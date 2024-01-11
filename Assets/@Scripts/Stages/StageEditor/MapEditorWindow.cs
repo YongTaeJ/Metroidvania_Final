@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -18,17 +18,17 @@ public class MapEditorWindow : EditorWindow
     {
         GUILayout.Box(Resources.Load<Texture2D>("Slime00"), GUILayout.Width(50), GUILayout.Height(50));
 
-        if (GUILayout.Button("¹öÆ°"))
+        if (GUILayout.Button("ë²„íŠ¼"))
         {
-            Debug.Log("¹öÆ° ¹İÀÀ");
+            Debug.Log("ë²„íŠ¼ ë°˜ì‘");
         }
-        if (GUILayout.RepeatButton("¹İº¹ ¹öÆ°"))
+        if (GUILayout.RepeatButton("ë°˜ë³µ ë²„íŠ¼"))
         {
-            Debug.Log("¹İº¹ ¹öÆ° ¹İÀÀ");
+            Debug.Log("ë°˜ë³µ ë²„íŠ¼ ë°˜ì‘");
         }
-        if (EditorGUILayout.DropdownButton(new GUIContent("µå·Ó ´Ù¿î ¹öÆ°"), FocusType.Keyboard))
+        if (EditorGUILayout.DropdownButton(new GUIContent("ë“œë¡­ ë‹¤ìš´ ë²„íŠ¼"), FocusType.Keyboard))
         {
-            Debug.Log("µå·Ó ´Ù¿î ¹öÆ° ¹İÀÀ");
+            Debug.Log("ë“œë¡­ ë‹¤ìš´ ë²„íŠ¼ ë°˜ì‘");
         }
     }
 }

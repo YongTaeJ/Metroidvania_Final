@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -88,7 +88,7 @@ public class MapGridEditor : Editor
         grid = (Grid)target;
         EditorGUILayout.BeginHorizontal();
         string[] ObjectOptions = new string[grid.prefabsList.Length];
-        string[] SelectOptions = { "±×¸®±â", "Áö¿ì±â" };
+        string[] SelectOptions = { "ê·¸ë¦¬ê¸°", "ì§€ìš°ê¸°" };
 
         for (int i = 0; i < ObjectOptions.Length; i++)
         {
