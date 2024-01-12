@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public enum EnemyStateType
 {
     None,
     Idle,
+    Wander,
     Chase,
     Attack
 }
@@ -18,6 +20,7 @@ public class EnemyStateMachine : StateMachine<EnemyBaseState>
     public EnemyData EnemyData {get; private set;}
     public PlayerFinder PlayerFinder {get; private set;}
     public Animator Animator {get; private set;}
+    public EnemyAnimationEventReceiver EventReceiver {get; private set;}
     #endregion
 
     private void Awake()
@@ -28,6 +31,8 @@ public class EnemyStateMachine : StateMachine<EnemyBaseState>
     public void Initialize()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+
+        EventReceiver = GetComponentInChildren<EnemyAnimationEventReceiver>();
         PlayerFinder = GetComponentInChildren<PlayerFinder>();
         Animator = GetComponentInChildren<Animator>();
 
@@ -41,6 +46,7 @@ public class EnemyStateMachine : StateMachine<EnemyBaseState>
         StateDictionary = new()
         {
             { EnemyStateType.Idle, new EnemyIdleState(this) },
+            { EnemyStateType.Wander, new EnemyWanderState(this) },
             { EnemyStateType.Chase, new EnemyChaseState(this)},
             { EnemyStateType.Attack, new EnemyAttackState(this)}
         };

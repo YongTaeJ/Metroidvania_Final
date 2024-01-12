@@ -34,7 +34,7 @@ Transform:
   - {fileID: 6427497330804223251}
   - {fileID: 8490435679174771125}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3910903350345002381
 Rigidbody2D:
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 6899858011784441921}
   - component: {fileID: 5597333674672385408}
   - component: {fileID: 3049223703225465877}
+  - component: {fileID: 5068962138244795240}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -237,6 +238,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 562b686cf11eaf0408b27d5b37c05926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5068962138244795240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734699786572374300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238c20a3948d1dd489a39d1dada24279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5642139029940479376

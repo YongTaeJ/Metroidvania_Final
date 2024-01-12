@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerFinder : MonoBehaviour
 {
     public bool IsPlayerEnter { get; private set; }
-    public Transform CurrentPosition { get; private set; }
+    public Transform CurrentTransform { get; private set; }
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class PlayerFinder : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             IsPlayerEnter = true;
-            CurrentPosition = other.transform;
+            CurrentTransform = other.transform;
         }
     }
 
@@ -27,7 +27,7 @@ public class PlayerFinder : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             IsPlayerEnter = false;
-            CurrentPosition = null;
+            CurrentTransform = null;
         }
     }
 }
