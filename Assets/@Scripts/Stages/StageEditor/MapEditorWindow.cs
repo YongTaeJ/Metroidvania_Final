@@ -3,20 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+[CustomEditor(typeof(Grid))]
 public class MapEditorWindow : EditorWindow
 {
+
     [MenuItem("Editor/MapEditor")]
     static public void Init()
     {
-        MapEditorWindow window = GetWindow<MapEditorWindow>(typeof(Square));
-        window.minSize = new Vector2(100, 100);
-        window.maxSize = new Vector2(500, 500);
+        MapEditorWindow window = GetWindow<MapEditorWindow>(typeof(Grid));
+        window.minSize = new Vector2(415, 200);
+        window.maxSize = new Vector2(415, 800);
         window.Show();
     }
 
+
+
     private void OnGUI()
     {
-        GUILayout.Box(Resources.Load<Texture2D>("Slime00"), GUILayout.Width(50), GUILayout.Height(50));
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button(Resources.Load<Texture2D>("Editor/001Player"), GUILayout.Width(100), GUILayout.Height(100)))
+        {
+            Debug.Log("플레이어 버튼");
+        }
+        if (GUILayout.Button(Resources.Load<Texture2D>("Editor/101Demon"), GUILayout.Width(100), GUILayout.Height(100)))
+        {
+            Debug.Log("데몬 버튼");
+        }
+        if (GUILayout.Button(Resources.Load<Texture2D>("Editor/102GreenSlime"), GUILayout.Width(100), GUILayout.Height(100)))
+        {
+            Debug.Log("그린 슬라임 버튼");
+        }
+        if (GUILayout.Button(Resources.Load<Texture2D>("Editor/103YellowSlime"), GUILayout.Width(100), GUILayout.Height(100)))
+        {
+            Debug.Log("옐로우 슬라임 버튼");
+        }
+        GUILayout.EndHorizontal();
+
 
         if (GUILayout.Button("버튼"))
         {
@@ -30,5 +52,9 @@ public class MapEditorWindow : EditorWindow
         {
             Debug.Log("드롭 다운 버튼 반응");
         }
+
+        //GUILayout.BeginArea(new Rect(0, 0, 100, 100), new GUIStyle("Box")); // 버튼도 가능
+        //GUILayout.Button("아이콘");
+        //GUILayout.EndArea();
     }
 }
