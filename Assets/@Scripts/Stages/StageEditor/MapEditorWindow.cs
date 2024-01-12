@@ -22,11 +22,6 @@ public class MapEditorWindow : EditorWindow
         if (grid == null)
         {
             grid = FindObjectOfType<Grid>();
-            grid.gameObject.SetActive(true);
-        }
-        else
-        {
-            grid.gameObject.SetActive(true);
         }
     }
 
@@ -108,8 +103,8 @@ public class MapEditorWindow : EditorWindow
             BaseName = "PlantBase",
             ResourceName = "Editor/Plant",
             Width = 30,
-            Height = 1,
-            Scale = new Vector3(0.5f, 0.5f, 1f),
+            Height = 5,
+            Scale = new Vector3(0.25f, 0.25f, 1f),
             StartPosition = new Vector3(-8.5f, -0.2f, 0),
         });
     }
