@@ -4,30 +4,33 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
-    private AnimatorStateInfo _stateInfo;
+    public bool _isAttackEnded;
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        
+        stateMachine.EventReceiver.OnAttackEnded -= EndState;
+        stateMachine.EventReceiver.OnAttackEnded += EndState; // TODO => 따로 OnStateEnter <-> Exit에서 관리해야하는지
     }
 
     public override void OnStateEnter()
     {
-        _animator.SetBool(AnimatorHash.Attack, true);
-        // TODO. 공격용 콜라이더 켜기
+        _isAttackEnded = false;
+        _animator.SetTrigger(AnimatorHash.Attack);
     }
 
     public override void OnStateExit()
     {
-        _animator.SetBool(AnimatorHash.Attack, false);
     }
 
     public override void OnStateStay()
     {
-        _stateInfo = _animator.GetNextAnimatorStateInfo(0);
-        if (_stateInfo.IsName("Attack") && _stateInfo.normalizedTime >= 1)
+        if(_isAttackEnded)
         {
-            Debug.Log("IsTransition");
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Idle]);
         }
+    }
+
+    public void EndState()
+    {
+        _isAttackEnded = true;
     }
 }
