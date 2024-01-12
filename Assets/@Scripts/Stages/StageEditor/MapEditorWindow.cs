@@ -6,16 +6,29 @@ using System;
 
 public class MapEditorWindow : EditorWindow
 {
+    private static Grid grid;
 
     [MenuItem("Editor/MapEditor")]
     static public void Init()
     {
-        MapEditorWindow window = GetWindow<MapEditorWindow>(typeof(Square));
+        MapEditorWindow window = GetWindow<MapEditorWindow>(typeof(Grid));
         window.minSize = new Vector2(415, 200);
         window.maxSize = new Vector2(415, 800);
         window.Show();
     }
 
+    private void Awake()
+    {
+        if (grid == null)
+        {
+            grid = FindObjectOfType<Grid>();
+            grid.gameObject.SetActive(true);
+        }
+        else
+        {
+            grid.gameObject.SetActive(true);
+        }
+    }
 
 
     private void OnGUI()
@@ -60,28 +73,21 @@ public class MapEditorWindow : EditorWindow
         }
         GUILayout.EndHorizontal();
 
-
-        if (GUILayout.Button("버튼"))
-        {
-            Debug.Log("버튼 반응");
-        }
-        if (GUILayout.RepeatButton("반복 버튼"))
-        {
-            Debug.Log("반복 버튼 반응");
-        }
-        if (EditorGUILayout.DropdownButton(new GUIContent("드롭 다운 버튼"), FocusType.Keyboard))
-        {
-            Debug.Log("드롭 다운 버튼 반응");
-        }
-
         //GUILayout.BeginArea(new Rect(0, 0, 100, 100), new GUIStyle("Box")); // 버튼도 가능
         //GUILayout.Button("아이콘");
         //GUILayout.EndArea();
 
-        if (GUILayout.Button("Slime Create"))
+        GUILayout.Label("Monster Random Create", EditorStyles.boldLabel);
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Create Slime"))
         {
             CreateSlime();
         }
+        if (GUILayout.Button("Create Plant"))
+        {
+            CreatePlant();
+        }
+        GUILayout.EndHorizontal();
 
 
         GUILayout.Label("MapEditor2", EditorStyles.boldLabel);
@@ -90,23 +96,81 @@ public class MapEditorWindow : EditorWindow
         GUILayout.EndHorizontal();
     }
 
+    void OnInspectorUpdate()
+    {
+        Repaint();
+    }
+
+    private void CreatePlant()
+    {
+        CreateObject(new ObjectCreationDatas
+        {
+            BaseName = "PlantBase",
+            ResourceName = "Editor/Plant",
+            Width = 30,
+            Height = 1,
+            Scale = new Vector3(0.5f, 0.5f, 1f),
+            StartPosition = new Vector3(-8.5f, -0.2f, 0),
+        });
+    }
+
     private void CreateSlime()
     {
-        Debug.Log("Create Slime");
-
-        GameObject baseObj = new GameObject("Base");
-
-        for (int i = 0; i < 10; i++)
+        CreateObject(new ObjectCreationDatas
         {
-            for (int j = 0; j < 10; j++)
+            BaseName = "SlimeBase",
+            ResourceName = "Editor/102GreenSlime",
+            Width = 30,
+            Height = 1,
+            Scale = new Vector3(0.25f, 0.25f, 1f),
+            StartPosition = new Vector3(-8.5f, 0.5f, 0),
+        });
+    }
+
+    private void CreateDefaultSetting()
+    {
+        CreateObject(new ObjectCreationDatas());
+    }
+
+    private GameObject CreateBaseObject(string baseName)
+    {
+        GameObject baseObj = GameObject.Find(baseName);
+        if (baseObj == null)
+        {
+            baseObj = new GameObject(baseName);
+        }
+        return baseObj;
+    }
+
+    private void CreateObject(ObjectCreationDatas datas)
+    {
+        Debug.Log("Create " + datas.BaseName);
+
+        GameObject baseObj = CreateBaseObject(datas.BaseName);
+        baseObj.transform.SetParent(grid.transform);
+
+        for (int i = 0; i < datas.Width; i++)
+        {
+            for (int j = 0; j < datas.Height; j++)
             {
-                GameObject childObj = new GameObject(string.Format("Child-{0}-{1}", i, j));
-                SpriteRenderer sr = childObj.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load("Editor/102GreenSlime", typeof(Sprite)) as Sprite;
-                sr.color = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
-                childObj.transform.position = new Vector3(i, j, 0);
-                childObj.transform.SetParent(baseObj.transform);
-                childObj.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+                Vector3 position = new Vector3(datas.StartPosition.x + i, datas.StartPosition.y + j, datas.StartPosition.z);
+
+                if (Physics2D.OverlapPoint(position) == null)
+                {
+                    if (UnityEngine.Random.Range(0f, 1f) <= 0.25f)
+                    {
+                        GameObject childObj = new GameObject(string.Format("Child-{0}-{1}", i, j));
+                        SpriteRenderer sr = childObj.AddComponent<SpriteRenderer>();
+                        sr.sprite = Resources.Load(datas.ResourceName, typeof(Sprite)) as Sprite;
+                        sr.color = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+
+                        childObj.AddComponent<BoxCollider2D>();
+
+                        childObj.transform.position = new Vector3(datas.StartPosition.x + i, datas.StartPosition.y + j, datas.StartPosition.z);
+                        childObj.transform.SetParent(baseObj.transform);
+                        childObj.transform.localScale = datas.Scale;
+                    }
+                }
             }
         }
 
@@ -114,19 +178,30 @@ public class MapEditorWindow : EditorWindow
         Selection.activeObject = baseObj;
     }
 
-    void OnInspectorUpdate()
+    public struct ObjectCreationDatas
     {
-        Repaint();
+        public string BaseName { get; set; }
+        public string ResourceName { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public Vector3 Scale { get; set; }
+        public Vector3 StartPosition { get; set; }
+
+        public ObjectCreationDatas(
+            string baseName = "DefaultBase",
+            string resourceName = "DefaultResource",
+            int width = 10,
+            int height = 10,
+            Vector3 scale = default,
+            Vector3 startPosition = default)
+        {
+            BaseName = baseName;
+            ResourceName = resourceName;
+            Width = width;
+            Height = height;
+            Scale = scale != default ? scale : new Vector3(1, 1, 1);
+            StartPosition = startPosition;
+        }
     }
 }
 
-public class MapData
-{
-    // 여기에 맵 데이터 구조 정의 (예: 타일 배열, 객체 리스트 등)
-}
-
-// 맵 데이터를 렌더링하는 클래스
-public class MapRenderer
-{
-    // 맵 데이터를 기반으로 맵을 렌더링하는 로직
-}
