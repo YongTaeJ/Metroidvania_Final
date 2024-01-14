@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawGizoms : MonoBehaviour
+public class DrawGizmos : MonoBehaviour
 {
     public float width = 1f;
     public float height = 1f;
@@ -30,6 +30,14 @@ public class DrawGizoms : MonoBehaviour
             Gizmos.DrawLine(new Vector3(Mathf.Floor(x / width) * width, 5000, 0f),
                 new Vector3(Mathf.Floor(x / width) * width, -5000, 0f));
 
+        }
+    }
+
+    public static void ToggleGizmos(GameObject gizmos)
+    {
+        if (gizmos != null)
+        {
+            gizmos.SetActive(!gizmos.activeSelf);
         }
     }
 }
