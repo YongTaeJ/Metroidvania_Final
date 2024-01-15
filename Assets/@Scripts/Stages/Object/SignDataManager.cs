@@ -1,27 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class SignDataManager : MonoBehaviour
+public class SignDataManager : Singleton<SignDataManager>
 {
-    public static SignDataManager Instance;
-
     public Dictionary<string, string> SignMessages = new Dictionary<string, string>();
 
     [SerializeField]
     private SignTexts _signTexts;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
 
         SignMessages.Add("Sign1", _signTexts.FirstSign);
         SignMessages.Add("Sign2", _signTexts.SecondSign);
