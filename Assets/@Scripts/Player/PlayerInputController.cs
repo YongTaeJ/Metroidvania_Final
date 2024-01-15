@@ -4,127 +4,80 @@ using System.Security.Claims;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : CharacterController
+public class PlayerInputController : MonoBehaviour
 {
-    #region Properties
-
-    private Vector2 _movementDirection = Vector2.zero;
-    private Vector2 _aimDirection = Vector2.right;
     private Rigidbody2D _rigidbody;
-    private Player _player;
-    private float _timeSinceLastAttack = float.MaxValue;
-    protected bool _isAttacking { get; set; }
-    private bool _isGrounded;
-    private float _jumpPowar = 5f;
+    private float _speed = 5f;
+    private float _jumpPower = 10f;
+    private int _maxJump = 2;
+    public int _jumpCount;
+    private float _horizontalMovement;
+    public Transform _groundCheckPos;
+    public Vector2 _groundCheckSize = new Vector2(0.5f, 0.05f);
+    public LayerMask groundLayer;
 
-    #endregion
-
-    #region MonoBehaviour
-
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _player = GetComponent<Player>();
-        _isGrounded = true;
-    }
+    [Header("Gravity")]
+    public float _baseGravity = 2f;
+    public float _maxFallSpeed = 10f;
+    public float _fallSpeedMultiplier = 2f;
 
     private void Start()
     {
-        OnMoveEvent += Move;
-        OnLookEvent += OnAim;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-        //AttackDelay();
+        _rigidbody.velocity = new Vector2(_horizontalMovement * _speed, _rigidbody.velocity.y);
+        GroundCheck();
+        Gravity();
     }
 
-    #endregion
-
-
-    #region Move
-    public void OnMove(InputValue value)
+    private void Gravity()
     {
-        Vector2 moveInput = value.Get<Vector2>().normalized;
-        CallMoveEvent(moveInput);
-    }
-
-    private void FixedUpdate()
-    {
-        ApplyMovment(_movementDirection);
-        CheckGrounded();
-    }
-
-    private void Move(Vector2 direction)
-    {
-        _movementDirection = direction;
-    }
-
-    private void ApplyMovment(Vector2 direction)
-    {
-        direction *= 5f; //플레이어 speed
-        //direction += KnockbackDirection;
-        _rigidbody.velocity = direction;
-    }
-
-    //public Vector2 KnockbackDirection = Vector2.zero;
-    #endregion
-
-    #region Look
-    public void OnLook(InputValue value)
-    {
-        Vector2 newAim = value.Get<Vector2>();
-        CallLookEvent(newAim);
-    }
-
-    public void OnAim(Vector2 newAimDirection)
-    {
-        _aimDirection = newAimDirection.normalized;
-    }
-    #endregion
-
-    #region Jump
-
-    public void OnJump()
-    {
-        if (_isGrounded)
+        if(_rigidbody.velocity.y < 0)
         {
-            _rigidbody.AddForce(Vector2.up * _jumpPowar, ForceMode2D.Impulse);
-            _isGrounded = false; // 땅에 있는 상태를 업데이트합니다.
-            Debug.Log("Jump");
+            _rigidbody.gravityScale = _baseGravity * _fallSpeedMultiplier;
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_maxFallSpeed));
+        }
+        else
+        {
+            _rigidbody.gravityScale = _baseGravity;
         }
     }
 
-    private void CheckGrounded()
+    public void Move(InputAction.CallbackContext context)
     {
-        // 플레이어가 땅에 있는지를 결정하기 위해 레이캐스트 또는 다른 땅 체크 메커니즘을 수행합니다.
-        // 단순화된 예로, 플레이어의 y-위치가 땅과 가까우면 땅에 있는 것으로 가정합니다.
-        float groundCheckDistance = 0.1f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance);
-
-        // 땅 체크 결과를 기반으로 땅에 있는지 여부를 업데이트합니다.
-        _isGrounded = hit.collider != null;
-    }
-    #endregion
-
-    #region Dash
-
-    public void OnDash()
-    {
-        Debug.Log("Dash");
-
+        _horizontalMovement = context.ReadValue<Vector2>().x;
     }
 
-    #endregion
-
-    #region Attack
-
-    public void OnAttack()
+    public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log("Attack");
-
+        if (_jumpCount > 0)
+        {
+            if (context.performed)
+            {
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
+                _jumpCount--;
+            }
+            else if (context.canceled)
+            {
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+            }
+        }
     }
 
-    #endregion
+    private void GroundCheck()
+    {
+        if(Physics2D.OverlapBox(_groundCheckPos.position, _groundCheckSize,0, groundLayer))
+        {
+            _jumpCount = _maxJump;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(_groundCheckPos.position, _groundCheckSize);
+    }
 }
