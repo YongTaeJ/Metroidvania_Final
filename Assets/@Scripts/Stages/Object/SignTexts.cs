@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractText : MonoBehaviour
+public class SignTexts : MonoBehaviour
 {
     public string FirstSign = "Press \"←\" , \"→\" to Move!";
     public string SecondSign = "Press \"C\" to Jump!";

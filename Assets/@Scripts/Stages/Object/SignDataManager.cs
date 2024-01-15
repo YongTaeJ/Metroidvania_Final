@@ -9,7 +9,7 @@ public class SignDataManager : MonoBehaviour
     public Dictionary<string, string> SignMessages = new Dictionary<string, string>();
 
     [SerializeField]
-    private InteractText _interactText;
+    private SignTexts _signTexts;
 
     private void Awake()
     {
@@ -23,10 +23,10 @@ public class SignDataManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        SignMessages.Add("Sign1", _interactText.FirstSign);
-        SignMessages.Add("Sign2", _interactText.SecondSign);
-        SignMessages.Add("Sign3", _interactText.ThirdSign);
-        SignMessages.Add("Sign4", _interactText.FourthSign);
+        SignMessages.Add("Sign1", _signTexts.FirstSign);
+        SignMessages.Add("Sign2", _signTexts.SecondSign);
+        SignMessages.Add("Sign3", _signTexts.ThirdSign);
+        SignMessages.Add("Sign4", _signTexts.FourthSign);
     }
 
     public string GetMessage(string SignId)
