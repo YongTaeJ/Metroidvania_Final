@@ -9,13 +9,15 @@ public enum EnemyStateType
     Idle,
     Wander,
     Chase,
-    Attack
+    Attack,
+    Hurt,
+    Dead
 }
 
-public class EnemyStateMachine : StateMachine<EnemyBaseState>
+public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 {
     #region Properties
-    public Dictionary<EnemyStateType, EnemyBaseState> StateDictionary {get; private set;}
+    public Dictionary<EnemyStateType, EnemyBaseState> StateDictionary {get; protected set;}
     public Rigidbody2D Rigidbody {get; private set;}
     public EnemyData EnemyData {get; private set;}
     public PlayerFinder PlayerFinder {get; private set;}
@@ -26,9 +28,10 @@ public class EnemyStateMachine : StateMachine<EnemyBaseState>
     private void Awake()
     {
         Initialize();
+        StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 
-    public void Initialize()
+    public virtual void Initialize()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
 
@@ -42,15 +45,5 @@ public class EnemyStateMachine : StateMachine<EnemyBaseState>
             Speed = 1f,
             Damage = 3f
         };
-
-        StateDictionary = new()
-        {
-            { EnemyStateType.Idle, new EnemyIdleState(this) },
-            { EnemyStateType.Wander, new EnemyWanderState(this) },
-            { EnemyStateType.Chase, new EnemyChaseState(this)},
-            { EnemyStateType.Attack, new EnemyAttackState(this)}
-        };
-
-        StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 }

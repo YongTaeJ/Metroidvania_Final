@@ -38,12 +38,14 @@ public class EnemyChaseState : EnemyBaseState
         float value = _playerFinder.CurrentTransform.position.x - _myTransform.position.x;
         if(Mathf.Abs(value) < 1.5f)
         {
-            _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Attack]);
+            if(_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var enemyBaseState))
+            _stateMachine.StateTransition(enemyBaseState);
             return;
         }
 
         _direction = value > 0 ? Vector2.right : Vector2.left;
         FallCheck();
+
         _rigidbody.velocity = _direction * _enemyData.Speed;
     }
 

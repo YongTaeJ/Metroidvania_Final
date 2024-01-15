@@ -23,5 +23,10 @@ public abstract class EnemyBaseState : IState
 
     public abstract void OnStateEnter();
     public abstract void OnStateExit();
-    public abstract void OnStateStay();
+
+    public virtual void OnStateStay()
+    {
+        // TODO => hit, dead 미리 검사하도록.
+        // attack일때 hit은? 경우에 따라 관리.
+    }
 }

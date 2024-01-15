@@ -1,11 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class EnemyRangedAttackState : EnemyAttackState
 {
+    private GameObject _bulletPrefab;
     public EnemyRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        // 공격할 때 탄환을 발사할 수 있도록
+        _bulletPrefab = (GameObject) Resources.Load("Enemies/Bullets/EnemyBullet");
     }
+
+    public override void OnStateExit()
+    {
+        base.OnStateExit();
+
+        FireBullet();
+    }
+
+    private void FireBullet()
+    {
+        Vector3 myPos = _attackPivot.position;
+
+        EnemyBullet bullet = 
+        GameObject.Instantiate(_bulletPrefab, myPos, quaternion.identity)
+        .GetComponent<EnemyBullet>();
+
+        Vector3 direction = (_playerFinder.CurrentTransform.position - myPos).normalized;
+
+        bullet.InitDirection(direction);
+    }
+
+
 }

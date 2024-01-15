@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyIdleState : EnemyFindingState
 {
-    private float _direction;
+    
     public EnemyIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
     }

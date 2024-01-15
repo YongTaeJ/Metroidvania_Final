@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemyStateMachine : EnemyStateMachine
+public class BasicEnemyStateMachine : EnemyStateMachine
 {
     public override void Initialize()
     {
@@ -11,8 +11,7 @@ public class MeleeEnemyStateMachine : EnemyStateMachine
         {
             { EnemyStateType.Idle, new EnemyIdleState(this) },
             { EnemyStateType.Wander, new EnemyWanderState(this) },
-            { EnemyStateType.Chase, new EnemyChaseState(this)},
-            { EnemyStateType.Attack, new EnemyMeleeAttackState(this)}
+            { EnemyStateType.Chase, new EnemyChaseState(this)}
         };
     }
 }

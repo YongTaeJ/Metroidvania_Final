@@ -27,7 +27,6 @@ public class PlayerFinder : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             IsPlayerEnter = false;
-            CurrentTransform = null;
         }
     }
 }

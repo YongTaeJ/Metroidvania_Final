@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyAttackState : EnemyBaseState
 {
     public bool _isAttackEnded;
+    protected Transform _attackPivot;
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         stateMachine.EventReceiver.OnAttackEnded -= EndState;
         stateMachine.EventReceiver.OnAttackEnded += EndState; // TODO => 따로 OnStateEnter <-> Exit에서 관리해야하는지
+        _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot"); 
     }
 
     public override void OnStateEnter()

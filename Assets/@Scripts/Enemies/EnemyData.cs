@@ -8,4 +8,5 @@ public class EnemyData
     public float Damage {get; set;}
     public float Speed {get; set;}
     public float AttackDistance { get; set; }
+    public int HitEndurance {get; set;}
 }
