@@ -6,13 +6,14 @@ public class EnemyWanderState : EnemyFindingState
 {
     private Transform _myTransform;
     private Vector2 _direction;
+    private Rigidbody2D _rigidbody;
     private float _walkTime;
     private int _layerMask;
     public EnemyWanderState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        // TODO => LayerMask 수정 필요
-        _layerMask = LayerMask.GetMask("Water");
-        _myTransform = _rigidbody.transform;
+        _layerMask = LayerMask.GetMask("Ground");
+        _rigidbody = stateMachine.Rigidbody;
+        _myTransform = stateMachine.transform;
     }
 
     #region IState

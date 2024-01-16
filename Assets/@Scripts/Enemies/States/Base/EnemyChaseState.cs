@@ -5,13 +5,21 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyBaseState
 {
+    private Rigidbody2D _rigidbody;
     private Transform _myTransform;
     private Vector2 _direction;
+    private PlayerFinder _playerFinder;
     private int _layerMask;
+    private float _attackDistance;
+    private float _speed;
     public EnemyChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _myTransform = _rigidbody.transform;
-        _layerMask = LayerMask.GetMask("Water");
+        _myTransform = stateMachine.transform;
+        _layerMask = LayerMask.GetMask("Ground");
+        _attackDistance = stateMachine.EnemyData.AttackDistance;
+        _speed = stateMachine.EnemyData.Speed;
+        _playerFinder = stateMachine.PlayerFinder;
+        _rigidbody = stateMachine.Rigidbody;
     }
 
     #region IState
@@ -34,9 +42,8 @@ public class EnemyChaseState : EnemyBaseState
             return;
         }
         
-        // TODO => AttackDistance 필요
         float value = _playerFinder.CurrentTransform.position.x - _myTransform.position.x;
-        if(Mathf.Abs(value) < 1.5f)
+        if(Mathf.Abs(value) < _attackDistance)
         {
             if(_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var enemyBaseState))
             _stateMachine.StateTransition(enemyBaseState);
@@ -46,7 +53,7 @@ public class EnemyChaseState : EnemyBaseState
         _direction = value > 0 ? Vector2.right : Vector2.left;
         FallCheck();
 
-        _rigidbody.velocity = _direction * _enemyData.Speed;
+        _rigidbody.velocity = _direction * _speed;
     }
 
     #endregion

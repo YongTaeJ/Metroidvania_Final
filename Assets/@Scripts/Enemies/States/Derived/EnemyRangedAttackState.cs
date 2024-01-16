@@ -6,18 +6,18 @@ using UnityEngine;
 public class EnemyRangedAttackState : EnemyAttackState
 {
     private GameObject _bulletPrefab;
+    private PlayerFinder _playerFinder;
     public EnemyRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _bulletPrefab = (GameObject) Resources.Load("Enemies/Bullets/EnemyBullet");
+        _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet");
+        _playerFinder = stateMachine.PlayerFinder;
+        stateMachine.EventReceiver.OnBulletFire += FireBullet;
     }
 
     public override void OnStateExit()
     {
         base.OnStateExit();
-
-        FireBullet();
     }
-
     private void FireBullet()
     {
         Vector3 myPos = _attackPivot.position;

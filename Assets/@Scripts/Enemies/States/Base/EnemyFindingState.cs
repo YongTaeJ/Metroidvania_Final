@@ -7,9 +7,11 @@ using UnityEngine;
 /// </summary>
 public abstract class EnemyFindingState : EnemyBaseState
 {
+    private PlayerFinder _playerFinder;
     protected float _stateTime;
     protected EnemyFindingState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
+        _playerFinder = stateMachine.PlayerFinder;
     }
 
     public override void OnStateStay()

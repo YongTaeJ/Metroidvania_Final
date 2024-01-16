@@ -16,6 +16,9 @@ public enum EnemyStateType
 
 public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 {
+    #region ID
+    [SerializeField] private int ID;
+    #endregion
     #region Properties
     public Dictionary<EnemyStateType, EnemyBaseState> StateDictionary {get; protected set;}
     public Rigidbody2D Rigidbody {get; private set;}
@@ -39,11 +42,6 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         PlayerFinder = GetComponentInChildren<PlayerFinder>();
         Animator = GetComponentInChildren<Animator>();
 
-        // TOOD => 임시 데이터 처리. 추후 개선 필요!!
-        EnemyData = new EnemyData()
-        {
-            Speed = 1f,
-            Damage = 3f
-        };
+        EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
     }
 }
