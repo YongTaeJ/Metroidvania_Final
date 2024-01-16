@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SignTexts : MonoBehaviour
 {
-    public string FirstSign = "Press \"←\" , \"→\" to Move!";
-    public string SecondSign = "Press \"C\" to Jump!";
-    public string ThirdSign = "Press \"X\" to Attack!";
-    public string FourthSign = "Press \"C\" to Dash!";
+    public string Sign00 = "Press \"←\" , \"→\" to Move!";
+    public string Sign01 = "Press \"Z\" to Jump!";
+    public string Sign02 = "Press \"X\" to Attack!";
+    public string Sign03 = "Press \"C\" to Dash!";
 }
