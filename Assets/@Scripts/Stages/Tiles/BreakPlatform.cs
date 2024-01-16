@@ -25,6 +25,12 @@ public class BreakPlatform : MonoBehaviour
         if (playerRigidbody.velocity.y > 0 && _standCount < 1)
         {
             transform.parent.gameObject.SetActive(false);
+            Invoke("ActivePlatform", 2f);
         }
+    }
+
+    private void ActivePlatform()
+    {
+        transform.parent.gameObject.SetActive(true);
     }
 }
