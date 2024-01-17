@@ -65,6 +65,6 @@ public class EnemyWanderState : EnemyFindingState
 
     private Vector2 GetVelocity()
     {
-        return _direction * _stateMachine.EnemyData.Speed; 
+        return new Vector2 (_direction.x * _stateMachine.EnemyData.Speed, _rigidbody.velocity.y); 
     }
 }

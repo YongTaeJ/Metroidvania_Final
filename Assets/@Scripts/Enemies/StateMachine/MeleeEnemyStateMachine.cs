@@ -12,7 +12,9 @@ public class MeleeEnemyStateMachine : EnemyStateMachine
             { EnemyStateType.Idle, new EnemyIdleState(this) },
             { EnemyStateType.Wander, new EnemyWanderState(this) },
             { EnemyStateType.Chase, new EnemyChaseState(this)},
-            { EnemyStateType.Attack, new EnemyMeleeAttackState(this)}
+            { EnemyStateType.Attack, new EnemyMeleeAttackState(this)},
+            { EnemyStateType.Hurt, new EnemyHurtState(this)},
+            { EnemyStateType.Dead, new EnemyDeadState(this)}
         };
     }
 }

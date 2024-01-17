@@ -5,15 +5,33 @@ using UnityEngine;
 public enum ItemType
 {
     None,
-    Coin1,
-    Coin10,
-    Coin100,
+    Coin,
+    Brick,
+    Wood
 }
 
 public class Item : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private ItemType _itemType;
+    [SerializeField] private int _value;
+    #endregion
+
+    #region Properties
     public ItemType ItemType => _itemType;
+    public int Value => _value;
+    #endregion
+
+    #region Monobehaviour
+    private void Start()
+    {
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+
+        float x = Random.Range(-45f, 45f) / 360;
+        float y = 1 - x;
+
+        rigidbody.AddForce( new Vector2(x,y) * 300);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -23,4 +41,5 @@ public class Item : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    #endregion
 }

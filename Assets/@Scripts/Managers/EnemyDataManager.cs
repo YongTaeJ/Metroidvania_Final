@@ -5,9 +5,10 @@ using Newtonsoft.Json;
 
 public class EnemyDataManager : Singleton<EnemyDataManager>
 {
-    // TODO => 데이터 관리 형태를 고민할 필요가 있어보임.
+    #region Fields
     public TextAsset enemyData_Json;
     private EnemyDataArray _enemyData;
+    #endregion
 
     public override bool Initialize()
     {

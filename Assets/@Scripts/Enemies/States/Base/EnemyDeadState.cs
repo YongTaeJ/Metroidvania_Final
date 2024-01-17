@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class EnemyDeadState : EnemyBaseState
 {
+    #region Fields
+    private float _deadTime;
+    private Transform _spriteTransform;
+    #endregion
     public EnemyDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
+        _deadTime = 0.2f;
+        _spriteTransform = stateMachine.transform.Find("Sprite");
     }
-
+    #region IState
     public override void OnStateEnter()
     {
         _animator.SetTrigger(AnimatorHash.Dead);
+        GenerateDeadEffect();
     }
 
     public override void OnStateExit()
@@ -19,7 +26,19 @@ public class EnemyDeadState : EnemyBaseState
 
     public override void OnStateStay()
     {
+        _deadTime -= Time.deltaTime;
+        if(_deadTime <= 0)
+        {
+            DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
+            GameObject.Destroy(_stateMachine.gameObject);
+        }
     }
-
-    // TODO. 애니메이션 끝나면 아이템 드랍, 게임 오브젝트 삭제
+    #endregion
+    
+    private void GenerateDeadEffect()
+    {
+        GameObject effect = Resources.Load<GameObject>("Enemies/Effects/EnemyDeadEffect");
+        Transform transform = GameObject.Instantiate(effect).GetComponent<Transform>();
+        transform.localPosition = _spriteTransform.position;
+    }
 }

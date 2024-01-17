@@ -45,15 +45,15 @@ public class EnemyChaseState : EnemyBaseState
         float value = _playerFinder.CurrentTransform.position.x - _myTransform.position.x;
         if(Mathf.Abs(value) < _attackDistance)
         {
-            if(_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var enemyBaseState))
-            _stateMachine.StateTransition(enemyBaseState);
+            if(_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var attackState))
+                _stateMachine.StateTransition(attackState);
             return;
         }
 
         _direction = value > 0 ? Vector2.right : Vector2.left;
         FallCheck();
 
-        _rigidbody.velocity = _direction * _speed;
+        _rigidbody.velocity = new Vector2(_direction.x * _speed, _rigidbody.velocity.y);
     }
 
     #endregion

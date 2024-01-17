@@ -19,6 +19,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     #region ID
     [SerializeField] private int ID;
     #endregion
+    
     #region Properties
     public Dictionary<EnemyStateType, EnemyBaseState> StateDictionary {get; protected set;}
     public Rigidbody2D Rigidbody {get; private set;}
@@ -34,6 +35,11 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 
+    private void Start()
+    {
+        new EnemyHitSystem(this);
+    }
+
     public virtual void Initialize()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -43,5 +49,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         Animator = GetComponentInChildren<Animator>();
 
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
+
+        
     }
 }

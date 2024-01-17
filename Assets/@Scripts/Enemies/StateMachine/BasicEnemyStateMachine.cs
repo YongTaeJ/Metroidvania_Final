@@ -11,7 +11,9 @@ public class BasicEnemyStateMachine : EnemyStateMachine
         {
             { EnemyStateType.Idle, new EnemyIdleState(this) },
             { EnemyStateType.Wander, new EnemyWanderState(this) },
-            { EnemyStateType.Chase, new EnemyChaseState(this)}
+            { EnemyStateType.Chase, new EnemyChaseState(this)},
+            { EnemyStateType.Hurt, new EnemyHurtState(this)},
+            { EnemyStateType.Dead, new EnemyDeadState(this)}
         };
     }
 }

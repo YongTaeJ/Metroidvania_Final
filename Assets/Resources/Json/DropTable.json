@@ -1,0 +1,46 @@
+{
+  "DropTables": [
+    {
+      "Index": "0",
+      "MinGold": "2",
+      "MaxGold": "5",
+      "ItemName": "Wood",
+      "DropRate": "20"
+    },
+    {
+      "Index": "1",
+      "MinGold": "3",
+      "MaxGold": "6",
+      "ItemName": "Wood",
+      "DropRate": "40"
+    },
+    {
+      "Index": "2",
+      "MinGold": "4",
+      "MaxGold": "7",
+      "ItemName": "Brick",
+      "DropRate": "20"
+    },
+    {
+      "Index": "3",
+      "MinGold": "5",
+      "MaxGold": "8",
+      "ItemName": "Brick",
+      "DropRate": "40"
+    },
+    {
+      "Index": "100",
+      "MinGold": "100",
+      "MaxGold": "150",
+      "ItemName": "None",
+      "DropRate": "100"
+    },
+    {
+      "Index": "101",
+      "MinGold": "200",
+      "MaxGold": "250",
+      "ItemName": "None",
+      "DropRate": "100"
+    }
+  ]
+}

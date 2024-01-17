@@ -13,6 +13,8 @@ public class EnemyAttackState : EnemyBaseState
         _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot"); 
     }
 
+    #region IState
+
     public override void OnStateEnter()
     {
         _isAttackEnded = false;
@@ -30,6 +32,8 @@ public class EnemyAttackState : EnemyBaseState
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Idle]);
         }
     }
+
+    #endregion
 
     public void EndState()
     {

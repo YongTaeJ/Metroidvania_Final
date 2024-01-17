@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class SpriteFlipper : MonoBehaviour
 {
+    #region Fields
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
     private Transform _attackPivot;
     private Vector2 _pivotRightPosition;
     private Vector2 _pivotLeftPosition;
+    #endregion
 
+    #region Monobehaviour
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -34,4 +37,5 @@ public class SpriteFlipper : MonoBehaviour
             _attackPivot.localPosition = _pivotLeftPosition;
         }
     }
+    #endregion
 }

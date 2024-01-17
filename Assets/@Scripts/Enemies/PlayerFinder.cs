@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class PlayerFinder : MonoBehaviour
 {
+    #region Properties
     public bool IsPlayerEnter { get; private set; }
     public Transform CurrentTransform { get; private set; }
+    #endregion
 
+    #region Monobehaviour
     private void Awake()
     {
         IsPlayerEnter = false;
@@ -29,4 +32,5 @@ public class PlayerFinder : MonoBehaviour
             IsPlayerEnter = false;
         }
     }
+    #endregion
 }

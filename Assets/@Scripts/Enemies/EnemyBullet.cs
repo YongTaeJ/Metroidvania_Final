@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
+    #region Fields
     private Vector2 _direction;
     private Rigidbody2D _rigidbody;
     private float _speed;
+    #endregion
 
+    #region Monobehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -20,6 +23,17 @@ public class EnemyBullet : MonoBehaviour
     {
         _rigidbody.velocity = _direction * _speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            // TODO. Player에 연결된 메서드를 통해 데미지 주기
+            CancelInvoke();
+            Destroy(gameObject);
+        }   
+    }
+    #endregion
 
     private void DestroySelf()
     {
@@ -36,13 +50,5 @@ public class EnemyBullet : MonoBehaviour
         transform.Find("Sprite").eulerAngles = new Vector3(0,0, angleDegrees);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            // TODO. Player에 연결된 메서드를 통해 데미지 주기
-            CancelInvoke();
-            Destroy(gameObject);
-        }   
-    }
+
 }

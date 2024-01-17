@@ -7,13 +7,16 @@ using UnityEngine;
 /// </summary>
 public abstract class EnemyFindingState : EnemyBaseState
 {
+    #region Fields
     private PlayerFinder _playerFinder;
     protected float _stateTime;
+    #endregion
+
     protected EnemyFindingState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         _playerFinder = stateMachine.PlayerFinder;
     }
-
+    #region IState
     public override void OnStateStay()
     {
         if(_playerFinder.IsPlayerEnter)
@@ -22,5 +25,6 @@ public abstract class EnemyFindingState : EnemyBaseState
             return;
         }
     }
+    #endregion
 
 }

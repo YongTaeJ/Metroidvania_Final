@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyMeleeAttackState : EnemyAttackState
 {
+    #region Fields
     private Collider2D _attackCollider;
+    #endregion
+
     public EnemyMeleeAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         stateMachine.EventReceiver.OnAttackStarted += ActiveAttackCollider;
@@ -12,6 +15,7 @@ public class EnemyMeleeAttackState : EnemyAttackState
         _attackCollider.enabled = false;
     }
 
+    #region IState
     public override void OnStateEnter()
     {
         base.OnStateEnter();
@@ -28,5 +32,6 @@ public class EnemyMeleeAttackState : EnemyAttackState
     {
         _attackCollider.enabled = true;
     }
+    #endregion
 
 }
