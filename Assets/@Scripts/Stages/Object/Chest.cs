@@ -15,7 +15,7 @@ public class Chest : MonoBehaviour
     [SerializeField]
     private GameObject _panel;
     [SerializeField]
-    private TextMeshProUGUI _mimicText;
+    private TextMeshProUGUI _chestText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -34,7 +34,7 @@ public class Chest : MonoBehaviour
 
     private void ChestText()
     {
-        _mimicText.text = "You opened Chest";
+        _chestText.text = "You opened chest\r\nYou got the Dash!";
         _panel.SetActive(true);
     }
 }

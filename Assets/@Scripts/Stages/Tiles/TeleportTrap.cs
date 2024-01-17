@@ -13,7 +13,7 @@ public class TeleportTrap : MonoBehaviour
     [SerializeField]
     private GameObject _panel;
     [SerializeField]
-    private TextMeshProUGUI _mimicText;
+    private TextMeshProUGUI _teleportText;
     [SerializeField]
     private Vector3 _teleportPosition;
 
@@ -27,12 +27,25 @@ public class TeleportTrap : MonoBehaviour
             {
                 MimicText();
             }
+
+            else
+            {
+                FallText();
+            }
         }
     }
 
     private void MimicText()
     {
-        _mimicText.text = "You just Actived Trap Card";
+        _teleportText.text = "You just Actived Trap Card";
+        _panel.SetActive(true);
+
+        StartCoroutine(DeactiveText(2));
+    }
+
+    private void FallText()
+    {
+        _teleportText.text = "You are fallen. Try again";
         _panel.SetActive(true);
 
         StartCoroutine(DeactiveText(2));
