@@ -34,7 +34,7 @@ public class Chest : MonoBehaviour
 
     private void ChestText()
     {
-        _chestText.text = "You opened chest\r\nYou got the Dash skill";
+        _chestText.text = "You opened chest\r\nYou got the Dash!";
         _panel.SetActive(true);
     }
 }
