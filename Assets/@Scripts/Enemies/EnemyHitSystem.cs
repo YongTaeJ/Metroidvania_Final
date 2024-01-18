@@ -28,9 +28,6 @@ public class EnemyHitSystem
 
         _playerFinder = stateMachine.PlayerFinder;
         _rigidbody = stateMachine.Rigidbody;
-
-        // Temp Code.
-        DamageButton.Instance.OnDamaged += GetDamaged;
     }
 
     public void GetDamaged(int damage)
@@ -43,8 +40,6 @@ public class EnemyHitSystem
         if(_currentHP <= 0)
         {
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Dead]);
-            // Temp Code.
-            DamageButton.Instance.OnDamaged -= GetDamaged;
             return;
         }
 

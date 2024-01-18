@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyBaseState
 {
+    #region Fields
     private Rigidbody2D _rigidbody;
     private Transform _myTransform;
     private Vector2 _direction;
@@ -12,6 +13,7 @@ public class EnemyChaseState : EnemyBaseState
     private int _layerMask;
     private float _attackDistance;
     private float _speed;
+    #endregion
     public EnemyChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         _myTransform = stateMachine.transform;

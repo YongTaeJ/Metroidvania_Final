@@ -19,7 +19,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     #region ID
     [SerializeField] private int ID;
     #endregion
-    
+
     #region Properties
     public Dictionary<EnemyStateType, EnemyBaseState> StateDictionary {get; protected set;}
     public Rigidbody2D Rigidbody {get; private set;}
@@ -28,6 +28,8 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     public Animator Animator {get; private set;}
     public EnemyAnimationEventReceiver EventReceiver {get; private set;}
     #endregion
+
+    #region Monobehaviour
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     {
         new EnemyHitSystem(this);
     }
+
+    #endregion
 
     public virtual void Initialize()
     {

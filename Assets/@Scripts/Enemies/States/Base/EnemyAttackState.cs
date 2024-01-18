@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
+    #region Fields
     public bool _isAttackEnded;
     protected Transform _attackPivot;
+    #endregion
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         stateMachine.EventReceiver.OnAttackEnded -= EndState;

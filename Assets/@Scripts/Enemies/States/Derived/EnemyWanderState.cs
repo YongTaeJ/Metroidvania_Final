@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyWanderState : EnemyFindingState
 {
+    #region Fields
     private Transform _myTransform;
     private Vector2 _direction;
     private Rigidbody2D _rigidbody;
     private float _walkTime;
     private int _layerMask;
+    #endregion
     public EnemyWanderState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         _layerMask = LayerMask.GetMask("Ground");
