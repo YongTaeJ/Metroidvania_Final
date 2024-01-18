@@ -14,7 +14,7 @@ public class PlayerInputController : MonoBehaviour
 
     //Jump
     private float _jumpPower = 10f;
-    public int _maxJump = 2;
+    public int _maxJump = 1;
     public int _jumpCount;
 
     //Ground Check
@@ -57,7 +57,7 @@ public class PlayerInputController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _trailRenderer = GetComponent<TrailRenderer>();
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -78,9 +78,10 @@ public class PlayerInputController : MonoBehaviour
             Gravity();
         }
 
-        _animator.SetFloat("Fall", _rigidbody.velocity.y);
-        _animator.SetFloat("Walk", _rigidbody.velocity.magnitude);
-        _animator.SetBool("IsWallSliding", _isWallSliding);
+        _animator.SetFloat(AnimatorHash.yVelocity, _rigidbody.velocity.y);
+        _animator.SetFloat(AnimatorHash.Walk, _rigidbody.velocity.magnitude);
+        _animator.SetBool(AnimatorHash.WallSliding, _isWallSliding);
+        
     }
 
     private void Gravity()
@@ -135,51 +136,58 @@ public class PlayerInputController : MonoBehaviour
         _horizontal = context.ReadValue<Vector2>().x;
     }
 
+    public void Attack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _animator.SetTrigger(AnimatorHash.Attack);
+
+        }
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
         if (_jumpCount > 0)
         {
             if (context.performed)
             {
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
-                _jumpCount--;
-                _animator.SetTrigger("Jump");
-
+                if(!_isWallJumping)
+                {
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
+                    _animator.SetTrigger(AnimatorHash.Jump);
+                    _jumpCount--;
+                }
             }
             else if (context.canceled)
             {
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-                //_jumpCount--;
-                _animator.SetTrigger("Jump");
-
+                if (!_isWallJumping)
+                {
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+                    _animator.SetTrigger(AnimatorHash.Jump);
+                    _jumpCount--;
+                }
             }
-
-            //if (_jumpCount == 2)
-            //{
-            //    _animator.SetTrigger("Jump");
-            //}
-            //else if (_jumpCount == 1)
-            //{
-            //    _animator.SetTrigger("DoubleJump");
-            //}
         }
 
         //Wall Jump
         if(context.performed && _wallJumpTimer > 0f)
         {
-            _isWallJumping = true;
-            _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
-            _wallJumpTimer = 0f;
-            _animator.SetTrigger("WallJump");
-            if(transform.localScale.x != _wallJumpDirection)
+            if (!_isWallJumping)
             {
-                _isFacingRight = !_isFacingRight;
-                Vector3 Is = transform.localScale;
-                Is.x *= -1f;
-                transform.localScale = Is;
-            }
+                _isWallJumping = true;
+                _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
+                _wallJumpTimer = 0f;
+                _animator.SetTrigger(AnimatorHash.WallJump);
+                if (transform.localScale.x != _wallJumpDirection)
+                {
+                    _isFacingRight = !_isFacingRight;
+                    Vector3 Is = transform.localScale;
+                    Is.x *= -1f;
+                    transform.localScale = Is;
+                }
 
-            Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
+                Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
+            }
         }
     }
 
@@ -188,7 +196,6 @@ public class PlayerInputController : MonoBehaviour
         if (context.performed && _canDash == true)
         {
             StartCoroutine(CoDash());
-            _animator.SetTrigger("Dash");
         }
     }
 
@@ -196,6 +203,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if(_dashCount > 0)
         {
+            _animator.SetTrigger(AnimatorHash.Dash);
             _canDash = false;
             _isDashing = true;
             float originalGravity = _baseGravity;
