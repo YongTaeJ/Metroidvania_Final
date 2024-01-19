@@ -1,35 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine : StateMachine<PlayerBaseState>
+public class PlayerStateMachine
 {
-    public PlayerInputController Controller { get; private set; }
-    public Transform CameraTransform { get; private set; }
+    public PlayerBaseState PlayerBaseState { get; private set; }
 
-    public enum PlayerState
+    public void Initialize(PlayerBaseState startingState)
     {
-        Idle,
-        Dead,
+        PlayerBaseState = startingState;
+        PlayerBaseState.Enter();
     }
 
-    private Dictionary<PlayerState, PlayerBaseState> _stateDict;
-
-    public Dictionary<PlayerState, PlayerBaseState> StateDictionary => _stateDict;
-
-    private void Awake()
+    public void ChangeState(PlayerBaseState newstate)
     {
-        Initialize();
-    }
-
-    public void Initialize()
-    {
-        Controller = GetComponent<PlayerInputController>();
-        CameraTransform = Camera.main.transform;
-        _stateDict = new()
-        {
-            { PlayerState.Idle, new PlayerIdleState(this) },
-            { PlayerState.Dead, new PlayerDeadState(this) },
-        };
-        StateTransition(_stateDict[PlayerState.Idle]);
+        PlayerBaseState.Exit();
+        PlayerBaseState = newstate;
+        PlayerBaseState.Enter();
     }
 }
