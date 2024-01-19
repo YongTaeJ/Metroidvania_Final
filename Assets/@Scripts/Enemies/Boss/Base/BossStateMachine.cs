@@ -28,7 +28,7 @@ public abstract class BossStateMachine : StateMachine<BossBaseState>
     private void Awake()
     {
         Initialize();
-        _patternFinder = new PatternFinder(this);
+        _patternFinder = new PatternFinder();
         // StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
     #endregion
