@@ -8,6 +8,8 @@ public class EnemyAnimationEventReceiver : MonoBehaviour
     public event Action OnAttackEnded;
     public event Action OnBulletFire;
     public event Action OnAttackStarted;
+    public event Action OnDeadEnded;
+    public event Action OnHurtEnded;
     
     private void Animation_AttackEnded()
     {
@@ -22,5 +24,15 @@ public class EnemyAnimationEventReceiver : MonoBehaviour
     private void Animation_AttackStarted()
     {
         OnAttackStarted?.Invoke();
+    }
+
+    private void Animation_DeadEnded()
+    {
+        OnDeadEnded?.Invoke();
+    }
+
+    private void Animation_HurtEnded()
+    {
+        OnHurtEnded?.Invoke();
     }
 }

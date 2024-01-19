@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlueSlime_Hurt
+  m_Name: BlueSlime_Dead
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -77,7 +77,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.33333334
-    functionName: Animation_HurtEnded
+    functionName: Animation_DeadEnded
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 238c20a3948d1dd489a39d1dada24279, type: 3}
     floatParameter: 0

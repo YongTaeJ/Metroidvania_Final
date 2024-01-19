@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlueSlime_Hurt
+  m_Name: Orc_Melee_Dead
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1729223954, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
+      value: {fileID: -1227727620, guid: 309b7662f2346db4ab56b2252a119fc0, type: 3}
     - time: 0.16666667
-      value: {fileID: -879708112, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
+      value: {fileID: 98302824, guid: 309b7662f2346db4ab56b2252a119fc0, type: 3}
     - time: 0.33333334
-      value: {fileID: -60357211, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
+      value: {fileID: -1047449735, guid: 309b7662f2346db4ab56b2252a119fc0, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,9 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1729223954, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
-    - {fileID: -879708112, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
-    - {fileID: -60357211, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
+    - {fileID: -1227727620, guid: 309b7662f2346db4ab56b2252a119fc0, type: 3}
+    - {fileID: 98302824, guid: 309b7662f2346db4ab56b2252a119fc0, type: 3}
+    - {fileID: -1047449735, guid: 309b7662f2346db4ab56b2252a119fc0, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -77,7 +77,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.33333334
-    functionName: Animation_HurtEnded
+    functionName: Animation_DeadEnded
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 238c20a3948d1dd489a39d1dada24279, type: 3}
     floatParameter: 0

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 264730799198805070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 8, y: 5, z: 1}
+  m_LocalScale: {x: 30, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4780785741653502555}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 4780785741653502555}
   - component: {fileID: 1599760695444151864}
   - component: {fileID: 8635401899853411779}
-  - component: {fileID: 3305708348079841758}
+  - component: {fileID: 1828804447313252655}
   m_Layer: 0
   m_Name: Boss_VillageHead
   m_TagString: Untagged
@@ -334,7 +334,7 @@ Transform:
   - {fileID: 3900955520403553971}
   - {fileID: 1296046117586200827}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1599760695444151864
 Rigidbody2D:
@@ -408,7 +408,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.8}
   m_EdgeRadius: 0
---- !u!114 &3305708348079841758
+--- !u!114 &1828804447313252655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5726843180453137288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ae1c6b67e576da44b7e6b652993b947, type: 3}
+  m_Script: {fileID: 11500000, guid: 123d686c63e0b4c48acb748002025b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 2
+  ID: 101

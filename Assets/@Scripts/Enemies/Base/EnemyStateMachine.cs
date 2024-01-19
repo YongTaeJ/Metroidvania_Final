@@ -31,15 +31,10 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 
     #region Monobehaviour
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Initialize();
         StateTransition(StateDictionary[EnemyStateType.Idle]);
-    }
-
-    private void Start()
-    {
-        new EnemyHitSystem(this);
     }
 
     #endregion
@@ -53,7 +48,6 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         Animator = GetComponentInChildren<Animator>();
 
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
-
-        
+        new EnemyHitSystem(this);
     }
 }

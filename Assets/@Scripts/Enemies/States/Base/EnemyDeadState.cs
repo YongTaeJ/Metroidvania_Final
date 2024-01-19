@@ -5,17 +5,18 @@ using UnityEngine;
 public class EnemyDeadState : EnemyBaseState
 {
     #region Fields
-    private float _deadTime;
+    protected bool _isDeadEnded;
     private Transform _spriteTransform;
     #endregion
     public EnemyDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _deadTime = 0.2f;
         _spriteTransform = stateMachine.transform.Find("Sprite");
+        stateMachine.EventReceiver.OnDeadEnded += EndState;
     }
     #region IState
     public override void OnStateEnter()
     {
+        _isDeadEnded = false;
         _animator.SetTrigger(AnimatorHash.Dead);
         GenerateDeadEffect();
     }
@@ -26,8 +27,7 @@ public class EnemyDeadState : EnemyBaseState
 
     public override void OnStateStay()
     {
-        _deadTime -= Time.deltaTime;
-        if(_deadTime <= 0)
+        if(_isDeadEnded)
         {
             DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
             GameObject.Destroy(_stateMachine.gameObject);
@@ -40,5 +40,10 @@ public class EnemyDeadState : EnemyBaseState
         GameObject effect = Resources.Load<GameObject>("Enemies/Effects/EnemyDeadEffect");
         Transform transform = GameObject.Instantiate(effect).GetComponent<Transform>();
         transform.localPosition = _spriteTransform.position;
+    }
+
+    private void EndState()
+    {
+        _isDeadEnded = true;
     }
 }

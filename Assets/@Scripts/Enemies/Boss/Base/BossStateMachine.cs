@@ -2,39 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BossPatternType
-{
-    None,
-    Melee,
-    Ranged,
-    Random,
-    Special
-}
-public abstract class BossStateMachine : StateMachine<BossBaseState>
+public abstract class BossStateMachine : EnemyStateMachine
 {
     #region Fields
-    private PatternFinder _patternFinder;
+    protected PatternFinder _patternFinder;
     #endregion
 
     #region Properties
-
     public List<BossBaseState> AttackList {get; protected set;}
-    public List<BossBaseState> IdleList {get; protected set;}
+    public List<BossBaseState> PrepareList {get; protected set;}
     #endregion
 
-
-    #region Monobehaviour
-
-    private void Awake()
+    protected override void Awake()
     {
         Initialize();
-        _patternFinder = new PatternFinder();
-        // StateTransition(StateDictionary[EnemyStateType.Idle]);
+        PatternTransition();
     }
-    #endregion
 
-    public virtual void Initialize()
+    public void PatternTransition()
     {
-        _patternFinder = new PatternFinder(); 
+        EnemyBaseState nextState = _patternFinder.GetState();
+        StateTransition(nextState);
     }
 }

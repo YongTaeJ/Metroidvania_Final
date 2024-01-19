@@ -10,7 +10,6 @@ public class EnemyAttackState : EnemyBaseState
     #endregion
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        stateMachine.EventReceiver.OnAttackEnded -= EndState;
         stateMachine.EventReceiver.OnAttackEnded += EndState;
         _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot"); 
     }
@@ -37,7 +36,7 @@ public class EnemyAttackState : EnemyBaseState
 
     #endregion
 
-    public void EndState()
+    private void EndState()
     {
         _isAttackEnded = true;
     }

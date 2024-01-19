@@ -2,20 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBaseState : IState
+public abstract class BossBaseState : EnemyBaseState
 {
-    public void OnStateEnter()
+    public BossPatternType BossPatternType {get; protected set;}
+    protected BossBaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnStateExit()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnStateStay()
-    {
-        throw new System.NotImplementedException();
     }
 }

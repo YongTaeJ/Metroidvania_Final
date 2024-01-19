@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHitSystem
+public class EnemyHitSystem : IDamagable
 {
     #region Fields
     private PlayerFinder _playerFinder;
@@ -35,16 +35,16 @@ public class EnemyHitSystem
         _currentEndurance--;
         _currentHP -= damage;
 
-        KnockBack();
-
         if(_currentHP <= 0)
         {
+            KnockBack();
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Dead]);
             return;
         }
 
         if(_currentEndurance <= 0)
         {
+            KnockBack();
             _currentEndurance = _maxEndurance;
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Hurt]);
             return;

@@ -9,6 +9,7 @@ public static class AnimatorHash
 {
     public static readonly int Walk = Animator.StringToHash("Walk");
     public static readonly int Attack = Animator.StringToHash("Attack");
+    public static readonly int Prepare = Animator.StringToHash("Prepare");
     public static readonly int Idle = Animator.StringToHash("Idle");
     public static readonly int Dead = Animator.StringToHash("Dead");
     public static readonly int Hurt = Animator.StringToHash("Hurt");
