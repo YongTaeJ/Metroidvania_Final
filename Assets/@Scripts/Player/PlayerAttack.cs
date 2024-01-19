@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private Player _player;
-    private EnemyHitSystem _enemyHit;
     private PolygonCollider2D _polygonCollider;
 
     private void Awake()
@@ -16,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            _enemyHit.GetDamaged(_player._damage);
+            collision.GetComponent<IDamagable>().GetDamaged(1);
         }
     }
 }

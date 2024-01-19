@@ -48,6 +48,6 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         Animator = GetComponentInChildren<Animator>();
 
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
-        new EnemyHitSystem(this);
+        GetComponent<EnemyHitSystem>().Initialize(this);
     }
 }

@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
             _Hp -= damage;
             StartCoroutine(ResetHurtAnimation());
 
-            //TODO ³Ë¹é
+            //TODO ï¿½Ë¹ï¿½
         }
 
         if (_Hp <= 0)
