@@ -26,8 +26,6 @@ public class PlayerTemp : MonoBehaviour
 
     #region Check Transforms
 
-    [SerializeField]
-    private Transform groundCheck;
 
     #endregion
 
@@ -92,7 +90,7 @@ public class PlayerTemp : MonoBehaviour
 
     public bool CheckGround()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, _playerData.groundCheckRadius, _playerData.whatIsGround);
+        return Physics2D.Raycast(transform.position, Vector2.down, _playerData.groundCheckDistance, _playerData.whatIsGround);
     }
     public void CheckIfShouldFlip(int xInput)
     {

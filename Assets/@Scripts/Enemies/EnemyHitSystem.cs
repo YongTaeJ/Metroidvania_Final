@@ -28,7 +28,7 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         _playerFinder = stateMachine.PlayerFinder;
     }
 
-    public void GetDamaged(int damage)
+    public void GetDamaged(int damage, Transform target)
     {
         _currentEndurance--;
         _currentHP -= damage;
