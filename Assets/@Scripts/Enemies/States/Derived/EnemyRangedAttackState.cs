@@ -8,12 +8,14 @@ public class EnemyRangedAttackState : EnemyAttackState
     #region Fields
     private GameObject _bulletPrefab;
     private PlayerFinder _playerFinder;
+    private int _damage;
     #endregion
 
     public EnemyRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet");
         _playerFinder = stateMachine.PlayerFinder;
+        _damage = stateMachine.EnemyData.Damage;
         stateMachine.EventReceiver.OnBulletFire += FireBullet;
     }
 
@@ -34,7 +36,7 @@ public class EnemyRangedAttackState : EnemyAttackState
 
         Vector3 direction = (_playerFinder.CurrentTransform.position - myPos).normalized;
 
-        bullet.InitDirection(direction);
+        bullet.Initialize(direction, _damage);
     }
 
 

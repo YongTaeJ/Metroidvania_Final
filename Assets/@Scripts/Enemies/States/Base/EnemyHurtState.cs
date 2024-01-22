@@ -17,12 +17,11 @@ public class EnemyHurtState : EnemyBaseState
     public override void OnStateEnter()
     {
         _isHurtEnded = false;
-        _animator.SetBool(AnimatorHash.Hurt, true);
+        _animator.SetTrigger(AnimatorHash.Hurt);
     }
 
     public override void OnStateExit()
     {
-        _animator.SetBool(AnimatorHash.Hurt, false);
     }
 
     public override void OnStateStay()

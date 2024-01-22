@@ -27,6 +27,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     public PlayerFinder PlayerFinder {get; private set;}
     public Animator Animator {get; private set;}
     public EnemyAnimationEventReceiver EventReceiver {get; private set;}
+    public ObjectFlip ObjectFlip {get; private set;}
     #endregion
 
     #region Monobehaviour
@@ -47,7 +48,11 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         PlayerFinder = GetComponentInChildren<PlayerFinder>();
         Animator = GetComponentInChildren<Animator>();
 
+        ObjectFlip = new ObjectFlip(transform);
+
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
+        
         GetComponent<EnemyHitSystem>().Initialize(this);
+        GetComponentInChildren<EnemyAttackSystem>().Initialize(this);
     }
 }

@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     private Vector2 _direction;
     private Rigidbody2D _rigidbody;
     private float _speed;
+    private int _damage;
     #endregion
 
     #region Monobehaviour
@@ -28,7 +29,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            // TODO. Player에 연결된 메서드를 통해 데미지 주기
+            other.GetComponent<IDamagable>().GetDamaged(_damage, other.transform);
             CancelInvoke();
             Destroy(gameObject);
         }   
@@ -40,15 +41,14 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void InitDirection(Vector2 direction)
+    public void Initialize(Vector2 direction, int damage)
     {
         _direction = direction;
+        _damage = damage;
 
         // 계산식은 GPT한테 물어봄 !!
         float angleRadians = Mathf.Atan2(_direction.y, _direction.x);
         float angleDegrees = angleRadians * Mathf.Rad2Deg;
         transform.Find("Sprite").eulerAngles = new Vector3(0,0, angleDegrees);
     }
-
-
 }

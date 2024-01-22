@@ -8,7 +8,7 @@ public class EnemyWanderState : EnemyFindingState
     private Transform _myTransform;
     private Vector2 _direction;
     private Rigidbody2D _rigidbody;
-    private float _walkTime;
+    private ObjectFlip _objectFlip;
     private int _layerMask;
     #endregion
     public EnemyWanderState(EnemyStateMachine stateMachine) : base(stateMachine)
@@ -16,6 +16,7 @@ public class EnemyWanderState : EnemyFindingState
         _layerMask = LayerMask.GetMask("Ground");
         _rigidbody = stateMachine.Rigidbody;
         _myTransform = stateMachine.transform;
+        _objectFlip = stateMachine.ObjectFlip;
     }
 
     #region IState
@@ -39,6 +40,7 @@ public class EnemyWanderState : EnemyFindingState
         if(IsTimeOut()) return;
 
         FallCheck();
+        _objectFlip.Flip(_direction.x);
         _rigidbody.velocity = GetVelocity();
     }
 
