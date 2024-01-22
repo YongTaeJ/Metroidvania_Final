@@ -15,7 +15,7 @@ public class EnemyAttackSystem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<IDamagable>().GetDamaged(_damage);
+            other.GetComponent<IDamagable>().GetDamaged(_damage, other.transform);
         }
     }
 }
