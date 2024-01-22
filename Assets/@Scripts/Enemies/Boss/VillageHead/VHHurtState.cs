@@ -8,7 +8,6 @@ public class VHHurtState : EnemyHurtState
     private int _maxHurtCount;
     public VHHurtState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        // TODO => EnemyHurtState에서 이벤트 걸리는게 반영 되는지 확인 필요
         _maxHurtCount = 4;
     }
 

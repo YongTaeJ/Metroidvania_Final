@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public static class AnimatorHash
 {
+    public static readonly int PatternNumber = Animator.StringToHash("PatternNumber");
     public static readonly int Walk = Animator.StringToHash("Walk");
     public static readonly int Attack = Animator.StringToHash("Attack");
     public static readonly int Prepare = Animator.StringToHash("Prepare");
