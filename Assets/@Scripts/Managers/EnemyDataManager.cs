@@ -36,7 +36,7 @@ public class EnemyData
     public string Name {get; set;}
     public int PrefabID {get; set;}
     public int HP { get; set; }
-    public float Damage {get; set;}
+    public int Damage {get; set;}
     public float Speed {get; set;}
     public float AttackDistance { get; set; }
     public int HitEndurance {get; set;}

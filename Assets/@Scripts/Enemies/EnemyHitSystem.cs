@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyHitSystem : MonoBehaviour, IDamagable
 {
     #region Fields
     private PlayerFinder _playerFinder;
-    private Rigidbody2D _rigidbody;
     private EnemyStateMachine _stateMachine;
     private int _maxEndurance;
     private int _maxHP;
@@ -18,7 +18,6 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
     public void Initialize(EnemyStateMachine stateMachine)
     {
         _stateMachine = stateMachine;
-        _rigidbody = stateMachine.Rigidbody;
 
         _maxEndurance = stateMachine.EnemyData.HitEndurance;
         _maxHP = stateMachine.EnemyData.HP;
@@ -27,7 +26,6 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         _currentHP = _maxHP;
 
         _playerFinder = stateMachine.PlayerFinder;
-        _rigidbody = stateMachine.Rigidbody;
     }
 
     public void GetDamaged(int damage)
@@ -55,10 +53,9 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
     {
         if(_playerFinder.CurrentTransform == null) return;
 
-        float dist = _playerFinder.CurrentTransform.position.x - _rigidbody.position.x;
+        float dist = _playerFinder.CurrentTransform.position.x - transform.position.x;
+        float direction = dist > 0 ? -1 : 1;
 
-        Vector2 direction = dist > 0 ? Vector2.left : Vector2.right;
-
-        _rigidbody.AddForce(direction * 100);
+        transform.DOMoveX(transform.position.x + direction * 0.4f , 0.3f);
     }
 }

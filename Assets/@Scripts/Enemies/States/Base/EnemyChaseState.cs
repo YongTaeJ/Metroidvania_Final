@@ -7,21 +7,23 @@ public class EnemyChaseState : EnemyBaseState
 {
     #region Fields
     private Rigidbody2D _rigidbody;
-    private Transform _myTransform;
+    private Transform _transform;
     private Vector2 _direction;
     private PlayerFinder _playerFinder;
+    private ObjectFlip _objectFlip;
     private int _layerMask;
     private float _attackDistance;
     private float _speed;
     #endregion
     public EnemyChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _myTransform = stateMachine.transform;
+        _transform = stateMachine.transform;
         _layerMask = LayerMask.GetMask("Ground");
         _attackDistance = stateMachine.EnemyData.AttackDistance;
         _speed = stateMachine.EnemyData.Speed;
         _playerFinder = stateMachine.PlayerFinder;
         _rigidbody = stateMachine.Rigidbody;
+        _objectFlip = stateMachine.ObjectFlip;
     }
 
     #region IState
@@ -44,7 +46,9 @@ public class EnemyChaseState : EnemyBaseState
             return;
         }
         
-        float value = _playerFinder.CurrentTransform.position.x - _myTransform.position.x;
+        float value = _playerFinder.CurrentTransform.position.x - _transform.position.x;
+        _objectFlip.Flip(value);
+        
         if(Mathf.Abs(value) < _attackDistance)
         {
             if(_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var attackState))
@@ -62,7 +66,7 @@ public class EnemyChaseState : EnemyBaseState
 
     private void FallCheck()
     {
-        Vector2 currentPosition = _myTransform.position;
+        Vector2 currentPosition = _transform.position;
 
         bool isLand = Physics2D.Raycast(currentPosition + _direction, Vector2.down, 1f, _layerMask);
 
