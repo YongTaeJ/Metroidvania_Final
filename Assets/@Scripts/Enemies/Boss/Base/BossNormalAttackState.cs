@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 public abstract class BossAttackState : BossBaseState
 {
@@ -10,7 +11,7 @@ public abstract class BossAttackState : BossBaseState
     public BossAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Melee;
-        _attackPivot = stateMachine.transform.Find("AttackPivot");
+        _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot");
         _attackCollider = _attackPivot.GetComponent<Collider2D>();
         stateMachine.EventReceiver.OnAttackStarted += OnAttack;
         stateMachine.EventReceiver.OnAttackEnded += OnAttackEnd;

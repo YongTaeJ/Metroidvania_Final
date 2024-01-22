@@ -6,17 +6,17 @@ using UnityEngine;
 public class PlayerFinder : MonoBehaviour
 {
     #region Properties
-    public bool IsPlayerEnter { get; private set; }
-    public Transform CurrentTransform { get; private set; }
+    public bool IsPlayerEnter { get; protected set; }
+    public Transform CurrentTransform { get; protected set; }
     #endregion
 
     #region Monobehaviour
-    private void Awake()
+    protected virtual void Awake()
     {
         IsPlayerEnter = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
@@ -25,7 +25,7 @@ public class PlayerFinder : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {

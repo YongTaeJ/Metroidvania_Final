@@ -13,6 +13,7 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
     private int _maxHP;
     private int _currentHP;
     private int _currentEndurance;
+    private bool _isInvincible;
     #endregion
 
     public void Initialize(EnemyStateMachine stateMachine)
@@ -26,10 +27,13 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         _currentHP = _maxHP;
 
         _playerFinder = stateMachine.PlayerFinder;
+        _isInvincible = false;
     }
 
     public void GetDamaged(int damage, Transform target)
     {
+        if(_isInvincible) return;
+        
         _currentEndurance--;
         _currentHP -= damage;
 

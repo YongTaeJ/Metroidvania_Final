@@ -18,7 +18,7 @@ public class PatternFinder
     private int _maxSpecialCount;
     private int _currentSpecialCount;
     private float _attackDistance;
-    private Transform _bossTransform;
+    private Transform _transform;
     private Transform _playerTransform;
     private Animator _animator;
     private Dictionary<BossPatternType, List<BossBaseState>> _attackPatterns;
@@ -32,12 +32,24 @@ public class PatternFinder
         _currentSpecialCount = 0;
 
         _attackDistance = stateMachine.EnemyData.AttackDistance;
-        _bossTransform = stateMachine.transform;
+        _transform = stateMachine.transform;
         _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _animator = stateMachine.Animator;
 
+        InitAttackPatterns();
         SetAttackPatterns(stateMachine.AttackList);
         _preparePatterns = stateMachine.PrepareList;
+    }
+
+    private void InitAttackPatterns()
+    {
+        _attackPatterns = new Dictionary<BossPatternType, List<BossBaseState>>();
+
+        _attackPatterns[BossPatternType.Melee] = new List<BossBaseState>();
+        _attackPatterns[BossPatternType.Ranged] = new List<BossBaseState>();
+        _attackPatterns[BossPatternType.Random] = new List<BossBaseState>();
+        _attackPatterns[BossPatternType.Special] = new List<BossBaseState>();
+
     }
 
     private void SetAttackPatterns(List<BossBaseState> patterns)
@@ -74,13 +86,13 @@ public class PatternFinder
 
         _currentSpecialCount++;
 
-        int rand = Random.Range(0,100);
-        if(rand < 20 && _attackPatterns.ContainsKey(BossPatternType.Random))
+        int rand = Random.Range(0,20);
+        if(rand < 100 && _attackPatterns.ContainsKey(BossPatternType.Random))
         {
             return GetRandomPattern(_attackPatterns[BossPatternType.Random]);
         }
 
-        float distance = Vector2.Distance(_playerTransform.position, _bossTransform.position);
+        float distance = Vector2.Distance(_playerTransform.position, _transform.position);
 
         if(distance < _attackDistance)
         {
