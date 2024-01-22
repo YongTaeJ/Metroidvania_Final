@@ -28,6 +28,11 @@ public class TeleportTrap : MonoBehaviour
                 MimicText();
             }
 
+            else if (this.CompareTag("Challenge"))
+            {
+                ChallengeText();
+            }
+
             else
             {
                 FallText();
@@ -38,6 +43,13 @@ public class TeleportTrap : MonoBehaviour
     private void MimicText()
     {
         _teleportText.text = "You just Actived Trap Card";
+        _panel.SetActive(true);
+
+        StartCoroutine(DeactiveText(2));
+    }
+    private void ChallengeText()
+    {
+        _teleportText.text = "You are not prepared!";
         _panel.SetActive(true);
 
         StartCoroutine(DeactiveText(2));
