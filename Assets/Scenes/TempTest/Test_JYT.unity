@@ -387,11 +387,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780785741653502555, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1946507
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4780785741653502555, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.2435203
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4780785741653502555, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
       propertyPath: m_LocalPosition.z
@@ -428,26 +428,6 @@ PrefabInstance:
     - target: {fileID: 5726843180453137288, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
       propertyPath: m_Name
       value: Boss_VillageHead
-      objectReference: {fileID: 0}
-    - target: {fileID: 8218783779579362951, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
-      propertyPath: m_Size.x
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8218783779579362951, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8218783779579362951, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8826456842512779913, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8923933221016659038, guid: ce39cf055321d5840a13e123fa64c602, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
