@@ -13,7 +13,7 @@ public class PlayerInputController : MonoBehaviour
     private float _horizontal;
 
     //Jump
-    private float _jumpPower = 10f;
+    private float _jumpPower = 11.5f;
     public int _maxJump = 1;
     public int _jumpCount;
 
