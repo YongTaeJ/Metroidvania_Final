@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class TeleportTrap : MonoBehaviour
 {
-    // damage 주는 함정
-    // 플레이어의 체력을 받아서 일정 수치를 깍아서 반환
-    // 플레이어를 특정 위치로 순간이동 시킴
+    // 플레이어를 순간이동 시키는 함정
+    // Vector3 teleportPosition을 갖고 있어서
+    // 플레이어가 닿는 순간 해당하는 위치로 순간이동 시키기
+    // 만약 필요하면 지금처럼 UI에 텍스트 표시해주기 유지
 
     [SerializeField]
     private GameObject _panel;
