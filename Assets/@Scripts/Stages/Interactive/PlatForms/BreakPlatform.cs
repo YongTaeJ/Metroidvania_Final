@@ -1,9 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakPlatform : MonoBehaviour
 {
+    // 몇번 밟았을 때 없어지는 발판
+    // 플레이어가 밟은 뒤에 점프하면 사라지게 작동
+    // 2초 후에 다시 생기게 만들어둠
+
+
+
     [SerializeField]
     private int _standCount = 1;
 
