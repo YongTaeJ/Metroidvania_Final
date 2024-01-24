@@ -9,12 +9,21 @@ public abstract class BossAttackState : BossBaseState
     protected Transform _attackPivot;
     protected Collider2D _attackCollider;
     protected EnemyAnimationEventReceiver _eventReceiver;
+    protected ObjectFlip _objectFlip;
+    protected Transform _playerTransform;
+    protected Transform _transform;
+    protected float _direction;
+    
     public BossAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Melee;
         _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot");
         _attackCollider = _attackPivot.GetComponent<Collider2D>();
         _eventReceiver = stateMachine.EventReceiver;
+        
+        _objectFlip = stateMachine.ObjectFlip;
+        _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
+        _transform = stateMachine.transform;
     }
 
     public override void OnStateEnter()
@@ -23,6 +32,8 @@ public abstract class BossAttackState : BossBaseState
         _eventReceiver.OnAttackEnded -= OnAttackEnd;
         _eventReceiver.OnAttackStarted += OnAttack;
         _eventReceiver.OnAttackEnded += OnAttackEnd;
+        _direction = _playerTransform.position.x - _transform.position.x > 0 ? 1 : -1 ;
+        _objectFlip.Flip(_direction);
     }
 
     public override void OnStateExit()

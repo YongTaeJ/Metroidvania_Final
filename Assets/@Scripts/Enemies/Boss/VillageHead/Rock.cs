@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
+    private GameObject _rockCrashEffect;
 
     public void Initialize( Sprite sprite, float x, float y )
     {
+        _rockCrashEffect = Resources.Load<GameObject>("Enemies/Effects/RockCrashEffect");
+
         _spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
 
@@ -21,10 +25,12 @@ public class Rock : MonoBehaviour
         if(other.collider.CompareTag("Player"))
         {
             other.collider.GetComponent<IDamagable>().GetDamaged(1, transform);
+            Instantiate(_rockCrashEffect, transform.position, quaternion.identity);
             Destroy(gameObject);
         }
         else if(other.collider.CompareTag("Ground"))
         {
+            Instantiate(_rockCrashEffect, transform.position, quaternion.identity);
             Destroy(gameObject);
         }
     }

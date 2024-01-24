@@ -3,7 +3,7 @@ guid: bfc10be2c971f9146a43c41e0d871a64
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -74,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -86,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -110,6 +116,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1617,80 +1637,79 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PS_Tileset_12_Animated_2: -482911187
-      PS_Tileset_12_Animated_3: 1954940742
-      PS_Tileset_12_Animated_61: 496520507
-      PS_Tileset_12_Animated_21: 618086098
-      PS_Tileset_12_Animated_63: 1919064684
-      PS_Tileset_12_Animated_54: -774748004
-      PS_Tileset_12_Animated_13: 681461125
-      PS_Tileset_12_Animated_64: -1222674931
-      PS_Tileset_12_Animated_56: 1157811285
-      PS_Tileset_12_Animated_55: 1025562067
-      PS_Tileset_12_Animated_28: -1393150502
-      PS_Tileset_12_Animated_46: -2014401161
-      PS_Tileset_12_Animated_65: 7514219
-      PS_Tileset_12_Animated_32: -1406466094
-      PS_Tileset_12_Animated_16: -983483444
-      PS_Tileset_12_Animated_68: 1612749247
-      PS_Tileset_12_Animated_11: -87537865
-      PS_Tileset_12_Animated_38: -417848416
-      PS_Tileset_12_Animated_58: -1737757504
-      PS_Tileset_12_Animated_17: 394855111
-      PS_Tileset_12_Animated_20: 145603754
-      PS_Tileset_12_Animated_10: 1799010739
-      PS_Tileset_12_Animated_7: 996050966
-      PS_Tileset_12_Animated_4: -1024907151
-      PS_Tileset_12_Animated_22: -1263876085
-      PS_Tileset_12_Animated_30: -243455551
-      PS_Tileset_12_Animated_12: 1101713536
-      PS_Tileset_12_Animated_59: -1578603191
-      PS_Tileset_12_Animated_15: 1147699875
-      PS_Tileset_12_Animated_53: -1513567928
       PS_Tileset_12_Animated_0: 2128474954
-      PS_Tileset_12_Animated_35: 1376205782
-      PS_Tileset_12_Animated_37: -518499333
-      PS_Tileset_12_Animated_36: -1513141088
-      PS_Tileset_12_Animated_14: -1838727683
-      PS_Tileset_12_Animated_29: 2116338517
-      PS_Tileset_12_Animated_67: -1763594128
-      PS_Tileset_12_Animated_24: -382983991
       PS_Tileset_12_Animated_1: 131410359
+      PS_Tileset_12_Animated_10: 1799010739
+      PS_Tileset_12_Animated_11: -87537865
+      PS_Tileset_12_Animated_12: 1101713536
+      PS_Tileset_12_Animated_13: 681461125
+      PS_Tileset_12_Animated_14: -1838727683
+      PS_Tileset_12_Animated_15: 1147699875
+      PS_Tileset_12_Animated_16: -983483444
+      PS_Tileset_12_Animated_17: 394855111
+      PS_Tileset_12_Animated_18: -619844319
+      PS_Tileset_12_Animated_19: -1393310471
+      PS_Tileset_12_Animated_2: -482911187
+      PS_Tileset_12_Animated_20: 145603754
+      PS_Tileset_12_Animated_21: 618086098
+      PS_Tileset_12_Animated_22: -1263876085
+      PS_Tileset_12_Animated_23: 899449191
+      PS_Tileset_12_Animated_24: -382983991
       PS_Tileset_12_Animated_25: -1207884765
+      PS_Tileset_12_Animated_26: -1290934816
+      PS_Tileset_12_Animated_27: -2125752560
+      PS_Tileset_12_Animated_28: -1393150502
+      PS_Tileset_12_Animated_29: 2116338517
+      PS_Tileset_12_Animated_3: 1954940742
+      PS_Tileset_12_Animated_30: -243455551
+      PS_Tileset_12_Animated_31: 1061537812
+      PS_Tileset_12_Animated_32: -1406466094
+      PS_Tileset_12_Animated_33: 1025569505
+      PS_Tileset_12_Animated_34: -395353346
+      PS_Tileset_12_Animated_35: 1376205782
+      PS_Tileset_12_Animated_36: -1513141088
+      PS_Tileset_12_Animated_37: -518499333
+      PS_Tileset_12_Animated_38: -417848416
       PS_Tileset_12_Animated_39: -798412909
+      PS_Tileset_12_Animated_4: -1024907151
       PS_Tileset_12_Animated_40: -2142769186
       PS_Tileset_12_Animated_41: 993200943
-      PS_Tileset_12_Animated_51: -967223638
-      PS_Tileset_12_Animated_26: -1290934816
-      PS_Tileset_12_Animated_62: 959888947
-      PS_Tileset_12_Animated_9: 282180161
-      PS_Tileset_12_Animated_49: 1384934377
-      PS_Tileset_12_Animated_8: -2007443919
-      PS_Tileset_12_Animated_52: -553356108
-      PS_Tileset_12_Animated_50: -1765573173
-      PS_Tileset_12_Animated_43: -402331746
-      PS_Tileset_12_Animated_33: 1025569505
-      PS_Tileset_12_Animated_23: 899449191
-      PS_Tileset_12_Animated_47: 411462279
-      PS_Tileset_12_Animated_34: -395353346
-      PS_Tileset_12_Animated_27: -2125752560
-      PS_Tileset_12_Animated_31: 1061537812
       PS_Tileset_12_Animated_42: 1212008467
+      PS_Tileset_12_Animated_43: -402331746
       PS_Tileset_12_Animated_44: 1377513126
-      PS_Tileset_12_Animated_57: 45422887
       PS_Tileset_12_Animated_45: 799398790
-      PS_Tileset_12_Animated_60: 1134030771
-      PS_Tileset_12_Animated_66: 1585058076
-      PS_Tileset_12_Animated_70: -883022683
-      PS_Tileset_12_Animated_6: -1399046119
-      PS_Tileset_12_Animated_5: -1931369580
-      PS_Tileset_12_Animated_19: -1393310471
-      PS_Tileset_12_Animated_69: -126255243
+      PS_Tileset_12_Animated_46: -2014401161
+      PS_Tileset_12_Animated_47: 411462279
       PS_Tileset_12_Animated_48: -39401315
-      PS_Tileset_12_Animated_18: -619844319
-  spritePackingTag: 
+      PS_Tileset_12_Animated_49: 1384934377
+      PS_Tileset_12_Animated_5: -1931369580
+      PS_Tileset_12_Animated_50: -1765573173
+      PS_Tileset_12_Animated_51: -967223638
+      PS_Tileset_12_Animated_52: -553356108
+      PS_Tileset_12_Animated_53: -1513567928
+      PS_Tileset_12_Animated_54: -774748004
+      PS_Tileset_12_Animated_55: 1025562067
+      PS_Tileset_12_Animated_56: 1157811285
+      PS_Tileset_12_Animated_57: 45422887
+      PS_Tileset_12_Animated_58: -1737757504
+      PS_Tileset_12_Animated_59: -1578603191
+      PS_Tileset_12_Animated_6: -1399046119
+      PS_Tileset_12_Animated_60: 1134030771
+      PS_Tileset_12_Animated_61: 496520507
+      PS_Tileset_12_Animated_62: 959888947
+      PS_Tileset_12_Animated_63: 1919064684
+      PS_Tileset_12_Animated_64: -1222674931
+      PS_Tileset_12_Animated_65: 7514219
+      PS_Tileset_12_Animated_66: 1585058076
+      PS_Tileset_12_Animated_67: -1763594128
+      PS_Tileset_12_Animated_68: 1612749247
+      PS_Tileset_12_Animated_69: -126255243
+      PS_Tileset_12_Animated_7: 996050966
+      PS_Tileset_12_Animated_70: -883022683
+      PS_Tileset_12_Animated_8: -2007443919
+      PS_Tileset_12_Animated_9: 282180161
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -29,14 +29,14 @@
       "DropRate": "40"
     },
     {
-      "Index": "100",
+      "Index": "4",
       "MinGold": "100",
       "MaxGold": "150",
-      "ItemName": "None",
+      "ItemName": "Wood",
       "DropRate": "100"
     },
     {
-      "Index": "101",
+      "Index": "5",
       "MinGold": "200",
       "MaxGold": "250",
       "ItemName": "None",

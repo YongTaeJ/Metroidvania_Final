@@ -11,7 +11,7 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
     private EnemyStateMachine _stateMachine;
     private int _maxEndurance;
     private int _maxHP;
-    private int _currentHP;
+    [SerializeField] private int _currentHP;
     private int _currentEndurance;
     private bool _isInvincible;
     #endregion
@@ -36,17 +36,17 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         
         _currentEndurance--;
         _currentHP -= damage;
+        KnockBack();
 
         if(_currentHP <= 0)
         {
-            KnockBack();
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Dead]);
+            Debug.Log("죽었음");
             return;
         }
 
         if(_currentEndurance <= 0)
         {
-            KnockBack();
             _currentEndurance = _maxEndurance;
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Hurt]);
             return;

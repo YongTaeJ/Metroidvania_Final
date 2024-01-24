@@ -10,8 +10,9 @@ public class VHSpecialAttackState : BossAttackState
 
     public VHSpecialAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        // TODO => 개선 필요
+        
         BossPatternType = BossPatternType.Special;
+        // TODO => Find 개선이 필요할수도??
         _pattern = GameObject.Find("VillageHeadSpecialPattern").GetComponent<VHSpeicalPattern>();
     }
 

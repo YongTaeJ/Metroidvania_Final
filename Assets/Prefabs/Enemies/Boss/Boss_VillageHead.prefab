@@ -324,7 +324,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.4, y: 2}
+  m_Size: {x: 1.1, y: 1.8}
   m_Direction: 0
 --- !u!114 &7678431562386981310
 MonoBehaviour:
@@ -378,7 +378,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4827757216003016425}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -414,7 +414,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3, y: 2}
+  m_Size: {x: 2.3, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &3829147752316818860
 MonoBehaviour:
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 8635401899853411779}
   - component: {fileID: 1828804447313252655}
   - component: {fileID: 5088962522758789814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss_VillageHead
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ Transform:
   - {fileID: 3900955520403553971}
   - {fileID: 1296046117586200827}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1599760695444151864
 Rigidbody2D:
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123d686c63e0b4c48acb748002025b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 3
+  ID: 4
 --- !u!114 &5088962522758789814
 MonoBehaviour:
   m_ObjectHideFlags: 0

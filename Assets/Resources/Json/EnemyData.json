@@ -8,7 +8,7 @@
       "Speed": "0",
       "AttackDistance": "0",
       "HitEndurance": "0",
-      "DropTableIndex": "0"
+      "DropTableIndex": "-1"
     },
     {
       "ID": "1",
@@ -39,6 +39,16 @@
       "AttackDistance": "4",
       "HitEndurance": "1",
       "DropTableIndex": "1"
+    },
+    {
+      "ID": "4",
+      "Name": "VillageHead",
+      "HP": "300",
+      "Damage": "2",
+      "Speed": "1.2",
+      "AttackDistance": "3",
+      "HitEndurance": "15",
+      "DropTableIndex": "4"
     }
   ]
 }

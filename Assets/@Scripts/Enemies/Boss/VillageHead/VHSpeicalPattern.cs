@@ -16,7 +16,7 @@ public class VHSpeicalPattern : MonoBehaviour
 
     public void Initialize()
     {
-        _boundary = 8f;
+        _boundary = 11f;
         _variation = 5;
         _rockPrefab = Resources.Load<GameObject>("Enemies/Rocks/Rock");
 
@@ -33,6 +33,7 @@ public class VHSpeicalPattern : MonoBehaviour
     public void CreateRock()
     {
         Rock rock = Instantiate(_rockPrefab).GetComponent<Rock>();
+        rock.transform.position += Vector3.right * Random.Range(-_boundary, _boundary);
 
         // TODO => 적당하게 position 조정
         int random = Random.Range(0, _variation);

@@ -7,16 +7,14 @@ public class VHLeapAttackState : BossAttackState
 {
     private int _startCount;
     private int _endCount; 
-    private Transform _playerTransform;
-    private Transform _transform;
+
     private Rigidbody2D _rigidbody;
     private Collider2D _throwCollider;
     private Collider2D _bodyTriggerCollider;
     private Collider2D _bodyCollisionCollider;
-    private ObjectFlip _objectFlip;
     private float _throwDistance;
     private float _jumpTime;
-    private float _direction;
+
     public VHLeapAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Ranged;
@@ -25,10 +23,7 @@ public class VHLeapAttackState : BossAttackState
         _bodyTriggerCollider = stateMachine.transform.Find("Sprite/AttackPivot").GetComponent<CapsuleCollider2D>();
         _bodyCollisionCollider = stateMachine.transform.GetComponent<Collider2D>();
         _rigidbody = stateMachine.Rigidbody;
-        _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
-        _transform = stateMachine.transform;
-        _objectFlip = stateMachine.ObjectFlip;
-        
+
         _jumpTime = 1f;
         _throwDistance = 4.5f;
     }
