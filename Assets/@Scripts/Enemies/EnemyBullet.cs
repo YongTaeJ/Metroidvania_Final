@@ -32,7 +32,12 @@ public class EnemyBullet : MonoBehaviour
             other.GetComponent<IDamagable>().GetDamaged(_damage, other.transform);
             CancelInvoke();
             Destroy(gameObject);
-        }   
+        }
+        if(other.CompareTag("Ground"))
+        {
+            CancelInvoke();
+            Destroy(gameObject);
+        }
     }
     #endregion
 

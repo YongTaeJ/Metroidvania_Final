@@ -12,13 +12,16 @@ public class VHBasicAttack2State : BossAttackState
 
     public override void OnStateEnter()
     {
+        base.OnStateEnter();
         _endCount = 0;
         _isAttackEnded = false;
+        _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 1);
     }
 
     public override void OnStateExit()
     {
+        base.OnStateExit();
         _animator.SetInteger(AnimatorHash.PatternNumber, -1);
     }
 

@@ -7,24 +7,30 @@ public class VHDashAttackState : BossAttackState
 {
     private Transform _transform;
     private Transform _playerTransform;
+    private ObjectFlip _objectFlip;
     private float _distanceToPlayer;
+    private int _startCount;
     public VHDashAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Ranged;
         _transform = stateMachine.transform;
-        _playerTransform = stateMachine.PlayerFinder.transform;
+        _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
+        _objectFlip = stateMachine.ObjectFlip;
         _distanceToPlayer = 1.5f;
     }
 
     public override void OnStateEnter()
     {
+        base.OnStateEnter();
+        _startCount = 0;
         _isAttackEnded = false;
+        _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 2);
-        DashToPlayer();
     }
 
     public override void OnStateExit()
     {
+        base.OnStateExit();
         _animator.SetInteger(AnimatorHash.PatternNumber, -1);
     }
 
@@ -38,13 +44,22 @@ public class VHDashAttackState : BossAttackState
 
     protected override void OnAttack()
     {
-        _attackCollider.enabled = true;
+        _startCount++;
+
+        if(_startCount == 1)
+        {
+            DashToPlayer();
+        }
+        else if(_startCount == 2)
+        {
+            _attackCollider.enabled = true;
+        }
     }
 
     protected override void OnAttackEnd()
     {
-        _isAttackEnded = true;
         _attackCollider.enabled = false;
+        _isAttackEnded = true;
     }
 
     private void DashToPlayer()
@@ -58,9 +73,8 @@ public class VHDashAttackState : BossAttackState
             distance *= -1;
         }
 
-        Vector3 dist = Vector2.right * distance;
-
-        _transform.DOMove(_playerTransform.position + dist, 0.4f);
+        _objectFlip.Flip(directionX);
+        _transform.DOMoveX(_playerTransform.position.x + distance, 0.7f);
     }
 
 }

@@ -28,7 +28,7 @@ public class PatternFinder
     public PatternFinder(BossStateMachine stateMachine)
     {
         _isAttacked = false;
-        _maxSpecialCount = 5;
+        _maxSpecialCount = 0;
         _currentSpecialCount = 0;
 
         _attackDistance = stateMachine.EnemyData.AttackDistance;
@@ -36,26 +36,19 @@ public class PatternFinder
         _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _animator = stateMachine.Animator;
 
-        InitAttackPatterns();
         SetAttackPatterns(stateMachine.AttackList);
         _preparePatterns = stateMachine.PrepareList;
     }
 
-    private void InitAttackPatterns()
-    {
-        _attackPatterns = new Dictionary<BossPatternType, List<BossBaseState>>();
-
-        _attackPatterns[BossPatternType.Melee] = new List<BossBaseState>();
-        _attackPatterns[BossPatternType.Ranged] = new List<BossBaseState>();
-        _attackPatterns[BossPatternType.Random] = new List<BossBaseState>();
-        _attackPatterns[BossPatternType.Special] = new List<BossBaseState>();
-
-    }
-
     private void SetAttackPatterns(List<BossBaseState> patterns)
     {
+        _attackPatterns = new Dictionary<BossPatternType, List<BossBaseState>>();
         foreach(var pattern in patterns)
         {
+            if(!_attackPatterns.ContainsKey(pattern.BossPatternType))
+            {
+                _attackPatterns[pattern.BossPatternType] = new List<BossBaseState>();
+            }
             _attackPatterns[pattern.BossPatternType].Add(pattern);
         }
     }
@@ -70,14 +63,12 @@ public class PatternFinder
         else
         {
             _isAttacked = true;
-            return GetPrepaerPattern();
+            return GetPreparePattern();
         }
     }
 
     private EnemyBaseState GetAttackPattern()
     {
-        _animator.SetTrigger(AnimatorHash.Attack);
-
         if(_currentSpecialCount >= _maxSpecialCount && _attackPatterns.ContainsKey(BossPatternType.Special))
         {
             _currentSpecialCount = 0;
@@ -86,8 +77,8 @@ public class PatternFinder
 
         _currentSpecialCount++;
 
-        int rand = Random.Range(0,20);
-        if(rand < 100 && _attackPatterns.ContainsKey(BossPatternType.Random))
+        int rand = Random.Range(0,100);
+        if(rand < 20 && _attackPatterns.ContainsKey(BossPatternType.Random))
         {
             return GetRandomPattern(_attackPatterns[BossPatternType.Random]);
         }
@@ -103,9 +94,8 @@ public class PatternFinder
             return GetRandomPattern(_attackPatterns[BossPatternType.Ranged]);
         }
     }
-    private EnemyBaseState GetPrepaerPattern()
+    private EnemyBaseState GetPreparePattern()
     {
-        _animator.SetTrigger(AnimatorHash.Prepare);
         return GetRandomPattern(_preparePatterns);
     }
 

@@ -13,6 +13,7 @@ public class VHIdleState : BossBaseState
     public override void OnStateEnter()
     {
         _idleTime = Random.Range(1f, 1.5f);
+        _animator.SetTrigger(AnimatorHash.Prepare);
         _animator.SetBool(AnimatorHash.Idle, true);
     }
 

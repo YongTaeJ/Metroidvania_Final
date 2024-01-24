@@ -14,6 +14,8 @@ public static class AnimatorHash
     public static readonly int Idle = Animator.StringToHash("Idle");
     public static readonly int Dead = Animator.StringToHash("Dead");
     public static readonly int Hurt = Animator.StringToHash("Hurt");
+    public static readonly int HurtEnd = Animator.StringToHash("HurtEnd");
+
     public static readonly int Jump = Animator.StringToHash("Jump");
     public static readonly int yVelocity = Animator.StringToHash("yVelocity");
     public static readonly int WallSliding = Animator.StringToHash("WallSliding");

@@ -15,7 +15,7 @@ public class VHHurtState : EnemyHurtState
     {
         _hurtCount = 0;
         _isHurtEnded = false;
-        _animator.SetBool(AnimatorHash.Hurt, true);
+        _animator.SetTrigger(AnimatorHash.Hurt);
     }
 
     public override void OnStateStay()
@@ -24,6 +24,11 @@ public class VHHurtState : EnemyHurtState
         {
             (_stateMachine as BossStateMachine).PatternTransition();
         }
+    }
+
+    public override void OnStateExit()
+    {
+        _animator.SetTrigger(AnimatorHash.HurtEnd);
     }
 
     protected override void EndState()

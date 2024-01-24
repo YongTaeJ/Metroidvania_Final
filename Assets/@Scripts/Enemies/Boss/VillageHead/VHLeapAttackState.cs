@@ -9,26 +9,34 @@ public class VHLeapAttackState : BossAttackState
     private int _endCount; 
     private Transform _playerTransform;
     private Transform _transform;
+    private Rigidbody2D _rigidbody;
     private Collider2D _throwCollider;
+    private Collider2D _bodyTriggerCollider;
+    private Collider2D _bodyCollisionCollider;
     private ObjectFlip _objectFlip;
     private float _throwDistance;
     private float _jumpTime;
     private float _direction;
     public VHLeapAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Random;
+        BossPatternType = BossPatternType.Ranged;
 
         _throwCollider = stateMachine.transform.Find("Sprite/AttackPivot/ThrowAttack").GetComponent<Collider2D>();
-        _playerTransform = stateMachine.PlayerFinder.transform;
+        _bodyTriggerCollider = stateMachine.transform.Find("Sprite/AttackPivot").GetComponent<CapsuleCollider2D>();
+        _bodyCollisionCollider = stateMachine.transform.GetComponent<Collider2D>();
+        _rigidbody = stateMachine.Rigidbody;
+        _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _transform = stateMachine.transform;
         _objectFlip = stateMachine.ObjectFlip;
         
-        _jumpTime = 2.5f;
+        _jumpTime = 1f;
         _throwDistance = 4.5f;
     }
 
     public override void OnStateEnter()
     {
+        base.OnStateEnter();
+        _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 3);
         _startCount = 0;
         _endCount = 0;
@@ -36,6 +44,7 @@ public class VHLeapAttackState : BossAttackState
 
     public override void OnStateExit()
     {
+        base.OnStateExit();
         _animator.SetInteger(AnimatorHash.PatternNumber, -1);
     }
 
@@ -49,9 +58,12 @@ public class VHLeapAttackState : BossAttackState
 
         if(_startCount == 1)
         {
-            _direction = _playerTransform.position.x - _transform.position.x > 0 ? -1 : 1 ;
+            _direction = _playerTransform.position.x - _transform.position.x > 0 ? 1 : -1 ;
             _objectFlip.Flip(_direction);
-            _transform.DOMoveX(_playerTransform.position.x + _throwDistance * _direction, _jumpTime);
+            _transform.DOMoveX(_playerTransform.position.x - _throwDistance * _direction, _jumpTime);
+            _bodyTriggerCollider.enabled = false;
+            _bodyCollisionCollider.enabled = false;
+            _rigidbody.isKinematic = true;
         }
         else if(_startCount == 2)
         {
@@ -59,7 +71,9 @@ public class VHLeapAttackState : BossAttackState
         }
         else if(_startCount == 3)
         {
-            // TODO => 방향 검사 필요
+            _bodyTriggerCollider.enabled = true;
+            _bodyCollisionCollider.enabled = true;
+            _rigidbody.isKinematic = false;
             _transform.position += Vector3.right * _direction * _throwDistance;
         }
     }

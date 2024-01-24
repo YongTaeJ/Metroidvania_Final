@@ -8,19 +8,22 @@ public class VHChaseState : BossBaseState
     private Transform _playerTransform;
     private Transform _enemyTransform;
     private Rigidbody2D _rigidbody;
+    private ObjectFlip _objectFlip;
     private float _speed;
     public VHChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.None;
         _enemyTransform = stateMachine.transform;
-        _playerTransform = stateMachine.PlayerFinder.transform;
+        _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _speed = stateMachine.EnemyData.Speed;
         _rigidbody = stateMachine.Rigidbody;
+        _objectFlip = stateMachine.ObjectFlip;
     }
 
     public override void OnStateEnter()
     {
         _chaseTime = Random.Range(1f, 1.5f);
+        _animator.SetTrigger(AnimatorHash.Prepare);
         _animator.SetBool(AnimatorHash.Walk, true);
     }
 
@@ -41,6 +44,7 @@ public class VHChaseState : BossBaseState
             float direction =
             _playerTransform.position.x - _enemyTransform.position.x > 0 ?
             1f : -1f ;
+            _objectFlip.Flip(direction);
             _rigidbody.velocity = new Vector2(direction * _speed , _rigidbody.velocity.y);
         }
     }

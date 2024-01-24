@@ -21,7 +21,8 @@ public class VHStateMachine : BossStateMachine
             new VHBasicAttack2State(this),
             new VHDashAttackState(this),
             new VHLeapAttackState(this),
-            // new VHSpinAttackState(this)
+            new VHSpinAttackState(this),
+            new VHSpecialAttackState(this)
         };
 
         PrepareList = new()
