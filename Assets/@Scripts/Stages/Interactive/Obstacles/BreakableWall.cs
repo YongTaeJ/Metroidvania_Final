@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AtkableWall : MonoBehaviour
+public class BreakableWall : MonoBehaviour
 {
     [SerializeField]
     private bool _isOpened = false;
