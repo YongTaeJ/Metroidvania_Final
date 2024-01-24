@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,25 +19,38 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     private Animator _animator;
     private Rigidbody2D _rigidbody;
+    private TouchingDirection _touchingDirection;
     private bool _isFacingRight = true;
     private float _speed = 10f;
-    private float _horizontal;
+    private Vector2 _moveInput;
+
+    private bool _isWalking = false;
+    public bool Iswalking {get
+        {
+            return _isWalking;
+        }
+        private set
+        {
+            _isWalking = value;
+            _animator.SetBool(AnimatorHash.Walk, value);
+        }
+    }
 
     //Jump
-    private float _jumpPower = 11.5f;
+    private float _jumpPower = 20f;
     public int _maxJump = 1;
     public int _jumpCount;
 
-    //Ground Check
-    public Transform _groundCheckPos;
-    public Vector2 _groundCheckSize = new Vector2(0.5f, 0.05f);
-    public LayerMask groundLayer;
-    private bool _isGrounded;
+    ////Ground Check
+    //public Transform _groundCheckPos;
+    //public Vector2 _groundCheckSize = new Vector2(0.5f, 0.05f);
+    //public LayerMask groundLayer;
+    //private bool _isGrounded;
 
-    //Wall Check
-    public Transform _wallCheckPos;
-    public Vector2 _wallCheckSize = new Vector2(0.5f, 0.05f);
-    public LayerMask wallLayer;
+    ////Wall Check
+    //public Transform _wallCheckPos;
+    //public Vector2 _wallCheckSize = new Vector2(0.5f, 0.05f);
+    //public LayerMask wallLayer;
 
     //Gravity
     public float _baseGravity = 2f;
@@ -46,6 +60,17 @@ public class PlayerInputController : MonoBehaviour, IDamagable
     //Wall Slide
     private float _wallSlideSpeed = 0f;
     private bool _isWallSliding;
+
+    public bool IsWallSliding { get 
+        {
+            return _isWallSliding; 
+        } 
+        private set
+        {
+            _isWallSliding = value;
+            _animator.SetBool(AnimatorHash.WallSliding, value);
+        }
+    }
 
     // WallJump
     private bool _isWallJumping;
@@ -99,22 +124,22 @@ public class PlayerInputController : MonoBehaviour, IDamagable
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _touchingDirection = GetComponent<TouchingDirection>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _animator = GetComponent<Animator>();
         _Hp = _maxHp;
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        
         GroundCheck();
         WallSlide();
         WallJump();
 
         if (!_isWallJumping && !_isDashing && !IsHit)
         {
-            _rigidbody.velocity = new Vector2(_horizontal * _speed, _rigidbody.velocity.y);
+            _rigidbody.velocity = new Vector2(_moveInput.x * _speed, _rigidbody.velocity.y);
             Flip();
         }
 
@@ -124,9 +149,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         }
 
         _animator.SetFloat(AnimatorHash.yVelocity, _rigidbody.velocity.y);
-        _animator.SetFloat(AnimatorHash.Walk, _rigidbody.velocity.magnitude);
-        _animator.SetBool(AnimatorHash.WallSliding, _isWallSliding);
-        
+        _animator.SetBool(AnimatorHash.IsGrounded, _touchingDirection.IsGrounded);
     }
 
     #endregion
@@ -148,7 +171,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     private void WallSlide()
     {
-        if(!_isGrounded & WallCheck() & _horizontal != 0)
+        if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0)
         {
             _isWallSliding = true;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
@@ -182,7 +205,9 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     public void Move(InputAction.CallbackContext context)
     {
-        _horizontal = context.ReadValue<Vector2>().x;
+        _moveInput = context.ReadValue<Vector2>();
+
+        Iswalking = _moveInput != Vector2.zero;
     }
 
     public void Attack(InputAction.CallbackContext context)
@@ -190,7 +215,6 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         if (context.performed)
         {
             _animator.SetTrigger(AnimatorHash.Attack);
-
         }
     }
 
@@ -198,12 +222,12 @@ public class PlayerInputController : MonoBehaviour, IDamagable
     {
         if (_jumpCount > 0)
         {
-            if (context.performed)
+            if (context.started && _touchingDirection.IsGrounded)
             {
                 if(!_isWallJumping)
                 {
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
                     _animator.SetTrigger(AnimatorHash.Jump);
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
                     _jumpCount--;
                 }
             }
@@ -212,7 +236,6 @@ public class PlayerInputController : MonoBehaviour, IDamagable
                 if (!_isWallJumping)
                 {
                     _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-                    _animator.SetTrigger(AnimatorHash.Jump);
                     _jumpCount--;
                 }
             }
@@ -221,7 +244,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         //Wall Jump
         if(context.performed && _wallJumpTimer > 0f)
         {
-            if (!_isWallJumping)
+            if (!_isWallJumping && _touchingDirection.IsWall)
             {
                 _isWallJumping = true;
                 _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
@@ -273,38 +296,20 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     #region Check
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireCube(_groundCheckPos.position, _groundCheckSize);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(_wallCheckPos.position, _wallCheckSize);
-    }
-
     private void GroundCheck()
     {
-        if(Physics2D.OverlapBox(_groundCheckPos.position, _groundCheckSize,0, groundLayer))
+        if (_touchingDirection.IsGrounded)
         {
             _jumpCount = _maxJump;
             _dashCount = _maxDash;
-            _isGrounded = true;
         }
-        else
-        {
-            _isGrounded = false;
-        }
-    }
-
-    private bool WallCheck()
-    {
-        return Physics2D.OverlapBox(_wallCheckPos.position, _wallCheckSize, 0, wallLayer);
     }
 
     #endregion
 
     private void Flip()
     {
-        if(_isFacingRight && _horizontal < 0 || !_isFacingRight && _horizontal > 0)
+        if(_isFacingRight && _moveInput.x < 0 || !_isFacingRight && _moveInput.x > 0)
         {
             _isFacingRight = !_isFacingRight;
             Vector3 Is = transform.localScale;
@@ -338,12 +343,11 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     private IEnumerator Knockback(Transform target)
     {
-        // 플레이어와 피해를 준 오브젝트의 위치 차이를 계산
+        // 플레이어와 피해를 준 오브젝트 간의 상대적인 위치를 비교하여 방향 계산
         float direction = Mathf.Sign(target.position.x - transform.position.x);
-        
-        // 플레이어를 피해를 받은 방향의 반대로 밀어냄
+
+        // 플레이어를 피해를 받은 방향으로 밀어냄
         Vector2 knockbackDirection = new Vector2(-direction, 1f).normalized;
-        Debug.Log(knockbackDirection);
         _rigidbody.velocity = knockbackDirection * 5f;
 
         yield return new WaitForSeconds(0.2f);

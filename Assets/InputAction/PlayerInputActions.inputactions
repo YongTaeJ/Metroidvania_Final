@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerInputActions",
     "maps": [
         {
             "name": "Player",
@@ -45,6 +45,15 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "210567d7-6d86-4297-899f-15626063b675",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "c0cb4495-6e4f-4382-9001-7dcba8d702f0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -170,6 +179,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e0f8a78-0443-4730-8eb7-58ba10c367b8",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Skill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
