@@ -59,6 +59,8 @@ public class TouchingDirection : MonoBehaviour
         }
     }
 
+    public LayerMask groundLayerMask;
+
     private void Awake()
     {
         _touchingCol = GetComponent<CapsuleCollider2D>();
@@ -67,6 +69,8 @@ public class TouchingDirection : MonoBehaviour
 
     private void Update()
     {
+        castFilter.layerMask = groundLayerMask;
+
         IsGrounded = _touchingCol.Cast(Vector2.down, castFilter, groundHit, groundDistance) > 0;
         IsWall = _touchingCol.Cast(_wallCheckDirection, castFilter, wallHit, wallDistance) > 0;
         IsCeiling = _touchingCol.Cast(Vector2.up, castFilter, ceilingHit, ceilingDistance) > 0;

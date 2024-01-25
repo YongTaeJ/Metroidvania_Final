@@ -36,21 +36,12 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         }
     }
 
+    private bool _isAttacking = false;
+
     //Jump
     private float _jumpPower = 20f;
     public int _maxJump = 1;
     public int _jumpCount;
-
-    ////Ground Check
-    //public Transform _groundCheckPos;
-    //public Vector2 _groundCheckSize = new Vector2(0.5f, 0.05f);
-    //public LayerMask groundLayer;
-    //private bool _isGrounded;
-
-    ////Wall Check
-    //public Transform _wallCheckPos;
-    //public Vector2 _wallCheckSize = new Vector2(0.5f, 0.05f);
-    //public LayerMask wallLayer;
 
     //Gravity
     public float _baseGravity = 2f;
@@ -149,7 +140,6 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         }
 
         _animator.SetFloat(AnimatorHash.yVelocity, _rigidbody.velocity.y);
-        _animator.SetBool(AnimatorHash.IsGrounded, _touchingDirection.IsGrounded);
     }
 
     #endregion
@@ -213,9 +203,23 @@ public class PlayerInputController : MonoBehaviour, IDamagable
     public void Attack(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
+        { 
+            _isAttacking = true;
             _animator.SetTrigger(AnimatorHash.Attack);
+            StartCoroutine(ResetAttackAnimation());
         }
+    }
+
+    // TODO 리펙토링 필요해 보임
+    private IEnumerator ResetAttackAnimation()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _isAttacking = false;
+    }
+
+    public void Skill(InputAction.CallbackContext context)
+    {
+        // TODO
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -309,12 +313,15 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     private void Flip()
     {
-        if(_isFacingRight && _moveInput.x < 0 || !_isFacingRight && _moveInput.x > 0)
+        if(_isAttacking == false)
         {
-            _isFacingRight = !_isFacingRight;
-            Vector3 Is = transform.localScale;
-            Is.x *= -1f;
-            transform.localScale = Is;
+            if (_isFacingRight && _moveInput.x < 0 || !_isFacingRight && _moveInput.x > 0)
+            {
+                _isFacingRight = !_isFacingRight;
+                Vector3 Is = transform.localScale;
+                Is.x *= -1f;
+                transform.localScale = Is;
+            }
         }
     }
 
@@ -325,11 +332,9 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         if (Invincible == false)
         {
             Invincible = true;
-
             StartCoroutine(FlashPlayer());
             IsHit = true;
             _Hp -= damage;
-
             StartCoroutine(ResetHurtAnimation());
             StartCoroutine(Knockback(target));
 
@@ -343,15 +348,10 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     private IEnumerator Knockback(Transform target)
     {
-        // 플레이어와 피해를 준 오브젝트 간의 상대적인 위치를 비교하여 방향 계산
         float direction = Mathf.Sign(target.position.x - transform.position.x);
-
-        // 플레이어를 피해를 받은 방향으로 밀어냄
         Vector2 knockbackDirection = new Vector2(-direction, 1f).normalized;
         _rigidbody.velocity = knockbackDirection * 5f;
-
         yield return new WaitForSeconds(0.2f);
-
         _rigidbody.velocity = Vector2.zero;
     }
 
@@ -367,6 +367,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         Invincible = false;
     }
 
+    // TODO 연속해서 맞을경우 알파값이 낮은 상태로 고정되는 버그 있음 애니메이션에 적용해서 이부분은 없앨수 있을듯
     private IEnumerator FlashPlayer()
     {
         float flashSpeed = 0.1f;
@@ -386,6 +387,4 @@ public class PlayerInputController : MonoBehaviour, IDamagable
     }
 
     #endregion
-
-   
 }
