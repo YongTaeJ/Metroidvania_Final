@@ -11,7 +11,7 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
     private EnemyStateMachine _stateMachine;
     private int _maxEndurance;
     private int _maxHP;
-    [SerializeField] private int _currentHP;
+    private int _currentHP;
     private int _currentEndurance;
     private bool _isInvincible;
     #endregion

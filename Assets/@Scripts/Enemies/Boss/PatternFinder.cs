@@ -71,7 +71,8 @@ public class PatternFinder
     {
         if(_currentSpecialCount >= _maxSpecialCount && _attackPatterns.ContainsKey(BossPatternType.Special))
         {
-            _currentSpecialCount = Random.Range(5,8);
+            _currentSpecialCount = 0;
+            _maxSpecialCount = Random.Range(5,8);
             return GetRandomPattern(_attackPatterns[BossPatternType.Special]);
         }
 

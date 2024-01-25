@@ -8,12 +8,14 @@ public class EnemyRangedAttackState : EnemyAttackState
     #region Fields
     private GameObject _bulletPrefab;
     private PlayerFinder _playerFinder;
+    private int _bulletIndex;
     private int _damage;
     #endregion
 
     public EnemyRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet");
+        _bulletIndex = stateMachine.EnemyData.BulletIndex;
+        _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet" + _bulletIndex.ToString() );
         _playerFinder = stateMachine.PlayerFinder;
         _damage = stateMachine.EnemyData.Damage;
         stateMachine.EventReceiver.OnBulletFire += FireBullet;

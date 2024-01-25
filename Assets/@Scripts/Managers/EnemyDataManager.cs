@@ -14,7 +14,6 @@ public class EnemyDataManager : Singleton<EnemyDataManager>
     {
         enemyData_Json = Resources.Load<TextAsset>("Json/EnemyData");
         _enemyData = JsonConvert.DeserializeObject<EnemyDataArray>(enemyData_Json.ToString());
-
         return base.Initialize();
     }
 
@@ -41,4 +40,5 @@ public class EnemyData
     public float AttackDistance { get; set; }
     public int HitEndurance {get; set;}
     public int DropTableIndex { get; set; }
+    public int BulletIndex {get; set;}
 }
