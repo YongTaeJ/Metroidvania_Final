@@ -19,6 +19,7 @@ TagManager:
   - Ground
   - Wall
   - Enemy
+  - Item
   - 
   - 
   - 
@@ -34,8 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Map
   - 
   - 
   - 

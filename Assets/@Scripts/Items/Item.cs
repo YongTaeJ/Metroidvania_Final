@@ -1,45 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public enum ItemType
 {
     None,
-    Coin,
-    Brick,
-    Wood
+    Gold,
+    Material,
+    Equipment
 }
 
-public class Item : MonoBehaviour
+public class Item
 {
-    #region Fields
-    [SerializeField] private ItemType _itemType;
-    [SerializeField] private int _value;
-    #endregion
+    public ItemData ItemData {get; private set;}
+    public int Stock {get; private set;}
+    public event Action<int> OnStockChanged;
 
-    #region Properties
-    public ItemType ItemType => _itemType;
-    public int Value => _value;
-    #endregion
-
-    #region Monobehaviour
-    private void Start()
+    public Item(ItemData itemData)
     {
-        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-
-        float x = Random.Range(-45f, 45f) / 360;
-        float y = 1 - x;
-
-        rigidbody.AddForce( new Vector2(x,y) * 300);
+        ItemData = itemData;
+        Stock = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void SetItemStock(int value)
     {
-        if(other.CompareTag("Player"))
-        {
-            // ItemType을 토대로 인벤토리 등 필요한 곳에 정보 전달
-            Destroy(gameObject);
-        }
+        Stock = value;
+        OnStockChanged?.Invoke(value);
     }
-    #endregion
+}
+
+public class ItemData
+{
+    public ItemType ItemType {get; set; }
+    public int ID {get; set; }
+    public string Name {get; set; }
+    public string Description { get; set; }
+}
+
+public class SavedItemData
+{
+    public ItemType ItemType;
+    public int ID;
+    public int Stock;
 }
