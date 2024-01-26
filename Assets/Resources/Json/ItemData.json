@@ -1,0 +1,34 @@
+{
+  "ItemDatas": [
+    {
+      "ItemType": "Gold",
+      "ID": "0",
+      "Name": "Gold",
+      "Description": "이세계에서 가져온 금화입니다. 현실에서 통용되는 금화와는 다른 모습이지만 값어치는 비슷합니다."
+    },
+    {
+      "ItemType": "Material",
+      "ID": "0",
+      "Name": "Wood",
+      "Description": "이세계에서 가져온 목재입니다. 몬스터들이 왜 나무를 들고 다닐까요?"
+    },
+    {
+      "ItemType": "Material",
+      "ID": "1",
+      "Name": "Brick",
+      "Description": "이세계에서 가져온 벽돌입니다. 여기서 벽돌 집을 본 적은 없지만 벽돌은 있네요."
+    },
+    {
+      "ItemType": "Material",
+      "ID": "10000",
+      "Name": "StatuePiece",
+      "Description": "부서진 여신상의 파편입니다. 조각일 뿐인데도 강력한 힘이 느껴집니다."
+    },
+    {
+      "ItemType": "Equipment",
+      "ID": "0",
+      "Name": "testName",
+      "Description": "벽점프를 가능하게 해주는 아이템. 아직 설명 미정"
+    }
+  ]
+}

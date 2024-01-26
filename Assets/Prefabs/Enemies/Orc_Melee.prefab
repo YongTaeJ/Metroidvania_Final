@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 4395763967978287848}
   - component: {fileID: 1478609656115518529}
   - component: {fileID: 54491743952695038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Orc_Melee
   m_TagString: Enemy
   m_Icon: {fileID: 0}

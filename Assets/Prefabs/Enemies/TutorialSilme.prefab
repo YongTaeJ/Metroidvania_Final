@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 2995580687548187624}
   - component: {fileID: 344639579064809314}
   - component: {fileID: 213812752781379760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TutorialSilme
   m_TagString: Enemy
   m_Icon: {fileID: 0}

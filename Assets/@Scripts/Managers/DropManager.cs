@@ -2,77 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-using JetBrains.Annotations;
-using System.Threading;
 
 public class DropManager : Singleton<DropManager>
 {
     #region Fields
-    public TextAsset itemTable_Json;
-    private DropTableArray _dropTables;
-    private Dictionary<string, GameObject> _itemPrefabs;
-    private List<GameObject> _coinPrefabs;
+    private DropTable[] _dropTables;
+    private GameObject[] coinPrefabs;
+    private GameObject _dropItem;
     #endregion
 
     public override bool Initialize()
     {
-        itemTable_Json = Resources.Load<TextAsset>("Json/DropTable");
-        _dropTables = JsonConvert.DeserializeObject<DropTableArray>(itemTable_Json.ToString());
+        TextAsset itemTable_Json = Resources.Load<TextAsset>("Json/DropTable");
+        _dropTables = JsonConvert.DeserializeObject<DropTableArray>(itemTable_Json.ToString()).DropTables;
+        
+        _dropItem = Resources.Load<GameObject>("Items/DropItem");
 
-        InitPrefabs();
+        coinPrefabs = new GameObject[3];
+        coinPrefabs[0] = Resources.Load<GameObject>("Items/Coin1");
+        coinPrefabs[1] = Resources.Load<GameObject>("Items/Coin10");
+        coinPrefabs[2] = Resources.Load<GameObject>("Items/Coin100");
 
         return base.Initialize();
     }
 
-    private void InitPrefabs()
+    private void DropCoin(int sumValue, Vector2 location)
     {
-        _itemPrefabs = new Dictionary<string, GameObject>();
-        _coinPrefabs = new List<GameObject>();
-
-        // TODO => 폴더 내 데이터를 자동으로 처리하고, GameObject 이름을 Key값으로 받도록 수정
-        _itemPrefabs.Add("Wood", Resources.Load<GameObject>("Items/Wood"));
-        _itemPrefabs.Add("Brick", Resources.Load<GameObject>("Items/Brick"));
-
-        _coinPrefabs.Add(Resources.Load<GameObject>("Items/Coin1"));
-        _coinPrefabs.Add(Resources.Load<GameObject>("Items/Coin10"));
-        _coinPrefabs.Add(Resources.Load<GameObject>("Items/Coin100"));
-    }
-
-    private void DropCoin(int value, Vector2 location)
-    {
-        int index = 0;
-        while(value != 0)
+        // 현재 0~999원까지만 설계됨.
+        int prefabIndex = 0;
+        int value = 1;
+        while(sumValue != 0)
         {
-            // 1000원 이상은 작동 X
-            if(index == 3) break;
+            int remainder = sumValue % 10;
+            sumValue /= 10;
 
-            int count = value % 10;
-            value /= 10;
-            for(int i=0; i < count ; i++)
+            for(int i=0; i < remainder; i++)
             {
-                GameObject item = Instantiate(_coinPrefabs[index]);
-                item.transform.localPosition = location;
+                Instantiate(coinPrefabs[prefabIndex], location, Quaternion.identity)
+                .GetComponent<DropItem>()
+                .Initialize(ItemType.Gold, 0, value);
             }
-            index++;
+
+            value *= 10;
         }
     }
 
-    public void DropItem(int index, Vector2 location)
+    public void DropItem(int tableIndex, Vector2 dropLocation)
     {
-        
-        DropTable currentTable = _dropTables.DropTables[index];
 
-        int goldValue = Random.Range(currentTable.MinGold, currentTable.MaxGold);
-        DropCoin(goldValue, location);
+        DropTable currentTable = _dropTables[tableIndex];
+
+        int coinValue = Random.Range(currentTable.MinGold, currentTable.MaxGold+1);
+
+        DropCoin(coinValue, dropLocation);
 
         int chance = Random.Range(0,100);
 
         if(chance < currentTable.DropRate)
         {
-            GameObject item = Instantiate(_itemPrefabs[currentTable.ItemName]);
-            item.transform.localPosition = location;
+            // 현재 Material만 드랍되는 것으로 설계됨.
+            ItemData data = ItemManager.Instance.GetItemData(ItemType.Material, currentTable.ItemID);
+            GameObject dropitem = Instantiate(_dropItem, dropLocation, Quaternion.identity);
+            dropitem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);
+            dropitem.GetComponentInChildren<SpriteRenderer>().sprite = ItemManager.Instance.GetSprite(data.Name);
         }
-
     }
 }
 
@@ -86,6 +79,6 @@ public class DropTable
     public int Index;
     public int MinGold;
     public int MaxGold;
-    public string ItemName;
+    public int ItemID;
     public int DropRate;
 }

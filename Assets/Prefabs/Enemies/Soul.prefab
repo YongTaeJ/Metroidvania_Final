@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 3956889017881823549}
   - component: {fileID: 6021759290401668189}
   - component: {fileID: 7451347963660184592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Soul
   m_TagString: Enemy
   m_Icon: {fileID: 0}

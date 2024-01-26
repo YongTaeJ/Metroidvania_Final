@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7909850480725159085}
   - component: {fileID: 4372926075231896252}
   - component: {fileID: 5860954067244137858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlueSlime
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8715cbe34608a64b926aa6b8f007b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 0
 --- !u!1 &4564743120839652586
 GameObject:
   m_ObjectHideFlags: 0
