@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 6496732378902445627}
   - component: {fileID: 5750209441709579841}
   - component: {fileID: 3419575364104034267}
+  - component: {fileID: 3677823334134738909}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -320,7 +321,19 @@ MonoBehaviour:
     m_ActionId: 210567d7-6d86-4297-899f-15626063b675
     m_ActionName: Player/Dash[/Keyboard/c]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5692649238268825939}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
+        m_MethodName: Skill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c0cb4495-6e4f-4382-9001-7dcba8d702f0
     m_ActionName: Player/Skill[/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
@@ -546,3 +559,16 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &3677823334134738909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5289157278338680038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11ff96fbcd993a4fb6067b20184e7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swordAuror: {fileID: 5384882959024855129, guid: cbf15bb94d2422446add95cbc3ada5c7, type: 3}

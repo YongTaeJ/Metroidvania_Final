@@ -5,9 +5,7 @@ using UnityEngine;
 public class Skill_SwordAuror : SkillBase
 {
     //임시
-    public GameObject projectilePrefab;
-    public float projectileSpeed = 10f;
-
+    public GameObject _swordAuror;
     public override void Initialize()
     {
         base.Initialize();
@@ -28,12 +26,29 @@ public class Skill_SwordAuror : SkillBase
 
     private void LaunchProjectile()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+        //if (GameManager.Instance.player == null)
+        //{
+        //    Debug.LogWarning("Player object not found in GameManager.Instance.player.");
+        //    return;
+        //}
 
-        if (projectileRb != null)
-        {
-            projectileRb.velocity = transform.right * projectileSpeed;
-        }
+        //Quaternion rotation = Quaternion.Euler(0, 0, GameManager.Instance.player.transform.localScale.x > 0 ? 0 : 180);
+
+        GameObject projectile = Instantiate(_swordAuror, transform.position, Quaternion.identity);
+
+        //GameObject projectile = Instantiate(_swordAuror, transform.position, rotation);
+
+        //Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
+
+        //if (projectileRigidbody != null)
+        //{
+        //    float speed = 1000f;
+        //    projectileRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Rigidbody2D component not found on projectile.");
+        //    // 또는 필요한 처리 추가
+        //}
     }
 }

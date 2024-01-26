@@ -120,6 +120,9 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         _animator = GetComponent<Animator>();
         _Hp = _maxHp;
 
+        //임시 스킬 초기화.
+        _SwordAuror = GetComponent<Skill_SwordAuror>();
+        //_SwordAuror.Initialize();
     }
 
     private void FixedUpdate()
@@ -202,7 +205,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _isAttacking == false)
         { 
             _isAttacking = true;
             _animator.SetTrigger(AnimatorHash.Attack);
@@ -217,9 +220,22 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         _isAttacking = false;
     }
 
+    // 임시
+    private Skill_SwordAuror _SwordAuror;
+
     public void Skill(InputAction.CallbackContext context)
     {
         // TODO
+        if (context.performed && _SwordAuror.Activate())
+        {
+            _animator.SetTrigger(AnimatorHash.Skill);
+        }
+
+        // 커맨드 키로 스킬 사용 예시
+        //if(Input.GetKey(KeyCode.DownArrow) && context.performed && _SwordAuror.Activate())
+        //{
+        //    _animator.SetTrigger(AnimatorHash.Skill);
+        //}
     }
 
     public void Jump(InputAction.CallbackContext context)

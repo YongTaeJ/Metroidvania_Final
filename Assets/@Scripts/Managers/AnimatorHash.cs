@@ -24,4 +24,5 @@ public static class AnimatorHash
     public static readonly int IsGrounded = Animator.StringToHash("Ground");
     public static readonly int IsWall = Animator.StringToHash("Wall");
     public static readonly int IsCeiling = Animator.StringToHash("Ceiling");
+    public static readonly int Skill = Animator.StringToHash("Skill");
 }
