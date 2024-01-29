@@ -1,0 +1,470 @@
+fileFormatVersion: 2
+guid: d3d5d67ebf6952a4380aaec75416ac45
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 25
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DeadEffect0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51af6ecad3cb5674b8d9da31d80741c0
+      internalID: -626221370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f719699373abac64f8daf3a1c611bcbc
+      internalID: -120613677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 396d718d43aa02241a24d4af624fc5ea
+      internalID: 129724968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8962061cc3d3c6d4894638418597a68c
+      internalID: -621411996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6574d937f42b38f43b1e0775d2fdf6a7
+      internalID: 164318523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4314af123b76c374293be67d7a44f5a3
+      internalID: 404767426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6606911384905f345a48da3d2f3acd72
+      internalID: 1817609085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f753388e0952114ba5d76614fc0c6db
+      internalID: 2088539485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 656510c230703bd4ab466867f6ad9924
+      internalID: -364850872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d238fca49c93a469c5cb25ed200af2
+      internalID: 112895258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadEffect10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 512
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eb6f86fe8381ea4cb87fd66a103bea8
+      internalID: -19464776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      DeadEffect0: -626221370
+      DeadEffect1: -120613677
+      DeadEffect10: -19464776
+      DeadEffect2: 129724968
+      DeadEffect3: -621411996
+      DeadEffect4: 164318523
+      DeadEffect5: 404767426
+      DeadEffect6: 1817609085
+      DeadEffect7: 2088539485
+      DeadEffect8: -364850872
+      DeadEffect9: 112895258
+      Free Smoke Fx  Pixel 06_11: 1431174745
+      Free Smoke Fx  Pixel 06_12: 1032358774
+      Free Smoke Fx  Pixel 06_13: -590531922
+      Free Smoke Fx  Pixel 06_14: 854085139
+      Free Smoke Fx  Pixel 06_15: 1655883398
+      Free Smoke Fx  Pixel 06_16: -2144345208
+      Free Smoke Fx  Pixel 06_17: 994460515
+      Free Smoke Fx  Pixel 06_18: 111557999
+      Free Smoke Fx  Pixel 06_19: 1238640336
+      Free Smoke Fx  Pixel 06_20: 423677245
+      Free Smoke Fx  Pixel 06_21: 649087672
+      Free Smoke Fx  Pixel 06_22: 179265395
+      Free Smoke Fx  Pixel 06_23: -399366324
+      Free Smoke Fx  Pixel 06_24: -2012175114
+      Free Smoke Fx  Pixel 06_25: 581865139
+      Free Smoke Fx  Pixel 06_26: -1753432707
+      Free Smoke Fx  Pixel 06_27: -2110863414
+      Free Smoke Fx  Pixel 06_28: 1681482084
+      Free Smoke Fx  Pixel 06_29: 1678838479
+      Free Smoke Fx  Pixel 06_30: -867689763
+      Free Smoke Fx  Pixel 06_31: -1039998605
+      Free Smoke Fx  Pixel 06_32: 65133930
+      Free Smoke Fx  Pixel 06_33: 1630794972
+      Free Smoke Fx  Pixel 06_34: 1766322444
+      Free Smoke Fx  Pixel 06_35: 513119293
+      Free Smoke Fx  Pixel 06_36: 1026736434
+      Free Smoke Fx  Pixel 06_37: -63902574
+      Free Smoke Fx  Pixel 06_38: 511232873
+      Free Smoke Fx  Pixel 06_39: -1174848581
+      Free Smoke Fx  Pixel 06_40: 401219608
+      Free Smoke Fx  Pixel 06_41: 1475522364
+      Free Smoke Fx  Pixel 06_42: -283605641
+      Free Smoke Fx  Pixel 06_43: 1976988021
+      Free Smoke Fx  Pixel 06_44: 731796302
+      Free Smoke Fx  Pixel 06_45: 830672338
+      Free Smoke Fx  Pixel 06_46: -168180757
+      Free Smoke Fx  Pixel 06_47: -647731916
+      Free Smoke Fx  Pixel 06_48: -1928336139
+      Free Smoke Fx  Pixel 06_49: -2035668162
+      Free Smoke Fx  Pixel 06_50: 1038010821
+      Free Smoke Fx  Pixel 06_51: -2114430172
+      Free Smoke Fx  Pixel 06_52: -1680157818
+      Free Smoke Fx  Pixel 06_53: -2064613701
+      Free Smoke Fx  Pixel 06_54: 450751850
+      Free Smoke Fx  Pixel 06_55: -225062491
+      Free Smoke Fx  Pixel 06_56: -2076582351
+      Free Smoke Fx  Pixel 06_57: -1351841599
+      Free Smoke Fx  Pixel 06_58: -1033789826
+      Free Smoke Fx  Pixel 06_59: 573729278
+      Free Smoke Fx  Pixel 06_60: 1486259499
+      Free Smoke Fx  Pixel 06_61: -2044320308
+      Free Smoke Fx  Pixel 06_62: 405346260
+      Free Smoke Fx  Pixel 06_63: -610198985
+      Free Smoke Fx  Pixel 06_64: 674203141
+      Free Smoke Fx  Pixel 06_65: 269601333
+      Free Smoke Fx  Pixel 06_66: -350663460
+      Free Smoke Fx  Pixel 06_67: 1041696598
+      Free Smoke Fx  Pixel 06_68: -810889412
+      Free Smoke Fx  Pixel 06_69: -495870251
+      Free Smoke Fx  Pixel 06_70: -351201715
+      Free Smoke Fx  Pixel 06_71: -2133890396
+      Free Smoke Fx  Pixel 06_72: 1604731740
+      Free Smoke Fx  Pixel 06_73: 1171450482
+      Free Smoke Fx  Pixel 06_74: -1419051340
+      Free Smoke Fx  Pixel 06_75: -560162628
+      Free Smoke Fx  Pixel 06_76: -1096101832
+      Free Smoke Fx  Pixel 06_77: -1557143333
+      Free Smoke Fx  Pixel 06_78: -233187339
+      Free Smoke Fx  Pixel 06_79: 186544747
+      Free Smoke Fx  Pixel 06_80: -1002375960
+      Free Smoke Fx  Pixel 06_81: -1087976628
+      Free Smoke Fx  Pixel 06_82: 628620051
+      Free Smoke Fx  Pixel 06_83: 1546538467
+      Free Smoke Fx  Pixel 06_84: 799188291
+      Free Smoke Fx  Pixel 06_85: 749222699
+      Free Smoke Fx  Pixel 06_86: 563224614
+      Free Smoke Fx  Pixel 06_87: -1732631868
+      Free Smoke Fx  Pixel 06_88: -1193261325
+      Free Smoke Fx  Pixel 06_89: -1873716287
+      Free Smoke Fx  Pixel 06_90: 113867455
+      Free Smoke Fx  Pixel 06_91: 2127362710
+      Free Smoke Fx  Pixel 06_92: -158679959
+      Free Smoke Fx  Pixel 06_93: -2097684340
+      Free Smoke Fx  Pixel 06_94: 1969984515
+      Free Smoke Fx  Pixel 06_95: -1200548642
+      Free Smoke Fx  Pixel 06_96: 2106562798
+      Free Smoke Fx  Pixel 06_97: 1602371757
+      Free Smoke Fx  Pixel 06_98: -1681734015
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Mimic
+  - Enemy
+  - PlayerAttack
+  - Challenge
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -11,6 +16,10 @@ TagManager:
   - 
   - Water
   - UI
+  - Ground
+  - Wall
+  - Enemy
+  - Item
   - 
   - 
   - 
@@ -25,12 +34,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Chest
+  - Map
   - 
   - 
   - 
