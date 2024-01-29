@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_SwordAurorObject : MonoBehaviour
+public class Skill_PlungeAttackOnject : MonoBehaviour
 {
     private int _damage = 10;
 
@@ -14,7 +13,7 @@ public class Skill_SwordAurorObject : MonoBehaviour
 
     private IEnumerator DestroySwordAurorObject()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(this.gameObject);
     }
 
