@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,12 +16,16 @@ public class Chest : MonoBehaviour
     private GameObject _panel;
     [SerializeField]
     private TextMeshProUGUI _chestText;
+    [SerializeField]
+    private MapData _mapdata;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            ChestText();
+            _mapdata._curMapData++;
+            _chestText.text = "You acquired map data";
+            _panel.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -29,6 +33,7 @@ public class Chest : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _panel.SetActive(false);
+            GameObject.Destroy(gameObject);
         }
     }
 
