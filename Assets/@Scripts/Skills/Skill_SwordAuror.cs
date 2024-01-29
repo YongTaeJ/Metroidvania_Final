@@ -18,7 +18,7 @@ public class Skill_SwordAuror : SkillBase
         {
             return false;
         }
-
+        GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Skill);
         LaunchProjectile();
 
         return true;
@@ -26,29 +26,18 @@ public class Skill_SwordAuror : SkillBase
 
     private void LaunchProjectile()
     {
-        //if (GameManager.Instance.player == null)
-        //{
-        //    Debug.LogWarning("Player object not found in GameManager.Instance.player.");
-        //    return;
-        //}
+        if (GameManager.Instance.player == null) return;
 
-        //Quaternion rotation = Quaternion.Euler(0, 0, GameManager.Instance.player.transform.localScale.x > 0 ? 0 : 180);
+        Quaternion rotation = Quaternion.Euler(0, 0, GameManager.Instance.player.transform.localScale.x > 0 ? 0 : 180);
 
-        GameObject projectile = Instantiate(_swordAuror, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(_swordAuror, transform.position, rotation);
 
-        //GameObject projectile = Instantiate(_swordAuror, transform.position, rotation);
+        Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
-        //Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
-
-        //if (projectileRigidbody != null)
-        //{
-        //    float speed = 1000f;
-        //    projectileRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("Rigidbody2D component not found on projectile.");
-        //    // 또는 필요한 처리 추가
-        //}
+        if (projectileRigidbody != null)
+        {
+            float speed = 30f;
+            projectileRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
+        }
     }
 }

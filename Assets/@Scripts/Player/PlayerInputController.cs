@@ -45,7 +45,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     //Gravity
     public float _baseGravity = 2f;
-    public float _maxFallSpeed = 10f;
+    public float _maxFallSpeed = 20f;
     public float _fallSpeedMultiplier = 2f;
 
     //Wall Slide
@@ -120,9 +120,12 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         _animator = GetComponent<Animator>();
         _Hp = _maxHp;
 
-        //임시 스킬 초기화.
+        //임시 스킬 초기화. ==================================================================
         _SwordAuror = GetComponent<Skill_SwordAuror>();
+        _PlungeAttack = GetComponent<Skill_PlungeAttack>();
         //_SwordAuror.Initialize();
+        //_PlungeAttack.Initialize();
+        //====================================================================================
     }
 
     private void FixedUpdate()
@@ -151,7 +154,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     private void Gravity()
     {
-        if(_rigidbody.velocity.y < 0)
+        if (_rigidbody.velocity.y < 0)
         {
             _rigidbody.gravityScale = _baseGravity * _fallSpeedMultiplier;
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_maxFallSpeed));
@@ -220,22 +223,22 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         _isAttacking = false;
     }
 
-    // 임시
+    // 임시 ===================================================================
     private Skill_SwordAuror _SwordAuror;
+    private Skill_PlungeAttack _PlungeAttack;
+    // ========================================================================
 
     public void Skill(InputAction.CallbackContext context)
     {
-        // TODO
-        if (context.performed && _SwordAuror.Activate())
+        if (!Input.GetKey(KeyCode.DownArrow) && context.performed)
         {
-            _animator.SetTrigger(AnimatorHash.Skill);
+            _SwordAuror.Activate();
         }
-
-        // 커맨드 키로 스킬 사용 예시
-        //if(Input.GetKey(KeyCode.DownArrow) && context.performed && _SwordAuror.Activate())
-        //{
-        //    _animator.SetTrigger(AnimatorHash.Skill);
-        //}
+        else if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed)
+        {
+            _PlungeAttack.Activate();
+            Invincible = true;
+        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -343,6 +346,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 
     #region Attribute Method
 
+    // Controller에 필요없음
     public void GetDamaged(int damage, Transform target)
     {
         if (Invincible == false)

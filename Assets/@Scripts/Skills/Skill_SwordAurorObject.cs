@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class Skill_SwordAurorObject : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
-    private float _speed = 1000f;
     private int _damage = 10;
-
-    //public Vector2 initialVelocity;
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
         StartCoroutine(DestroySwordAurorObject());
     }
 
@@ -21,12 +16,6 @@ public class Skill_SwordAurorObject : MonoBehaviour
     {
         yield return new WaitForSeconds(0.7f);
         Destroy(this.gameObject);
-    }
-
-    private void FixedUpdate()
-    {
-        //_rigidbody.velocity = initialVelocity * Time.fixedDeltaTime;
-        _rigidbody.velocity = Vector2.right * _speed * Time.fixedDeltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,6 +29,4 @@ public class Skill_SwordAurorObject : MonoBehaviour
             collision.GetComponent<IDamagable>().GetDamaged(_damage, collision.transform);
         }
     }
-
-
 }
