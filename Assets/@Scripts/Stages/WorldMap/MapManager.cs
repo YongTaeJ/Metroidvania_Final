@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class MapManager : Singleton<MapManager>
 {
     [SerializeField] private GameObject _worldMap;
+    private Camera _mapCamera;
 
     public bool IsWorldMapOpen { get; private set; }
 
@@ -15,6 +16,7 @@ public class MapManager : Singleton<MapManager>
 
         CloseLargeMap();
         this.GetComponent<PlayerInput>().enabled = false;
+        _mapCamera = GetComponentInChildren<Camera>();
     }
 
     private void Update()
@@ -41,8 +43,10 @@ public class MapManager : Singleton<MapManager>
         if (GameManager.Instance.player != null)
         {
             GameManager.Instance.player.GetComponent<PlayerInput>().enabled = false;
+            
             this.GetComponent<PlayerInput>().enabled = true;
-            Debug.Log("Map move on");
+            Vector3 _playerPosition = GameManager.Instance.player.transform.position;
+            _mapCamera.transform.position = new Vector3(_playerPosition.x, _playerPosition.y + 8, _playerPosition.z - 10);
         }
     }
 
@@ -56,7 +60,6 @@ public class MapManager : Singleton<MapManager>
         {
             GameManager.Instance.player.GetComponent<PlayerInput>().enabled = true;
             this.GetComponent<PlayerInput>().enabled = false;
-            Debug.Log("Map move off");
         }
     }
 
