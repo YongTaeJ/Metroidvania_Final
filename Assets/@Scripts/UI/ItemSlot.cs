@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestInventorySlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour
 {
     private TextMeshProUGUI _stockText;
     private Image _itemImage;
@@ -19,6 +19,19 @@ public class TestInventorySlot : MonoBehaviour
         _stockText.text = item.Stock.ToString();
 
         _item.OnStockChanged += RefreshStock;
+
+        Button button = GetComponent<Button>();
+
+        // TODO => 현재 가지고 있는 Data를 inform에 전달
+    }
+
+    private void OnEnable()
+    {
+        if(_item == null) return;
+
+        _item.OnStockChanged -= RefreshStock;
+        _item.OnStockChanged += RefreshStock;
+        RefreshStock(_item.Stock);
     }
 
     private void OnDisable()

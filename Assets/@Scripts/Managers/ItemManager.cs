@@ -32,7 +32,6 @@ public class ItemManager : Singleton<ItemManager>
 
             _items[data.ItemType].Add(data.ID, new Item(data));
         }
-
         // TODO => 이후 Saved Data를 기준으로 Stock 설정. 없으면 Stock 전부 0인거 하나 만들어주기
     }
 
@@ -64,7 +63,7 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    public void AddItem(ItemType itemType, int ID, int value)
+    public void AddItem(ItemType itemType, int ID, int value = 1)
     {
         Item currentItem = _items[itemType][ID];
         int sumValue = currentItem.Stock + value;
@@ -84,6 +83,11 @@ public class ItemManager : Singleton<ItemManager>
     public Sprite GetSprite(string itemName)
     {
         return ItemSprites[itemName];
+    }
+
+    public bool HasItem(ItemType itemType, int ID)
+    {
+        return _items[itemType][ID].Stock != 0;
     }
 }
 
