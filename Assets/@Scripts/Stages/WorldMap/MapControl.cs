@@ -9,7 +9,7 @@ public class MapControl : MonoBehaviour
     public Camera _mapCamera;
 
     private Vector2 _mapMove;
-    private float _scrollSpeed = 0.5f;
+    private float _scrollSpeed = 0.1f;
     [SerializeField] private Vector2 _minCameraBound;
     [SerializeField] private Vector2 _maxCameraBound;
 
@@ -28,14 +28,5 @@ public class MapControl : MonoBehaviour
     public void MapMove(InputAction.CallbackContext context)
     {
         _mapMove = context.ReadValue<Vector2>();
-    }
-
-    public void MapSelect(InputAction.CallbackContext context)
-    {
-
-    }
-    public void MapCancel(InputAction.CallbackContext context)
-    {
-
     }
 }

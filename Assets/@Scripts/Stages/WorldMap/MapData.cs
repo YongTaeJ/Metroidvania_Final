@@ -25,6 +25,10 @@ public class MapData : MonoBehaviour
     {
        if (Input.GetKeyDown(KeyCode.M))
         {
+            if (_curMapData >= _mapTilesData.Length)
+            {
+                _curMapData = _mapTilesData.Length - 1;
+            }
             UpdateMapData(_curMapData);
         }
     }
@@ -35,7 +39,7 @@ public class MapData : MonoBehaviour
         // 해당 지도로 맵을 업데이트
 
         int acqMapData = 1; // 얻은 지도의 번호 가져오기
-        if (acqMapData > _curMapData)
+        if (acqMapData > _curMapData && _mapTilesData.Length > acqMapData)
         {
             _curMapData = acqMapData;
             UpdateMapData(_curMapData);
