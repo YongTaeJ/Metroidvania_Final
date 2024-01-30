@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class MapManager : Singleton<MapManager>
 {
     [SerializeField] private GameObject _worldMap;
+    [SerializeField] private GameObject _worldMapUI;
     private Camera _mapCamera;
 
     public bool IsWorldMapOpen { get; private set; }
@@ -16,6 +17,7 @@ public class MapManager : Singleton<MapManager>
 
         CloseLargeMap();
         this.GetComponent<PlayerInput>().enabled = false;
+        _worldMapUI.SetActive(false);
         _mapCamera = GetComponentInChildren<Camera>();
     }
 
@@ -37,6 +39,7 @@ public class MapManager : Singleton<MapManager>
     private void OpenLargeMap()
     {
         _worldMap.SetActive(true);
+        _worldMapUI.SetActive(true);
         IsWorldMapOpen = true;
         StopTime();
 
@@ -53,6 +56,7 @@ public class MapManager : Singleton<MapManager>
     private void CloseLargeMap()
     {
         _worldMap.SetActive(false);
+        _worldMapUI.SetActive(false);
         IsWorldMapOpen = false;
         ResumeTime();
 
