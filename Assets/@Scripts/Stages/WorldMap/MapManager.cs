@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class MapManager : Singleton<MapManager>
 {
     [SerializeField] private GameObject _worldMap;
+    [SerializeField] private GameObject _worldMapUI;
+    public PortalTrigger _portalTrigger;
     private Camera _mapCamera;
 
     public bool IsWorldMapOpen { get; private set; }
@@ -16,6 +18,7 @@ public class MapManager : Singleton<MapManager>
 
         CloseLargeMap();
         this.GetComponent<PlayerInput>().enabled = false;
+        _worldMapUI.SetActive(false);
         _mapCamera = GetComponentInChildren<Camera>();
     }
 
@@ -46,13 +49,19 @@ public class MapManager : Singleton<MapManager>
             
             this.GetComponent<PlayerInput>().enabled = true;
             Vector3 _playerPosition = GameManager.Instance.player.transform.position;
-            _mapCamera.transform.position = new Vector3(_playerPosition.x, _playerPosition.y + 8, _playerPosition.z - 10);
+            moveMapCamera(_playerPosition);
+        }
+
+        if (_portalTrigger != null && _portalTrigger.CanUsePortal)
+        {
+            _worldMapUI.SetActive(true);
         }
     }
 
-    private void CloseLargeMap()
+    public void CloseLargeMap()
     {
         _worldMap.SetActive(false);
+        _worldMapUI.SetActive(false);
         IsWorldMapOpen = false;
         ResumeTime();
 
@@ -77,5 +86,10 @@ public class MapManager : Singleton<MapManager>
     {
         Time.timeScale = 1.0f;
         //AudioListener.pause = false; // 사운드효과 사용시
+    }
+
+    public void moveMapCamera(Vector3 position)
+    {
+        _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
     }
 }
