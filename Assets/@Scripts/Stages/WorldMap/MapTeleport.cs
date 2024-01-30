@@ -1,46 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MapTeleport : MonoBehaviour
 {
-    // UI의 버튼을 누르면 해당 위치로 미니맵을 이동(마을은 이동 x)
-    // 해당 위치의 대한 내용을 팝업으로 띄우면서 확인창(팝업창 하나 더 추가)
-
-
     // 순간이동 위치 - 마을, 포탈1(시작부분), 포탈2(보스방 앞), 포탈3(미니보스방)
     // 포탈4(TD부분), 포탈5(Stage 2 입구), 포탈6(Stage 3 입구)
 
-    [SerializeField] private GameObject _checkCanvas;
+    [SerializeField] 
+    private GameObject _checkCanvas;
+    private int _selectedButtonIndex;
+
+    public Button[] portalButtons;
+    public Transform[] portalLocations;
+    public TextMeshProUGUI portalText;
 
     private void Awake()
     {
         _checkCanvas.SetActive(false);
+
+        for (int i = 0; i < portalButtons.Length; i++)
+        {
+            int index = i;
+            portalButtons[i].onClick.AddListener(() => ClickTeleport(index));
+        }
     }
 
-    public void ClickTeleport()
+    public void ClickTeleport(int index)
     {
-        // 누른 버튼의 데이터 확인하여 해당 위치로 미니맵 이동
-        // 해당 데이터의 위치에 대한 내용("마을"로 이동하시겠습니까, "포탈1"로 이동하시겠습니까)
-        // 으로 팝업창 띄우고 만들기
-
-        ToggleTeleport();
-    }
-
-    public void ToggleTeleport()
-    {
+        _selectedButtonIndex = index;
+        PortalText(index);
         _checkCanvas.SetActive(true);
+
+        if (index != 0)
+        {
+            MapManager.Instance.moveMapCamera(portalLocations[_selectedButtonIndex].position);
+        }
     }
 
     public void ClickYes()
     {
-        // 순간이동 구현 부분
         _checkCanvas.SetActive(false);
-
+        MapManager.Instance.CloseLargeMap();
+        Teleport(_selectedButtonIndex);
     }
 
     public void ClickNo()
     {
         _checkCanvas.SetActive(false);
+    }
+
+    private void Teleport(int index)
+    {
+        GameManager.Instance.player.transform.position = portalLocations[index].position;
+    }
+
+    private void PortalText(int index)
+    {
+        if (index == 0)
+        {
+            portalText.text = "마을(으/로)\r\n" + "이동하시겠습니까?";
+        }
+        else
+        {
+            portalText.text = "포탈" + index + "(으/로)\r\n" + "이동하시겠습니까?";
+        }
     }
 }
