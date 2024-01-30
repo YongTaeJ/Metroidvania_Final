@@ -70,6 +70,8 @@ public class ItemManager : Singleton<ItemManager>
         currentItem.SetItemStock(sumValue);
     }
 
+
+
     public Dictionary<int, Item> GetItemDict(ItemType itemType)
     {
         return _items[itemType];

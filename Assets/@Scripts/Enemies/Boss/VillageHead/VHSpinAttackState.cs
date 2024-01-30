@@ -10,7 +10,6 @@ public class VHSpinAttackState : BossAttackState
     private bool _isChase;
     private float _speed;
     private Collider2D _spinCollider;
-    private Transform _playerTransform;
     private Transform _enemyTransform;
     private Rigidbody2D _rigidbody;
     public VHSpinAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
@@ -18,7 +17,6 @@ public class VHSpinAttackState : BossAttackState
         BossPatternType = BossPatternType.Random;
         _spinCollider = stateMachine.transform.Find("Sprite/AttackPivot/SpinAttack").GetComponent<Collider2D>();
         _enemyTransform = stateMachine.transform;
-        _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _rigidbody = stateMachine.Rigidbody;
         _speed = stateMachine.EnemyData.Speed * 5f;
         _rotateCount = 5;

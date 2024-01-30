@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VHChaseState : BossBaseState
+public class BossChaseState : BossBaseState
 {
     private float _chaseTime;
     private Transform _playerTransform;
@@ -10,7 +10,7 @@ public class VHChaseState : BossBaseState
     private Rigidbody2D _rigidbody;
     private ObjectFlip _objectFlip;
     private float _speed;
-    public VHChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public BossChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.None;
         _enemyTransform = stateMachine.transform;
