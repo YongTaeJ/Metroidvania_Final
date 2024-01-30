@@ -187,7 +187,7 @@ Animator:
   m_GameObject: {fileID: 499856098365337158}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8dec000d51c1fcf40887efe4e5496415, type: 2}
+  m_Controller: {fileID: 9100000, guid: edbff31b7fcbf454799becec9e7eaf72, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -553,7 +553,7 @@ Transform:
   - {fileID: 3900955520403553971}
   - {fileID: 1296046117586200827}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1599760695444151864
 Rigidbody2D:

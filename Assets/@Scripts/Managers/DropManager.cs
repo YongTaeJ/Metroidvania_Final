@@ -61,7 +61,6 @@ public class DropManager : Singleton<DropManager>
         if(chance < currentTable.DropRate)
         {
             // 현재 Material만 드랍되는 것으로 설계됨.
-            // TODO => 여신상 조각 사진 필요!!!
             ItemData data = ItemManager.Instance.GetItemData(ItemType.Material, currentTable.ItemID);
             GameObject dropitem = Instantiate(_dropItem, dropLocation, Quaternion.identity);
             dropitem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);

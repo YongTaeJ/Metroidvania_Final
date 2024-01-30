@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VHIdleState : BossBaseState
+public class BossIdleState : BossBaseState
 {
     private float _idleTime;
-    public VHIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public BossIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.None;
     }

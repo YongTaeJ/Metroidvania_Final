@@ -28,11 +28,12 @@ public abstract class BossAttackState : BossBaseState
 
     public override void OnStateEnter()
     {
+        _isAttackEnded = false;
         _eventReceiver.OnAttackStarted -= OnAttack;
         _eventReceiver.OnAttackEnded -= OnAttackEnd;
         _eventReceiver.OnAttackStarted += OnAttack;
         _eventReceiver.OnAttackEnded += OnAttackEnd;
-        _direction = _playerTransform.position.x - _transform.position.x > 0 ? 1 : -1 ;
+        GetDirection();
         _objectFlip.Flip(_direction);
     }
 
@@ -45,4 +46,9 @@ public abstract class BossAttackState : BossBaseState
     protected abstract void OnAttack();
 
     protected abstract void OnAttackEnd();
+
+    protected void GetDirection()
+    {
+        _direction = _playerTransform.position.x - _transform.position.x > 0 ? 1 : -1 ;
+    }
 }
