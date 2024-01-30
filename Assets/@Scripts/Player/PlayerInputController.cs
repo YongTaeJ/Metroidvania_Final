@@ -9,9 +9,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
 {
     #region Properties
 
-    public int _maxHp = 100;
-    public int _Hp;
-    public int _damage = 5;
+    
 
     #endregion
 
@@ -118,7 +116,7 @@ public class PlayerInputController : MonoBehaviour, IDamagable
         _touchingDirection = GetComponent<TouchingDirection>();
         _trailRenderer = GetComponent<TrailRenderer>();
         _animator = GetComponent<Animator>();
-        _Hp = _maxHp;
+        
 
         //임시 스킬 초기화. ==================================================================
         _SwordAuror = GetComponent<Skill_SwordAuror>();
@@ -354,13 +352,13 @@ public class PlayerInputController : MonoBehaviour, IDamagable
             Invincible = true;
             StartCoroutine(FlashPlayer());
             IsHit = true;
-            _Hp -= damage;
+            GameManager.Instance.player._Hp -= damage;
             StartCoroutine(ResetHurtAnimation());
             StartCoroutine(Knockback(target));
 
-            if (_Hp <= 0)
+            if (GameManager.Instance.player._Hp <= 0)
             {
-                _Hp = 0;
+                GameManager.Instance.player._Hp = 0;
                 _animator.SetBool(AnimatorHash.Dead, true);
             }
         }

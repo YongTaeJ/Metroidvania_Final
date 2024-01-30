@@ -131,7 +131,7 @@ Transform:
   m_Children:
   - {fileID: 1687613479484836621}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &8883361996984312801
 CapsuleCollider2D:
@@ -193,7 +193,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &28726634059834260
 MonoBehaviour:
@@ -588,3 +588,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd2716551dd856439c07791391bc534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shockwavePrefab: {fileID: 1706611803579554251, guid: 0a9cc2a67586f7e4e8a774150378a0ad, type: 3}
