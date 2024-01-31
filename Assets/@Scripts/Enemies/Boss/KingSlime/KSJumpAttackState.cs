@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
+using Unity.Mathematics;
 
 public class KSJumpAttackState : BossAttackState
 {
@@ -10,13 +11,15 @@ public class KSJumpAttackState : BossAttackState
     private int _attackCount;
     private bool _isJumped;
     private float _speed;
-    private GameObject _shockWaveArea;
+    private int _damage;
+    private GameObject _shockwave;
     public KSJumpAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Random;
         _rigidbody = stateMachine.Rigidbody;
-        _shockWaveArea = _attackPivot.Find("ShockWaveArea").gameObject;
         _speed = stateMachine.EnemyData.Speed;
+        _damage = stateMachine.EnemyData.Damage;
+        _shockwave = Resources.Load<GameObject>("Enemies/Effects/EnemyShockwave");
     }
 
     public override void OnStateEnter()
@@ -46,7 +49,7 @@ public class KSJumpAttackState : BossAttackState
         {
             GetDirection();
             _objectFlip.Flip(_direction);
-            _rigidbody.velocity = Vector2.right * _direction * _speed * 3;
+            _rigidbody.velocity = Vector2.right * _direction * _speed * 3.5f;
         }
     }
 
@@ -71,14 +74,13 @@ public class KSJumpAttackState : BossAttackState
 
     protected override void OnAttackEnd()
     {
-        _shockWaveArea.SetActive(false);
         _isAttackEnded = true;
     }
 
     private void MakeShockWave()
     {
-        _shockWaveArea.SetActive(true);
         _rigidbody.isKinematic = false;
-        // TODO => 쇼크웨이브 이펙트 생성 + collider 위치 고민 필요
+        GameObject.Instantiate(_shockwave, _transform.position, quaternion.identity)
+        .GetComponent<EnemyAttackSystem>().Initialize(_damage);
     }
 }

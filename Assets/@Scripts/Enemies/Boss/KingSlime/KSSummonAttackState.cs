@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class KSSummonAttackState : BossAttackState
 {
+    private KSSpecialPattern _pattern;
     public KSSummonAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Special;
+        _pattern = GameObject.Find("KSSpecialPattern").GetComponent<KSSpecialPattern>();
     }
 
     public override void OnStateEnter()
@@ -18,21 +20,25 @@ public class KSSummonAttackState : BossAttackState
 
     public override void OnStateExit()
     {
-        throw new System.NotImplementedException();
+        base.OnStateExit();
+        _animator.SetInteger(AnimatorHash.PatternNumber, -1);
     }
 
     public override void OnStateStay()
     {
-        throw new System.NotImplementedException();
+        if(_isAttackEnded)
+        {
+            (_stateMachine as BossStateMachine).PatternTransition();
+        }
     }
 
     protected override void OnAttack()
     {
-        throw new System.NotImplementedException();
+        _pattern.SummonEnemies();
     }
 
     protected override void OnAttackEnd()
     {
-        throw new System.NotImplementedException();
+        _isAttackEnded = true;
     }
 }

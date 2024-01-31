@@ -53,6 +53,6 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
         
         GetComponent<EnemyHitSystem>().Initialize(this);
-        GetComponentInChildren<EnemyAttackSystem>().Initialize(this);
+        GetComponentInChildren<EnemyAttackSystem>().Initialize(EnemyData.Damage);
     }
 }

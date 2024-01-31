@@ -20,8 +20,7 @@ public class PlayerPull : MonoBehaviour
     {
         if(_isPlayerEnter)
         {
-            // TODO => 차라리 transform을 바꾸는게 나아보임
-            _playerRigidbody.AddForce(_pullDirection * 100);
+            _playerRigidbody.transform.position += (Vector3) _pullDirection * 0.21f;
         }
     }
 

@@ -6,9 +6,9 @@ public class EnemyAttackSystem : MonoBehaviour
 {
     private int _damage;
 
-    public void Initialize(EnemyStateMachine stateMachine)
+    public void Initialize(int damage)
     {
-        _damage = stateMachine.EnemyData.Damage;
+        _damage = damage;
     }
     
     private void OnTriggerEnter2D(Collider2D other)
