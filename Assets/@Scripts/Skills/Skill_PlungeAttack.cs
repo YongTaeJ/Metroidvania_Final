@@ -20,7 +20,7 @@ public class Skill_PlungeAttack : SkillBase
         }
 
         // TODO 스킬 애니메이션
-        GameManager.Instance.player._rigidbody.velocity = new Vector2(0, -transform.localScale.y * 30f); // 낙공 스킬 속도 조절
+        GameManager.Instance.player._rigidbody.velocity = new Vector2(0, -transform.localScale.y * 30f);
         GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Plunge);
         return true;
     }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Skill_SwordAuror : SkillBase
 {
@@ -20,7 +22,6 @@ public class Skill_SwordAuror : SkillBase
         }
         GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Skill);
         LaunchProjectile();
-
         return true;
     }
 
