@@ -8,16 +8,20 @@ public enum PopupType
 {
     None,
     Status,
-    Chest
+    Chest,
+    ChatBox
 }
 
 public class UIManager : Singleton<UIManager>
 {
+    #region Variables
     private Transform _fixedUI;
     private Transform _popupUI;
     private Dictionary<PopupType, GameObject> _popupUIElements;
     private List<GameObject> _fixedUIElements;
+    #endregion
 
+    #region Initialize
     public override bool Initialize()
     {
         InitCanvases();
@@ -82,6 +86,7 @@ public class UIManager : Singleton<UIManager>
             inGameUI.SetActive(false);
         }
     }
+    #endregion
 
     public void PopupUI(PopupType popupType)
     {

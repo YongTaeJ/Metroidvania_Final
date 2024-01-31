@@ -246,7 +246,7 @@ Transform:
   - {fileID: 20732433130970391}
   - {fileID: 3050707315934748913}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2286725553384859976
 Rigidbody2D:
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08ee4cee97a077428e9c454ea357985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 3
+  ID: 9
 --- !u!1 &7457092751761193410
 GameObject:
   m_ObjectHideFlags: 0

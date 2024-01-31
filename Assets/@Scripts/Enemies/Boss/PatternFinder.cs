@@ -27,7 +27,7 @@ public class PatternFinder
     public PatternFinder(BossStateMachine stateMachine)
     {
         _isAttacked = false;
-        _maxSpecialCount = 0;
+        _maxSpecialCount = 5;
         _currentSpecialCount = 0;
 
         _attackDistance = stateMachine.EnemyData.AttackDistance;
@@ -76,7 +76,7 @@ public class PatternFinder
 
         _currentSpecialCount++;
 
-        int rand = Random.Range(0,100);
+        int rand = Random.Range(0,20);
         if(rand < 20 && _attackPatterns.ContainsKey(BossPatternType.Random))
         {
             return GetRandomPattern(_attackPatterns[BossPatternType.Random]);
