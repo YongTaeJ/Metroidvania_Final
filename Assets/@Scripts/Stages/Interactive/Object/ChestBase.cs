@@ -16,14 +16,11 @@ public class ChestBase : MonoBehaviour
     private GameObject _panel;
     [SerializeField]
     private TextMeshProUGUI _chestText;
-    [SerializeField]
-    private MapData _mapdata;
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            _mapdata._curMapData++;
             _chestText.text = "You acquired map data";
             _panel.SetActive(true);
         }
