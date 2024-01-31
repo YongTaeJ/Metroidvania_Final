@@ -8,6 +8,11 @@ public class KSHurtState : EnemyHurtState
     {
     }
 
+    public override void OnStateExit()
+    {
+        _animator.SetTrigger(AnimatorHash.HurtEnd);
+    }
+
     public override void OnStateStay()
     {
         if(_isHurtEnded)
@@ -15,4 +20,6 @@ public class KSHurtState : EnemyHurtState
             (_stateMachine as BossStateMachine).PatternTransition();
         }
     }
+
+
 }

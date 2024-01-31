@@ -10,7 +10,7 @@ public class KSStateMachine : BossStateMachine
         // Link To EnemyHitSystem.
         StateDictionary = new()
         {
-            {EnemyStateType.Hurt, new EnemyHurtState(this)},
+            {EnemyStateType.Hurt, new KSHurtState(this)},
             {EnemyStateType.Dead, new EnemyDeadState(this)}
         };
 

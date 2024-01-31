@@ -13,7 +13,6 @@ public class KSRangedAttackState : BossAttackState
     {
         BossPatternType = BossPatternType.Ranged;   
         _bulletIndex = stateMachine.EnemyData.BulletIndex;
-        Debug.Log(_bulletIndex);
         _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet" + _bulletIndex.ToString() );
         _damage = stateMachine.EnemyData.Damage;
     }

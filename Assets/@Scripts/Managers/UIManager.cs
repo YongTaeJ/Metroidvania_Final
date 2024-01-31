@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public enum PopupType
 {
     None,
-    Status
+    Status,
+    Chest
 }
 
 public class UIManager : Singleton<UIManager>
@@ -15,12 +16,13 @@ public class UIManager : Singleton<UIManager>
     private Transform _fixedUI;
     private Transform _popupUI;
     private Dictionary<PopupType, GameObject> _popupUIElements;
+    private List<GameObject> _fixedUIElements;
 
     public override bool Initialize()
     {
         InitCanvases();
+        InitFixedElements();
         InitPopupElements();
-
         return base.Initialize();
     }
 
@@ -46,17 +48,51 @@ public class UIManager : Singleton<UIManager>
         obj.AddComponent<GraphicRaycaster>();
     }
 
+    private void InitFixedElements()
+    {
+        _fixedUIElements = new List<GameObject>();
+        
+        GameObject[] UIs = Resources.LoadAll<GameObject>("UI/FixedUI");
+
+        foreach(var UI in UIs)
+        {
+            var inGameUI = Instantiate(UI, _fixedUI);
+            _fixedUIElements.Add(inGameUI);
+            inGameUI.SetActive(true);
+        }
+    }
+
     private void InitPopupElements()
     {
         _popupUIElements = new Dictionary<PopupType, GameObject>();
-        // TODO => 폴더 다 읽은 다음 뒤에 UI 지우고 해당 string으로 enum 매칭시켜서 넣기
-        var statusUI = Instantiate(Resources.Load<GameObject>("UI/Status/StatusUI"), _popupUI);
-        _popupUIElements.Add(PopupType.Status, statusUI);
-        statusUI.SetActive(false);
+        
+        // 프리펩 명명규칙 : EnumType + UI로 제작 ex. StatusUI
+        GameObject[] UIs = Resources.LoadAll<GameObject>("UI/PopupUI");
+
+        foreach(var UI in UIs)
+        {
+            var inGameUI = Instantiate(UI, _popupUI);
+            string UIName = UI.name.Substring(0, UI.name.Length - 2);
+            if (!Enum.TryParse(UIName, out PopupType type))
+            {
+                Debug.Log("PopupUI 폴더 확인 필요");
+                continue;
+            }
+            _popupUIElements.Add(type, inGameUI);
+            inGameUI.SetActive(false);
+        }
     }
 
-    public void OnPopupEvent(PopupType popupType)
+    public void PopupUI(PopupType popupType)
     {
         _popupUIElements[popupType].SetActive(true);
+    }
+
+    public void SetFixedUI(bool isActive)
+    {
+        foreach(var UI in _fixedUIElements)
+        {
+            UI.SetActive(isActive);
+        }
     }
 }
