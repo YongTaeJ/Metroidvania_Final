@@ -9,7 +9,8 @@ public enum ItemType
     None,
     Gold,
     Material,
-    Equipment
+    Equipment,
+    Map
 }
 
 public class Item

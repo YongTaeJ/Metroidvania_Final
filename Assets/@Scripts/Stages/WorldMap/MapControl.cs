@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class MapControl : MonoBehaviour
 {
-    public Camera _mapCamera;
+    [SerializeField] private Vector2 _minCameraBound;
+    [SerializeField] private Vector2 _maxCameraBound;
+    [SerializeField] private Camera _mapCamera;
 
     private Vector2 _mapMove;
     private float _scrollSpeed = 0.1f;
-    [SerializeField] private Vector2 _minCameraBound;
-    [SerializeField] private Vector2 _maxCameraBound;
+    private bool IsMapCooldown = false;
 
 
     private void Update()
@@ -28,5 +29,29 @@ public class MapControl : MonoBehaviour
     public void MapMove(InputAction.CallbackContext context)
     {
         _mapMove = context.ReadValue<Vector2>();
+    }
+
+    public void MapEnlarge(InputAction.CallbackContext context)
+    {
+        if (!IsMapCooldown && _mapCamera.orthographicSize <= 35)
+        {
+            _mapCamera.orthographicSize += 5;
+            StartCoroutine(CoMapCooldown());
+        }
+    }
+    public void MapReduce(InputAction.CallbackContext context)
+    {
+        if (!IsMapCooldown && _mapCamera.orthographicSize >= 15)
+        {
+            _mapCamera.orthographicSize -= 5;
+            StartCoroutine(CoMapCooldown());
+        }
+    }
+    
+    private IEnumerator CoMapCooldown()
+    {
+        IsMapCooldown = true;
+        yield return new WaitForSecondsRealtime(0.2f);
+        IsMapCooldown = false;
     }
 }
