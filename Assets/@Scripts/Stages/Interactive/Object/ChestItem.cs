@@ -33,8 +33,9 @@ public class ChestItem : ChestBase
 
     protected override void ChestText()
     {
-        ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
-        _chestText.text = "You got " + _chestItem;
+        ItemData _chestItemData = ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
+        string _chestItemName = _chestItemData.Name;
+        _chestText.text = "You got " + _chestItemName;
         _panel.SetActive(true);
     }
 }

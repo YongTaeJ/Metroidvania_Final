@@ -15,8 +15,8 @@ public class MapData : MonoBehaviour
 
     private void Awake()
     {
-        // _curMapData의 데이터를 현재 갖고 있는 아이템에서 확인하기.
-
+        // 아래의 itemtype을 map으로 변경해야됨. 지금은 버그로 초기화 안되서 gold 사용중
+        _curMapData = ItemManager.Instance.GetItemStock(ItemType.Gold, 0);
         _curActiveTilemap = _mapTilesData[_curMapData];
         _curActiveTilemap.gameObject.SetActive(true);
     }
