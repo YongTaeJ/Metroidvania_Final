@@ -24,8 +24,8 @@ public class SkillUI : MonoBehaviour
 
     private void FindChildObject()
     {
-        SwordAuror = transform.Find("SwordAuror").gameObject;
-        PlungeAttack = transform.Find("PlungeAttack").gameObject;
+        SwordAuror = transform.Find("Skill_SwordAuror").gameObject;
+        PlungeAttack = transform.Find("Skill_PlungeAttack").gameObject;
 
         if (SwordAuror != null)
         {
@@ -39,11 +39,11 @@ public class SkillUI : MonoBehaviour
 
     private void ActivateChildObject()
     {
-        if (SwordAuror != null && ItemManager.Instance.HasItem(ItemType.Skill, 0) == true)
+        if (SwordAuror != null && ItemManager.Instance.HasItem(ItemType.Skill, 0))
         {
             SwordAuror.SetActive(true);
         }
-        if (PlungeAttack != null && ItemManager.Instance.HasItem(ItemType.Skill, 1) == true)
+        if (PlungeAttack != null && ItemManager.Instance.HasItem(ItemType.Skill, 1))
         {
             PlungeAttack.SetActive(true);
         }

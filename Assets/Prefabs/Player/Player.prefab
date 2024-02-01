@@ -131,7 +131,7 @@ Transform:
   m_Children:
   - {fileID: 1687613479484836621}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &8883361996984312801
 CapsuleCollider2D:
@@ -207,6 +207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e1b020cae2f254f81446939873e7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHp: 10
+  _Hp: 0
+  _damage: 5
   _animator: {fileID: 0}
   _rigidbody: {fileID: 0}
   _controller: {fileID: 0}
@@ -222,14 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7c766b9c72b4241a0118bd80888e1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
-  _Hp: 0
-  _damage: 5
   _maxJump: 1
   _jumpCount: 0
-  _baseGravity: 4
-  _maxFallSpeed: 18
-  _fallSpeedMultiplier: 2
   _dashCount: 0
 --- !u!114 &4451099120012715577
 MonoBehaviour:
@@ -340,6 +337,30 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c0cb4495-6e4f-4382-9001-7dcba8d702f0
     m_ActionName: Player/Skill[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5692649238268825939}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
+        m_MethodName: Interaction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 03d9654b-02b0-4f32-8732-a207be6a677e
+    m_ActionName: Player/Interaction[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 61830ab0-8c0c-49d5-b036-5a8e5edfa331
+    m_ActionName: UI/Inventory[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 401d8257-de7a-4179-a7a1-dfd216502f6a
+    m_ActionName: UI/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -575,7 +596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11ff96fbcd993a4fb6067b20184e7fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _swordAuror: {fileID: 5384882959024855129, guid: cbf15bb94d2422446add95cbc3ada5c7, type: 3}
 --- !u!114 &4494999259269976714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,4 +608,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd2716551dd856439c07791391bc534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shockwavePrefab: {fileID: 1706611803579554251, guid: 0a9cc2a67586f7e4e8a774150378a0ad, type: 3}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
@@ -35,6 +36,9 @@ public class Player : MonoBehaviour, IDamagable
     private Coroutine _coInvincible;
     private float _invincibilityTime = 1f;
 
+    //Skill
+    private List<SkillBase> _skills = new();
+
     public Animator _animator;
     public Rigidbody2D _rigidbody;
     public PlayerInputController _controller;
@@ -48,9 +52,30 @@ public class Player : MonoBehaviour, IDamagable
         GameManager.Instance.player = this;
     }
 
+    #region Set
+
+    private void SetSkill()
+    {
+        if(ItemManager.Instance.HasItem(ItemType.Skill, 0))
+        {
+            _skills.Add(this.AddComponent<Skill_SwordAuror>());
+        }
+        if (ItemManager.Instance.HasItem(ItemType.Skill, 1))
+        {
+            _skills.Add(this.AddComponent<Skill_PlungeAttack>());
+        }
+
+        for (int i = 0; i < _skills.Count; i++)
+        {
+            _skills[i].Initialize();
+        }
+    }
+
+    #endregion
+
     public void GetDamaged(int damage, Transform target)
     {
-        if (Invincible == false)
+        if (Invincible == false && enabled)
         {
             Invincible = true;
             StartCoroutine(FlashPlayer());
@@ -62,7 +87,7 @@ public class Player : MonoBehaviour, IDamagable
             if (GameManager.Instance.player._Hp <= 0)
             {
                 GameManager.Instance.player._Hp = 0;
-                _animator.SetBool(AnimatorHash.Dead, true);
+                OnDie();
             }
         }
     }
@@ -107,7 +132,10 @@ public class Player : MonoBehaviour, IDamagable
         }
     }
 
-
-
-
+    private void OnDie()
+    {
+        _animator.SetTrigger(AnimatorHash.Dead);
+        enabled = false;
+        _controller.enabled = enabled;
+    }
 }

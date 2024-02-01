@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class SkillBase : MonoBehaviour
 {
-    public Image cooldownImage;
-    public TextMeshProUGUI cooldownText;
+    public GameObject skillUI {  get; private set; }
+    public Image cooldownImage { get; private set; }
+    public TextMeshProUGUI cooldownText { get; private set; }
     public float Cooldown { get; protected set; }
 
     private float _cooldown;
@@ -31,6 +32,9 @@ public class SkillBase : MonoBehaviour
 
     public virtual void Initialize()
     {
+        skillUI = GameObject.Find(GetType().Name);
+        cooldownImage = skillUI.transform.Find("CooldownImage").GetComponent<Image>();
+        cooldownText = skillUI.transform.Find("CooldownText").GetComponent<TextMeshProUGUI>();
         cooldownImage.fillAmount = 0;
         cooldownText.text = "0";
         cooldownText.gameObject.SetActive(false);
