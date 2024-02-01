@@ -69,6 +69,6 @@ public class ChestBase : MonoBehaviour
 
     protected virtual void ChestText()
     {
-        _chestText.text = "You opened chest";
+        _chestText.text = "You opened chest\n\r" + "but, nothing in the chest";
     }
 }
