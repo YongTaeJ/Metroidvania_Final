@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class DamageTrap : MonoBehaviour
 {
-    // 대미지를 주는 함정
-    // int damage 사용
-    // 플레이어인지 확인해서 플레이어라면 Attack()하게 만들기
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<IDamagable>().GetDamaged(1, transform);
+        }
+    }
 }
