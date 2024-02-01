@@ -1,28 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public GameObject _monsterPrefabs;
-
+    private GameObject _monsterPrefabs;
     private GameObject _spawnedMonsters;
+    private GameObject _enemiesParent;
+    private bool IsSpawned = false;
 
-    private void SpawnMonster()
+    private void Awake()
     {
-        // 몬스터가 생성되어 있는지 확인
-
-        // 몬스터가 생성되어 있지 않다면
-
-        _spawnedMonsters = Instantiate(_monsterPrefabs, transform.position, Quaternion.identity);
-    }
-
-    private void DestroyMonster()
-    {
-        if (_spawnedMonsters != null) // 생성된 몬스터가 있다면
-        {
-            Destroy(_spawnedMonsters);
-        }
+        _monsterPrefabs = Resources.Load<GameObject>("Enemies/BlueSlime");
+        _enemiesParent = GameObject.Find("Stage01/EnemiesPrefabs");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,4 +31,31 @@ public class MonsterSpawner : MonoBehaviour
             DestroyMonster();
         }
     }
+
+    private void SpawnMonster()
+    {
+        if (IsSpawned == true)
+        {
+            Debug.Log("monster already spawned");
+            DestroyMonster();
+        }
+        else
+        {
+            Debug.Log("spawn monster");
+
+
+            _spawnedMonsters = Instantiate(_monsterPrefabs, _enemiesParent.transform);
+            _spawnedMonsters.transform.localPosition = new Vector3(30, 4, 0);
+        }
+    }
+
+    private void DestroyMonster()
+    {
+        if (_spawnedMonsters != null)
+        {
+            Destroy(_spawnedMonsters);
+        }
+    }
+
+    
 }
