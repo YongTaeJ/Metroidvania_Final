@@ -13,8 +13,6 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _monsterPrefabs = Resources.LoadAll<GameObject>("Enemies/Monsters");
-        _monsterPrefabs = _monsterPrefabs.OrderBy(prefab => prefab.name).ToArray();
         _enemiesParent = transform.parent.parent;
     }
 
@@ -40,7 +38,6 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (var position in spawnInfo.spawnPositions)
             {
-
                 GameObject _spawnedMonster = Instantiate(spawnInfo.monsterPrefab, position, Quaternion.identity, _enemiesParent);
                 _spawnedMonsters.Add(_spawnedMonster);
             }
