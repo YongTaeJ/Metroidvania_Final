@@ -131,77 +131,100 @@ public class PlayerInputController : MonoBehaviour
         Iswalking = _moveInput != Vector2.zero;
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    private void Flip()
     {
-        if (_jumpCount > 0)
+        if (_isAttacking == false)
         {
-            if (context.started && _touchingDirection.IsGrounded)
+            if (_isFacingRight && _moveInput.x < 0 || !_isFacingRight && _moveInput.x > 0)
             {
-                if (!_isWallJumping)
-                {
-                    _animator.SetTrigger(AnimatorHash.Jump);
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
-                    _jumpCount--;
-                }
-            }
-            else if (context.canceled)
-            {
-                if (!_isWallJumping)
-                {
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-                    _jumpCount--;
-                }
+                _isFacingRight = !_isFacingRight;
+                Vector3 Is = transform.localScale;
+                Is.x *= -1f;
+                transform.localScale = Is;
             }
         }
+    }
 
-        //Wall Jump
-        if (context.performed && _wallJumpTimer > 0f)
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if (enabled)
         {
-            if (!_isWallJumping && _touchingDirection.IsWall)
+            if (_jumpCount > 0)
             {
-                _isWallJumping = true;
-                _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
-                _wallJumpTimer = 0f;
-                _animator.SetTrigger(AnimatorHash.WallJump);
-                if (transform.localScale.x != _wallJumpDirection)
+                if (context.started && _touchingDirection.IsGrounded)
                 {
-                    _isFacingRight = !_isFacingRight;
-                    Vector3 Is = transform.localScale;
-                    Is.x *= -1f;
-                    transform.localScale = Is;
+                    if (!_isWallJumping)
+                    {
+                        _animator.SetTrigger(AnimatorHash.Jump);
+                        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
+                        _jumpCount--;
+                    }
                 }
+                else if (context.canceled)
+                {
+                    if (!_isWallJumping)
+                    {
+                        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+                        _jumpCount--;
+                    }
+                }
+            }
 
-                Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
+            //Wall Jump
+            if (context.performed && _wallJumpTimer > 0f)
+            {
+                if (!_isWallJumping && _touchingDirection.IsWall)
+                {
+                    _isWallJumping = true;
+                    _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
+                    _wallJumpTimer = 0f;
+                    _animator.SetTrigger(AnimatorHash.WallJump);
+                    if (transform.localScale.x != _wallJumpDirection)
+                    {
+                        _isFacingRight = !_isFacingRight;
+                        Vector3 Is = transform.localScale;
+                        Is.x *= -1f;
+                        transform.localScale = Is;
+                    }
+
+                    Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
+                }
             }
         }
     }
 
     private void WallSlide()
     {
-        if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0)
+        if (enabled)
         {
-            _isWallSliding = true;
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
-        }
-        else
-        {
-            _isWallSliding = false;
+            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0)
+            {
+                _isWallSliding = true;
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
+            }
+            else
+            {
+                _isWallSliding = false;
+            }
         }
     }
 
     private void WallJump()
     {
-        if (_isWallSliding)
+        if (enabled)
         {
-            _isWallJumping = false;
-            _wallJumpDirection = -transform.localScale.x;
-            _wallJumpTimer = _wallJumpTime;
+            if (_isWallSliding)
+            {
+                _isWallJumping = false;
+                _wallJumpDirection = -transform.localScale.x;
+                _wallJumpTimer = _wallJumpTime;
 
-            CancelInvoke(nameof(CancelWallJump));
-        }
-        else if (_wallJumpTimer > 0f)
-        {
-            _wallJumpTimer -= Time.deltaTime;
+                CancelInvoke(nameof(CancelWallJump));
+            }
+            else if (_wallJumpTimer > 0f)
+            {
+                _wallJumpTimer -= Time.deltaTime;
+            }
         }
     }
 
@@ -212,11 +235,14 @@ public class PlayerInputController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (context.performed && _isAttacking == false)
-        { 
-            _isAttacking = true;
-            _animator.SetTrigger(AnimatorHash.Attack);
-            StartCoroutine(ResetAttackAnimation());
+        if (enabled)
+        {
+            if (context.performed && _isAttacking == false)
+            {
+                _isAttacking = true;
+                _animator.SetTrigger(AnimatorHash.Attack);
+                StartCoroutine(ResetAttackAnimation());
+            }
         }
     }
 
@@ -229,9 +255,12 @@ public class PlayerInputController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (context.performed && _canDash == true)
+        if (enabled)
         {
-            StartCoroutine(CoDash());
+            if (context.performed && _canDash == true)
+            {
+                StartCoroutine(CoDash());
+            }
         }
     }
 
@@ -264,23 +293,29 @@ public class PlayerInputController : MonoBehaviour
 
     public void Skill(InputAction.CallbackContext context)
     {
-        if (!Input.GetKey(KeyCode.DownArrow) && context.performed)
+        if (enabled)
         {
-            _SwordAuror.Activate();
-        }
-        else if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed)
-        {
-            _PlungeAttack.Activate();
-            _player.Invincible = true;
+            if (!Input.GetKey(KeyCode.DownArrow) && context.performed)
+            {
+                _SwordAuror.Activate();
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed)
+            {
+                _PlungeAttack.Activate();
+                _player.Invincible = true;
+            }
         }
     }
 
     public void Interaction(InputAction.CallbackContext context)
     {
-        //if (상호작용이 가능한 오브젝트 && context.performed)
-        //{
-        //    상호작용 오브젝트에서 실행될 메서드?
-        //}
+        if (enabled)
+        {
+            //if (상호작용이 가능한 오브젝트 && context.performed)
+            //{
+            //    상호작용 오브젝트에서 실행될 메서드?
+            //}
+        }
     }
 
     private void Gravity()
@@ -296,9 +331,6 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    
-    
-
     #endregion
 
     #region Check
@@ -311,27 +343,6 @@ public class PlayerInputController : MonoBehaviour
             _dashCount = _maxDash;
         }
     }
-
-    #endregion
-
-    private void Flip()
-    {
-        if(_isAttacking == false)
-        {
-            if (_isFacingRight && _moveInput.x < 0 || !_isFacingRight && _moveInput.x > 0)
-            {
-                _isFacingRight = !_isFacingRight;
-                Vector3 Is = transform.localScale;
-                Is.x *= -1f;
-                transform.localScale = Is;
-            }
-        }
-    }
-
-    #region Attribute Method
-
-    // Controller에 필요없음
-   
 
     #endregion
 }

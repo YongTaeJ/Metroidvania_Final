@@ -6,8 +6,7 @@ using TMPro;
 
 public class Skill_SwordAuror : SkillBase
 {
-    //임시
-    public GameObject _swordAuror;
+    private GameObject _swordAurorPrefab;
     public override void Initialize()
     {
         base.Initialize();
@@ -28,11 +27,9 @@ public class Skill_SwordAuror : SkillBase
     private void LaunchProjectile()
     {
         if (GameManager.Instance.player == null) return;
-
+        _swordAurorPrefab = Resources.Load<GameObject>("Skills/SwordAuror");
         Quaternion rotation = Quaternion.Euler(0, 0, GameManager.Instance.player.transform.localScale.x > 0 ? 0 : 180);
-
-        GameObject projectile = Instantiate(_swordAuror, transform.position, rotation);
-
+        GameObject projectile = Instantiate(_swordAurorPrefab, transform.position, rotation);
         Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
         if (projectileRigidbody != null)

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Skill_PlungeAttack : SkillBase
 {
-    public GameObject _shockwavePrefab;
+    private GameObject _shockwavePrefab;
 
     public override void Initialize()
     {
@@ -27,6 +29,7 @@ public class Skill_PlungeAttack : SkillBase
 
     public void Shockwaves()
     {
+        _shockwavePrefab = Resources.Load<GameObject>("Skills/PlungeAttack");
         Vector3 playerPosition = transform.position;
         float distanceBetweenShockwaves = 1.0f;
 
