@@ -25,7 +25,7 @@ public class UIManager : Singleton<UIManager>
     public override bool Initialize()
     {
         InitCanvases();
-        InitFixedElements();
+        // InitFixedElements();
         InitPopupElements();
         return base.Initialize();
     }
@@ -91,6 +91,11 @@ public class UIManager : Singleton<UIManager>
     public void PopupUI(PopupType popupType)
     {
         _popupUIElements[popupType].SetActive(true);
+    }
+
+    public GameObject GetUI(PopupType popupType)
+    {
+        return _popupUIElements[popupType];
     }
 
     public void SetFixedUI(bool isActive)

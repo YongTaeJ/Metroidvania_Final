@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7627711370501536529}
   - component: {fileID: 8423164345294126944}
   - component: {fileID: 5483677226059268222}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: ChestAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,8 @@ MonoBehaviour:
   _panel: {fileID: 0}
   _chestText: {fileID: 0}
   _chestGold: 0
+  _chestItem: 0
+  _chestItemID: 0
 --- !u!61 &5483677226059268222
 BoxCollider2D:
   m_ObjectHideFlags: 0

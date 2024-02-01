@@ -32,7 +32,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 
     #region Monobehaviour
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         Initialize();
         StateTransition(StateDictionary[EnemyStateType.Idle]);
