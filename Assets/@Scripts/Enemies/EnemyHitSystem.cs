@@ -60,6 +60,6 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         float dist = _playerFinder.CurrentTransform.position.x - transform.position.x;
         float direction = dist > 0 ? -1 : 1;
 
-        transform.DOMoveX(transform.position.x + direction * 0.4f , 0.3f);
+        transform.DOMoveX(transform.position.x + direction * 0.2f , 0.3f);
     }
 }

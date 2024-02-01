@@ -33,7 +33,6 @@ public class PatternFinder
         _attackDistance = stateMachine.EnemyData.AttackDistance;
         _transform = stateMachine.transform;
         _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
-
         SetAttackPatterns(stateMachine.AttackList);
         _preparePatterns = stateMachine.PrepareList;
     }
@@ -76,7 +75,7 @@ public class PatternFinder
 
         _currentSpecialCount++;
 
-        int rand = Random.Range(0,20);
+        int rand = Random.Range(0,100);
         if(rand < 20 && _attackPatterns.ContainsKey(BossPatternType.Random))
         {
             return GetRandomPattern(_attackPatterns[BossPatternType.Random]);

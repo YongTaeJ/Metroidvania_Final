@@ -9,39 +9,49 @@ public class ChatBoxUI : MonoBehaviour
     private TMP_Text _nameText;
     private TMP_Text _chatText;
     private IEnumerator _chatCoroutine;
+    private IEnumerator _typingCoroutine;
     #endregion
 
     #region MonoBehaviour
     private void Awake()
     {
         _nameText = transform.Find("NameText").GetComponent<TMP_Text>();
-        _chatText = transform.Find("ChatText").GetComponent<TMP_Text>();
+        _chatText = transform.Find("ConversationArea/ChatText").GetComponent<TMP_Text>();
     }
     #endregion
 
     #region private
-    private IEnumerator WaitforInput((string, string)[] chatDatas)
+    private IEnumerator WaitforInput(List<(string, string)> chatDatas)
     {
-        _nameText.text = chatDatas[0].Item1;
-        TypeSentence(chatDatas[0].Item2);
-        int currentIndex = 1;
-        int length = chatDatas.Length;
+        int currentIndex = 0;
+        int length = chatDatas.Count;
+
+        _nameText.text = chatDatas[currentIndex].Item1;
+        _typingCoroutine = TypeSentence(chatDatas[currentIndex].Item2);
+        StartCoroutine(_typingCoroutine);
+        currentIndex++;
 
         while(true)
         {
             if(IsKeyInput())
             {
+                yield return null;
                 if(currentIndex < length)
                 {
                     _nameText.text = chatDatas[currentIndex].Item1;
-                    TypeSentence(chatDatas[currentIndex].Item2);
+                    if(_typingCoroutine != null)
+                    {
+                        StopCoroutine(_typingCoroutine);
+                    }
+                    _typingCoroutine = TypeSentence(chatDatas[currentIndex].Item2);
+                    yield return StartCoroutine(_typingCoroutine);
                     currentIndex++;
                 }
                 else
                 {
+                    StopCoroutine(_typingCoroutine);
                     yield break;
                 }
-
                 yield return new WaitForSeconds(0.5f);
             }
             yield return null;
@@ -53,13 +63,9 @@ public class ChatBoxUI : MonoBehaviour
         _chatText.text = "";
         foreach ( char letter in sentence)
         {
-            if(IsKeyInput())
-            {
-                _chatText.text = sentence;
-                yield break;
-            }
+            // TOOD => (후순위) 나중에 스킵 기능 추가
             _chatText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -70,10 +76,12 @@ public class ChatBoxUI : MonoBehaviour
     #endregion
 
     #region public
-    public void StartChatting((string, string)[] chatDatas)
+    public IEnumerator StartChatting(List<(string, string)> chatDatas)
     {
+        gameObject.SetActive(true);
         _chatCoroutine = WaitforInput(chatDatas);
-        StartCoroutine(_chatCoroutine);
+        yield return StartCoroutine(_chatCoroutine);
+        gameObject.SetActive(false);
     }
     #endregion
 }
