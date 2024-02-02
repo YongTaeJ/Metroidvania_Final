@@ -61,7 +61,7 @@
       "HP": "30",
       "Damage": "1",
       "Speed": "1",
-      "AttackDistance": "1.5",
+      "AttackDistance": "1",
       "HitEndurance": "1",
       "DropTableIndex": "1",
       "BulletIndex": "-1"
@@ -105,7 +105,7 @@
       "HP": "200",
       "Damage": "1",
       "Speed": "1.2",
-      "AttackDistance": "5",
+      "AttackDistance": "6",
       "HitEndurance": "7",
       "DropTableIndex": "4",
       "BulletIndex": "2"
