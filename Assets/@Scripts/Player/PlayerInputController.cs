@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -77,6 +78,10 @@ public class PlayerInputController : MonoBehaviour
     private int _maxDash = 1;
     public int _dashCount;
     private TrailRenderer _trailRenderer;
+
+    // Action
+
+    public event Action OnInteraction;
 
     #endregion
 
@@ -318,10 +323,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            //if (상호작용이 가능한 오브젝트 && context.performed)
-            //{
-            //    상호작용 오브젝트에서 실행될 메서드?
-            //}
+            OnInteraction?.Invoke();
         }
     }
 
