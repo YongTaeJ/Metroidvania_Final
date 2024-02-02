@@ -371,7 +371,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (context.started)
         {
-            UIManager.Instance.PopupUI(PopupType.Status);
+            UIManager.Instance.OpenPopupUI(PopupType.Status);
         }
     }
 
@@ -380,7 +380,7 @@ public class PlayerInputController : MonoBehaviour
         if (context.started)
         {
             //if 켜진 UI가 없다면
-            UIManager.Instance.PopupUI(PopupType.Pause);
+            UIManager.Instance.OpenPopupUI(PopupType.Pause);
             Time.timeScale = 0f;
             //else if 켜진 Popup이 있다면 UI SetActive(false)
 

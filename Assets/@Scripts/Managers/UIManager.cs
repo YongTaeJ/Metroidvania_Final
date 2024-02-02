@@ -95,9 +95,14 @@ public class UIManager : Singleton<UIManager>
     }
     #endregion
 
-    public void PopupUI(PopupType popupType)
+    public void OpenPopupUI(PopupType popupType)
     {
         _popupUIElements[popupType].SetActive(true);
+    }
+
+    public void ClosePopupUI(PopupType popupType)
+    {
+        _popupUIElements[popupType].SetActive(false);
     }
 
     public GameObject GetUI(PopupType popupType)

@@ -16,7 +16,7 @@ public class TempScriptForAnything : MonoBehaviour
     public void AddddddddddMoney()
     {
         ItemManager.Instance.AddItem(ItemType.Gold, 0, 10);
-        UIManager.Instance.PopupUI(PopupType.Status);
+        UIManager.Instance.OpenPopupUI(PopupType.Status);
     }
 
     public void chattest()
