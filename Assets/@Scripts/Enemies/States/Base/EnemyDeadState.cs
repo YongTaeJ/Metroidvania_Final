@@ -6,7 +6,7 @@ public class EnemyDeadState : EnemyBaseState
 {
     #region Fields
     protected bool _isDeadEnded;
-    private Transform _spriteTransform;
+    protected Transform _spriteTransform;
     #endregion
     public EnemyDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {

@@ -12,7 +12,8 @@ public enum PopupType
     Status,
     Chest,
     ChatBox,
-    Pause
+    Pause,
+    Interact
 }
 
 public class UIManager : Singleton<UIManager>
@@ -33,7 +34,6 @@ public class UIManager : Singleton<UIManager>
             InitFixedElements();
             InitPopupElements();
         }
-
         return true;
     }
 

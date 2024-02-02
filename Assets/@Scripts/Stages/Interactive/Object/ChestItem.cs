@@ -14,6 +14,16 @@ public class ChestItem : ChestBase
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
+    }
+
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+    }
+
+    protected override void OpenChest()
+    {
+        base.OpenChest();
 
         if (_chestItem == ItemType.Gold)
         {
@@ -26,16 +36,18 @@ public class ChestItem : ChestBase
         }
     }
 
-    protected override void OnTriggerExit2D(Collider2D collision)
-    {
-        base.OnTriggerExit2D(collision);
-    }
-
     protected override void ChestText()
     {
-        ItemData _chestItemData = ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
-        string _chestItemName = _chestItemData.Name;
-        _chestText.text = "You got " + _chestItemName;
+        if (_chestItem == ItemType.Gold)
+        {
+            _chestText.text = "You got " + _chestGold + " Gold";
+        }
+        else
+        {
+            ItemData _chestItemData = ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
+            string _chestItemName = _chestItemData.Name;
+            _chestText.text = "You got " + _chestItemName;
+        }
         _panel.SetActive(true);
     }
 }

@@ -41,7 +41,6 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         if(_currentHP <= 0)
         {
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Dead]);
-            Debug.Log("죽었음");
             return;
         }
 
