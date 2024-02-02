@@ -38,6 +38,10 @@ public class TeleportTrap : MonoBehaviour
             {
                 TownPortalText();
             }
+            else
+            {
+                FallText();
+            }
         }
     }
 

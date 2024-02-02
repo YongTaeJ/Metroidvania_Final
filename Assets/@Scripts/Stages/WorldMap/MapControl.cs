@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class MapControl : MonoBehaviour
@@ -12,7 +14,6 @@ public class MapControl : MonoBehaviour
 
     private Vector2 _mapMove;
     private float _scrollSpeed = 0.1f;
-    private bool IsMapCooldown = false;
 
 
     private void Update()
@@ -33,25 +34,17 @@ public class MapControl : MonoBehaviour
 
     public void MapEnlarge(InputAction.CallbackContext context)
     {
-        if (!IsMapCooldown && _mapCamera.orthographicSize <= 35)
+        if (enabled && context.performed && _mapCamera.orthographicSize >= 15)
         {
-            _mapCamera.orthographicSize += 5;
-            StartCoroutine(CoMapCooldown());
+            _mapCamera.orthographicSize -= 5;
         }
     }
     public void MapReduce(InputAction.CallbackContext context)
     {
-        if (!IsMapCooldown && _mapCamera.orthographicSize >= 15)
+        if (enabled && context.performed && _mapCamera.orthographicSize <= 35)
         {
-            _mapCamera.orthographicSize -= 5;
-            StartCoroutine(CoMapCooldown());
+            _mapCamera.orthographicSize += 5;
         }
-    }
-    
-    private IEnumerator CoMapCooldown()
-    {
-        IsMapCooldown = true;
-        yield return new WaitForSecondsRealtime(0.2f);
-        IsMapCooldown = false;
+        
     }
 }
