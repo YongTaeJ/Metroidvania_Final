@@ -52,7 +52,7 @@ public class PlayerInputController : MonoBehaviour
 
     //Wall Slide
     private float _wallSlideSpeed = 0f;
-    private bool _isWallSliding;
+    private bool _isWallSliding = false;
 
     public bool IsWallSliding { get 
         {
@@ -198,14 +198,14 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0)
+            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
             {
-                _isWallSliding = true;
+                IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
             }
             else
             {
-                _isWallSliding = false;
+                IsWallSliding = false;
             }
         }
     }
@@ -214,7 +214,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (_isWallSliding)
+            if (IsWallSliding)
             {
                 _isWallJumping = false;
                 _wallJumpDirection = -transform.localScale.x;
@@ -258,7 +258,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (context.performed && _canDash == true)
+            if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
                 StartCoroutine(CoDash());
             }
