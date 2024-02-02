@@ -26,8 +26,6 @@ public class ItemSlot : MonoBehaviour
         _item.OnStockChanged += RefreshStock;
 
         Button button = GetComponent<Button>();
-
-        // TODO => 현재 가지고 있는 Data를 inform에 전달
     }
 
     private void OnEnable()
@@ -48,5 +46,11 @@ public class ItemSlot : MonoBehaviour
     private void RefreshStock(int value)
     {
         _stockText.text = value.ToString();
+    }
+
+    public void CheckStock()
+    {
+        if(_item.Stock != 0) gameObject.SetActive(true);
+        else gameObject.SetActive(false);
     }
 }

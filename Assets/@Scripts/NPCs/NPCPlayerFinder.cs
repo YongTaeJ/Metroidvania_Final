@@ -24,6 +24,7 @@ public class NPCPlayerFinder : MonoBehaviour
             var playerInputController = other.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= StartConversation;
             playerInputController.OnInteraction += StartConversation;
+            UIManager.Instance.OpenPopupUI(PopupType.Interact);
         }
     }
 
@@ -33,10 +34,10 @@ public class NPCPlayerFinder : MonoBehaviour
         {
             var playerInputController = other.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= StartConversation;
+            UIManager.Instance.ClosePopupUI(PopupType.Interact);
         } 
     }
 
-    // TODO => 상황에 맞는 대화문을 출력할 수 있도록
     private void StartConversation()
     {
         StopAllCoroutines();

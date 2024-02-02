@@ -9,7 +9,7 @@ public class StatusUI : MonoBehaviour
     public StatusInformContainer InformContainer { get; private set;}
     public StatusItemContainer ItemContainer { get; private set;}
     public StatusNonItemContainer NonItemContainer {get; private set;}
-    private void OnEnable()
+    private void Awake()
     {
         InformContainer = GetComponentInChildren<StatusInformContainer>();
         ItemContainer = GetComponentInChildren<StatusItemContainer>();
@@ -19,5 +19,10 @@ public class StatusUI : MonoBehaviour
 
         Button button = transform.Find("ExitButton").GetComponent<Button>();
         button.onClick.AddListener( () => { gameObject.SetActive(false);});
+    }
+
+    private void OnEnable()
+    {
+        ItemContainer.CheckItems();
     }
 }
