@@ -38,7 +38,7 @@ public class BossRoom : MonoBehaviour
         yield return StartCoroutine(ChatManager.Instance.StartChatting(_chatID));
 
         _VHEntrySet.Taunt();
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.2f);
 
         _leftWall.enabled = true;
         _rightWall.enabled = true;
@@ -52,5 +52,11 @@ public class BossRoom : MonoBehaviour
             _isEntered = true;
             StartCoroutine(BossBattle());
         }
+    }
+
+    public void OpenDoor()
+    {
+        _leftWall.enabled = false;
+        _rightWall.enabled = false;
     }
 }

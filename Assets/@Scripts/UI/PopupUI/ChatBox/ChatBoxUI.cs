@@ -71,7 +71,9 @@ public class ChatBoxUI : MonoBehaviour
 
     private bool IsKeyInput()
     {
-        return Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return);
+        return
+        Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)
+        || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) ||Input.GetKeyDown(KeyCode.C);
     }
     #endregion
 

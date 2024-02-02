@@ -33,7 +33,6 @@ public class UIManager : Singleton<UIManager>
             InitFixedElements();
             InitPopupElements();
         }
-
         return true;
     }
 

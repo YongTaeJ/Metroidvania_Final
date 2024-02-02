@@ -40,7 +40,6 @@ public class ChatManager : Singleton<ChatManager>
     public IEnumerator StartChatting(int ID)
     {
         yield return StartCoroutine(_chatBoxUI.StartChatting(_chatDataList[ID]));
-        Debug.Log("chatend1");
     }
 
 }
