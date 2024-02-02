@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee24c7f22f51294a8003ea40ca581ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChatID: 0
+  ChatID: 3
 --- !u!58 &5579384401834806091
 CircleCollider2D:
   m_ObjectHideFlags: 0

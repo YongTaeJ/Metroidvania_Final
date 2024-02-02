@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
 public class StatusItemContainer : MonoBehaviour
 {
     private GameObject _itemSlot;
     private StatusUI _statusUI;
+    private List<ItemSlot> _itemSlots;
 
     public void Initialize(StatusUI statusUI)
     {
+        _itemSlots = new List<ItemSlot>();
         _itemSlot = Resources.Load<GameObject>("UI/ItemSlot");
         _statusUI = statusUI;
 
@@ -18,6 +21,14 @@ public class StatusItemContainer : MonoBehaviour
         InitEquipmentSlots();
         InitMaterialSlots();
         InitGoldSlot();
+    }
+
+    public void CheckItems()
+    {
+        foreach(var slot in _itemSlots)
+        {
+            slot.CheckStock();
+        }
     }
 
     private void InitSkillSlots()
@@ -29,13 +40,12 @@ public class StatusItemContainer : MonoBehaviour
 
         foreach (Item item in items.Values)
         {
-            if (ItemManager.Instance.HasItem(type, item.ItemData.ID))
-            {
-                ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
-                slot.Initialize(item);
-                Button button = slot.GetComponent<Button>();
-                button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
-            }
+            ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
+            _itemSlots.Add(slot);
+            slot.Initialize(item);
+            Button button = slot.GetComponent<Button>();
+            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+            slot.gameObject.SetActive(false);
         }
     }
 
@@ -48,13 +58,12 @@ public class StatusItemContainer : MonoBehaviour
 
         foreach (Item item in items.Values)
         {
-            if (ItemManager.Instance.HasItem(type, item.ItemData.ID))
-            {
-                ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
-                slot.Initialize(item);
-                Button button = slot.GetComponent<Button>();
-                button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
-            }
+            ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
+            _itemSlots.Add(slot);
+            slot.Initialize(item);
+            Button button = slot.GetComponent<Button>();
+            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+            slot.gameObject.SetActive(false);
         }
     }
 
