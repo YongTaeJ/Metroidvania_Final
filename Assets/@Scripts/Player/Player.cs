@@ -117,20 +117,18 @@ public class Player : MonoBehaviour, IDamagable
     private IEnumerator FlashPlayer()
     {
         float flashSpeed = 0.1f;
-
+        Color originalColor = GetComponent<SpriteRenderer>().color;
         while (Invincible)
         {
-            Color originalColor = GetComponent<SpriteRenderer>().color;
             Color flashColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0.1f);
             GetComponent<SpriteRenderer>().color = flashColor;
-
             yield return new WaitForSeconds(flashSpeed);
-
             GetComponent<SpriteRenderer>().color = originalColor;
-
             yield return new WaitForSeconds(flashSpeed);
         }
+        GetComponent<SpriteRenderer>().color = originalColor;
     }
+
 
     private void OnDie()
     {

@@ -22,12 +22,34 @@ public class StatusItemContainer : MonoBehaviour
 
     private void InitSkillSlots()
     {
-        // TODO => 스킬 아이템 구상 끝나면
+        ItemType type = ItemType.Skill;
+        Transform Container = transform.Find(type.ToString());
+
+        var items = ItemManager.Instance.GetItemDict(type);
+
+        foreach (Item item in items.Values)
+        {
+            ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
+            slot.Initialize(item);
+            Button button = slot.GetComponent<Button>();
+            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+        }
     }
 
     private void InitEquipmentSlots()
     {
-        // TODO => 기믹템 구상 끝나면
+        ItemType type = ItemType.Equipment;
+        Transform Container = transform.Find(type.ToString());
+
+        var items = ItemManager.Instance.GetItemDict(type);
+
+        foreach (Item item in items.Values)
+        {
+            ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
+            slot.Initialize(item);
+            Button button = slot.GetComponent<Button>();
+            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+        }
     }
 
     private void InitMaterialSlots()
