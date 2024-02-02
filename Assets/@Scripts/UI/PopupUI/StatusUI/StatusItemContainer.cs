@@ -29,10 +29,13 @@ public class StatusItemContainer : MonoBehaviour
 
         foreach (Item item in items.Values)
         {
-            ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
-            slot.Initialize(item);
-            Button button = slot.GetComponent<Button>();
-            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+            if (ItemManager.Instance.HasItem(type, item.ItemData.ID))
+            {
+                ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
+                slot.Initialize(item);
+                Button button = slot.GetComponent<Button>();
+                button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+            }
         }
     }
 
@@ -45,10 +48,13 @@ public class StatusItemContainer : MonoBehaviour
 
         foreach (Item item in items.Values)
         {
-            ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
-            slot.Initialize(item);
-            Button button = slot.GetComponent<Button>();
-            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+            if (ItemManager.Instance.HasItem(type, item.ItemData.ID))
+            {
+                ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
+                slot.Initialize(item);
+                Button button = slot.GetComponent<Button>();
+                button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
+            }
         }
     }
 
@@ -64,7 +70,7 @@ public class StatusItemContainer : MonoBehaviour
             ItemSlot slot = Instantiate(_itemSlot, Container).GetComponent<ItemSlot>();
             slot.Initialize(item);
             Button button = slot.GetComponent<Button>();
-            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item) );
+            button.onClick.AddListener(() => _statusUI.InformContainer.SetItemInform(item));
         }
     }
 

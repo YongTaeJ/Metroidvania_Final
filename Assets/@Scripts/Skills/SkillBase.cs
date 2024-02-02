@@ -22,12 +22,6 @@ public class SkillBase : MonoBehaviour
             cooldownImage.fillAmount = fillAmount;
             cooldownText.text = Mathf.CeilToInt(_cooldown).ToString();
         }
-        else
-        {
-            cooldownImage.fillAmount = 0;
-            cooldownText.text = "0";
-            cooldownText.gameObject.SetActive(false);
-        }
     }
 
     public virtual void Initialize()
