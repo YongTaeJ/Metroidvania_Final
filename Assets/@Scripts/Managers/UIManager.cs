@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,10 +27,14 @@ public class UIManager : Singleton<UIManager>
     #region Initialize
     public override bool Initialize()
     {
-        InitCanvases();
-        // InitFixedElements();
-        InitPopupElements();
-        return base.Initialize();
+        if(base.Initialize())
+        {
+            InitCanvases();
+            InitFixedElements();
+            InitPopupElements();
+        }
+
+        return true;
     }
 
     private void InitCanvases()

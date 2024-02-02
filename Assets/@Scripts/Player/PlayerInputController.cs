@@ -321,7 +321,7 @@ public class PlayerInputController : MonoBehaviour
 
     public void Interaction(InputAction.CallbackContext context)
     {
-        if (enabled)
+        if (enabled && context.performed)
         {
             OnInteraction?.Invoke();
         }
