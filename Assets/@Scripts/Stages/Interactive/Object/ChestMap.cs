@@ -10,7 +10,16 @@ public class ChestMap : ChestBase
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
+    }
 
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+    }
+
+    protected override void ChestText()
+    {
+        base.ChestText();
         if (_mapData._curMapData > _mapDataLimit)
         {
             _chestText.text = "You Already have this map data";
@@ -20,10 +29,5 @@ public class ChestMap : ChestBase
             _chestText.text = "You acquired map data";
             _mapData._curMapData++;
         }
-    }
-
-    protected override void OnTriggerExit2D(Collider2D collision)
-    {
-        base.OnTriggerExit2D(collision);
     }
 }
