@@ -34,9 +34,9 @@ public class TeleportTrap : MonoBehaviour
                 ChallengeText();
             }
 
-            else
+            else if (this.CompareTag("TownPortal"))
             {
-                FallText();
+                TownPortalText();
             }
         }
     }
@@ -62,6 +62,13 @@ public class TeleportTrap : MonoBehaviour
         _panel.SetActive(true);
 
         StartCoroutine(DeactiveText(2));
+    }
+    private void TownPortalText()
+    {
+        _teleportText.text = "You enter dungeon";
+        _panel.SetActive(true);
+
+        StartCoroutine(DeactiveText(4));
     }
 
     private IEnumerator DeactiveText(float seconds)
