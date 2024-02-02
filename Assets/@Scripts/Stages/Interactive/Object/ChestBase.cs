@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ChestBase : MonoBehaviour
 {
@@ -20,23 +21,18 @@ public class ChestBase : MonoBehaviour
     protected GameObject _panel;
     [SerializeField]
     protected TextMeshProUGUI _chestText;
-    protected bool IsPlayerEnter = false;
+    protected PlayerInput _playerInput;
 
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            IsPlayerEnter = true;
-            ChestText();
-            _panel.SetActive(true);
+            _playerInput = collision.GetComponent<PlayerInput>();
+            var playerInputController = collision.GetComponent<PlayerInputController>();
+            playerInputController.OnInteraction += OpenChest;
+            InteractUI.Instance.PopUpInteractUI();
 
-            // 아래 부분처럼해서 상호작용에 연결되게 만들면 될듯
-            //if (IsPlayerEnter && Input.GetKeyDown(KeyCode.E))
-            //{
-            //    ChestText();
-            //    _panel.SetActive(true);
-            //}
         }
     }
 
@@ -44,25 +40,28 @@ public class ChestBase : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Renderer renderer = GetComponent<Renderer>();
-            renderer.enabled = false;
-
-            if (_panel.activeSelf)
-            {
-                StartCoroutine(CoChestTextOff());
-            }
-            else
-            {
-                GameObject.Destroy(gameObject);
-            }
-
-            IsPlayerEnter = false;
+            var playerInputController = collision.GetComponent<PlayerInputController>();
+            playerInputController.OnInteraction -= OpenChest;
+            InteractUI.Instance.CloseInteractUI();
         }
+    }
+
+    protected virtual void OpenChest()
+    {
+        ChestText();
+        _panel.SetActive(true);
+        InteractUI.Instance.CloseInteractUI();
+
+        // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.enabled = false;
+
+        StartCoroutine(CoChestTextOff());
     }
 
     private IEnumerator CoChestTextOff()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         _panel.SetActive(false);
         GameObject.Destroy(gameObject);
     }

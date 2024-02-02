@@ -45,6 +45,5 @@ public class MapControl : MonoBehaviour
         {
             _mapCamera.orthographicSize += 5;
         }
-        
     }
 }
