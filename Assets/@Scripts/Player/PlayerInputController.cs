@@ -4,6 +4,7 @@ using System.Security.Claims;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerInputController : MonoBehaviour
 {
@@ -151,7 +152,7 @@ public class PlayerInputController : MonoBehaviour
         {
             if (_jumpCount > 0)
             {
-                if (context.started && _touchingDirection.IsGrounded)
+                if (context.started && _touchingDirection.IsGrounded && !_isDashing)
                 {
                     if (!_isWallJumping)
                     {
@@ -295,14 +296,23 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!Input.GetKey(KeyCode.DownArrow) && context.performed)
+            if (!Input.GetKey(KeyCode.DownArrow) && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 _SwordAuror.Activate();
             }
-            else if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed)
+            else
+            {
+                Debug.Log("아이템 없음");
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _PlungeAttack.Activate();
                 _player.Invincible = true;
+            }
+            else
+            {
+                Debug.Log("아이템 없음");
             }
         }
     }
@@ -341,6 +351,30 @@ public class PlayerInputController : MonoBehaviour
         {
             _jumpCount = _maxJump;
             _dashCount = _maxDash;
+        }
+    }
+
+    #endregion
+
+    #region UI Input
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            UIManager.Instance.PopupUI(PopupType.Status);
+        }
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            //if 켜진 UI가 없다면
+            UIManager.Instance.PopupUI(PopupType.Pause);
+            Time.timeScale = 0f;
+            //else if 켜진 Popup이 있다면 UI SetActive(false)
+
         }
     }
 
