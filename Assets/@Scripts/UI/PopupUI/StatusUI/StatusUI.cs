@@ -9,7 +9,7 @@ public class StatusUI : MonoBehaviour
     public StatusInformContainer InformContainer { get; private set;}
     public StatusItemContainer ItemContainer { get; private set;}
     public StatusNonItemContainer NonItemContainer {get; private set;}
-    private void Awake()
+    private void OnEnable()
     {
         InformContainer = GetComponentInChildren<StatusInformContainer>();
         ItemContainer = GetComponentInChildren<StatusItemContainer>();

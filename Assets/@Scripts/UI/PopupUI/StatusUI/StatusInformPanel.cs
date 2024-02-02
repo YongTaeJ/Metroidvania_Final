@@ -24,6 +24,7 @@ public class StatusInformPanel : MonoBehaviour
 
     public void SetInform(Item item)
     {
+        _itemImage.gameObject.SetActive(true);
         _itemImage.sprite = ItemManager.Instance.GetSprite(item.ItemData.Name);
         _itemName.text = item.ItemData.Name;
         _itemType.text = item.ItemData.ItemType.ToString();

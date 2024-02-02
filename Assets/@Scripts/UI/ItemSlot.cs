@@ -18,6 +18,11 @@ public class ItemSlot : MonoBehaviour
         _itemImage.sprite = ItemManager.Instance.GetSprite(item.ItemData.Name);
         _stockText.text = item.Stock.ToString();
 
+        if (item.ItemData.ItemType == ItemType.Skill || item.ItemData.ItemType == ItemType.Equipment)
+        {
+            _stockText.gameObject.SetActive(false);
+        }
+
         _item.OnStockChanged += RefreshStock;
 
         Button button = GetComponent<Button>();
@@ -36,6 +41,7 @@ public class ItemSlot : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_item == null) return;
         _item.OnStockChanged -= RefreshStock;
     }
 
