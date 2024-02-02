@@ -134,6 +134,16 @@ public class PlayerInputController : MonoBehaviour
         Iswalking = _moveInput != Vector2.zero;
     }
 
+    /// <summary>
+    /// 연출 전용 옵션
+    /// </summary>
+    /// <param name="direction"></param>
+    public void Move(Vector2 direction)
+    {
+        _moveInput = direction;
+        Iswalking = _moveInput != Vector2.zero;
+    }
+
     private void Flip()
     {
         if (_isAttacking == false)

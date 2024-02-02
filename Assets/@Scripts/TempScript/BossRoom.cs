@@ -25,9 +25,13 @@ public class BossRoom : MonoBehaviour
     private IEnumerator BossBattle()
     {
         var inputSystem = GameManager.Instance.player.GetComponent<PlayerInput>();
+        var inputSystem2 = GameManager.Instance.player.GetComponent<PlayerInputController>();
         inputSystem.enabled = false;
 
-        // TODO => 카메라 처리는 일단 나중에 
+        inputSystem2.Move(Vector2.right);
+        yield return new WaitForSeconds(0.3f);
+        inputSystem2.Move(Vector2.zero);
+        
         _VHEntrySet = Instantiate
         (Resources.Load<GameObject>("Enemies/Bosses/Auxiliary/VillageHead_EntrySet"), _bossLocation.position, Quaternion.identity)
         .GetComponent<VHEntrySet>();
