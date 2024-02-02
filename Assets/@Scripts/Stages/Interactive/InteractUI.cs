@@ -1,12 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class InteractUI : MonoBehaviour
+public class InteractUI : Singleton<InteractUI>
 {
-    [SerializeField] private GameObject _interactUI;
+    private GameObject _interactUI;
 
-    private void Awake()
+    public override bool Initialize()
+    {
+        _interactUI = UIManager.Instance.GetUI(PopupType.Interact);
+        _interactUI.SetActive(false);
+        return base.Initialize();
+    }
+    public void PopUpInteractUI()
+    {
+        _interactUI.SetActive(true);
+    }
+    public void CloseInteractUI()
     {
         _interactUI.SetActive(false);
     }

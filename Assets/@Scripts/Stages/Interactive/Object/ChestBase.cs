@@ -31,6 +31,8 @@ public class ChestBase : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction += OpenChest;
+            InteractUI.Instance.PopUpInteractUI();
+
         }
     }
 
@@ -40,6 +42,7 @@ public class ChestBase : MonoBehaviour
         {
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= OpenChest;
+            InteractUI.Instance.CloseInteractUI();
         }
     }
 
@@ -47,8 +50,12 @@ public class ChestBase : MonoBehaviour
     {
         ChestText();
         _panel.SetActive(true);
+        InteractUI.Instance.CloseInteractUI();
+
+        // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
         Renderer renderer = GetComponent<Renderer>();
         renderer.enabled = false;
+
         StartCoroutine(CoChestTextOff());
     }
 
