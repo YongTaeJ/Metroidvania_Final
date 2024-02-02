@@ -19,7 +19,7 @@ public class SkillUI : MonoBehaviour
 
     private void Update()
     {
-        //ActivateChildObject();
+        ActivateChildObject();
     }
 
     private void FindChildObject()

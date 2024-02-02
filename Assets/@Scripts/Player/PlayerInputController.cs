@@ -36,8 +36,6 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 _moveInput;
 
     private bool _isWalking = false;
-    
-
     private bool _isAttacking = false;
 
     //Jump
@@ -53,7 +51,6 @@ public class PlayerInputController : MonoBehaviour
     //Wall Slide
     private float _wallSlideSpeed = 0f;
     private bool _isWallSliding = false;
-
     public bool IsWallSliding { get 
         {
             return _isWallSliding; 
