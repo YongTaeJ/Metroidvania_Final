@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Claims;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerInputController : MonoBehaviour
 {
@@ -35,8 +37,6 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 _moveInput;
 
     private bool _isWalking = false;
-    
-
     private bool _isAttacking = false;
 
     //Jump
@@ -51,8 +51,7 @@ public class PlayerInputController : MonoBehaviour
 
     //Wall Slide
     private float _wallSlideSpeed = 0f;
-    private bool _isWallSliding;
-
+    private bool _isWallSliding = false;
     public bool IsWallSliding { get 
         {
             return _isWallSliding; 
@@ -79,6 +78,10 @@ public class PlayerInputController : MonoBehaviour
     private int _maxDash = 1;
     public int _dashCount;
     private TrailRenderer _trailRenderer;
+
+    // Action
+
+    public event Action OnInteraction;
 
     #endregion
 
@@ -151,7 +154,7 @@ public class PlayerInputController : MonoBehaviour
         {
             if (_jumpCount > 0)
             {
-                if (context.started && _touchingDirection.IsGrounded)
+                if (context.started && _touchingDirection.IsGrounded && !_isDashing)
                 {
                     if (!_isWallJumping)
                     {
@@ -197,14 +200,14 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0)
+            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
             {
-                _isWallSliding = true;
+                IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
             }
             else
             {
-                _isWallSliding = false;
+                IsWallSliding = false;
             }
         }
     }
@@ -213,7 +216,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (_isWallSliding)
+            if (IsWallSliding)
             {
                 _isWallJumping = false;
                 _wallJumpDirection = -transform.localScale.x;
@@ -257,7 +260,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (context.performed && _canDash == true)
+            if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
                 StartCoroutine(CoDash());
             }
@@ -295,14 +298,23 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!Input.GetKey(KeyCode.DownArrow) && context.performed)
+            if (!Input.GetKey(KeyCode.DownArrow) && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 _SwordAuror.Activate();
             }
-            else if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed)
+            else
+            {
+                Debug.Log("아이템 없음");
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _PlungeAttack.Activate();
                 _player.Invincible = true;
+            }
+            else
+            {
+                Debug.Log("아이템 없음");
             }
         }
     }
@@ -311,10 +323,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            //if (상호작용이 가능한 오브젝트 && context.performed)
-            //{
-            //    상호작용 오브젝트에서 실행될 메서드?
-            //}
+            OnInteraction?.Invoke();
         }
     }
 
@@ -341,6 +350,30 @@ public class PlayerInputController : MonoBehaviour
         {
             _jumpCount = _maxJump;
             _dashCount = _maxDash;
+        }
+    }
+
+    #endregion
+
+    #region UI Input
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            UIManager.Instance.PopupUI(PopupType.Status);
+        }
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            //if 켜진 UI가 없다면
+            UIManager.Instance.PopupUI(PopupType.Pause);
+            Time.timeScale = 0f;
+            //else if 켜진 Popup이 있다면 UI SetActive(false)
+
         }
     }
 

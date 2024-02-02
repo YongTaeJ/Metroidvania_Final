@@ -27,8 +27,32 @@
     {
       "ItemType": "Equipment",
       "ID": "0",
-      "Name": "testName",
-      "Description": "벽점프를 가능하게 해주는 아이템. 아직 설명 미정"
+      "Name": "WindCloak",
+      "Description": "바람의 호의가 담긴 망토입니다. 착용한 사람은 바람을 타고 돌진할 수 있습니다."
+    },
+    {
+      "ItemType": "Map",
+      "ID": "0",
+      "Name": "MapPiece",
+      "Description": "지도 조각입니다. 아직 설명 미정"
+    },
+    {
+      "ItemType": "Equipment",
+      "ID": "1",
+      "Name": "WallGloves",
+      "Description": "필요에 따라 점성을 조절할 수 있는 장갑입니다."
+    },
+    {
+      "ItemType": "Skill",
+      "ID": "0",
+      "Name": "SwordAurorCrystalBlue",
+      "Description": "누군가의 기억이 담긴 크리스탈. 강한 마력을 담은 검기를 날립니다."
+    },
+    {
+      "ItemType": "Skill",
+      "ID": "1",
+      "Name": "PlungeAttackCrystalGreen",
+      "Description": "누군가의 기억이 담긴 크리스탈. 땅을 내려찍는 기술입니다."
     }
   ]
 }
