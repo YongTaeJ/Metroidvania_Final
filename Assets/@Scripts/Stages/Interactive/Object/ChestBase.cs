@@ -62,7 +62,7 @@ public class ChestBase : MonoBehaviour
 
     private IEnumerator CoChestTextOff()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         _panel.SetActive(false);
         GameObject.Destroy(gameObject);
     }
