@@ -39,19 +39,19 @@
     {
       "ItemType": "Equipment",
       "ID": "1",
-      "Name": "StickyGloves",
+      "Name": "WallGloves",
       "Description": "필요에 따라 점성을 조절할 수 있는 장갑입니다."
     },
     {
       "ItemType": "Skill",
       "ID": "0",
-      "Name": "AuraBlade",
+      "Name": "SwordAurorCrystalBlue",
       "Description": "누군가의 기억이 담긴 크리스탈. 강한 마력을 담은 검기를 날립니다."
     },
     {
       "ItemType": "Skill",
       "ID": "1",
-      "Name": "VStrike",
+      "Name": "PlungeAttackCrystalGreen",
       "Description": "누군가의 기억이 담긴 크리스탈. 땅을 내려찍는 기술입니다."
     }
   ]
