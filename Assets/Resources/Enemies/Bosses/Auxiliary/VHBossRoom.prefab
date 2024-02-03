@@ -113,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076579010656381736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.64, y: -3.63, z: 0}
+  m_LocalPosition: {x: 13.5, y: -3.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,7 +163,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 5}
+  m_Size: {x: 3, y: 5}
   m_EdgeRadius: 0
 --- !u!1 &2864850752689093616
 GameObject:
@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262242075023156077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.5, y: -4.41, z: 0}
+  m_LocalPosition: {x: -13.5, y: -4.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,7 +361,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4}
+  m_Size: {x: 3, y: 4}
   m_EdgeRadius: 0
 --- !u!1 &8997294789971559837
 GameObject:
@@ -567,12 +567,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 4288818479663670126}
     m_Modifications:
     - target: {fileID: 1223245190812302512, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1223245190812302512, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
       propertyPath: m_Name
       value: VillageHeadSpecialPattern
       objectReference: {fileID: 0}
     - target: {fileID: 2954395422536997419, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314197712433887953, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
+      propertyPath: m_Icon
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6207645748537432148, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -621,6 +629,10 @@ PrefabInstance:
     - target: {fileID: 6529920070987554680, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345474806480699455, guid: c97cfd83b96d7784898d3d6afb0cbf8e, type: 3}
+      propertyPath: m_Icon
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

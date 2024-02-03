@@ -17,12 +17,19 @@ public enum PopupType
     GameOver
 }
 
+public enum DisposableType
+{
+    None,
+}
+
 public class UIManager : Singleton<UIManager>
 {
     #region Variables
     private Transform _fixedUI;
     private Transform _popupUI;
+    private Transform _disposableUI;
     private Dictionary<PopupType, GameObject> _popupUIElements;
+    private Dictionary<DisposableType, GameObject> _disposableUIElements;
     private List<GameObject> _fixedUIElements;
     #endregion
 
@@ -34,6 +41,7 @@ public class UIManager : Singleton<UIManager>
             InitCanvases();
             InitFixedElements();
             InitPopupElements();
+            InitDisposableElements();
         }
         return true;
     }
@@ -42,10 +50,13 @@ public class UIManager : Singleton<UIManager>
     {
         var fixedUI = new GameObject("@FixedUI");
         var popupUI = new GameObject("@PopupUI");
+        var disposableUI = new GameObject("@DisposableUI");
         InitCanvas(fixedUI);
         InitCanvas(popupUI);
+        InitCanvas(disposableUI);
         _fixedUI = fixedUI.transform;
         _popupUI = popupUI.transform;
+        _disposableUI = disposableUI.transform;
     }
 
     private void InitCanvas(GameObject obj)
@@ -94,6 +105,25 @@ public class UIManager : Singleton<UIManager>
             inGameUI.SetActive(false);
         }
     }
+
+    private void InitDisposableElements()
+    {
+        _disposableUIElements = new Dictionary<DisposableType, GameObject>();
+        
+        // 프리펩 명명규칙 : EnumType + UI로 제작 ex. StatusUI
+        GameObject[] UIs = Resources.LoadAll<GameObject>("UI/DisposableUI");
+
+        foreach(var UI in UIs)
+        {
+            string UIName = UI.name.Substring(0, UI.name.Length - 2);
+            if (!Enum.TryParse(UIName, out DisposableType type))
+            {
+                Debug.Log("DisposableUI 폴더 확인 필요");
+                continue;
+            }
+            _disposableUIElements.Add(type, UI);
+        }
+    }
     #endregion
 
     public void OpenPopupUI(PopupType popupType)
@@ -104,6 +134,11 @@ public class UIManager : Singleton<UIManager>
     public void ClosePopupUI(PopupType popupType)
     {
         _popupUIElements[popupType].SetActive(false);
+    }
+
+    public void MakeDisposableUI(DisposableType disposableType)
+    {
+        Instantiate(_disposableUIElements[disposableType], _disposableUI);
     }
 
     public GameObject GetUI(PopupType popupType)
