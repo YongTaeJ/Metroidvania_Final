@@ -20,14 +20,8 @@ public class ChestMap : ChestBase
     protected override void ChestText()
     {
         base.ChestText();
-        if (_mapData._curMapData > _mapDataLimit)
-        {
-            _chestText.text = "You Already have this map data";
-        }
-        else
-        {
-            _chestText.text = "You acquired map data";
-            _mapData._curMapData++;
-        }
+        _chestText.text = "You acquired map data";
+        _mapData._curMapData = 3;
+        _mapData.UpdateMapData(_mapData._curMapData);
     }
 }

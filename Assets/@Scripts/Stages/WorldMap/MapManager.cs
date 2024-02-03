@@ -8,6 +8,7 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private GameObject _worldMap;
     [SerializeField] private GameObject _worldMapUI;
     public PortalTrigger _portalTrigger;
+    public GameObject _loadingImage;
     private Camera _mapCamera;
 
     public bool IsWorldMapOpen { get; private set; }
@@ -19,6 +20,7 @@ public class MapManager : Singleton<MapManager>
         CloseLargeMap();
         this.GetComponent<PlayerInput>().enabled = false;
         _worldMapUI.SetActive(false);
+        _loadingImage.SetActive(false);
         _mapCamera = GetComponentInChildren<Camera>();
     }
 
@@ -50,12 +52,13 @@ public class MapManager : Singleton<MapManager>
             this.GetComponent<PlayerInput>().enabled = true;
             Vector3 _playerPosition = GameManager.Instance.player.transform.position;
             moveMapCamera(_playerPosition);
-        }
-
-        if (_portalTrigger != null && _portalTrigger.CanUsePortal)
-        {
             _worldMapUI.SetActive(true);
         }
+
+        //if (_portalTrigger != null && _portalTrigger.CanUsePortal)
+        //{
+        //    _worldMapUI.SetActive(true);
+        //}
     }
 
     public void CloseLargeMap()
@@ -91,5 +94,10 @@ public class MapManager : Singleton<MapManager>
     public void moveMapCamera(Vector3 position)
     {
         _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
+    }
+
+    public void LoadingImage(bool isActive)
+    {
+        _loadingImage.SetActive(isActive);
     }
 }
