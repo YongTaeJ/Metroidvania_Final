@@ -20,7 +20,6 @@ public class PatternFinder
     private float _attackDistance;
     private Transform _transform;
     private Transform _playerTransform;
-    private Animator _animator;
     private Dictionary<BossPatternType, List<BossBaseState>> _attackPatterns;
     private List<BossBaseState> _preparePatterns;
     #endregion
@@ -28,14 +27,12 @@ public class PatternFinder
     public PatternFinder(BossStateMachine stateMachine)
     {
         _isAttacked = false;
-        _maxSpecialCount = 6;
+        _maxSpecialCount = 5;
         _currentSpecialCount = 0;
 
         _attackDistance = stateMachine.EnemyData.AttackDistance;
         _transform = stateMachine.transform;
         _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
-        _animator = stateMachine.Animator;
-
         SetAttackPatterns(stateMachine.AttackList);
         _preparePatterns = stateMachine.PrepareList;
     }
@@ -95,6 +92,7 @@ public class PatternFinder
             return GetRandomPattern(_attackPatterns[BossPatternType.Ranged]);
         }
     }
+
     private EnemyBaseState GetPreparePattern()
     {
         return GetRandomPattern(_preparePatterns);

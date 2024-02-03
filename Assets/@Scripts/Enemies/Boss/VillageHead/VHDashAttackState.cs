@@ -5,9 +5,6 @@ using DG.Tweening;
 
 public class VHDashAttackState : BossAttackState
 {
-    private Transform _transform;
-    private Transform _playerTransform;
-    private ObjectFlip _objectFlip;
     private float _distanceToPlayer;
     private int _startCount;
     public VHDashAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
@@ -23,7 +20,6 @@ public class VHDashAttackState : BossAttackState
     {
         base.OnStateEnter();
         _startCount = 0;
-        _isAttackEnded = false;
         _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 2);
     }

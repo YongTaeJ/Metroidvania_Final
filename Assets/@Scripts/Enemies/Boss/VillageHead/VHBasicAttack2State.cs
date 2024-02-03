@@ -14,7 +14,6 @@ public class VHBasicAttack2State : BossAttackState
     {
         base.OnStateEnter();
         _endCount = 0;
-        _isAttackEnded = false;
         _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 1);
     }

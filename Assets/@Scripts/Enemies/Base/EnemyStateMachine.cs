@@ -32,7 +32,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 
     #region Monobehaviour
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         Initialize();
         StateTransition(StateDictionary[EnemyStateType.Idle]);
@@ -53,6 +53,10 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
         
         GetComponent<EnemyHitSystem>().Initialize(this);
-        GetComponentInChildren<EnemyAttackSystem>().Initialize(this);
+        var attacks = GetComponentsInChildren<EnemyAttackSystem>();
+        foreach(var system in attacks)
+        {
+            system.Initialize(EnemyData.Damage);
+        }
     }
 }

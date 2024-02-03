@@ -43,7 +43,6 @@ public class FlyingEnemyChaseState : EnemyBaseState
         }
 
         MoveToPlayer();
-
     }
 
     private void MoveToPlayer()

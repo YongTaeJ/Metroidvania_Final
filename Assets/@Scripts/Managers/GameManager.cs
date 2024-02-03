@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -9,7 +10,7 @@ public class GameManager : Singleton<GameManager>
 
     public override bool Initialize()
     {
-       
+  
         return base.Initialize();
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerFinder : MonoBehaviour
 {
     #region Properties
-    // TODO => Refactoring To Delegate.
     public bool IsPlayerEnter { get; protected set; }
     public Transform CurrentTransform { get; protected set; }
     #endregion

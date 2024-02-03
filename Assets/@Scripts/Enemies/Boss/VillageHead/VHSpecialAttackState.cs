@@ -21,7 +21,6 @@ public class VHSpecialAttackState : BossAttackState
         base.OnStateEnter();
         _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 5);
-
         _patternCount = 0;
         _endCount = 0;
     }

@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class MapControl : MonoBehaviour
 {
-    public Camera _mapCamera;
-
-    private Vector2 _mapMove;
-    private float _scrollSpeed = 0.5f;
     [SerializeField] private Vector2 _minCameraBound;
     [SerializeField] private Vector2 _maxCameraBound;
+    [SerializeField] private Camera _mapCamera;
+
+    private Vector2 _mapMove;
+    private float _scrollSpeed = 0.1f;
 
 
     private void Update()
@@ -30,12 +32,18 @@ public class MapControl : MonoBehaviour
         _mapMove = context.ReadValue<Vector2>();
     }
 
-    public void MapSelect(InputAction.CallbackContext context)
+    public void MapEnlarge(InputAction.CallbackContext context)
     {
-
+        if (enabled && context.performed && _mapCamera.orthographicSize >= 15)
+        {
+            _mapCamera.orthographicSize -= 5;
+        }
     }
-    public void MapCancel(InputAction.CallbackContext context)
+    public void MapReduce(InputAction.CallbackContext context)
     {
-
+        if (enabled && context.performed && _mapCamera.orthographicSize <= 35)
+        {
+            _mapCamera.orthographicSize += 5;
+        }
     }
 }

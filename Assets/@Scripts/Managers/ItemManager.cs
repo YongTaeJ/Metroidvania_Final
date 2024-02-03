@@ -75,19 +75,24 @@ public class ItemManager : Singleton<ItemManager>
         return _items[itemType];
     }
 
-    public ItemData GetItemData(ItemType itemType, int ID)
-    {
-        return _items[itemType][ID].ItemData;
-    }
-
     public Sprite GetSprite(string itemName)
     {
         return ItemSprites[itemName];
     }
 
+    public ItemData GetItemData(ItemType itemType, int ID)
+    {
+        return _items[itemType][ID].ItemData;
+    }
+
     public bool HasItem(ItemType itemType, int ID)
     {
         return _items[itemType][ID].Stock != 0;
+    }
+
+    public int GetItemStock(ItemType itemType, int ID)
+    {
+        return _items[itemType][ID].Stock;
     }
 }
 

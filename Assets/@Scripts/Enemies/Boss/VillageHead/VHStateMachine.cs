@@ -27,8 +27,8 @@ public class VHStateMachine : BossStateMachine
 
         PrepareList = new()
         {
-            new VHIdleState(this),
-            new VHChaseState(this)
+            new BossIdleState(this),
+            new BossChaseState(this)
         };
 
         _patternFinder = new PatternFinder(this);

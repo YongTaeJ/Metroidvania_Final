@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Skill_PlungeAttack : SkillBase
 {
-    public GameObject _shockwavePrefab;
+    private GameObject _shockwavePrefab;
 
     public override void Initialize()
     {
@@ -20,13 +22,14 @@ public class Skill_PlungeAttack : SkillBase
         }
 
         // TODO 스킬 애니메이션
-        GameManager.Instance.player._rigidbody.velocity = new Vector2(0, -transform.localScale.y * 30f); // 낙공 스킬 속도 조절
+        GameManager.Instance.player._rigidbody.velocity = new Vector2(0, -transform.localScale.y * 30f);
         GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Plunge);
         return true;
     }
 
     public void Shockwaves()
     {
+        _shockwavePrefab = Resources.Load<GameObject>("Skills/PlungeAttack");
         Vector3 playerPosition = transform.position;
         float distanceBetweenShockwaves = 1.0f;
 
