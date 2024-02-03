@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, IDamagable
 {
@@ -36,18 +37,35 @@ public class Player : MonoBehaviour, IDamagable
     private Coroutine _coInvincible;
     private float _invincibilityTime = 1f;
 
+    public bool IsAlive
+    {
+        get
+        {
+            return _isAlive;
+        }
+        private set
+        {
+            _isAlive = value;
+            _animator.SetBool(AnimatorHash.IsAlive, value);
+        }
+    }
+
+    private bool _isAlive = true;
+
     //Skill
     private List<SkillBase> _skills = new();
 
     public Animator _animator;
     public Rigidbody2D _rigidbody;
     public PlayerInputController _controller;
+    private PlayerInput _playerInput;
 
     private void Awake()
     {
         _controller = GetComponent<PlayerInputController>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _playerInput = GetComponent<PlayerInput>();
         _Hp = _maxHp;
         GameManager.Instance.player = this;
     }
@@ -75,7 +93,7 @@ public class Player : MonoBehaviour, IDamagable
 
     public void GetDamaged(int damage, Transform target)
     {
-        if (Invincible == false && enabled)
+        if (Invincible == false && IsAlive)
         {
             Invincible = true;
             StartCoroutine(FlashPlayer());
@@ -132,8 +150,27 @@ public class Player : MonoBehaviour, IDamagable
 
     private void OnDie()
     {
+        IsAlive = false;
+        _playerInput.enabled = false;
         _animator.SetTrigger(AnimatorHash.Dead);
-        enabled = false;
-        _controller.enabled = enabled;
+        StartCoroutine(OnGameOverUI());
+    }
+
+    private IEnumerator OnGameOverUI()
+    {
+        yield return new WaitForSeconds(1f);
+        UIManager.Instance.SetFixedUI(false);
+        UIManager.Instance.OpenPopupUI(PopupType.GameOver);
+        yield return new WaitForSeconds(1f);
+    }
+
+    public void OnContinue()
+    {
+        transform.position = new Vector3(263f, 0f, 0f);
+        IsAlive = true;
+        _playerInput.enabled = true;
+        _Hp = _maxHp;
+        UIManager.Instance.SetFixedUI(true);
+        UIManager.Instance.ClosePopupUI(PopupType.GameOver);
     }
 }

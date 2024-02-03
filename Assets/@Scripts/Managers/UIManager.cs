@@ -13,7 +13,8 @@ public enum PopupType
     Chest,
     ChatBox,
     Pause,
-    Interact
+    Interact,
+    GameOver
 }
 
 public class UIManager : Singleton<UIManager>

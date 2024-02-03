@@ -26,5 +26,6 @@ public static class AnimatorHash
     public static readonly int IsCeiling = Animator.StringToHash("Ceiling");
     public static readonly int Skill = Animator.StringToHash("Skill");
     public static readonly int Plunge = Animator.StringToHash("PlungeSkill");
+    public static readonly int IsAlive = Animator.StringToHash("Alive");
 
 }
