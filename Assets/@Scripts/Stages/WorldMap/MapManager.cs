@@ -37,7 +37,7 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    private void OpenLargeMap()
+    public void OpenLargeMap()
     {
         _worldMap.SetActive(true);
         IsWorldMapOpen = true;
