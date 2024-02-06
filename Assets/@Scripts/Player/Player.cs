@@ -144,7 +144,8 @@ public class Player : MonoBehaviour, IDamagable
             GetComponent<SpriteRenderer>().color = originalColor;
             yield return new WaitForSeconds(flashSpeed);
         }
-        GetComponent<SpriteRenderer>().color = originalColor;
+        yield break;
+        //GetComponent<SpriteRenderer>().color = originalColor; //알파값을 마지막에 원래 색으로 변경하는 코드 추가해서 버그 수정
     }
 
 
