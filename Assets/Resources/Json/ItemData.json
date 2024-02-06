@@ -53,6 +53,102 @@
       "ID": "1",
       "Name": "PlungeAttackCrystalGreen",
       "Description": "누군가의 기억이 담긴 크리스탈. 땅을 내려찍는 기술입니다."
+    },
+    {
+      "ItemType": "Building",
+      "ID": "10000",
+      "Name": "Statue1",
+      "Description": "보석 1"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "10001",
+      "Name": "Statue2",
+      "Description": "보석 2"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "10002",
+      "Name": "Statue3",
+      "Description": "보석 3"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "0",
+      "Name": "Teleporter",
+      "Description": "마을에서 순간이동을 가능하게 하는 건물"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "1",
+      "Name": "Shop",
+      "Description": "상점 이용이 가능해짐"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "2",
+      "Name": "TownHall",
+      "Description": "촌장님 오면 건축가능 스탯 올라감"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "3",
+      "Name": "Fountain",
+      "Description": "스탯이 올라가는 분수"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "4",
+      "Name": "MyHome",
+      "Description": "내집마련!! 스탯 올라감"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "5",
+      "Name": "Home2",
+      "Description": "다른 사람 집 스탯 올라감"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "0",
+      "Name": "AA",
+      "Description": "AA11"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "1",
+      "Name": "BB",
+      "Description": "BB22"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "2",
+      "Name": "CC",
+      "Description": "CC22"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "3",
+      "Name": "DD",
+      "Description": "DD22"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "4",
+      "Name": "EE",
+      "Description": "EE22"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "5",
+      "Name": "FF",
+      "Description": "FF22"
+    },
+    {
+      "ItemType": "Portal",
+      "ID": "6",
+      "Name": "GG",
+      "Description": "GG22"
     }
   ]
 }
