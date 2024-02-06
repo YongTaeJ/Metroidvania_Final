@@ -13,10 +13,10 @@ public class BuildingButton : MonoBehaviour
     private Button _button;
     #endregion
 
-    public void Initialize()
+    public void Initialize(int ID)
     {
         InitComponents();
-        InitDatas();
+        InitDatas(ID);
         InitButton();
     }
 
@@ -28,11 +28,39 @@ public class BuildingButton : MonoBehaviour
         _button = GetComponent<Button>();
     }
 
-    private void InitDatas()
+    private void InitDatas(int ID)
     {
-        _nameText.text = "asdf";
-        _YNText.text = "asdf";
-        // _image.sprite = sprite;
+        var SO = BuildingSOManager.Instance.GetSO(ID);
+        Sprite sprite = ItemManager.Instance.GetSprite(ItemType.Building, ID);
+        _nameText.text = SO.ConstructName;
+
+        if(IsBuildable(SO))
+        {
+            SetYes();
+        }
+        else
+        {
+            SetNo();
+        }
+
+        _image.sprite = sprite;
+    }
+
+    private bool IsBuildable(BuildingSO SO)
+    {
+        return true;
+    }
+
+    private void SetYes()
+    {
+        _YNText.text = "건축 가능";
+        _YNText.color = Color.green;
+    }
+
+    private void SetNo()
+    {
+        _YNText.text = "건축 불가능";
+        _YNText.color = Color.red;
     }
 
     private void InitButton()
