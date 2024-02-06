@@ -54,7 +54,9 @@ public class ChestBase : MonoBehaviour
 
         // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
         Renderer renderer = GetComponent<Renderer>();
+        Collider2D collider2D = GetComponent<Collider2D>();
         renderer.enabled = false;
+        collider2D.enabled = false;
 
         StartCoroutine(CoChestTextOff());
     }

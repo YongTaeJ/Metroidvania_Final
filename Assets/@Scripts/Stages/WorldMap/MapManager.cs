@@ -7,7 +7,6 @@ public class MapManager : Singleton<MapManager>
 {
     [SerializeField] private GameObject _worldMap;
     [SerializeField] private GameObject _worldMapUI;
-    public PortalTrigger _portalTrigger;
     public GameObject _loadingImage;
     private Camera _mapCamera;
 
@@ -54,11 +53,6 @@ public class MapManager : Singleton<MapManager>
             moveMapCamera(_playerPosition);
             _worldMapUI.SetActive(true);
         }
-
-        //if (_portalTrigger != null && _portalTrigger.CanUsePortal)
-        //{
-        //    _worldMapUI.SetActive(true);
-        //}
     }
 
     public void CloseLargeMap()

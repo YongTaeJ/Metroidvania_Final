@@ -48,6 +48,11 @@ public class MapTeleport : MonoBehaviour
         MapManager.Instance.CloseLargeMap();
         Teleport(_selectedButtonIndex);
         UIManager.Instance.OpenPopupUI(PopupType.Interact);
+
+        if (_selectedButtonIndex == 0)
+        {
+            GameManager.Instance.player._Hp = GameManager.Instance.player._maxHp;
+        }
     }
 
     public void ClickNo()
@@ -57,7 +62,7 @@ public class MapTeleport : MonoBehaviour
 
     private void Teleport(int index)
     {
-        StartCoroutine(CoTeleportDelay(1));
+        StartCoroutine(CoTeleportDelay(0.8f));
         GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
         GameManager.Instance.player.transform.position = portalLocations[index].position;
     }
