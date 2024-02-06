@@ -11,8 +11,7 @@ public enum ItemType
     Material,
     Equipment,
     Map,
-    Skill,
-    Portal
+    Skill
 }
 
 public class Item
