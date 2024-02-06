@@ -7,7 +7,7 @@ public class WallHP : WallBase
     [SerializeField]
     private int _wallHP = 1;
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    protected override void WallReact(Collider2D collision)
     {
         if (collision.CompareTag("PlayerAttack"))
         {
