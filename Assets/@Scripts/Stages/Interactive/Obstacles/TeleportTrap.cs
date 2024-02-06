@@ -23,6 +23,7 @@ public class TeleportTrap : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.transform.position = _teleportPosition;
+            GameManager.Instance.player.GetDamaged(2, transform);
 
             if (this.CompareTag("Mimic"))
             {

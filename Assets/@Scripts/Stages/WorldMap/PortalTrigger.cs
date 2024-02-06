@@ -49,12 +49,13 @@ public class PortalTrigger : MonoBehaviour
     {
         if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
         {
-            MapManager.Instance.moveMapCamera(new Vector3(290, -100, 0));
             MapManager.Instance.OpenLargeMap();
+            MapManager.Instance.moveMapCamera(new Vector3(290, -100, 0));
         }
         else
         {
             CheckBuyPortal();
+            Debug.Log("BUY PORTAL");
         }
     }
 
@@ -73,9 +74,11 @@ public class PortalTrigger : MonoBehaviour
     {
         _checkCanvas.SetActive(false);
         BuyPortal();
+        Debug.Log(ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex));
     }
     public void ClickNo()
     {
         _checkCanvas.SetActive(false);
+        Debug.Log("Cancel");
     }
 }
