@@ -80,6 +80,12 @@ public class ItemManager : Singleton<ItemManager>
         return ItemSprites[itemName];
     }
 
+    public Sprite GetSprite(ItemType itemType, int ID)
+    {
+        string curName = _items[itemType][ID].ItemData.Name;
+        return ItemSprites[curName];
+    }
+
     public ItemData GetItemData(ItemType itemType, int ID)
     {
         return _items[itemType][ID].ItemData;

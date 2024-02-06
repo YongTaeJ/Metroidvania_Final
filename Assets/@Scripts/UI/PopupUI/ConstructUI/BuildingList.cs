@@ -21,11 +21,10 @@ public class BuildingList : MonoBehaviour
             if(building.Stock == 0)
             {
                 var buildingButton = Instantiate(_buildingButton, _contentContainer).GetComponent<BuildingButton>();
-                buildingButton.Initialize(); // TODO => required Data Dependency.
+                buildingButton.Initialize(building.ItemData.ID); // TODO => required Data Dependency.
                 _buildingButtons.Add(buildingButton);
             }
         }
-
 
         RefreshValidButtons();
     }
