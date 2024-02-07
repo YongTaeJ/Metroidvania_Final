@@ -14,7 +14,8 @@ public enum PopupType
     ChatBox,
     Pause,
     Interact,
-    GameOver
+    GameOver,
+    Sign
 }
 
 public enum DisposableType
