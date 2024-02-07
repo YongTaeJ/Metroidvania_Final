@@ -57,19 +57,19 @@
     {
       "ItemType": "Building",
       "ID": "10000",
-      "Name": "Statue1",
+      "Name": "StatuePiece",
       "Description": "보석 1"
     },
     {
       "ItemType": "Building",
       "ID": "10001",
-      "Name": "Statue2",
+      "Name": "StatuePiece",
       "Description": "보석 2"
     },
     {
       "ItemType": "Building",
       "ID": "10002",
-      "Name": "Statue3",
+      "Name": "StatuePiece",
       "Description": "보석 3"
     },
     {
@@ -105,7 +105,7 @@
     {
       "ItemType": "Building",
       "ID": "5",
-      "Name": "Home2",
+      "Name": "VillagerHouse",
       "Description": "다른 사람 집 스탯 올라감"
     },
     {

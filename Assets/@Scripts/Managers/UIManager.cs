@@ -14,7 +14,8 @@ public enum PopupType
     ChatBox,
     Pause,
     Interact,
-    GameOver
+    GameOver,
+    Construct
 }
 
 public enum DisposableType
@@ -28,6 +29,7 @@ public class UIManager : Singleton<UIManager>
     private Transform _fixedUI;
     private Transform _popupUI;
     private Transform _disposableUI;
+    public Transform TempUI { get; private set; }
     private Dictionary<PopupType, GameObject> _popupUIElements;
     private Dictionary<DisposableType, GameObject> _disposableUIElements;
     private List<GameObject> _fixedUIElements;
@@ -51,12 +53,20 @@ public class UIManager : Singleton<UIManager>
         var fixedUI = new GameObject("@FixedUI");
         var popupUI = new GameObject("@PopupUI");
         var disposableUI = new GameObject("@DisposableUI");
+        var tempUI = new GameObject("@TemporaryUI");
+
         InitCanvas(fixedUI);
         InitCanvas(popupUI);
         InitCanvas(disposableUI);
+        InitCanvas(tempUI);
+
         _fixedUI = fixedUI.transform;
         _popupUI = popupUI.transform;
         _disposableUI = disposableUI.transform;
+        TempUI = tempUI.transform;
+
+        // Temp Code.
+        tempUI.GetComponent<Canvas>().sortingOrder = 2;
     }
 
     private void InitCanvas(GameObject obj)

@@ -1,17 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildingList : MonoBehaviour
 {
-    // Condition => ItemType.Building.item.Stock == 0
-
     private GameObject _buildingButton;
     private Transform _contentContainer;
     private List<BuildingButton> _buildingButtons;
 
-    public void Initialize()
+    public void Initialize(ConstructUI parents)
     {
+        _buildingButtons = new List<BuildingButton>();
         _buildingButton = Resources.Load<GameObject>("UI/BuildingButton");
         _contentContainer = transform.Find("Viewport/Content");
 
@@ -21,7 +22,8 @@ public class BuildingList : MonoBehaviour
             if(building.Stock == 0)
             {
                 var buildingButton = Instantiate(_buildingButton, _contentContainer).GetComponent<BuildingButton>();
-                buildingButton.Initialize(building.ItemData.ID); // TODO => required Data Dependency.
+                buildingButton.Initialize(building.ItemData.ID);
+                buildingButton.InitAction(parents);
                 _buildingButtons.Add(buildingButton);
             }
         }
@@ -38,11 +40,12 @@ public class BuildingList : MonoBehaviour
 
     public void RefreshValidButtons()
     {
-        foreach(var button in _buildingButtons)
+        for(int i= _buildingButtons.Count-1 ; i >= 0 ; i--)
         {
-            if(!button.IsValidButton())
+            if(!_buildingButtons[i].IsValidButton())
             {
-                Destroy(button.gameObject);
+                Destroy(_buildingButtons[i].gameObject);
+                _buildingButtons.RemoveAt(i);
             }
         }
     }

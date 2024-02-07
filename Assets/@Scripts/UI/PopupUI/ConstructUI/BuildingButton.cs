@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class BuildingButton : MonoBehaviour
@@ -11,13 +13,20 @@ public class BuildingButton : MonoBehaviour
     private TMP_Text _YNText;
     private Image _image;
     private Button _button;
+    private int _ID;
+    private Action<int> _onButtonClick;
     #endregion
 
     public void Initialize(int ID)
     {
+        _ID = ID;
         InitComponents();
         InitDatas(ID);
-        InitButton();
+    }
+
+    public void InitAction(ConstructUI parents)
+    {
+        _onButtonClick = parents.InformPanel.SetInformPanel;
     }
 
     private void InitComponents()
@@ -26,6 +35,7 @@ public class BuildingButton : MonoBehaviour
         _YNText = transform.Find("YNText").GetComponent<TMP_Text>();
         _image = transform.Find("Image").GetComponent<Image>();
         _button = GetComponent<Button>();
+        _button.onClick.AddListener(OnBuildingInform);
     }
 
     private void InitDatas(int ID)
@@ -34,7 +44,7 @@ public class BuildingButton : MonoBehaviour
         Sprite sprite = ItemManager.Instance.GetSprite(ItemType.Building, ID);
         _nameText.text = SO.ConstructName;
 
-        if(IsBuildable(SO))
+        if(SO.IsBuildable())
         {
             SetYes();
         }
@@ -46,10 +56,6 @@ public class BuildingButton : MonoBehaviour
         _image.sprite = sprite;
     }
 
-    private bool IsBuildable(BuildingSO SO)
-    {
-        return true;
-    }
 
     private void SetYes()
     {
@@ -63,20 +69,15 @@ public class BuildingButton : MonoBehaviour
         _YNText.color = Color.red;
     }
 
-    private void InitButton()
-    {
-        // TODO => 매개변수로 메서드를 받을 수도.
-        _button.onClick.AddListener(OnBuildingInform);
-    }
-
     private void OnBuildingInform()
     {
-        // TODO => BuildingInform에 정보 전달
+        _onButtonClick.Invoke(_ID);
     }
 
     public bool IsValidButton()
     {
-        // TODO => It is constructed already?
-        return true;
+        // 해당 건물이 없으면 => 지을 수 있으니까 True
+        bool flag = ItemManager.Instance.HasItem(ItemType.Building, _ID);
+        return !flag;
     }
 }
