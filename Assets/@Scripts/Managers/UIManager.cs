@@ -10,7 +10,7 @@ public enum PopupType
 {
     None,
     Status,
-    Chest,
+    ToolTip,
     ChatBox,
     Pause,
     Interact,

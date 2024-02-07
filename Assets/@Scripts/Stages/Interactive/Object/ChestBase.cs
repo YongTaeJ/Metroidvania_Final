@@ -16,10 +16,6 @@ public class ChestBase : MonoBehaviour
     // 실제 작동은 IsPlayerEnter가 true일때 상호작용키를 누르면 작동하게 변경
     // 상자가 열리는 애니메이션을 넣고, 아이템 등을 획득하고, 몇초 후에 UI가 사라지게
 
-
-    [SerializeField]
-    protected GameObject _panel;
-    [SerializeField]
     protected TextMeshProUGUI _chestText;
     protected PlayerInput _playerInput;
 
@@ -49,7 +45,7 @@ public class ChestBase : MonoBehaviour
     protected virtual void OpenChest()
     {
         ChestText();
-        _panel.SetActive(true);
+        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
 
         // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
@@ -63,13 +59,14 @@ public class ChestBase : MonoBehaviour
 
     private IEnumerator CoChestTextOff()
     {
-        yield return new WaitForSeconds(1f);
-        _panel.SetActive(false);
+        yield return new WaitForSeconds(0.7f);
+        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
         GameObject.Destroy(gameObject);
     }
 
     protected virtual void ChestText()
     {
+        _chestText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
         _chestText.text = "You opened chest\n\r" + "but, nothing in the chest";
     }
 }

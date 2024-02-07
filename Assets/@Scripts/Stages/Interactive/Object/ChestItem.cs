@@ -10,7 +10,6 @@ public class ChestItem : ChestBase
     [SerializeField] private ItemType _chestItem;
     [SerializeField] private int _chestItemID;
 
-
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -27,8 +26,7 @@ public class ChestItem : ChestBase
 
         if (_chestItem == ItemType.Gold)
         {
-            // 마지막 150 부분에 골드량을 조절할 수 있게 변경하면 될듯
-            ItemManager.Instance.AddItem(_chestItem, _chestItemID, 150);
+            ItemManager.Instance.AddItem(_chestItem, _chestItemID, _chestGold);
         }
         else
         {
@@ -38,6 +36,7 @@ public class ChestItem : ChestBase
 
     protected override void ChestText()
     {
+        base.ChestText();
         if (_chestItem == ItemType.Gold)
         {
             _chestText.text = "You got " + _chestGold + " Gold";
@@ -48,6 +47,5 @@ public class ChestItem : ChestBase
             string _chestItemName = _chestItemData.Name;
             _chestText.text = "You got " + _chestItemName;
         }
-        _panel.SetActive(true);
     }
 }
