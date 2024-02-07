@@ -27,7 +27,7 @@ public class TeleportTrap : MonoBehaviour
 
     private void OpenTrapText()
     {
-        _teleportText = UIManager.Instance.GetUI(PopupType.Chest).GetComponentInChildren<TextMeshProUGUI>();
+        _teleportText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
         
         if (this.CompareTag("Mimic"))
         {
@@ -47,13 +47,13 @@ public class TeleportTrap : MonoBehaviour
         {
             _teleportText.text = "You are fallen. Try again";
         }
-        UIManager.Instance.OpenPopupUI(PopupType.Chest);
+        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         StartCoroutine(DeactiveText(2));
     }
 
     private IEnumerator DeactiveText(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        UIManager.Instance.ClosePopupUI(PopupType.Chest);
+        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
     }
 }

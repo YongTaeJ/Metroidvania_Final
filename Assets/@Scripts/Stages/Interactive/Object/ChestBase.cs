@@ -45,7 +45,7 @@ public class ChestBase : MonoBehaviour
     protected virtual void OpenChest()
     {
         ChestText();
-        UIManager.Instance.OpenPopupUI(PopupType.Chest);
+        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
 
         // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
@@ -60,13 +60,13 @@ public class ChestBase : MonoBehaviour
     private IEnumerator CoChestTextOff()
     {
         yield return new WaitForSeconds(0.7f);
-        UIManager.Instance.ClosePopupUI(PopupType.Chest);
+        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
         GameObject.Destroy(gameObject);
     }
 
     protected virtual void ChestText()
     {
-        _chestText = UIManager.Instance.GetUI(PopupType.Chest).GetComponentInChildren<TextMeshProUGUI>();
+        _chestText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
         _chestText.text = "You opened chest\n\r" + "but, nothing in the chest";
     }
 }
