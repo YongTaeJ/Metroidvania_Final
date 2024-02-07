@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ConstructInformPanel : MonoBehaviour
@@ -31,8 +32,27 @@ public class ConstructInformPanel : MonoBehaviour
         _constructButton.Initialize();
     }
 
-    public void SetInformPanel()
+    public void SetInformPanel(int ID)
     {
+        var data = ItemManager.Instance.GetItemData(ItemType.Building, ID);
+        var sprite = ItemManager.Instance.GetSprite(ItemType.Building, ID);
+        var SO = BuildingSOManager.Instance.GetSO(ID);
+ 
 
+        _buildingImage.sprite = sprite;
+        _nameText.text = data.Name;
+        // TODO =>
+        // _conditionText.text = ;
+        _descriptionText.text = SO.ConstructDescription;
+        // _materialText.text = ;
+
+        if(SO.IsBuildable())
+        {
+            _constructButton.Enable(ID);
+        }
+        else
+        {
+            _constructButton.Disable();
+        }
     }
 }

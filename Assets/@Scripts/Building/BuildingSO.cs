@@ -16,9 +16,34 @@ public class BuildingSO : ScriptableObject
 
     public int ID => _ID;
     public string ConstructName => _constructName;
+    public string ConstructDescription => _constructDescription;
     public List<RequiredCondition> RequiredConditions => _requiredConditions;
     public List<RequiredMaterial> RequiredMaterials => _requiredMaterials;
     public List<StatElement> StatElements => _statElements;
+
+    public bool IsBuildable()
+    {
+        int curStock;
+
+        // TODO => Foreach 요소들이 초기화되는지 검증 안됨
+
+        foreach(var required in RequiredMaterials)
+        {
+            curStock = ItemManager.Instance.GetItemStock(ItemType.Material, required.ID);
+            if(curStock < required.Stock)
+            {
+                return false;
+            }
+        }
+
+        foreach(var required in RequiredConditions)
+        {
+            if(!ItemManager.Instance.HasItem(required.itemType, required.ID))
+                return false;
+        }
+
+        return true;
+    }
 }
 
 [Serializable]
