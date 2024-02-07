@@ -11,9 +11,6 @@ public class TeleportTrap : MonoBehaviour
     // 플레이어가 닿는 순간 해당하는 위치로 순간이동 시키기
     // 만약 필요하면 지금처럼 UI에 텍스트 표시해주기 유지
 
-    [SerializeField]
-    private GameObject _panel;
-    [SerializeField]
     private TextMeshProUGUI _teleportText;
     [SerializeField]
     private Vector3 _teleportPosition;
@@ -24,61 +21,39 @@ public class TeleportTrap : MonoBehaviour
         {
             collision.transform.position = _teleportPosition;
             GameManager.Instance.player.GetDamaged(2, transform);
-
-            if (this.CompareTag("Mimic"))
-            {
-                MimicText();
-            }
-
-            else if (this.CompareTag("Challenge"))
-            {
-                ChallengeText();
-            }
-
-            else if (this.CompareTag("TownPortal"))
-            {
-                TownPortalText();
-            }
-            else
-            {
-                FallText();
-            }
+            OpenTrapText();
         }
     }
 
-    private void MimicText()
+    private void OpenTrapText()
     {
-        _teleportText.text = "You just Actived Trap Card";
-        _panel.SetActive(true);
+        _teleportText = UIManager.Instance.GetUI(PopupType.Chest).GetComponentInChildren<TextMeshProUGUI>();
+        
+        if (this.CompareTag("Mimic"))
+        {
+            _teleportText.text = "You just Actived Trap Card";
+        }
 
+        else if (this.CompareTag("Challenge"))
+        {
+            _teleportText.text = "You are not prepared!";
+        }
+
+        else if (this.CompareTag("TownPortal"))
+        {
+            _teleportText.text = "You enter dungeon";
+        }
+        else
+        {
+            _teleportText.text = "You are fallen. Try again";
+        }
+        UIManager.Instance.OpenPopupUI(PopupType.Chest);
         StartCoroutine(DeactiveText(2));
-    }
-    private void ChallengeText()
-    {
-        _teleportText.text = "You are not prepared!";
-        _panel.SetActive(true);
-
-        StartCoroutine(DeactiveText(2));
-    }
-
-    private void FallText()
-    {
-        _teleportText.text = "You are fallen. Try again";
-        _panel.SetActive(true);
-
-        StartCoroutine(DeactiveText(2));
-    }
-    private void TownPortalText()
-    {
-        _teleportText.text = "You enter dungeon";
-        _panel.SetActive(true);
-
-        StartCoroutine(DeactiveText(4));
     }
 
     private IEnumerator DeactiveText(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        _panel.SetActive(false);
+        UIManager.Instance.ClosePopupUI(PopupType.Chest);
     }
 }

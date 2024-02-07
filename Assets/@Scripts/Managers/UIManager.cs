@@ -15,7 +15,6 @@ public enum PopupType
     Pause,
     Interact,
     GameOver,
-    Sign
 }
 
 public enum DisposableType

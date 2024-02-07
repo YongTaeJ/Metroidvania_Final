@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7662088715040865257}
   - component: {fileID: 8806607463577555199}
-  - component: {fileID: 2657554716452182169}
   - component: {fileID: 7535140018673250326}
+  - component: {fileID: 289805718287703102}
   m_Layer: 0
   m_Name: SignOverlay
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8806607463577555199
 SpriteRenderer:
@@ -86,21 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2657554716452182169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460545204874173799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 227e9626e270645459c25896cdc9ae2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _panel: {fileID: 0}
-  _signText: {fileID: 0}
-  SignId: Sign00
 --- !u!61 &7535140018673250326
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,3 +131,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 2.05}
   m_EdgeRadius: 0
+--- !u!114 &289805718287703102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460545204874173799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d78021d295de94492899b80f5ea8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _signText: {fileID: 0}
+  _signID: Sign00
