@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class Skill_SwordAurorObject : MonoBehaviour
 {
-    private int _damage = 50;
+    private int _damage = 5;
+    private GameObject swordAurorEffectPrefab;
 
-    void Start()
+    private void Awake()
+    {
+        swordAurorEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/SwordAurorEffect");
+    }
+    private void Start()
     {
         StartCoroutine(DestroySwordAurorObject());
     }
@@ -30,11 +35,20 @@ public class Skill_SwordAurorObject : MonoBehaviour
             collision.GetComponent<IDamagable>().GetDamaged(_damage, collision.transform);
 
             Vector2 attackPoint = collision.ClosestPoint(transform.position);
+            Vector2 direction = attackPoint - (Vector2)transform.position;
 
-            //너무 긴데 이걸 매니져로 만들어서 여러개 관리하는게 효율적인가?
-            GameObject attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect");
-            GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
-            attackEffect.transform.position = attackPoint;
+            Vector2 offset = new Vector2(2f, 0f);
+            if (direction.x < 0)
+            {
+                offset.x *= -1;
+            }
+
+            Vector2 point = attackPoint + offset;
+
+            GameObject swordAurorEffect = PoolManager.Instance.Pop(swordAurorEffectPrefab);
+            swordAurorEffect.transform.position = point;
+
+            swordAurorEffect.transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
         }
     }
 }

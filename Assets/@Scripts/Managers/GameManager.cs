@@ -10,7 +10,6 @@ public class GameManager : Singleton<GameManager>
 
     public override bool Initialize()
     {
-  
         return base.Initialize();
     }
 }
