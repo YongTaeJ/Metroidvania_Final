@@ -24,6 +24,30 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    public bool IsFacingRight
+    {
+        get
+        {
+            return _isFacingRight;
+        }
+        private set
+        {
+            _isFacingRight = value;
+        }
+    }
+
+    public bool IsAttacking
+    {
+        get
+        {
+            return _isAttacking;
+        }
+        private set
+        {
+            _isAttacking = value;
+            _animator.SetBool(AnimatorHash.IsAttacking, value);
+        }
+    }
     #endregion
 
     #region Fileds
@@ -38,6 +62,7 @@ public class PlayerInputController : MonoBehaviour
 
     private bool _isWalking = false;
     private bool _isAttacking = false;
+    private bool _isFirstAttack = true;
 
     //Jump
     private float _jumpPower = 20f;
@@ -246,14 +271,41 @@ public class PlayerInputController : MonoBehaviour
         _isWallJumping = false;
     }
 
+    //임시
+    private GameObject attackEffectPrefab;
+    private GameObject attackEffect2Profab;
+
     public void Attack(InputAction.CallbackContext context)
     {
         if (enabled)
         {
-            if (context.performed && _isAttacking == false)
+            if (context.performed && !IsAttacking)
             {
-                _isAttacking = true;
-                _animator.SetTrigger(AnimatorHash.Attack);
+                IsAttacking = true;
+                if (_isFirstAttack)
+                {
+                    _animator.SetTrigger(AnimatorHash.Attack);
+                    attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp");
+                    GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
+
+                  
+
+                    attackEffect.transform.SetParent(transform);
+                    attackEffect.transform.position = transform.position;
+                    _isFirstAttack = false;
+                }
+                else if (!_isFirstAttack)
+                {
+                    _animator.SetTrigger(AnimatorHash.Attack2);
+                    attackEffect2Profab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp_2");
+                    GameObject attackEffect2 = PoolManager.Instance.Pop(attackEffect2Profab);
+
+                  
+
+                    attackEffect2.transform.SetParent(transform);
+                    attackEffect2.transform.position = transform.position;
+                    _isFirstAttack = true;
+                }
                 StartCoroutine(ResetAttackAnimation());
             }
         }
@@ -262,8 +314,8 @@ public class PlayerInputController : MonoBehaviour
     // TODO 리펙토링 필요해 보임
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(0.5f);
-        _isAttacking = false;
+        yield return new WaitForSeconds(0.2f);
+        IsAttacking = false;
     }
 
     public void Dash(InputAction.CallbackContext context)
