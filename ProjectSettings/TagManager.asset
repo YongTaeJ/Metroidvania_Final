@@ -10,6 +10,7 @@ TagManager:
   - Challenge
   - Ground
   - TownPortal
+  - SwordAuror
   layers:
   - Default
   - TransparentFX
