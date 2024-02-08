@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusInformPanel : MonoBehaviour
+public class StatusInformPanel : MonoBehaviour, IInformable
 {
     private Image _itemImage;
     private TextMeshProUGUI _itemName;
@@ -22,7 +22,7 @@ public class StatusInformPanel : MonoBehaviour
         _stock = transform.Find("Stock").GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetInform(Item item)
+    public void SetInformPanel(Item item)
     {
         _itemImage.gameObject.SetActive(true);
         _itemImage.sprite = ItemManager.Instance.GetSprite(item.ItemData.Name);

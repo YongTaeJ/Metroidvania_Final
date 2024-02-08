@@ -7,13 +7,15 @@ public class ConstructButton : MonoBehaviour
     private int _currentID;
     private Button _button;
     private GameObject _YNPanel;
+    private ConstructUI _constructUI;
     #endregion
 
-    public void Initialize()
+    public void Initialize(ConstructUI constructUI)
     {
         _button = GetComponent<Button>();
         _YNPanel = Resources.Load<GameObject>("UI/ConstructYNPanel");
 
+        _constructUI = constructUI;
         _button.onClick.AddListener(OnPopupYN);
     }
 
@@ -32,5 +34,6 @@ public class ConstructButton : MonoBehaviour
     {
         ConstructYNPanel YNPanel = Instantiate(_YNPanel, UIManager.Instance.TempUI).GetComponent<ConstructYNPanel>();
         YNPanel.Initialize(_currentID);
+        YNPanel.InitAction(_constructUI);
     }
 }
