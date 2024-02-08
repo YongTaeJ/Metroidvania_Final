@@ -9,7 +9,7 @@ public class WallSkill : WallBase
 
     protected override void WallReact(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerSkill"))
+        if (collision.CompareTag("SwordAuror"))
         {
             _wallHP--;
 

@@ -18,9 +18,12 @@ public class MapManager : Singleton<MapManager>
 
         CloseLargeMap();
         this.GetComponent<PlayerInput>().enabled = false;
+        _mapCamera = GetComponentInChildren<Camera>();
+
+        // 이거 두개는 묶어서 포탈 쪽으로 넘기기
         _worldMapUI.SetActive(false);
         _loadingImage.SetActive(false);
-        _mapCamera = GetComponentInChildren<Camera>();
+
     }
 
     private void Update()
@@ -42,7 +45,9 @@ public class MapManager : Singleton<MapManager>
     {
         _worldMap.SetActive(true);
         IsWorldMapOpen = true;
-        StopTime();
+        Time.timeScale = 0;
+
+        // 아래의 기능은 맵과 포탈 둘다 사용할 기능
 
         if (GameManager.Instance.player != null)
         {
@@ -51,7 +56,8 @@ public class MapManager : Singleton<MapManager>
             this.GetComponent<PlayerInput>().enabled = true;
             Vector3 _playerPosition = GameManager.Instance.player.transform.position;
             moveMapCamera(_playerPosition);
-            _worldMapUI.SetActive(true);
+
+            //_worldMapUI.SetActive(true);
         }
     }
 
@@ -60,7 +66,7 @@ public class MapManager : Singleton<MapManager>
         _worldMap.SetActive(false);
         _worldMapUI.SetActive(false);
         IsWorldMapOpen = false;
-        ResumeTime();
+        Time.timeScale = 1.0f;
 
         if (GameManager.Instance.player != null)
         {
@@ -69,27 +75,12 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    /// <summary>
-    /// 시간을 정지하는 기능 - 일시정지 기능을 만들면 그 것을 사용하고
-    /// 이 기능은 그것을 상속받아서 사용하거나 같으면 참조해서 사용하게
-    /// </summary>
-    private void StopTime()
-    {
-        Time.timeScale = 0;
-        //AudioListener.pause = true;  // 사운드효과 사용시
-    }
-
-    private void ResumeTime()
-    {
-        Time.timeScale = 1.0f;
-        //AudioListener.pause = false; // 사운드효과 사용시
-    }
-
     public void moveMapCamera(Vector3 position)
     {
         _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
     }
 
+    // 이건 포탈 쪽으로 넘어갈 예정
     public void LoadingImage(bool isActive)
     {
         _loadingImage.SetActive(isActive);

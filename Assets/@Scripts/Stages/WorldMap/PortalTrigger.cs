@@ -50,7 +50,6 @@ public class PortalTrigger : MonoBehaviour
         if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
         {
             MapManager.Instance.OpenLargeMap();
-            MapManager.Instance.moveMapCamera(new Vector3(290, -100, 0));
         }
         else
         {

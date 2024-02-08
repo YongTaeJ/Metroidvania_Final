@@ -13,7 +13,7 @@ public class MapControl : MonoBehaviour
     [SerializeField] private Camera _mapCamera;
 
     private Vector2 _mapMove;
-    private float _scrollSpeed = 0.1f;
+    private float _scrollSpeed = 0.5f;
 
 
     private void Update()
