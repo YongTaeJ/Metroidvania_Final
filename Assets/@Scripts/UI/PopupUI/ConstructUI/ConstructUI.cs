@@ -16,7 +16,7 @@ public class ConstructUI : MonoBehaviour
         InformPanel = GetComponentInChildren<ConstructInformPanel>();
         BuildingList = GetComponentInChildren<BuildingList>();
 
-        InformPanel.Initialize();
+        InformPanel.Initialize(this);
         BuildingList.Initialize(this);
     }
 }

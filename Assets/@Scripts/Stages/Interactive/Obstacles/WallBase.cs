@@ -11,7 +11,6 @@ public abstract class WallBase : MonoBehaviour
     }
     protected virtual void BreakWall()
     {
-        // 특정 조건에 따라서 작동하게
         GameObject.Destroy(this.gameObject);
     }
 

@@ -15,6 +15,6 @@ public class StatusInformContainer : MonoBehaviour
 
     public void SetItemInform(Item item)
     {
-        _informPanels.SetInform(item);
+        _informPanels.SetInformPanel(item);
     }
 }
