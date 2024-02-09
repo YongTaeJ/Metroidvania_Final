@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using UnityEngine;
+
+public class SOManager : Singleton<SOManager>
+{
+    private Dictionary<int, BuildingSO> _BuildingSODict = new Dictionary<int, BuildingSO>();
+    private Dictionary<int, MerchantSO> _MerchantSODict = new Dictionary<int, MerchantSO>();
+    private const string DefaultPath = "Items/SO/";
+
+    public override bool Initialize()
+    {
+        if(base.Initialize())
+        {
+            InitSODatas("Buildings", _BuildingSODict);
+            InitSODatas("Merchants", _MerchantSODict);
+        }
+        return true;
+    }
+
+    private void InitSODatas<T>(string leftPath, Dictionary<int, T> target) where T : ScriptableObject, IHasID
+    {
+        string SOPath = DefaultPath + leftPath;
+
+        var SOArr = Resources.LoadAll<T>(SOPath);
+        foreach(var SO in SOArr)
+        {
+            target.Add(SO.ID, SO);
+        }
+    }
+
+    public BuildingSO GetBuildingSO(int ID)
+    {
+        return _BuildingSODict[ID];
+    }
+
+    public MerchantSO GetMerchantSO(int ID)
+    {
+        return _MerchantSODict[ID];
+    }
+}

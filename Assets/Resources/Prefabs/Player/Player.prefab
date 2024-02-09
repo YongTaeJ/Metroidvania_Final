@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1687613479484836621
 Transform:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ Transform:
   m_Children:
   - {fileID: 1687613479484836621}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &8883361996984312801
 CapsuleCollider2D:
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e1b020cae2f254f81446939873e7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 1
+  _maxHp: 10
   _Hp: 0
   _damage: 5
   _animator: {fileID: 0}
@@ -636,7 +636,6 @@ MonoBehaviour:
     maxNormalAngle: 0
   groundDistance: 0.05
   wallDistance: 0.2
-  ceilingDistance: 0.05
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64

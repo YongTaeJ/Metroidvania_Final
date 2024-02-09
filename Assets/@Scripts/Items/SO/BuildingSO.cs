@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewBuilding", menuName = "Data/BuildingSO")]
-public class BuildingSO : ScriptableObject
+public class BuildingSO : ScriptableObject, IHasID
 {
     // 외부에서 아이템 존재 유무는 ItemManager를 통해 접근 가능
     // 해당 SO는 건축 조건과 강화 요소에 대한 접근
@@ -14,7 +14,7 @@ public class BuildingSO : ScriptableObject
     [SerializeField] private List<RequiredMaterial> _requiredMaterials;
     [SerializeField] private List<StatElement> _statElements;
 
-    public int ID => _ID;
+    public int ID { get {return _ID;} set { } }
     public string ConstructName => _constructName;
     public string ConstructDescription => _constructDescription;
     public List<RequiredCondition> RequiredConditions => _requiredConditions;
@@ -23,10 +23,12 @@ public class BuildingSO : ScriptableObject
 
     public bool IsBuildable()
     {
+        return MaterialTest() && ConditionTest();
+    }
+
+    public bool MaterialTest()
+    {
         int curStock;
-
-        // TODO => Foreach 요소들이 초기화되는지 검증 안됨
-
         foreach(var required in RequiredMaterials)
         {
             curStock = ItemManager.Instance.GetItemStock(ItemType.Material, required.ID);
@@ -36,6 +38,11 @@ public class BuildingSO : ScriptableObject
             }
         }
 
+        return true;
+    }
+
+    public bool ConditionTest()
+    {
         foreach(var required in RequiredConditions)
         {
             if(!ItemManager.Instance.HasItem(required.itemType, required.ID))

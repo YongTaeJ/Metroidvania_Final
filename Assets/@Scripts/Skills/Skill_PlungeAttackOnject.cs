@@ -5,11 +5,11 @@ using UnityEngine;
 public class Skill_PlungeAttackOnject : MonoBehaviour
 {
     private int _damage = 50;
-    private GameObject plungeAttackEffectPreFab;
+    private GameObject attackEffectPreFab;
 
     private void Awake()
     {
-        plungeAttackEffectPreFab = Resources.Load<GameObject>("Prefabs/Effects/PlungeAttackEffect");
+        attackEffectPreFab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect");
     }
 
     private void Start()
@@ -36,19 +36,10 @@ public class Skill_PlungeAttackOnject : MonoBehaviour
 
             Vector2 attackPoint = collision.ClosestPoint(transform.position);
             Vector2 direction = attackPoint - (Vector2)transform.position;
+            GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPreFab);
+            attackEffect.transform.position = attackPoint;
 
-            Vector2 offset = new Vector2(1.5f, 0f);
-            if (direction.x < 0)
-            {
-                offset.x *= -1;
-            }
-
-            Vector2 point = attackPoint + offset;
-
-            GameObject plungeAttackEffect = PoolManager.Instance.Pop(plungeAttackEffectPreFab);
-            plungeAttackEffect.transform.position = point;
-
-            plungeAttackEffect.transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
+            attackEffect.transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
         }
     }
 }

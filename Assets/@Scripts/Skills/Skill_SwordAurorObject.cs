@@ -6,11 +6,11 @@ using UnityEngine;
 public class Skill_SwordAurorObject : MonoBehaviour
 {
     private int _damage = 5;
-    private GameObject swordAurorEffectPrefab;
+    private GameObject attackEffectPrefab;
 
     private void Awake()
     {
-        swordAurorEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/SwordAurorEffect");
+        attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect");
     }
     private void Start()
     {
@@ -36,19 +36,10 @@ public class Skill_SwordAurorObject : MonoBehaviour
 
             Vector2 attackPoint = collision.ClosestPoint(transform.position);
             Vector2 direction = attackPoint - (Vector2)transform.position;
+            GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
+            attackEffect.transform.position = attackPoint;
 
-            Vector2 offset = new Vector2(2f, 0f);
-            if (direction.x < 0)
-            {
-                offset.x *= -1;
-            }
-
-            Vector2 point = attackPoint + offset;
-
-            GameObject swordAurorEffect = PoolManager.Instance.Pop(swordAurorEffectPrefab);
-            swordAurorEffect.transform.position = point;
-
-            swordAurorEffect.transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
+            attackEffect.transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
         }
     }
 }

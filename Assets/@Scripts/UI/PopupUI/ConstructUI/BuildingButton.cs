@@ -14,7 +14,7 @@ public class BuildingButton : MonoBehaviour
     private Image _image;
     private Button _button;
     private int _ID;
-    private Action<int> _onButtonClick;
+    private Action<Item> _onButtonClick;
     #endregion
 
     public void Initialize(int ID)
@@ -40,7 +40,7 @@ public class BuildingButton : MonoBehaviour
 
     private void InitDatas(int ID)
     {
-        var SO = BuildingSOManager.Instance.GetSO(ID);
+        var SO = SOManager.Instance.GetBuildingSO(ID);
         Sprite sprite = ItemManager.Instance.GetSprite(ItemType.Building, ID);
         _nameText.text = SO.ConstructName;
 
@@ -71,7 +71,8 @@ public class BuildingButton : MonoBehaviour
 
     private void OnBuildingInform()
     {
-        _onButtonClick.Invoke(_ID);
+        var item = ItemManager.Instance.GetItemDict(ItemType.Building)[_ID];
+        _onButtonClick.Invoke(item);
     }
 
     public bool IsValidButton()
