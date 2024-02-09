@@ -75,6 +75,11 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+
+    /// <summary>
+    /// 맵 이동 시에 카메라 위치를 보정해주는 함수입니다.
+    /// </summary>
+    /// <param name="position"></param>
     public void moveMapCamera(Vector3 position)
     {
         _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
