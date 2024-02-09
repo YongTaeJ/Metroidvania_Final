@@ -36,14 +36,14 @@ public class MapControl : MonoBehaviour
     {
         if (enabled && context.performed && _mapCamera.orthographicSize >= 15)
         {
-            _mapCamera.orthographicSize -= 3;
+            _mapCamera.orthographicSize -= 4;
         }
     }
     public void MapReduce(InputAction.CallbackContext context)
     {
         if (enabled && context.performed && _mapCamera.orthographicSize <= 35)
         {
-            _mapCamera.orthographicSize += 3;
+            _mapCamera.orthographicSize += 4;
         }
     }
 }

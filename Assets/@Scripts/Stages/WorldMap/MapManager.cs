@@ -10,6 +10,8 @@ public class MapManager : Singleton<MapManager>
     public GameObject _loadingImage;
     private Camera _mapCamera;
 
+    public MapData _mapData;
+
     public bool IsWorldMapOpen { get; private set; }
 
     protected override void Awake()
@@ -17,8 +19,9 @@ public class MapManager : Singleton<MapManager>
         base.Awake();
 
         CloseLargeMap();
-        this.GetComponent<PlayerInput>().enabled = false;
+        _mapData = GetComponent<MapData>();
         _mapCamera = GetComponentInChildren<Camera>();
+        this.GetComponent<PlayerInput>().enabled = false;
 
         // 이거 두개는 묶어서 포탈 쪽으로 넘기기
         _worldMapUI.SetActive(false);
@@ -32,6 +35,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (!IsWorldMapOpen)
             {
+                _mapData.UpdateMapData();
                 OpenLargeMap();
             }
             else
