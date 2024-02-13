@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class SOManager : Singleton<SOManager>
 {
-    private Dictionary<int, BuildingSO> _BuildingSODict = new Dictionary<int, BuildingSO>();
-    private Dictionary<int, MerchantSO> _MerchantSODict = new Dictionary<int, MerchantSO>();
+    private Dictionary<int, BuildingSO> _buildingSODict = new Dictionary<int, BuildingSO>();
+    private Dictionary<int, MerchantSO> _merchantSODict = new Dictionary<int, MerchantSO>();
+    private Dictionary<int, QuestSO> _questSODict = new Dictionary<int, QuestSO>();
     private const string DefaultPath = "Items/SO/";
 
     public override bool Initialize()
     {
         if(base.Initialize())
         {
-            InitSODatas("Buildings", _BuildingSODict);
-            InitSODatas("Merchants", _MerchantSODict);
+            InitSODatas("Buildings", _buildingSODict);
+            InitSODatas("Merchants", _merchantSODict);
+            InitSODatas("Quests", _questSODict);
         }
         return true;
     }
@@ -32,11 +34,16 @@ public class SOManager : Singleton<SOManager>
 
     public BuildingSO GetBuildingSO(int ID)
     {
-        return _BuildingSODict[ID];
+        return _buildingSODict[ID];
     }
 
     public MerchantSO GetMerchantSO(int ID)
     {
-        return _MerchantSODict[ID];
+        return _merchantSODict[ID];
+    }
+
+    public QuestSO GetQuestSO(int ID)
+    {
+        return _questSODict[ID];
     }
 }

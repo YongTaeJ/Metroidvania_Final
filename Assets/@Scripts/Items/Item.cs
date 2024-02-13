@@ -13,7 +13,8 @@ public enum ItemType
     Map,
     Skill,
     Building,
-    Portal
+    Portal,
+    Quest
 }
 
 public class Item
@@ -43,7 +44,8 @@ public class ItemData
     public string Description { get; set; }
 }
 
-public class SavedItemData
+[Serializable]
+public class InternalItemData
 {
     public ItemType ItemType;
     public int ID;

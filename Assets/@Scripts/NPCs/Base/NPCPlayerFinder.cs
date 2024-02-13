@@ -5,16 +5,19 @@ using UnityEngine.InputSystem;
 public class NPCPlayerFinder : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private int ChatID;
-    private Transform _playerTransform;
-    private PlayerInput _playerInput;
-    private ObjectFlip _objectFlip;
+    private NPCInteraction _interaction;
+    public Transform _playerTransform {get; private set;}
+    public PlayerInput _playerInput {get; private set;}
+    public ObjectFlip _objectFlip {get; private set;}
+
     #endregion
 
-    public void Initialize(ObjectFlip objectFlip)
+    private void Awake()
     {
-        _objectFlip = objectFlip;
+        _objectFlip = new ObjectFlip(transform);
+        _interaction = GetComponent<NPCInteraction>();
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
@@ -40,21 +43,8 @@ public class NPCPlayerFinder : MonoBehaviour
 
     private void StartConversation()
     {
-        StopAllCoroutines();
-        StartCoroutine(Conversation());
-    }
-
-    private IEnumerator Conversation()
-    {
-        float direction =
-        _playerTransform.position.x - transform.position.x > 0 ?
-        1 : -1;
-        _objectFlip.Flip(direction);
-
-        _playerInput.enabled = false;
-
-        yield return StartCoroutine(ChatManager.Instance.StartChatting(ChatID));
-
-        _playerInput.enabled = true;
+        float xDir = transform.position.x - _playerTransform.position.x;
+        _objectFlip.Flip(xDir);
+        StartCoroutine(_interaction.Interact(_playerInput));
     }
 }

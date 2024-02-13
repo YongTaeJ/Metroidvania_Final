@@ -149,6 +149,42 @@
       "ID": "6",
       "Name": "GG",
       "Description": "GG22"
+    },
+    {
+      "ItemType": "Quest",
+      "ID": "0",
+      "Name": "TestQuest",
+      "Description": "시험용 퀘스트."
+    },
+    {
+      "ItemType": "NPC",
+      "ID": "0",
+      "Name": "Villager1",
+      "Description": "일반 대화 확인용"
+    },
+    {
+      "ItemType": "NPC",
+      "ID": "1",
+      "Name": "Constructor",
+      "Description": "건축 UI 확인용"
+    },
+    {
+      "ItemType": "NPC",
+      "ID": "2",
+      "Name": "Merchant",
+      "Description": "상점 UI 확인용"
+    },
+    {
+      "ItemType": "NPC",
+      "ID": "3",
+      "Name": "Villager2",
+      "Description": "퀘스트 확인용"
+    },
+    {
+      "ItemType": "NPC",
+      "ID": "4",
+      "Name": "VillageHead",
+      "Description": "정신차린 촌장님"
     }
   ]
 }

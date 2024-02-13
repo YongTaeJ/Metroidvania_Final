@@ -15,7 +15,8 @@ public enum PopupType
     Pause,
     Interact,
     GameOver,
-    Construct
+    Construct,
+    Shop
 }
 
 public enum DisposableType
@@ -143,6 +144,8 @@ public class UIManager : Singleton<UIManager>
 
     public void ClosePopupUI(PopupType popupType)
     {
+        if(_popupUIElements[popupType] == null) return;
+        
         _popupUIElements[popupType].SetActive(false);
     }
 
@@ -162,5 +165,10 @@ public class UIManager : Singleton<UIManager>
         {
             UI.SetActive(isActive);
         }
+    }
+
+    public void OpenShopUI(int ID)
+    {
+        GetUI(PopupType.Shop).GetComponent<ShopUI>().OpenUI(ID);
     }
 }
