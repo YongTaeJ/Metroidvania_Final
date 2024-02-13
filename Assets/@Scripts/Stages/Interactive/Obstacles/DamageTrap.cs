@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class DamageTrap : MonoBehaviour
 {
+    [SerializeField] private int _trapDamage;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<IDamagable>().GetDamaged(1, transform);
+            collision.GetComponent<IDamagable>().GetDamaged(_trapDamage, transform);
         }
     }
 }
