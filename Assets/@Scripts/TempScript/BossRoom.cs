@@ -24,7 +24,7 @@ public class BossRoom : MonoBehaviour
 
     private IEnumerator BossBattle()
     {
-        var inputSystem = GameManager.Instance.player.GetComponent<PlayerInput>();
+        var inputSystem = GameManager.Instance.player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
         var inputSystem2 = GameManager.Instance.player.GetComponent<PlayerInputController>();
         inputSystem.enabled = false;
 
@@ -39,7 +39,8 @@ public class BossRoom : MonoBehaviour
         _VHEntrySet.Jump();
         yield return new WaitForSeconds(2.5f);
 
-        yield return StartCoroutine(ChatManager.Instance.StartChatting(_chatID));
+        // TODO => 채팅 관련 기능 수정 필요
+        // yield return StartCoroutine(ChatManager.Instance.StartChatting(_chatID));
 
         _VHEntrySet.Taunt();
         yield return new WaitForSeconds(1.2f);

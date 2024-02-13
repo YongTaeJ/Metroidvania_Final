@@ -5,13 +5,12 @@ using Newtonsoft.Json;
 
 public class ChatManager : Singleton<ChatManager>
 {
-    private ChatBoxUI _chatBoxUI;
-    private List<List<(string, string)>> _chatDataList;
-
+    #region variables
+    private Dictionary<int, List<(string, string)>> _chatDataList;
+    #endregion
 
     public override bool Initialize()
     {
-        _chatBoxUI = UIManager.Instance.GetUI(PopupType.ChatBox).GetComponent<ChatBoxUI>();
         GetDataFromResource();
 
         return base.Initialize();
@@ -22,26 +21,22 @@ public class ChatManager : Singleton<ChatManager>
         TextAsset chatData_Json = Resources.Load<TextAsset>("Json/ChatData");
         ChatData[] _chatDatas = JsonConvert.DeserializeObject<ChatDataContainer>(chatData_Json.ToString()).ChatDatas;
 
-        _chatDataList = new List<List<(string, string)>>();
+        _chatDataList = new Dictionary<int, List<(string, string)>>();
 
-        // 데이터 규칙 : ID 하나당 하나의 대화를 이룰 것. 동일한 ID에서는 위에서 아래로 대화 진행.
-        int currentIndex = -1;
         foreach(var data in _chatDatas)
         {
-            if(_chatDataList.Count - 1 != data.ChatID)
+            if(!_chatDataList.ContainsKey(data.ChatID))
             {
-                _chatDataList.Add(new List<(string, string)>());
-                currentIndex++;
+                _chatDataList.Add(data.ChatID, new List<(string, string)>());
             }
-            _chatDataList[currentIndex].Add((data.Name, data.Chat));
+            _chatDataList[data.ChatID].Add((data.Name, data.Chat));
         }
     }
 
-    public IEnumerator StartChatting(int ID)
+    public List<(string, string)> GetChatData(int ID)
     {
-        yield return StartCoroutine(_chatBoxUI.StartChatting(_chatDataList[ID]));
+        return _chatDataList[ID];
     }
-
 }
 
 public class ChatDataContainer

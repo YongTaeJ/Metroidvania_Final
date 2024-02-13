@@ -13,14 +13,14 @@ public class QuantitySetter : MonoBehaviour
 
     public void Initialize()
     {
-        _quantity = 0;
-
         InitComponents();
-        SetQuantity(1);
+        ResetQuantity();
     }
 
     private void InitComponents()
     {
+        _quantityText = transform.Find("QuantityText").GetComponent<TMP_Text>();
+
         Button _minus5Button = transform.Find("-5Button").GetComponent<Button>();
         Button _minus1Button = transform.Find("-1Button").GetComponent<Button>();
         Button _plus5Button = transform.Find("+5Button").GetComponent<Button>();
@@ -36,7 +36,7 @@ public class QuantitySetter : MonoBehaviour
     {
         int curValue = _quantity + value;
 
-        if(curValue < 0)
+        if(curValue <= 0)
         {
             _quantity = 99;
         }
@@ -55,6 +55,12 @@ public class QuantitySetter : MonoBehaviour
     public int GetQuantity()
     {
         return int.Parse(_quantityText.text);
+    }
+
+    public void ResetQuantity()
+    {
+        _quantity = 1;
+        _quantityText.text = _quantity.ToString();
     }
 
 

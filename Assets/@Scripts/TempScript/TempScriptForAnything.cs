@@ -5,14 +5,6 @@ using UnityEngine;
 public class TempScriptForAnything : MonoBehaviour
 {
     int ID = 0;
-
-    private void Awake()
-    {
-        GameObject targetObj = Resources.Load<GameObject>("Enemies/Bosses/Boss_VillageHead");
-        Instantiate(targetObj, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-
     public void AddddddddddMoney()
     {
         ItemManager.Instance.AddItem(ItemType.Gold, 0, 10);
@@ -21,6 +13,15 @@ public class TempScriptForAnything : MonoBehaviour
 
     public void chattest()
     {
-        ChatManager.Instance.StartChatting(ID++);
+    }
+
+    public void OpenShop()
+    {
+        UIManager.Instance.OpenShopUI(0);
+    }
+
+    public void OpenStatus()
+    {
+        UIManager.Instance.OpenPopupUI(PopupType.Status);
     }
 }

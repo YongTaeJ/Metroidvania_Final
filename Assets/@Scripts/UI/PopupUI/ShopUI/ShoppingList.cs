@@ -8,12 +8,34 @@ public class ShoppingList : MonoBehaviour
     private Transform _contentContainer;
     private List<GoodsButton> _buttons;
 
-    public void Initialize()
+    public void Initialize(BuyPopup popup)
     {
         _button = Resources.Load<GameObject>("UI/GoodsButton");
         _buttons = new List<GoodsButton>();
-        _contentContainer = transform.Find("Viewport/Content");
+        _contentContainer = transform.Find("Viewport/Content");        
 
-        // TODO => 상점 리스트에 맞는 아이템 생성
+        for(int i = 0; i < 10; i++)
+        {
+            var button = Instantiate(_button , _contentContainer).GetComponent<GoodsButton>();
+            button.Initialize(popup);
+            _buttons.Add(button);
+        }
+    }
+
+    public void SetMerchantData(int ID)
+    {
+        var dat = SOManager.Instance.GetMerchantSO(ID);
+        int index = 0;
+
+        foreach(var button in _buttons)
+        {
+            button.gameObject.SetActive(false);
+        }
+
+        foreach(var data in dat.GoodsList)
+        {
+            _buttons[index].SetGoodsData(data);
+            index++;
+        }
     }
 }

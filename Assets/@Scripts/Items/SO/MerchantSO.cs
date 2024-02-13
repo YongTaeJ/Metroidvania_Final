@@ -7,16 +7,8 @@ using UnityEngine;
 public class MerchantSO : ScriptableObject, IHasID
 {
     [SerializeField] private int _ID;
-    [SerializeField] private List<Goods> _goodsList;
+    [SerializeField] private List<InternalItemData> _goodsList;
 
     public int ID { get {return _ID;} set { } }
-    public List<Goods> GoodsList => _goodsList;
-}
-
-[Serializable]
-public struct Goods
-{
-    public ItemType ItemType;
-    public int ID;
-    public int Cost;
+    public List<InternalItemData> GoodsList => _goodsList;
 }
