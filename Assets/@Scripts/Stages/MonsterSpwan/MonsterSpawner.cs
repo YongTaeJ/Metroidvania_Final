@@ -38,7 +38,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (var position in spawnInfo.spawnPositions)
             {
-                GameObject _spawnedMonster = Instantiate(spawnInfo.monsterPrefab, position, Quaternion.identity, _enemiesParent);
+                GameObject _spawnedMonster = Instantiate(spawnInfo.monsterPrefab, position, spawnInfo.monsterPrefab.transform.rotation, _enemiesParent);
                 _spawnedMonsters.Add(_spawnedMonster);
             }
         }
@@ -56,13 +56,13 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
-    private void OldData()
-    {
-        // 리스트를 이용한 SpawnMonster 함수
-        GameObject selectedMonster = _monsterPrefabs[0];
-        GameObject spawnedMonster = Instantiate(selectedMonster, _enemiesParent);
-        spawnedMonster.transform.localPosition = new Vector3(30, 4, 0);
-        _spawnedMonsters.Add(spawnedMonster);
+    //private void OldData()
+    //{
+    //    // 리스트를 이용한 SpawnMonster 함수
+    //    GameObject selectedMonster = _monsterPrefabs[0];
+    //    GameObject spawnedMonster = Instantiate(selectedMonster, _enemiesParent);
+    //    spawnedMonster.transform.localPosition = new Vector3(30, 4, 0);
+    //    _spawnedMonsters.Add(spawnedMonster);
 
-    }
+    //}
 }
