@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Skill_PlungeAttack : SkillBase
 {
     private GameObject _shockwavePrefab;
+    private CinemachineImpulseSource _impulseSource;
 
     public override void Initialize()
     {
         base.Initialize();
         Cooldown = 5f;
+        _impulseSource = new CinemachineImpulseSource();
     }
 
     public override bool Activate()

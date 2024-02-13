@@ -13,31 +13,31 @@ public class SkillBase : MonoBehaviour
 
     private float _cooldown;
 
-    // protected virtual void Update()
-    // {
-    //     if (_cooldown > 0)
-    //     {
-    //         _cooldown -= Time.deltaTime;
-    //         float fillAmount = _cooldown / 5f;
-    //         cooldownImage.fillAmount = fillAmount;
-    //         cooldownText.text = Mathf.CeilToInt(_cooldown).ToString();
-    //     }
-    //     else
-    //     {
-    //         cooldownImage.fillAmount = 0;
-    //         cooldownText.text = "0";
-    //         cooldownText.gameObject.SetActive(false);
-    //     }
-    // }
+    protected virtual void Update()
+    {
+        if (_cooldown > 0)
+        {
+            _cooldown -= Time.deltaTime;
+            float fillAmount = _cooldown / 5f;
+            cooldownImage.fillAmount = fillAmount;
+            cooldownText.text = Mathf.CeilToInt(_cooldown).ToString();
+        }
+        else
+        {
+            cooldownImage.fillAmount = 0;
+            cooldownText.text = "0";
+            cooldownText.gameObject.SetActive(false);
+        }
+    }
 
     public virtual void Initialize()
     {
- //       skillUI = GameObject.Find(GetType().Name);
-        // cooldownImage = skillUI.transform.Find("CooldownImage").GetComponent<Image>();
-        // cooldownText = skillUI.transform.Find("CooldownText").GetComponent<TextMeshProUGUI>();
-        // cooldownImage.fillAmount = 0;
-        // cooldownText.text = "0";
-        // cooldownText.gameObject.SetActive(false);
+        skillUI = GameObject.Find(GetType().Name);
+        cooldownImage = skillUI.transform.Find("CooldownImage").GetComponent<Image>();
+        cooldownText = skillUI.transform.Find("CooldownText").GetComponent<TextMeshProUGUI>();
+        cooldownImage.fillAmount = 0;
+        cooldownText.text = "0";
+        cooldownText.gameObject.SetActive(false);
     }
 
     public virtual bool Activate()
