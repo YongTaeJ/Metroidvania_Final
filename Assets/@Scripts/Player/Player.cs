@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class Player : MonoBehaviour, IDamagable
 {
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour, IDamagable
 
     private bool _isAlive = true;
 
+    private float _shakeForce = 1f;
+
     //Skill
     private List<SkillBase> _skills = new();
 
@@ -59,13 +62,14 @@ public class Player : MonoBehaviour, IDamagable
     public Rigidbody2D _rigidbody;
     public PlayerInputController _controller;
     private PlayerInput _playerInput;
-
+    private CinemachineImpulseSource _impulseSource;
     private void Awake()
     {
         _controller = GetComponent<PlayerInputController>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _playerInput = GetComponent<PlayerInput>();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
         _Hp = _maxHp;
         GameManager.Instance.player = this;
     }
@@ -101,7 +105,7 @@ public class Player : MonoBehaviour, IDamagable
             GameManager.Instance.player._Hp -= damage;
             StartCoroutine(ResetHurtAnimation());
             StartCoroutine(Knockback(target));
-
+            CameraShakeManager.Instance.CameraShake(_impulseSource, _shakeForce);
             if (GameManager.Instance.player._Hp <= 0)
             {
                 GameManager.Instance.player._Hp = 0;

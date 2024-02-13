@@ -56,13 +56,13 @@ public class PlayerInputController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private TouchingDirection _touchingDirection;
     private Player _player;
-    private bool _isFacingRight = true;
     private float _speed = 10f;
     private Vector2 _moveInput;
 
     private bool _isWalking = false;
     private bool _isAttacking = false;
     private bool _isFirstAttack = true;
+    private bool _isFacingRight = true;
 
     //Jump
     private float _jumpPower = 20f;
@@ -91,7 +91,7 @@ public class PlayerInputController : MonoBehaviour
     // WallJump
     private bool _isWallJumping;
     private float _wallJumpDirection;
-    private float _wallJumpTime = 0.3f;
+    private float _wallJumpTime = 0.25f;
     private float _wallJumpTimer;
     private Vector2 _wallJumpPower = new Vector2(5f, 15f);
 
@@ -108,6 +108,11 @@ public class PlayerInputController : MonoBehaviour
 
     public event Action OnInteraction;
 
+    //임시
+
+    private GameObject attackEffectPrefab;
+    private GameObject attackEffect2Prefab;
+    private GameObject wallSlideEffectPrefab;
     #endregion
 
     #region MonoBehaviour
@@ -231,6 +236,8 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    private bool isWallSlideEffect = false;
+
     private void WallSlide()
     {
         if (enabled)
@@ -239,11 +246,39 @@ public class PlayerInputController : MonoBehaviour
             {
                 IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
+                if (!isWallSlideEffect)
+                {
+                    isWallSlideEffect = true;
+                    StartCoroutine(WallSlideEffect());
+                }
             }
             else
             {
                 IsWallSliding = false;
+                isWallSlideEffect = false;
             }
+        }
+    }
+
+    private IEnumerator WallSlideEffect()
+    {
+        while (isWallSlideEffect == true)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            wallSlideEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/WallSlideEffect");
+            GameObject wallSlideEffect = PoolManager.Instance.Pop(wallSlideEffectPrefab);
+
+            float wallSlideDirection = IsFacingRight ? 0.25f : -0.25f;
+            Vector2 point = new Vector2(transform.position.x + wallSlideDirection, transform.position.y + 1.2f);
+            wallSlideEffect.transform.position = point;
+
+            float wallSlideScale = IsFacingRight ? -1 : 1;
+            Vector3 scale = new Vector3(wallSlideScale, 1, 1);
+            wallSlideEffect.transform.localScale = scale;
+
+            float wallSlideRotation = IsFacingRight ? 90 : 270;
+            wallSlideEffect.transform.rotation = Quaternion.Euler(0, 0, wallSlideRotation);
         }
     }
 
@@ -271,10 +306,6 @@ public class PlayerInputController : MonoBehaviour
         _isWallJumping = false;
     }
 
-    //임시
-    private GameObject attackEffectPrefab;
-    private GameObject attackEffect2Profab;
-
     public void Attack(InputAction.CallbackContext context)
     {
         if (enabled)
@@ -288,22 +319,26 @@ public class PlayerInputController : MonoBehaviour
                     attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp");
                     GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
 
-                  
+                    float attackDirection = IsFacingRight ? 1f : -1f;
+                    Vector2 attackPoint = new Vector2(transform.position.x + (attackDirection * 1.5f), transform.position.y + 0.5f);
 
                     attackEffect.transform.SetParent(transform);
-                    attackEffect.transform.position = transform.position;
+                    attackEffect.transform.localScale = new Vector2(1.5f, 1.5f);
+                    attackEffect.transform.position = attackPoint;
                     _isFirstAttack = false;
                 }
                 else if (!_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack2);
-                    attackEffect2Profab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp_2");
-                    GameObject attackEffect2 = PoolManager.Instance.Pop(attackEffect2Profab);
+                    attackEffect2Prefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp_2");
+                    GameObject attackEffect2 = PoolManager.Instance.Pop(attackEffect2Prefab);
 
-                  
+                    float attackDirection = IsFacingRight ? 1f : -1f;
+                    Vector2 attackPoint = new Vector2(transform.position.x + (attackDirection * 1.5f), transform.position.y + 0.1f);
 
                     attackEffect2.transform.SetParent(transform);
-                    attackEffect2.transform.position = transform.position;
+                    attackEffect2.transform.localScale = new Vector2(1.5f, 1.5f);
+                    attackEffect2.transform.position = attackPoint;
                     _isFirstAttack = true;
                 }
                 StartCoroutine(ResetAttackAnimation());
@@ -314,7 +349,7 @@ public class PlayerInputController : MonoBehaviour
     // TODO 리펙토링 필요해 보임
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         IsAttacking = false;
     }
 
