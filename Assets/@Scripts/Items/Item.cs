@@ -14,7 +14,8 @@ public enum ItemType
     Skill,
     Building,
     Portal,
-    Quest
+    Quest,
+    NPC
 }
 
 public class Item
