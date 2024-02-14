@@ -9,12 +9,6 @@ public class MonsterSpawner : MonoBehaviour
 
     private GameObject[] _monsterPrefabs;
     private List<GameObject> _spawnedMonsters = new List<GameObject>();
-    private Transform _enemiesParent;
-
-    private void Awake()
-    {
-        _enemiesParent = transform.parent.parent;
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,7 +32,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (var position in spawnInfo.spawnPositions)
             {
-                GameObject _spawnedMonster = Instantiate(spawnInfo.monsterPrefab, position, spawnInfo.monsterPrefab.transform.rotation, _enemiesParent);
+                GameObject _spawnedMonster = MonsterPool.Instance.SpawnFromPool(spawnInfo.monsterPrefab.name, position, spawnInfo.monsterPrefab.transform.rotation);
                 _spawnedMonsters.Add(_spawnedMonster);
             }
         }
@@ -50,7 +44,10 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (GameObject monster in _spawnedMonsters)
             {
-                Destroy(monster);
+                if (monster != null)
+                {
+                    monster.SetActive(false);
+                }
             }
             _spawnedMonsters.Clear();
         }

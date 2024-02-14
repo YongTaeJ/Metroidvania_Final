@@ -23,7 +23,7 @@ public class ChestMap : ChestBase
     protected override void OpenChest()
     {
         base.OpenChest();
-
+        _mapData = MapManager.Instance.GetComponent<MapData>();
         _curMapNumber = ItemManager.Instance.GetItemStock(ItemType.Map, 0);
 
         if (_curMapNumber < _mapDataLimit)
