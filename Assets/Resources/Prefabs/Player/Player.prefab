@@ -18,8 +18,6 @@ GameObject:
   - component: {fileID: 6496732378902445627}
   - component: {fileID: 5750209441709579841}
   - component: {fileID: 3419575364104034267}
-  - component: {fileID: 3677823334134738909}
-  - component: {fileID: 4494999259269976714}
   - component: {fileID: 8734151917660046788}
   m_Layer: 10
   m_Name: Player
@@ -41,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &8883361996984312801
 CapsuleCollider2D:
@@ -549,30 +547,6 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &3677823334134738909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5289157278338680038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11ff96fbcd993a4fb6067b20184e7fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4494999259269976714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5289157278338680038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dd2716551dd856439c07791391bc534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8734151917660046788
 MonoBehaviour:
   m_ObjectHideFlags: 0

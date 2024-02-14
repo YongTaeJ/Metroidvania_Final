@@ -56,7 +56,8 @@ public class Player : MonoBehaviour, IDamagable
     private float _shakeForce = 1f;
 
     //Skill
-    private List<SkillBase> _skills = new();
+    //public List<SkillBase> _skills = new();
+    public Dictionary<int, SkillBase> _skills = new Dictionary<int, SkillBase>();
 
     public Animator _animator;
     public Rigidbody2D _rigidbody;
@@ -70,26 +71,44 @@ public class Player : MonoBehaviour, IDamagable
         _animator = GetComponent<Animator>();
         _playerInput = GetComponent<PlayerInput>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
-        _Hp = _maxHp;
         GameManager.Instance.player = this;
+        Initialized();
     }
 
-    #region Set
+    #region Set / Init
 
-    private void SetSkill()
+    private void Initialized()
     {
-        if(ItemManager.Instance.HasItem(ItemType.Skill, 0))
+        SetSkill();
+        _Hp = _maxHp;
+    }
+
+    public void SetSkill()
+    {
+        var items = ItemManager.Instance.GetItemDict(ItemType.Skill);
+
+
+        foreach (var item in items.Values)
         {
-            _skills.Add(this.AddComponent<Skill_SwordAuror>());
-        }
-        if (ItemManager.Instance.HasItem(ItemType.Skill, 1))
-        {
-            _skills.Add(this.AddComponent<Skill_PlungeAttack>());
+            if (ItemManager.Instance.HasItem(ItemType.Skill, item.ItemData.ID))
+            {
+                switch (item.ItemData.ID)
+                {
+                    case 0:
+                        if (!_skills.ContainsKey(0))
+                            _skills[0] = this.AddComponent<Skill_SwordAuror>();
+                        break;
+                    case 1:
+                        if (!_skills.ContainsKey(1))
+                            _skills[1] = this.AddComponent<Skill_PlungeAttack>();
+                        break;
+                }
+            }
         }
 
-        for (int i = 0; i < _skills.Count; i++)
+        foreach (var skill in _skills.Values)
         {
-            _skills[i].Initialize();
+            skill.Initialize();
         }
     }
 

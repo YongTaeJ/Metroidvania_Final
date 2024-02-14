@@ -28,6 +28,11 @@ public class ChestItem : ChestBase
         {
             ItemManager.Instance.AddItem(_chestItem, _chestItemID, _chestGold);
         }
+        else if (_chestItem == ItemType.Skill)
+        {
+            ItemManager.Instance.AddItem(_chestItem, _chestItemID);
+            GameManager.Instance.player.SetSkill();
+        }
         else
         {
             ItemManager.Instance.AddItem(_chestItem, _chestItemID);

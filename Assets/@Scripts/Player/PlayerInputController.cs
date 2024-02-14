@@ -124,13 +124,6 @@ public class PlayerInputController : MonoBehaviour
         _trailRenderer = GetComponent<TrailRenderer>();
         _animator = GetComponent<Animator>();
         _player = GetComponent<Player>();
-
-        //임시 스킬 초기화. ==================================================================
-        _SwordAuror = GetComponent<Skill_SwordAuror>();
-        _PlungeAttack = GetComponent<Skill_PlungeAttack>();
-        _SwordAuror.Initialize();
-        _PlungeAttack.Initialize();
-        //====================================================================================
     }
 
     private void FixedUpdate()
@@ -386,18 +379,13 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    // 임시 ===================================================================
-    private Skill_SwordAuror _SwordAuror;
-    private Skill_PlungeAttack _PlungeAttack;
-    // ========================================================================
-
     public void Skill(InputAction.CallbackContext context)
     {
         if (enabled)
         {
             if (!Input.GetKey(KeyCode.DownArrow) && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
-                _SwordAuror.Activate();
+                _player._skills[0].Activate();
             }
             else
             {
@@ -406,7 +394,7 @@ public class PlayerInputController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
-                _PlungeAttack.Activate();
+                _player._skills[1].Activate();
                 _player.Invincible = true;
             }
             else
