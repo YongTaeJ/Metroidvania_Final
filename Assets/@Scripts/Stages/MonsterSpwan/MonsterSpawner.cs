@@ -32,7 +32,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (var position in spawnInfo.spawnPositions)
             {
-                GameObject _spawnedMonster = MonsterPool.Instance.SpawnFromPool(spawnInfo.monsterPrefab.name, position, spawnInfo.monsterPrefab.transform.rotation);
+                GameObject _spawnedMonster = MonsterPoolManager.Instance.SpawnFromPool(spawnInfo.monsterPrefab.name, position, spawnInfo.monsterPrefab.transform.rotation);
                 _spawnedMonsters.Add(_spawnedMonster);
             }
         }

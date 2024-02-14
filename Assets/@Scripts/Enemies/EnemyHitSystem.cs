@@ -61,4 +61,11 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
 
         transform.DOMoveX(transform.position.x + direction * 0.2f , 0.3f);
     }
+
+    public void ResetHPCondition()
+    {
+        _currentHP = _maxHP;
+        _currentEndurance = _maxEndurance;
+        _isInvincible = false;
+    }
 }
