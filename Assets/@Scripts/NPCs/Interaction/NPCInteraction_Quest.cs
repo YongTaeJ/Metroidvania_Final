@@ -50,7 +50,7 @@ public class NPCInteraction_Quest : NPCInteraction
                 break;
         }
 
-        if(isNotAccept)
+        if(isNotAccept && IsMeetCondition() )
         {
             yield return StartCoroutine(WaitForChoose());
         }
@@ -92,6 +92,20 @@ public class NPCInteraction_Quest : NPCInteraction
         foreach(var item in SO.RequriedItems)
         {
             if(ItemManager.Instance.GetItemStock(item.ItemType, item.ID) < item.Stock)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsMeetCondition()
+    {
+        var SO = SOManager.Instance.GetQuestSO(_questID);
+        foreach(var item in SO.RequiredConditions)
+        {
+            if(!ItemManager.Instance.HasItem(item.itemType, item.ID))
             {
                 return false;
             }

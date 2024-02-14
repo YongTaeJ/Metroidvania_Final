@@ -15,8 +15,8 @@ public class VHDeadState : EnemyDeadState
         if(_isDeadEnded)
         {
             DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
-            GameObject.Destroy(_stateMachine.gameObject);
-            _bossRoom.OpenDoor();
+            _bossRoom.InvokeInteract(_stateMachine.transform.position);
+            MonoBehaviour.Destroy(_stateMachine.gameObject);
         }
     }
 }

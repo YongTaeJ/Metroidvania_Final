@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class NPCInteraction : MonoBehaviour
+
+public abstract class NPCInteraction : MonoBehaviour, IInteract
 {
     #region variables
     protected ChatBoxUI _chatBoxUI;

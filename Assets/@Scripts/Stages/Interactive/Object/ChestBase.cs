@@ -28,7 +28,6 @@ public class ChestBase : MonoBehaviour
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction += OpenChest;
             UIManager.Instance.OpenPopupUI(PopupType.Interact);
-
         }
     }
 
