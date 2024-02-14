@@ -38,7 +38,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (var position in spawnInfo.spawnPositions)
             {
-                GameObject _spawnedMonster = Instantiate(spawnInfo.monsterPrefab, position, spawnInfo.monsterPrefab.transform.rotation, _enemiesParent);
+                GameObject _spawnedMonster = MonsterPool.Instance.SpawnFromPool(spawnInfo.monsterPrefab.name, position, spawnInfo.monsterPrefab.transform.rotation, _enemiesParent);
                 _spawnedMonsters.Add(_spawnedMonster);
             }
         }
@@ -50,7 +50,7 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (GameObject monster in _spawnedMonsters)
             {
-                Destroy(monster);
+                monster.SetActive(false);
             }
             _spawnedMonsters.Clear();
         }
