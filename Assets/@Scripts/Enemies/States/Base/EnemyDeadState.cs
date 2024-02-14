@@ -30,7 +30,7 @@ public class EnemyDeadState : EnemyBaseState
         if(_isDeadEnded)
         {
             DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
-            GameObject.Destroy(_stateMachine.gameObject);
+            _stateMachine.gameObject.SetActive(false);
         }
     }
     #endregion

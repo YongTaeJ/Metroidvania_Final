@@ -44,7 +44,10 @@ public class MonsterSpawner : MonoBehaviour
         {
             foreach (GameObject monster in _spawnedMonsters)
             {
-                monster.SetActive(false);
+                if (monster != null)
+                {
+                    monster.SetActive(false);
+                }
             }
             _spawnedMonsters.Clear();
         }
