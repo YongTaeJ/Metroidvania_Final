@@ -8,7 +8,6 @@ public class NPCInteraction_Shop : NPCInteraction
     [SerializeField] private int _chatID_start;
     [SerializeField] private int _chatID_end;
 
-
     public override IEnumerator Interact(PlayerInput input)
     {
         StartInteract(input);

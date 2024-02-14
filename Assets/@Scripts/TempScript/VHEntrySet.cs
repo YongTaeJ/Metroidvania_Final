@@ -27,7 +27,7 @@ public class VHEntrySet : MonoBehaviour
 
     public void Animation_TauntEnd()
     {
-        GameObject targetObj = Resources.Load<GameObject>("Enemies/Bosses/Boss_VillageHead");
+        GameObject targetObj = Resources.Load<GameObject>("Enemies/Bosses/VillageHead/Boss_VillageHead");
         Instantiate(targetObj, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

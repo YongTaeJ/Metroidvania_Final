@@ -57,7 +57,7 @@ public class ChatBoxUI : MonoBehaviour
         {
             // TODO => 입력시 스킵 추가
             _chatText.text += letter;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
