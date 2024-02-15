@@ -24,9 +24,6 @@ public class ConstructYNPanel : YNPanel
     {
         OnRefresh -= constructUI.BuildingList.RefreshValidButtons;
         OnRefresh += constructUI.BuildingList.RefreshValidButtons;
-
-        OnRefresh -= constructUI.InformPanel.HideInformData;
-        OnRefresh += constructUI.InformPanel.HideInformData;
     }
 
     protected override void OnClickNo()

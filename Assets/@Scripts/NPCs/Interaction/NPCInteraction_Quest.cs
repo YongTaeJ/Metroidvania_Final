@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class NPCInteraction_Quest : NPCInteraction
 {
+
     [SerializeField] private int _questID;
     [SerializeField] private int _chatID_notAccept;
     [SerializeField] private int _chatID_acceptQuest;
@@ -20,16 +21,18 @@ public class NPCInteraction_Quest : NPCInteraction
 
         bool isNotAccept = false;
 
-        switch(ItemManager.Instance.GetItemStock(ItemType.Quest, _questID))
+        QuestStatus currentStatue = (QuestStatus) ItemManager.Instance.GetItemStock(ItemType.Quest, _questID);
+
+        switch(currentStatue)
         {
-            case 0:
+            case QuestStatus.NotAccept:
             {
                 chatDatas = ChatManager.Instance.GetChatData(_chatID_notAccept);
                 yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
                 isNotAccept = true;
             }
                 break;
-            case 1:
+            case QuestStatus.Accept:
             {
                 chatDatas = ChatManager.Instance.GetChatData(_chatID_alreadyAccept);
                 yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
@@ -42,7 +45,7 @@ public class NPCInteraction_Quest : NPCInteraction
                 }
             }
                 break;
-            case 2:
+            case QuestStatus.Complete:
             {
                 chatDatas = ChatManager.Instance.GetChatData(_chatID_alreadyComplete);
                 yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));

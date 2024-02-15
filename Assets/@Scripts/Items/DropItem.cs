@@ -14,6 +14,7 @@ public class DropItem : MonoBehaviour
         _ID = ID;
         _value = value;
 
+        Invoke("Vanish", 30f);
         PopItem();
     }
 
@@ -27,14 +28,21 @@ public class DropItem : MonoBehaviour
         rigidbody.AddForce( new Vector2(x,y) * 300);
     }
 
+    private void Vanish()
+    {
+        PoolManager.Instance.Push(gameObject);
+    }
+    
+
     #region Monobehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
             ItemManager.Instance.AddItem(_itemType, _ID, _value);
+            CancelInvoke();
+            Vanish();
             // TODO => 소리 + 이펙트, 이펙트는 안해도 될듯
-            Destroy(gameObject);
         }
     }
     #endregion

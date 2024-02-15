@@ -18,13 +18,11 @@ public abstract class NPCInteraction : MonoBehaviour, IInteract
     protected void StartInteract(PlayerInput input)
     {
         input.enabled = false;
-        _chatBoxUI.ActiveUI(true);
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
     }
 
     protected void EndInteract(PlayerInput input)
     {
-        _chatBoxUI.ActiveUI(false);
         input.enabled = true;
         UIManager.Instance.OpenPopupUI(PopupType.Interact);
     }

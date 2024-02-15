@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.InputSystem.Utilities;
 
 public class ChatManager : Singleton<ChatManager>
 {
     #region variables
-    private Dictionary<int, List<(string, string)>> _chatDataList;
+    private Dictionary<int, List<(string name, string chat)>> _chatDataList;
     #endregion
 
     public override bool Initialize()

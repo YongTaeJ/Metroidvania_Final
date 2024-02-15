@@ -28,6 +28,7 @@ public class NPCInteraction_Construct : NPCInteraction
     {
         int buttonValue = 0;
 
+        _chatBoxUI.ActiveUI(true);
         _chatBoxUI.MakeButton("마을 재건 시작", () => buttonValue = 1);
         _chatBoxUI.MakeButton("그만두기", () => buttonValue = 2);
 
@@ -40,6 +41,7 @@ public class NPCInteraction_Construct : NPCInteraction
 
         if(buttonValue == 1)
         {
+            _chatBoxUI.ActiveUI(false);
             UIManager.Instance.OpenPopupUI(PopupType.Construct);
             var obj = UIManager.Instance.GetUI(PopupType.Construct);
             while(obj.activeInHierarchy)

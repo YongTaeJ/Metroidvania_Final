@@ -34,7 +34,6 @@ public class ConstructInformPanel : MonoBehaviour, IInformable
         _descriptionText = transform.Find("DescriptionText").GetComponent<TMP_Text>();
         _materialText = transform.Find("MaterialText").GetComponent<TMP_Text>();
         _constructButton = transform.Find("ConstructButton").GetComponent<ConstructButton>();
-        _screen = transform.Find("Screen").gameObject;
     }
 
     public void SetInformPanel(Item item)
@@ -59,23 +58,6 @@ public class ConstructInformPanel : MonoBehaviour, IInformable
         {
             _constructButton.Disable();
         }
-
-        SetScreen(false);
-    }
-
-    private void OnEnable()
-    {
-        SetScreen(true);
-    }
-
-    public void SetScreen(bool value)
-    {
-        _screen?.SetActive(value);
-    }
-    
-    public void HideInformData()
-    {
-        SetScreen(true);
     }
 
     private void SetConditionText(List<RequiredCondition> conditions)

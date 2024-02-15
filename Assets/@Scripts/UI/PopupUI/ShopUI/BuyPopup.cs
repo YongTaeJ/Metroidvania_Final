@@ -13,24 +13,20 @@ public class BuyPopup : MonoBehaviour
     private TMP_Text _itemCost;
     private QuantitySetter _quantitySetter;
     private Button _buyButton;
-    private Button _exitButton;
     #endregion
 
     public void Initialize()
     {
-        Transform Panel = transform.Find("Panel");
 
-        _itemImage = Panel.Find("ItemImage").GetComponent<Image>();
-        _itemName = Panel.Find("ItemName").GetComponent<TMP_Text>();
-        _itemCost = Panel.Find("ItemCost").GetComponent<TMP_Text>();
-        _quantitySetter = Panel.Find("QuantitySetter").GetComponent<QuantitySetter>();
-        _buyButton = Panel.Find("BuyButton").GetComponent<Button>();
-        _exitButton = Panel.Find("ExitButton").GetComponent<Button>();
+        _itemImage = transform.Find("ItemImage").GetComponent<Image>();
+        _itemName = transform.Find("ItemName").GetComponent<TMP_Text>();
+        _itemCost = transform.Find("ItemCost").GetComponent<TMP_Text>();
+        _quantitySetter = transform.Find("QuantitySetter").GetComponent<QuantitySetter>();
+        _buyButton = transform.Find("BuyButton").GetComponent<Button>();
 
         _quantitySetter.Initialize();
 
         _buyButton.onClick.AddListener(OnClickBuyButton);
-        _exitButton.onClick.AddListener( () => { gameObject.SetActive(false); } );
     }
 
     public void SetPopupData(InternalItemData data)

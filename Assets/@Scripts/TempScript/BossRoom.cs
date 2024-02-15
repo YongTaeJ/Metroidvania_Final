@@ -61,16 +61,20 @@ public class BossRoom : MonoBehaviour
 
         List<(string, string)> chatDatas;
 
+        // 들어갔을 때 발동하는 메서드입니다.
+        // TODO => 처치하지 못하고 죽은 다음 다시 들어갔을 때 오류가 생길 수 있습니다.
         if(_count == 0)
         {
             _count++;
+
+            // 컨트롤러를 끊고, 캐릭터가 적당한 위치까지 오도록 만듭니다.
             DoorControl(true);
             _input.enabled = false;
-
             _controller.Move(Vector2.right);
             yield return new WaitForSeconds(0.3f);
             _controller.Move(Vector2.zero);
 
+            // 이벤트 전용 마을 촌장 게임 오브젝트를 생성하고, 조종하기 위해 참조를 할당합니다.
             _VHEntrySet = Instantiate
             (Resources.Load<GameObject>("Enemies/Bosses/VillageHead/VillageHead_EntrySet"), _bossLocation.position, Quaternion.identity)
             .GetComponent<VHEntrySet>();
@@ -78,18 +82,18 @@ public class BossRoom : MonoBehaviour
             _VHEntrySet.Jump();
             yield return new WaitForSeconds(2.5f);
 
-            _chatBoxUI.ActiveUI(true);
             chatDatas = ChatManager.Instance.GetChatData(_chatID_encounter);
             yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
             _VHEntrySet.Taunt();
             yield return new WaitForSeconds(1.2f);
         }
+        // 보스를 처치한 뒤 나타날 메서드입니다.
         else if(_count == 1)
         {
             StartInteract(_input);
 
-            // TODO => 보스 위치 알아낸 다음 거따 소환해야됨
+            // 이벤트 전용 마을 촌장 게임 오브젝트를 생성하고, 조종하기 위해 참조를 할당합니다.
             VHEndSet endSet = Instantiate(Resources.Load("Enemies/Bosses/VillageHead/VHEndSet"), _deadPosition, Quaternion.identity).GetComponent<VHEndSet>();
 
             chatDatas = ChatManager.Instance.GetChatData(_chatID_defeat_0);
@@ -100,6 +104,8 @@ public class BossRoom : MonoBehaviour
             chatDatas = ChatManager.Instance.GetChatData(_chatID_defeat_1);
             yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
+            // 전투가 끝났으므로 문을 엽니다.
+            // TODO => 플레이어 사망 시 문을 열 수 있도록 조정할 필요성이 있습니다.
             DoorControl(false);
         }
         else
@@ -119,12 +125,10 @@ public class BossRoom : MonoBehaviour
     protected void StartInteract(PlayerInput input)
     {
         input.enabled = false;
-        _chatBoxUI.ActiveUI(true);
     }
 
     protected void EndInteract(PlayerInput input)
     {
-        _chatBoxUI.ActiveUI(false);
         input.enabled = true;
     }
 }

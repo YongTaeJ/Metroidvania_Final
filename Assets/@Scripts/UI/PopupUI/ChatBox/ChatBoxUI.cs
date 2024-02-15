@@ -70,13 +70,15 @@ public class ChatBoxUI : MonoBehaviour
     #endregion
 
     #region public
-    public IEnumerator StartChat(List<(string, string)> chatDatas)
+    public IEnumerator StartChat(List<(string name, string chat)> chatDatas)
     {
+        gameObject.SetActive(true);
+
         int currentIndex = 0;
         int length = chatDatas.Count;
 
-        _nameText.text = chatDatas[currentIndex].Item1;
-        _typingCoroutine = TypeSentence(chatDatas[currentIndex].Item2);
+        _nameText.text = chatDatas[currentIndex].name;
+        _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
         yield return StartCoroutine(_typingCoroutine);
         currentIndex++;
 
@@ -84,8 +86,8 @@ public class ChatBoxUI : MonoBehaviour
         {
             if(_keyValue)
             {
-                _nameText.text = chatDatas[currentIndex].Item1;
-                _typingCoroutine = TypeSentence(chatDatas[currentIndex].Item2);
+                _nameText.text = chatDatas[currentIndex].name;
+                _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
                 yield return StartCoroutine(_typingCoroutine);
                 currentIndex++;
             }
@@ -93,6 +95,8 @@ public class ChatBoxUI : MonoBehaviour
         }
 
         while(!_keyValue) yield return null;
+
+        gameObject.SetActive(false);
     }
 
     public void MakeButton(string content, UnityAction unityAction)
@@ -106,11 +110,6 @@ public class ChatBoxUI : MonoBehaviour
         button.onClick.AddListener(unityAction);
     }
 
-    public void ActiveUI(bool isActive)
-    {
-        gameObject.SetActive(isActive);
-    }
-
     public void CloseButtons()
     {
         _buttonIndex = 0;
@@ -119,6 +118,12 @@ public class ChatBoxUI : MonoBehaviour
             obj.SetActive(false);
             obj.GetComponent<Button>().onClick.RemoveAllListeners();
         }
+    }
+
+    // TODO => 경로 추적용 임시 코드(그냥 UI매니저로 호출할지 고민중)
+    public void ActiveUI(bool flag)
+    {
+        gameObject.SetActive(flag);
     }
     #endregion
 }

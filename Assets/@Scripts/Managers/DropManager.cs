@@ -29,7 +29,7 @@ public class DropManager : Singleton<DropManager>
     private void DropCoin(int sumValue, Vector2 location)
     {
         // 현재 0~999원까지만 설계됨.
-        int prefabIndex = 0;
+        int prefabindex = 0;
         int value = 1;
         while(sumValue != 0)
         {
@@ -38,11 +38,11 @@ public class DropManager : Singleton<DropManager>
 
             for(int i=0; i < remainder; i++)
             {
-                Instantiate(coinPrefabs[prefabIndex], location, Quaternion.identity)
-                .GetComponent<DropItem>()
-                .Initialize(ItemType.Gold, 0, value);
+                var coin = PoolManager.Instance.Pop(coinPrefabs[prefabindex]);
+                coin.GetComponent<DropItem>().Initialize(ItemType.Gold, 0, value);
+                coin.transform.position = location;
             }
-
+            prefabindex++;
             value *= 10;
         }
     }
@@ -62,7 +62,8 @@ public class DropManager : Singleton<DropManager>
         {
             // 현재 Material만 드랍되는 것으로 설계됨.
             ItemData data = ItemManager.Instance.GetItemData(ItemType.Material, currentTable.ItemID);
-            GameObject dropitem = Instantiate(_dropItem, dropLocation, Quaternion.identity);
+            GameObject dropitem = PoolManager.Instance.Pop(_dropItem);
+            dropitem.transform.position = dropLocation;
             dropitem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);
             dropitem.GetComponentInChildren<SpriteRenderer>().sprite = ItemManager.Instance.GetSprite(data.Name);
         }

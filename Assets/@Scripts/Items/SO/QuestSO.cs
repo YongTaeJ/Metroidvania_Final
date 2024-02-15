@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewQuest", menuName = "Data/QuestSO")]
 public class QuestSO : ScriptableObject, IHasID
 {
-    // (Quest) InternalItemData => Stock 0 ? None, Stock 1 ? Accept, Stock 2 ? Complete.
     [SerializeField] private int _ID;
     [SerializeField] private List<RequiredCondition> _requiredConditions;
     [SerializeField] private List<InternalItemData> _requiredItems;
@@ -16,4 +15,11 @@ public class QuestSO : ScriptableObject, IHasID
     public List<InternalItemData> RequriedItems => _requiredItems;
     public List<InternalItemData> Rewards => _rewards;
 
+}
+
+public enum QuestStatus
+{
+    NotAccept,
+    Accept,
+    Complete
 }
