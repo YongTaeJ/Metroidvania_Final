@@ -21,3 +21,6 @@ MonoBehaviour:
   _requiredConditions: []
   _requiredMaterials: []
   _statElements: []
+  _buildingData:
+    buildingPrefab: {fileID: 8706551386021564540, guid: 0f2236626095f5d489f1caa937f7ce55, type: 3}
+    buildingPosition: {x: 290, y: -1, z: 0}

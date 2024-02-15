@@ -59,4 +59,10 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
             system.Initialize(EnemyData.Damage);
         }
     }
+
+    public void ResetMonster()
+    {
+        GetComponent<EnemyHitSystem>().ResetHPCondition();
+        StateTransition(StateDictionary[EnemyStateType.Idle]);
+    }
 }

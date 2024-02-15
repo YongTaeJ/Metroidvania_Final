@@ -18,3 +18,4 @@ MonoBehaviour:
   _requiredConditions: []
   _requiredMaterials: []
   _statElements: []
+  _buildingData: []

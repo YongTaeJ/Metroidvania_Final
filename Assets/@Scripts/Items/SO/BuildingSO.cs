@@ -21,6 +21,9 @@ public class BuildingSO : ScriptableObject, IHasID
     public List<RequiredMaterial> RequiredMaterials => _requiredMaterials;
     public List<StatElement> StatElements => _statElements;
 
+
+    public BuildingData _buildingData;
+
     public bool IsBuildable()
     {
         return MaterialTest() && ConditionTest();
@@ -72,4 +75,11 @@ public struct StatElement
 {
     // TODO => StatType
     public float value;
+}
+
+[Serializable]
+public struct BuildingData
+{
+    public GameObject buildingPrefab;
+    public Vector3 buildingPosition;
 }
