@@ -41,6 +41,13 @@
       "MaxGold": "250",
       "ItemID": "10000",
       "DropRate": "100"
+    },
+    {
+      "Index": "6",
+      "MinGold": "0",
+      "MaxGold": "0",
+      "ItemID": "0",
+      "DropRate": "0"
     }
   ]
 }

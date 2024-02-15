@@ -35,7 +35,6 @@ public class ConstructYNPanel : YNPanel
         // TODO => 차후순위로 건축 기념 이벤트 혹은 UI를 넣을 수 있을 듯.
         var SO = SOManager.Instance.GetBuildingSO(_ID);
 
-        // 유효성 검증 필요 X
         foreach(var item in SO.RequiredMaterials)
         {
             ItemManager.Instance.UseItem(ItemType.Material, item.ID, item.Stock);
@@ -43,7 +42,6 @@ public class ConstructYNPanel : YNPanel
 
         ItemManager.Instance.AddItem(ItemType.Building, _ID);
 
-        // TODO => 건축이 됐으니 Refresh.
         OnRefresh.Invoke();
         
         Destroy(gameObject);
