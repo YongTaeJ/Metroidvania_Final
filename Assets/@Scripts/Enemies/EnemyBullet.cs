@@ -17,7 +17,7 @@ public class EnemyBullet : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _speed = 10f;
         _direction = Vector2.up;
-        Invoke("DestroySelf", 5f);
+        Invoke("DestroySelf", 3f);
     }
 
     private void FixedUpdate()

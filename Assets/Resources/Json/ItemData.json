@@ -185,6 +185,12 @@
       "ID": "4",
       "Name": "VillageHead",
       "Description": "정신차린 촌장님"
+    },
+    {
+      "ItemType": "Equipment",
+      "ID": "2",
+      "Name": "WingShoes",
+      "Description": "공중에서 한번 더 뛸 수 있습니다"
     }
   ]
 }
