@@ -13,6 +13,7 @@ public class ItemManager : Singleton<ItemManager>
     {
         LoadItem();
         LoadSprites();
+        LoadSaveData(GameManager.Instance.Data.Inventory);
         return base.Initialize();
     }
 
@@ -47,6 +48,22 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
+    private void LoadSaveData(List<InternalItemData> inventoryData)
+    {
+        if (inventoryData == null) return;
+
+        foreach (var itemData in inventoryData)
+        {
+            if (_items.TryGetValue(itemData.ItemType, out Dictionary<int, Item> itemDict))
+            {
+                if (itemDict.TryGetValue(itemData.ID, out Item item))
+                {
+                    item.SetItemStock(itemData.Stock);
+                }
+            }
+        }
+    }
+
     public bool UseItem(ItemType itemType, int ID, int value)
     {
         Item currentItem = _items[itemType][ID];
@@ -68,6 +85,30 @@ public class ItemManager : Singleton<ItemManager>
         Item currentItem = _items[itemType][ID];
         int sumValue = currentItem.Stock + value;
         currentItem.SetItemStock(sumValue);
+
+        if (GameManager.Instance.Data.Inventory == null)
+        {
+            GameManager.Instance.Data.Inventory = new List<InternalItemData>();
+        }
+
+        bool found = false;
+        foreach (var itemData in GameManager.Instance.Data.Inventory)
+        {
+            if (itemData.ItemType == itemType && itemData.ID == ID)
+            {
+                itemData.Stock += value;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            GameManager.Instance.Data.Inventory.Add(new InternalItemData { ItemType = itemType, ID = ID, Stock = value });
+        }
+
+        //테스트
+        GameManager.Instance.SaveGame();
     }
 
     public Dictionary<int, Item> GetItemDict(ItemType itemType)

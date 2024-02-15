@@ -16,6 +16,15 @@ public class GameManager : Singleton<GameManager>
 
     public override bool Initialize()
     {
+        _dataPath = Application.persistentDataPath + "/SaveData.json";
+        Debug.Log(Application.persistentDataPath);
+        if (!LoadGame())
+        {
+            // Save Data가 없는경우.
+            // 초기화 작업을 수행한 후 초기 데이터를 저장.
+            // TODO: 초기화 작업 추가
+            SaveGame();
+        }
         return base.Initialize();
     }
 
