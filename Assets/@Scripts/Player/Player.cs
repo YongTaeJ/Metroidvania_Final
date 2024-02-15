@@ -124,7 +124,7 @@ public class Player : MonoBehaviour, IDamagable
             GameManager.Instance.player._Hp -= damage;
             StartCoroutine(ResetHurtAnimation());
             StartCoroutine(Knockback(target));
-            CameraShakeManager.Instance.CameraShake(_impulseSource, _shakeForce);
+            CameraManager.Instance.CameraShake(_impulseSource, _shakeForce);
             if (GameManager.Instance.player._Hp <= 0)
             {
                 GameManager.Instance.player._Hp = 0;

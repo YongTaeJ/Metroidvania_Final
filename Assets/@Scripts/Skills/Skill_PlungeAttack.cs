@@ -32,7 +32,7 @@ public class Skill_PlungeAttack : SkillBase
 
     public void Shockwaves()
     {
-        CameraShakeManager.Instance.CameraShake(_impulseSource, 1f);
+        CameraManager.Instance.CameraShake(_impulseSource, 1f);
         _shockwavePrefab = Resources.Load<GameObject>("Skills/PlungeAttack");
         Vector3 playerPosition = transform.position;
         float distanceBetweenShockwaves = 1.0f;

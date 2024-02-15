@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private GameObject attackEffectPrefab;
+    private float spawnRadius = 0.7f;
+
+    private List<GameObject> attackEffectPrefabs = new List<GameObject>();
+    private GameObject hitParticlePrefab;
     private void Awake()
     {
-        attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect");
+        attackEffectPrefabs.Add(Resources.Load<GameObject>("Prefabs/Effects/AttackEffect1"));
+        attackEffectPrefabs.Add(Resources.Load<GameObject>("Prefabs/Effects/AttackEffect2"));
+        attackEffectPrefabs.Add(Resources.Load<GameObject>("Prefabs/Effects/AttackEffect3"));
+        hitParticlePrefab = Resources.Load<GameObject>("Prefabs/Effects/HitParticle");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,10 +23,19 @@ public class PlayerAttack : MonoBehaviour
             collision.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player._damage, collision.transform);
 
             
-            Vector2 attackPoint = collision.ClosestPoint(transform.position);
+            Vector2 attackPoint = collision.transform.position;
+
+            int randomIndex = Random.Range(0, attackEffectPrefabs.Count);
+            GameObject attackEffectPrefab = attackEffectPrefabs[randomIndex];
+
+            Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+            Vector2 spawnPosition = attackPoint + randomOffset;
 
             GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
-            attackEffect.transform.position = attackPoint;
+            attackEffect.transform.position = spawnPosition;
+
+            GameObject hitParticle = PoolManager.Instance.Pop(hitParticlePrefab);
+            hitParticle.transform.position = spawnPosition;
         }
     }
 }

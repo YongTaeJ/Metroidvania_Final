@@ -66,8 +66,7 @@ public class PlayerInputController : MonoBehaviour
 
     //Jump
     private float _jumpPower = 20f;
-    public int _maxJump = 1;
-    public int _jumpCount;
+    private bool _doubleJump = false;
 
     //Gravity
     private float _baseGravity = 4f;
@@ -181,31 +180,61 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    public void Look(InputAction.CallbackContext context)
+    {
+        Vector2 look = context.ReadValue<Vector2>();
+        if(context.performed)
+        {
+            CameraManager.Instance.MoveCamera(look);
+        }
+        else if (context.canceled)
+        {
+
+        }
+        
+    }
+
+    private bool CanWallJump()
+    {
+        return _wallJumpTimer > 0f && _touchingDirection.IsWall;
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
+        //if (_isDashing) return;
+
+        //if (_jumpCount > 0 && !_isWallJumping)
+        //{
+        //    GroundJump(context);
+        //}
+
+        //if(context.performed && CanWallJump())
+        //{
+        //    WallJump();
+        //}
+
         if (enabled)
         {
-            if (_jumpCount > 0)
+            if (context.started && !_isDashing)
             {
-                if (context.started && _touchingDirection.IsGrounded && !_isDashing)
+                if (!_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
                 {
-                    if (!_isWallJumping)
+                    _animator.SetTrigger(AnimatorHash.Jump);
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
+                    if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
                     {
-                        _animator.SetTrigger(AnimatorHash.Jump);
-                        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
-                        _jumpCount--;
-                    }
-                }
-                else if (context.canceled)
-                {
-                    if (!_isWallJumping)
-                    {
-                        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-                        _jumpCount--;
+                        _doubleJump = !_doubleJump;
                     }
                 }
             }
-
+            else if (context.canceled)
+            {
+                if (!_isWallJumping)
+                {
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+                }
+            }
+            
             //Wall Jump
             if (context.performed && _wallJumpTimer > 0f)
             {
@@ -227,6 +256,80 @@ public class PlayerInputController : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    private void WallJump()
+    {
+        if (enabled)
+        {
+            if (IsWallSliding)
+            {
+                _isWallJumping = false;
+                _wallJumpDirection = -transform.localScale.x;
+                _wallJumpTimer = _wallJumpTime;
+
+                CancelInvoke(nameof(CancelWallJump));
+            }
+            else if (_wallJumpTimer > 0f)
+            {
+                _wallJumpTimer -= Time.deltaTime;
+            }
+        }
+    }
+
+    //private void GroundJump(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed && _touchingDirection.IsGrounded)
+    //    {
+    //        PerformJump(_jumpPower);
+    //    }
+    //    else if (context.canceled)
+    //    {
+    //        ReduceJumpVelocity();
+    //    }
+    //}
+
+    //private void WallJump()
+    //{
+    //    _isWallJumping = true;
+    //    _wallJumpDirection = _isFacingRight ? 1f : -1f;
+    //    _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
+    //    _wallJumpTimer = _wallJumpTime;
+    //    _animator.SetTrigger(AnimatorHash.WallJump);
+    //    FlipCharacterDirectionOnWallJump();
+    //    Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
+    //}
+
+    //private void PerformJump(float power)
+    //{
+    //    _animator.SetTrigger(AnimatorHash.Jump);
+    //    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, power);
+    //    _jumpCount--;
+    //}
+
+    //private void ReduceJumpVelocity()
+    //{
+    //    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+    //    _jumpCount--;
+    //}
+
+    //private void FlipCharacterDirectionOnWallJump()
+    //{
+    //if (transform.localScale.x != _wallJumpDirection)
+    //    {
+    //        _isFacingRight = !_isFacingRight;
+    //        Vector3 localScale = transform.localScale;
+    //        localScale.x *= -1f;
+    //        transform.localScale = localScale;
+    //    }
+    //}
+
+
+
+    private void CancelWallJump()
+    {
+        _isWallJumping = false;
     }
 
     private bool isWallSlideEffect = false;
@@ -260,6 +363,10 @@ public class PlayerInputController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
 
             wallSlideEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/WallSlideEffect");
+            if (!_touchingDirection.IsWall)
+            {
+                yield return null;
+            }
             GameObject wallSlideEffect = PoolManager.Instance.Pop(wallSlideEffectPrefab);
 
             float wallSlideDirection = IsFacingRight ? 0.25f : -0.25f;
@@ -273,30 +380,6 @@ public class PlayerInputController : MonoBehaviour
             float wallSlideRotation = IsFacingRight ? 90 : 270;
             wallSlideEffect.transform.rotation = Quaternion.Euler(0, 0, wallSlideRotation);
         }
-    }
-
-    private void WallJump()
-    {
-        if (enabled)
-        {
-            if (IsWallSliding)
-            {
-                _isWallJumping = false;
-                _wallJumpDirection = -transform.localScale.x;
-                _wallJumpTimer = _wallJumpTime;
-
-                CancelInvoke(nameof(CancelWallJump));
-            }
-            else if (_wallJumpTimer > 0f)
-            {
-                _wallJumpTimer -= Time.deltaTime;
-            }
-        }
-    }
-
-    private void CancelWallJump()
-    {
-        _isWallJumping = false;
     }
 
     public void Attack(InputAction.CallbackContext context)
@@ -433,8 +516,12 @@ public class PlayerInputController : MonoBehaviour
     {
         if (_touchingDirection.IsGrounded)
         {
-            _jumpCount = _maxJump;
             _dashCount = _maxDash;
+
+            if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
+            {
+                _doubleJump = true;
+            }
         }
     }
 
