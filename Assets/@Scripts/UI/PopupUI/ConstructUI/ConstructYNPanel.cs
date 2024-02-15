@@ -55,8 +55,8 @@ public class ConstructYNPanel : YNPanel
         var buildingSO = SOManager.Instance.GetBuildingSO(buildingID);
         Transform originalTarget = cinemachineVirtualCamera.Follow;
 
-        GameObject buildingPrefab = buildingSO._buildingData.buildingPrefab;
-        Vector3 buildingPosition = buildingSO._buildingData.buildingPosition;
+        GameObject buildingPrefab = buildingSO.BuildingData.buildingPrefab;
+        Vector3 buildingPosition = buildingSO.BuildingData.buildingPosition;
         GameObject buildingObject = Instantiate(buildingPrefab, buildingPosition, Quaternion.identity);
 
         HideUI(true);

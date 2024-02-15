@@ -13,6 +13,7 @@ public class BuildingSO : ScriptableObject, IHasID
     [SerializeField] private List<RequiredCondition> _requiredConditions;
     [SerializeField] private List<RequiredMaterial> _requiredMaterials;
     [SerializeField] private List<StatElement> _statElements;
+    [SerializeField] private BuildingData _buildingData;
 
     public int ID { get {return _ID;} set { } }
     public string ConstructName => _constructName;
@@ -20,9 +21,7 @@ public class BuildingSO : ScriptableObject, IHasID
     public List<RequiredCondition> RequiredConditions => _requiredConditions;
     public List<RequiredMaterial> RequiredMaterials => _requiredMaterials;
     public List<StatElement> StatElements => _statElements;
-
-
-    public BuildingData _buildingData;
+    public BuildingData BuildingData => _buildingData;
 
     public bool IsBuildable()
     {
