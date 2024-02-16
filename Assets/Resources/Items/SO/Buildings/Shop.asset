@@ -23,4 +23,4 @@ MonoBehaviour:
   _statElements: []
   _buildingData:
     buildingPrefab: {fileID: 234950853861326434, guid: 408f16a30cf7c02499a207eb2f583367, type: 3}
-    buildingPosition: {x: 300, y: 1.39, z: 0}
+    buildingPosition: {x: 300, y: 1.9, z: 0}
