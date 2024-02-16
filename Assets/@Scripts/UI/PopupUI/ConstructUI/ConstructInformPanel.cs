@@ -1,11 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ConstructInformPanel : MonoBehaviour, IInformable
@@ -17,7 +13,6 @@ public class ConstructInformPanel : MonoBehaviour, IInformable
     private TMP_Text _descriptionText;
     private TMP_Text _materialText;
     private ConstructButton _constructButton;
-    private GameObject _screen;
     #endregion
     
     public void Initialize(ConstructUI constructUI)
