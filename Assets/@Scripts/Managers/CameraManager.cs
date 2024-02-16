@@ -5,7 +5,8 @@ using Cinemachine;
 
 public class CameraManager : Singleton<CameraManager>
 {
-    [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+    [SerializeField] public CinemachineVirtualCamera _virtualCamera;
+    private Transform _originalFollowTransform;
     public override bool Initialize()
     {
         return base.Initialize();
@@ -41,6 +42,24 @@ public class CameraManager : Singleton<CameraManager>
 
             // 변경된 값을 적용합니다.
             framingTransposer.m_ScreenY = screenY;
+        }
+    }
+
+    public void ChangeCameraTarget(Transform Target)
+    {
+        if (_originalFollowTransform == null)
+        {
+            _originalFollowTransform = _virtualCamera.Follow;
+        }
+
+        _virtualCamera.Follow = Target;
+    }
+
+    public void ReturnCameraTarget()
+    {
+        if (_originalFollowTransform != null)
+        {
+            _virtualCamera.Follow = _originalFollowTransform;
         }
     }
 }

@@ -10,14 +10,12 @@ public class ConstructYNPanel : YNPanel
     #region variables
     private int _ID;
     private Action OnRefresh;
-    private CinemachineVirtualCamera cinemachineVirtualCamera;
     #endregion
 
     public void Initialize(int ID)
     {
         _ID = ID;
         base.Initialize();
-        cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
     }
 
     public void InitAction(ConstructUI constructUI)
@@ -46,27 +44,24 @@ public class ConstructYNPanel : YNPanel
         BuildingConstructAnimation(_ID);
 
         OnRefresh.Invoke();
-
-        Destroy(gameObject);
     }
 
     private void BuildingConstructAnimation(int buildingID)
     {
         var buildingSO = SOManager.Instance.GetBuildingSO(buildingID);
-        Transform originalTarget = cinemachineVirtualCamera.Follow;
 
         GameObject buildingPrefab = buildingSO.BuildingData.buildingPrefab;
         Vector3 buildingPosition = buildingSO.BuildingData.buildingPosition;
         GameObject buildingObject = Instantiate(buildingPrefab, buildingPosition, Quaternion.identity);
-
+        
         HideUI(true);
-        ChangeCinemachineCameraTarget(buildingPosition);
 
-        StartCoroutine(WaitForAnimation(buildingObject));
+        CameraManager.Instance.ChangeCameraTarget(buildingObject.gameObject.transform);
 
-        cinemachineVirtualCamera.Follow = originalTarget;
+        StartCoroutine(Recover(buildingObject));
     }
-    public void HideUI(bool hide)
+
+    private void HideUI(bool hide)
     {
         Canvas[] canvases = FindObjectsOfType<Canvas>();
         foreach (Canvas canvas in canvases)
@@ -75,27 +70,25 @@ public class ConstructYNPanel : YNPanel
         }
     }
 
-    private void ChangeCinemachineCameraTarget(Vector3 Position)
+    private IEnumerator Recover(GameObject obj, float delay = 0f)
     {
-        Transform buildingTransform = new GameObject("BuildingTarget").transform;
-        buildingTransform.position = Position;
-        cinemachineVirtualCamera.Follow = buildingTransform;
-    }
-
-    IEnumerator WaitForAnimation(GameObject buildingPrefab, float waitTime = 0f)
-    {
-        Animator animator = buildingPrefab.GetComponent<Animator>();
+        Animator animator = obj.GetComponent<Animator>();
 
         if (animator != null)
         {
             AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-            waitTime = clipInfo[0].clip.length;
-            Debug.Log(waitTime);
+            delay = clipInfo[0].clip.length;
         }
-
-        yield return new WaitForSeconds(1f);
-        Debug.Log("Return");
-
+        yield return new WaitForSeconds(delay + 1f);
         HideUI(false);
+        CameraManager.Instance.ReturnCameraTarget();
+        Destroy(gameObject);
     }
+
+    //private void ChangeCameraTarget(Vector3 Position)
+    //{
+    //    Transform buildingTransform = new GameObject("BuildingTarget").transform;
+    //    buildingTransform.position = Position;
+    //    CameraManager.Instance._virtualCamera.Follow = buildingTransform;
+    //}
 }
