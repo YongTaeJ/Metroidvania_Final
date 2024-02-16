@@ -16,7 +16,7 @@ public class PushParticle : MonoBehaviour
         //  파티클이 모두 종료되었을 때
         if (!particleSystem.IsAlive())
         {
-            PoolManager.Instance.Push(gameObject);
+            ResourceManager.Instance.Destroy(this.gameObject);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,40 +5,48 @@ using UnityEngine;
 public class Skill_SwordAurorObject : MonoBehaviour
 {
     private int _damage = 5;
-    private GameObject attackEffectPrefab;
+    private float spawnRadius = 0.7f;
+    private List<string> attackEffectPrefabs = new List<string>();
+    private string _attackEffectPrefab;
 
     private void Awake()
     {
-        attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect");
+        attackEffectPrefabs = new List<string>(Globals.AttackEffects);
+        int randomIndex = Random.Range(0, attackEffectPrefabs.Count);
+        _attackEffectPrefab = attackEffectPrefabs[randomIndex];
     }
     private void Start()
     {
-        StartCoroutine(DestroySwordAurorObject());
+        StartCoroutine(DestroySwordAurorObject(0.7f));
     }
 
-    private IEnumerator DestroySwordAurorObject()
+    private IEnumerator DestroySwordAurorObject(float time)
     {
-        yield return new WaitForSeconds(0.7f);
-        Destroy(this.gameObject);
+        yield return new WaitForSeconds(time);
+        ResourceManager.Instance.Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Destroy(this.gameObject);
+            StartCoroutine(DestroySwordAurorObject(0.1f));
         }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.GetComponent<IDamagable>().GetDamaged(_damage, collision.transform);
 
-            Vector2 attackPoint = collision.ClosestPoint(transform.position);
-            Vector2 direction = attackPoint - (Vector2)transform.position;
-            GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
-            attackEffect.transform.position = attackPoint;
+            Vector2 attackPoint = collision.transform.position;
 
-            attackEffect.transform.localScale = new Vector3(Mathf.Sign(direction.x), 1, 1);
+            Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+            Vector2 spawnPosition = attackPoint + randomOffset;
+
+            GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab(_attackEffectPrefab, pooling: true);
+            attackEffect.transform.position = spawnPosition;
+
+            GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
+            hitParticle.transform.position = spawnPosition;
         }
     }
 }

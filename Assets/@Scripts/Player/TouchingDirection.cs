@@ -56,7 +56,6 @@ public class TouchingDirection : MonoBehaviour
         _touchingCol = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         castFilter.layerMask = groundLayerMask;
-        landEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/LandEffect");
     }
 
     private void Update()
@@ -65,11 +64,9 @@ public class TouchingDirection : MonoBehaviour
         IsWall = _touchingCol.Cast(_wallCheckDirection, castFilter, wallHit, wallDistance) > 0;
     }
 
-    // 임시
-    private GameObject landEffectPrefab;
     public void LandEffect()
     {
-        GameObject landEffect = PoolManager.Instance.Pop(landEffectPrefab);
+        GameObject landEffect = ResourceManager.Instance.InstantiatePrefab("LandEffect", pooling: true);
         Vector2 point = new Vector2(transform.position.x, transform.position.y - 0.9f);
         landEffect.transform.position = point;
     }

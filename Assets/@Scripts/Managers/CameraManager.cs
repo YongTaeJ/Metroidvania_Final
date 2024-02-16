@@ -6,6 +6,9 @@ using Cinemachine;
 public class CameraManager : Singleton<CameraManager>
 {
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+    private float originScreenY = 0.5f;
+    private bool isCameraMove = false; //카메라 움직임과 임펄스가 동시에 일어나면 m_Screen이 이상한 수치에 고정됨
+
     public override bool Initialize()
     {
         return base.Initialize();
@@ -13,7 +16,10 @@ public class CameraManager : Singleton<CameraManager>
 
     public void CameraShake(CinemachineImpulseSource impulseSource, float shakeForce)
     {
-        impulseSource.GenerateImpulseWithForce(shakeForce);
+        if (!isCameraMove)
+        {
+            impulseSource.GenerateImpulseWithForce(shakeForce);
+        }
     }
 
     public void GetCamera(CinemachineVirtualCamera camera)
@@ -23,24 +29,38 @@ public class CameraManager : Singleton<CameraManager>
 
     public void MoveCamera(Vector2 direction)
     {
+        isCameraMove = true;
+
+        CinemachineFramingTransposer framingTransposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+            if (framingTransposer != null)
+            {
+                float screenY = framingTransposer.m_ScreenY;
+
+                if (originScreenY == 0f)
+                    originScreenY = screenY;
+
+                float moveAmountY = direction.y * 0.3f;
+                screenY += moveAmountY;
+                screenY = Mathf.Clamp01(screenY);
+                framingTransposer.m_ScreenY = screenY;
+            }
+    }
+
+    private IEnumerator ResetCameraMove()
+    {
+        yield return new WaitForSeconds(0.1f); //돌아올 약간의 텀 시간 기다림
+        isCameraMove = false;
+    }
+
+    public void ResetCamera()
+    {
         CinemachineFramingTransposer framingTransposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         if (framingTransposer != null)
         {
-            // 현재 Screen Y 값을 가져옴
-            float screenY = framingTransposer.m_ScreenY;
-
-            // 원하는 방향으로 이동할 양을 설정
-            float moveAmountY = direction.y * 0.3f;
-
-            // Screen Y 값을 조정 (예: 좌우로 이동)
-            screenY += moveAmountY;
-
-            // 범위를 벗어나지 않도록 클램핑합니다. (일반적으로 0 ~ 1 사이 값으로 제한합니다)
-            screenY = Mathf.Clamp01(screenY);
-
-            // 변경된 값을 적용합니다.
-            framingTransposer.m_ScreenY = screenY;
+            framingTransposer.m_ScreenY = originScreenY;
         }
+        StartCoroutine(ResetCameraMove());
     }
 }

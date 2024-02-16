@@ -28,14 +28,16 @@ public class Skill_SwordAuror : SkillBase
     {
         if (GameManager.Instance.player == null) return;
         _swordAurorPrefab = Resources.Load<GameObject>("Skills/SwordAuror");
-        Quaternion rotation = Quaternion.Euler(0, 0, GameManager.Instance.player.transform.localScale.x > 0 ? 0 : 180);
-        GameObject projectile = Instantiate(_swordAurorPrefab, transform.position, rotation);
-        Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
+        GameObject swordAurorPrefab = ResourceManager.Instance.InstantiatePrefab("SwordAuror", pooling: true);
+        float swordAurorScale = GameManager.Instance.player._controller.IsFacingRight ? 1 : -1;
+        swordAurorPrefab.transform.localScale = new Vector2(swordAurorScale, 1);
+        swordAurorPrefab.transform.position = transform.position;
+        Rigidbody2D swordAurorRigidbody = swordAurorPrefab.GetComponent<Rigidbody2D>();
 
-        if (projectileRigidbody != null)
+        if (swordAurorRigidbody != null)
         {
             float speed = 30f;
-            projectileRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
+            swordAurorRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
         }
     }
 }

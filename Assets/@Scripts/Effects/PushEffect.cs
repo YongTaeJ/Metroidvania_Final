@@ -22,6 +22,6 @@ public class PushEffect : MonoBehaviour
 
     private void ReturnToPool()
     {
-        PoolManager.Instance.Push(gameObject);
+        ResourceManager.Instance.Destroy(this.gameObject);
     }
 }

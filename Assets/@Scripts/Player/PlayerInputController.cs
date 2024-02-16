@@ -107,6 +107,10 @@ public class PlayerInputController : MonoBehaviour
 
     public event Action OnInteraction;
 
+    // Coroutine
+
+    private Coroutine _coMoveCamera;
+
     //임시
 
     private GameObject attackEffectPrefab;
@@ -182,16 +186,30 @@ public class PlayerInputController : MonoBehaviour
 
     public void Look(InputAction.CallbackContext context)
     {
-        Vector2 look = context.ReadValue<Vector2>();
-        if(context.performed)
+        Vector2 direction = context.ReadValue<Vector2>();
+        if (_moveInput.x == 0 && _touchingDirection.IsGrounded)
         {
-            CameraManager.Instance.MoveCamera(look);
-        }
-        else if (context.canceled)
-        {
+            if (context.performed)
+            {
+                if (_coMoveCamera != null)
+                    StopCoroutine(_coMoveCamera);
 
+                _coMoveCamera = StartCoroutine(MoveCameraDelay(direction));
+            }
+            else if (context.canceled)
+            {
+                if (_coMoveCamera != null)
+                    StopCoroutine(_coMoveCamera);
+
+                CameraManager.Instance.ResetCamera();
+            }
         }
-        
+    }
+
+    private IEnumerator MoveCameraDelay(Vector2 direction)
+    {
+        yield return new WaitForSeconds(0.5f);
+        CameraManager.Instance.MoveCamera(direction);
     }
 
     private bool CanWallJump()
@@ -386,35 +404,46 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (context.performed && !IsAttacking)
+            if (context.performed && !IsAttacking && !_player.IsHit)
             {
                 IsAttacking = true;
                 if (_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack);
-                    attackEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp");
-                    GameObject attackEffect = PoolManager.Instance.Pop(attackEffectPrefab);
-
+                    GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp", pooling : true);
+                    var playerAttack = attackEffect.GetComponent<PlayerAttack>();
+                    
                     float attackDirection = IsFacingRight ? 1f : -1f;
                     Vector2 attackPoint = new Vector2(transform.position.x + (attackDirection * 1.5f), transform.position.y + 0.5f);
 
-                    attackEffect.transform.SetParent(transform);
-                    attackEffect.transform.localScale = new Vector2(1.5f, 1.5f);
+                    float attackscale = IsFacingRight ? 1f : -1f;
+                    Vector2 scale = new Vector2(attackscale, 1);
+
+                    attackEffect.transform.localScale = scale;
                     attackEffect.transform.position = attackPoint;
+
+                    playerAttack.hasAttacked = false;
+
                     _isFirstAttack = false;
+
                 }
                 else if (!_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack2);
-                    attackEffect2Prefab = Resources.Load<GameObject>("Prefabs/Effects/AttackEffect_Temp_2");
-                    GameObject attackEffect2 = PoolManager.Instance.Pop(attackEffect2Prefab);
-
+                    GameObject attackEffect2 = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp_2", pooling: true);
+                    var playerAttack = attackEffect2.GetComponent<PlayerAttack>();
+                    
                     float attackDirection = IsFacingRight ? 1f : -1f;
                     Vector2 attackPoint = new Vector2(transform.position.x + (attackDirection * 1.5f), transform.position.y + 0.1f);
 
-                    attackEffect2.transform.SetParent(transform);
-                    attackEffect2.transform.localScale = new Vector2(1.5f, 1.5f);
+                    float attackscale = IsFacingRight ? 1f : -1f;
+                    Vector2 scale = new Vector2(attackscale, 1);
+
+                    attackEffect2.transform.localScale = scale;
                     attackEffect2.transform.position = attackPoint;
+
+                    playerAttack.hasAttacked = false;
+
                     _isFirstAttack = true;
                 }
                 StartCoroutine(ResetAttackAnimation());
@@ -425,7 +454,7 @@ public class PlayerInputController : MonoBehaviour
     // TODO 리펙토링 필요해 보임
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         IsAttacking = false;
     }
 
