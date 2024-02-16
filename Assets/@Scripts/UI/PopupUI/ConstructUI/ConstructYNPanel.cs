@@ -84,11 +84,4 @@ public class ConstructYNPanel : YNPanel
         CameraManager.Instance.ReturnCameraTarget();
         Destroy(gameObject);
     }
-
-    //private void ChangeCameraTarget(Vector3 Position)
-    //{
-    //    Transform buildingTransform = new GameObject("BuildingTarget").transform;
-    //    buildingTransform.position = Position;
-    //    CameraManager.Instance._virtualCamera.Follow = buildingTransform;
-    //}
 }

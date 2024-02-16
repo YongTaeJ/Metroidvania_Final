@@ -45,6 +45,10 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
+    /// <summary>
+    /// 시네머신 카메라를 원하는 타겟으로 옮기는 기능입니다.
+    /// </summary>
+    /// <param name="Target"></param>
     public void ChangeCameraTarget(Transform Target)
     {
         if (_originalFollowTransform == null)
@@ -55,6 +59,9 @@ public class CameraManager : Singleton<CameraManager>
         _virtualCamera.Follow = Target;
     }
 
+    /// <summary>
+    /// ChangeCameraTarget으로 변경했던 타겟을 원래 상태(플레이어)에게 돌리는 기능입니다.
+    /// </summary>
     public void ReturnCameraTarget()
     {
         if (_originalFollowTransform != null)
