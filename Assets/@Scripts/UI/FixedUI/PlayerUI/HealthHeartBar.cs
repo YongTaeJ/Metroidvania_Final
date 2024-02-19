@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class HealthHeartBar : MonoBehaviour
 {
-    public GameObject heartPrefab;
+    private GameObject heartPrefab;
     List<PlayerHeart> hearts = new List<PlayerHeart>();
+
+    private void Awake()
+    {
+        heartPrefab = Resources.Load<GameObject>("UI/Heart");
+    }
 
     public void Update()
     {
@@ -32,7 +37,7 @@ public class HealthHeartBar : MonoBehaviour
 
     public void CreateEmptyHeart()
     {
-        GameObject newHeart = Instantiate(heartPrefab);
+        GameObject newHeart = PoolManager.Instance.Pop(heartPrefab);
         newHeart.transform.SetParent(transform);
 
         PlayerHeart heartComponent = newHeart.GetComponent<PlayerHeart>();

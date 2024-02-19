@@ -36,7 +36,7 @@ public class Player : MonoBehaviour, IDamagable
     }
     private bool _invincible = false;
     private Coroutine _coInvincible;
-    private float _invincibilityTime = 1f;
+    public float _invincibilityTime;
 
     public bool IsAlive
     {
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         var items = ItemManager.Instance.GetItemDict(ItemType.Skill);
 
-
+        // 스킬이 늘어난다면 스킬 데이터를 만들어서 key값을 맟줘 해당하는 키의 ID와 이름을 가진 스킬을 넣을 수 있게 수정 할 수 있을듯
         foreach (var item in items.Values)
         {
             if (ItemManager.Instance.HasItem(ItemType.Skill, item.ItemData.ID))
@@ -118,6 +118,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         if (Invincible == false && IsAlive)
         {
+            _invincibilityTime = 1f;
             Invincible = true;
             StartCoroutine(FlashPlayer());
             IsHit = true;

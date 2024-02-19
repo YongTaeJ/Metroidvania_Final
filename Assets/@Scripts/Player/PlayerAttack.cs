@@ -65,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
     private void Attack(GameObject enemy)
     {
         enemy.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player._damage, GameManager.Instance.player.transform);
-        StartCoroutine(HitPause(0.05f));
+        StartCoroutine(HitPause(0.07f));
         CameraManager.Instance.CameraShake(_impulseSource, 1f);
         Vector2 attackPoint = enemy.transform.position;
 

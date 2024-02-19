@@ -20,11 +20,11 @@ public class Skill_SwordAuror : SkillBase
             return false;
         }
         GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Skill);
-        LaunchProjectile();
+        SwordAuror();
         return true;
     }
 
-    private void LaunchProjectile()
+    private void SwordAuror()
     {
         if (GameManager.Instance.player == null) return;
         _swordAurorPrefab = Resources.Load<GameObject>("Skills/SwordAuror");

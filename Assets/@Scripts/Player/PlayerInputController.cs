@@ -101,7 +101,6 @@ public class PlayerInputController : MonoBehaviour
     private float _dashTime = 0.2f;
     private int _maxDash = 1;
     public int _dashCount;
-    private TrailRenderer _trailRenderer;
 
     // Action
 
@@ -124,7 +123,6 @@ public class PlayerInputController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _touchingDirection = GetComponent<TouchingDirection>();
-        _trailRenderer = GetComponent<TrailRenderer>();
         _animator = GetComponent<Animator>();
         _player = GetComponent<Player>();
     }
@@ -156,7 +154,6 @@ public class PlayerInputController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
-
         Iswalking = _moveInput != Vector2.zero;
     }
 
@@ -404,7 +401,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (context.performed && !IsAttacking && !_player.IsHit)
+            if (context.performed && !IsAttacking && !_player.IsHit &&!_isDashing)
             {
                 IsAttacking = true;
                 if (_isFirstAttack)
@@ -460,7 +457,7 @@ public class PlayerInputController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (enabled)
+        if (!IsAttacking && !_player.IsHit)
         {
             if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
@@ -473,16 +470,30 @@ public class PlayerInputController : MonoBehaviour
     {
         if (_dashCount > 0)
         {
-            _animator.SetTrigger(AnimatorHash.Dash);
+            //_animator.SetTrigger(AnimatorHash.Dash);
             _canDash = false;
             _isDashing = true;
+
+            // 대쉬에 무적 필요한지?
+            _player._invincibilityTime = _dashTime;
             _player.Invincible = true;
+
             float originalGravity = _baseGravity;
             _rigidbody.gravityScale = 0f;
+
+            List<GameObject> dashEffects = new List<GameObject>();
+
             _rigidbody.velocity = new Vector2(transform.localScale.x * _dashPower, 0f);
-            _trailRenderer.emitting = true;
-            yield return new WaitForSeconds(_dashTime);
-            _trailRenderer.emitting = false;
+
+            float elapsedTime = 0f;
+            while (elapsedTime < _dashTime)
+            {
+                var dashEffect = ResourceManager.Instance.InstantiatePrefab("DashEffect", pooling: true);
+                dashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
+                dashEffects.Add(dashEffect);
+                yield return new WaitForSeconds(0.04f);
+                elapsedTime += 0.04f;
+            }
             _rigidbody.gravityScale = originalGravity;
             _isDashing = false;
             _dashCount--;
