@@ -7,6 +7,7 @@ public class GoodsButton : MonoBehaviour
 {
     #region variables
     private InternalItemData _goodsData;
+    private ShoppingList _shoppingList;
     private BuyPopup _buyPopup;
     private Image _image;
     private TMP_Text _nameText;
@@ -19,9 +20,10 @@ public class GoodsButton : MonoBehaviour
         InitComponents();
     }
 
-    public void Initialize(BuyPopup popup)
+    public void Initialize(ShopUI shopUI)
     {
-        _buyPopup = popup;
+        _shoppingList = shopUI.ShoppingList;
+        _buyPopup = shopUI.BuyPopup;
     }
 
     public void SetGoodsData(InternalItemData data)
@@ -45,6 +47,7 @@ public class GoodsButton : MonoBehaviour
 
     private void OnClickButton()
     {
+        _shoppingList.gameObject.SetActive(false);
         _buyPopup.SetPopupData(_goodsData);
     }
 }

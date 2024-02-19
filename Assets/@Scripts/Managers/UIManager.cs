@@ -9,14 +9,16 @@ using UnityEngine.UI;
 public enum PopupType
 {
     None,
-    Status,
+    Status, // => 삭제 필요!
     ToolTip,
     ChatBox,
     Pause,
     Interact,
     GameOver,
     Construct,
-    Shop
+    Shop,
+    Inventory,
+    Building
 }
 
 public enum DisposableType

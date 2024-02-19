@@ -10,23 +10,26 @@ public class BuyPopup : MonoBehaviour
     private InternalItemData _currentGoods;
     private Image _itemImage;
     private TMP_Text _itemName;
-    private TMP_Text _itemCost;
     private QuantitySetter _quantitySetter;
+    private ShoppingList _shoppingList;
     private Button _buyButton;
+    private Button _exitButton;
     #endregion
 
-    public void Initialize()
+    public void Initialize(ShopUI shopUI)
     {
-
         _itemImage = transform.Find("ItemImage").GetComponent<Image>();
         _itemName = transform.Find("ItemName").GetComponent<TMP_Text>();
-        _itemCost = transform.Find("ItemCost").GetComponent<TMP_Text>();
         _quantitySetter = transform.Find("QuantitySetter").GetComponent<QuantitySetter>();
         _buyButton = transform.Find("BuyButton").GetComponent<Button>();
+        _exitButton = transform.Find("ExitButton").GetComponent<Button>();
+
+        _shoppingList = shopUI.ShoppingList;
 
         _quantitySetter.Initialize();
 
         _buyButton.onClick.AddListener(OnClickBuyButton);
+        _exitButton.onClick.AddListener(ClosePopup);
     }
 
     public void SetPopupData(InternalItemData data)
@@ -35,15 +38,16 @@ public class BuyPopup : MonoBehaviour
         _currentGoods = data;
         _itemImage.sprite = ItemManager.Instance.GetSprite(data.ItemType, data.ID);
         _itemName.text = ItemManager.Instance.GetItemData(data.ItemType, data.ID).Name ;
-        _itemCost.text = data.Stock.ToString();
-        _quantitySetter.ResetQuantity();
+        // TODO => _itemCost.text = data.Stock.ToString(); QuantitySetter로 이관.
+        _quantitySetter.ResetQuantity(data.Stock);
     }
 
     public void OnClickBuyButton()
     {
-        gameObject.SetActive(false);
+        ClosePopup();
+
+        int cost = _quantitySetter.GetCost();
         int quantity = _quantitySetter.GetQuantity();
-        int cost = _currentGoods.Stock * quantity;
 
         if(ItemManager.Instance.UseItem(ItemType.Gold, 0, cost))
         {
@@ -54,6 +58,12 @@ public class BuyPopup : MonoBehaviour
         {
             // TODO => 구매 안됨 팝업같은거?
         }
+    }
+
+    public void ClosePopup()
+    {
+        _shoppingList.gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
 

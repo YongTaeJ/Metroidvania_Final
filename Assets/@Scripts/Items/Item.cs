@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
+/// <summary>
+/// 저장 가능한 요소들을 모아놓은 enum입니다.
+/// </summary>
 public enum ItemType
 {
     None,

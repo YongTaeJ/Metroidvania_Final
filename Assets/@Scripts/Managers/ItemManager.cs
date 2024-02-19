@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
+using JetBrains.Annotations;
 
 public class ItemManager : Singleton<ItemManager>
 {
@@ -33,7 +34,6 @@ public class ItemManager : Singleton<ItemManager>
 
             _items[data.ItemType].Add(data.ID, new Item(data));
         }
-        // TODO => 이후 Saved Data를 기준으로 Stock 설정. 없으면 Stock 전부 0인거 하나 만들어주기
     }
 
     private void LoadSprites()
@@ -140,6 +140,12 @@ public class ItemManager : Singleton<ItemManager>
     public int GetItemStock(ItemType itemType, int ID)
     {
         return _items[itemType][ID].Stock;
+    }
+
+    public Item GetItem(ItemType itemType, int ID)
+    {
+        // StockChanged 접근이 필요한 경우!!!!!
+        return _items[itemType][ID];
     }
 }
 

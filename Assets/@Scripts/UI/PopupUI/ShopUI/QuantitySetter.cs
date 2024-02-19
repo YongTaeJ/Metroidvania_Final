@@ -7,19 +7,21 @@ using UnityEngine.UI;
 public class QuantitySetter : MonoBehaviour
 {
     #region variables
+    private int _currentCost;
     private int _quantity;
     private TMP_Text _quantityText;
+    private TMP_Text _costText;
     #endregion
 
     public void Initialize()
     {
         InitComponents();
-        ResetQuantity();
     }
 
     private void InitComponents()
     {
         _quantityText = transform.Find("QuantityText").GetComponent<TMP_Text>();
+        _costText = transform.Find("CostText").GetComponent<TMP_Text>();
 
         Button _minus5Button = transform.Find("-5Button").GetComponent<Button>();
         Button _minus1Button = transform.Find("-1Button").GetComponent<Button>();
@@ -50,17 +52,26 @@ public class QuantitySetter : MonoBehaviour
         }
 
         _quantityText.text = _quantity.ToString();
+        _costText.text = "가격 : " + (_currentCost * _quantity).ToString() + " Gold";
+    }
+
+    public int GetCost()
+    {
+        return _quantity * _currentCost;
     }
 
     public int GetQuantity()
     {
-        return int.Parse(_quantityText.text);
+        return _quantity;
     }
 
-    public void ResetQuantity()
+    public void ResetQuantity(int cost)
     {
+        _currentCost = cost;
         _quantity = 1;
+
         _quantityText.text = _quantity.ToString();
+        _costText.text = "가격 : " + cost.ToString() + " Gold";
     }
 
 

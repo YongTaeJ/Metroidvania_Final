@@ -8,7 +8,7 @@ public class ShoppingList : MonoBehaviour
     private Transform _contentContainer;
     private List<GoodsButton> _buttons;
 
-    public void Initialize(BuyPopup popup)
+    public void Initialize(ShopUI shopUI)
     {
         _button = Resources.Load<GameObject>("UI/GoodsButton");
         _buttons = new List<GoodsButton>();
@@ -17,7 +17,7 @@ public class ShoppingList : MonoBehaviour
         for(int i = 0; i < 10; i++)
         {
             var button = Instantiate(_button , _contentContainer).GetComponent<GoodsButton>();
-            button.Initialize(popup);
+            button.Initialize(shopUI);
             _buttons.Add(button);
         }
     }

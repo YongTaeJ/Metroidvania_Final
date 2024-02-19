@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,7 @@ public class ChatBoxUI : MonoBehaviour
     private TMP_Text _nameText;
     private TMP_Text _chatText;
     private Transform _choiceArea;
+    private GameObject _chatArea;
     private IEnumerator _typingCoroutine;
     private int _buttonIndex;
     private GameObject[] _choiceButtons;
@@ -23,6 +25,7 @@ public class ChatBoxUI : MonoBehaviour
     #region MonoBehaviour
     private void Awake()
     {
+        _chatArea = transform.Find("ChatArea").gameObject;
         _nameText = transform.Find("ChatArea/NameText").GetComponent<TMP_Text>();
         _chatText = transform.Find("ChatArea/ChatText").GetComponent<TMP_Text>();
         _choiceArea = transform.Find("ChoiceArea");
@@ -72,7 +75,7 @@ public class ChatBoxUI : MonoBehaviour
     #region public
     public IEnumerator StartChat(List<(string name, string chat)> chatDatas)
     {
-        gameObject.SetActive(true);
+        SetChatArea(true);
 
         int currentIndex = 0;
         int length = chatDatas.Count;
@@ -96,11 +99,13 @@ public class ChatBoxUI : MonoBehaviour
 
         while(!_keyValue) yield return null;
 
-        gameObject.SetActive(false);
+        SetChatArea(false);
     }
 
     public void MakeButton(string content, UnityAction unityAction)
     {
+        SetChoiceArea(true);
+        
         GameObject buttonObj = _choiceButtons[_buttonIndex++];
         buttonObj.SetActive(true);
         Button button = buttonObj.GetComponent<Button>();
@@ -108,6 +113,20 @@ public class ChatBoxUI : MonoBehaviour
 
         contextText.text = content;
         button.onClick.AddListener(unityAction);
+    }
+
+    private void SetChatArea(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+        _chatArea.SetActive(isActive);
+        _choiceArea.gameObject.SetActive(!isActive);
+    }
+
+    private void SetChoiceArea(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+        _chatArea.SetActive(!isActive);
+        _choiceArea.gameObject.SetActive(isActive);
     }
 
     public void CloseButtons()
@@ -118,12 +137,6 @@ public class ChatBoxUI : MonoBehaviour
             obj.SetActive(false);
             obj.GetComponent<Button>().onClick.RemoveAllListeners();
         }
-    }
-
-    // TODO => 경로 추적용 임시 코드(그냥 UI매니저로 호출할지 고민중)
-    public void ActiveUI(bool flag)
-    {
-        gameObject.SetActive(flag);
     }
     #endregion
 }
