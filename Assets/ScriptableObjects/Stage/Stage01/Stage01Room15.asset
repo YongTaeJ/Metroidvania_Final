@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stage01Room15
   m_EditorClassIdentifier: 
   spawnInfos:
-  - monsterPrefab: {fileID: 1102426181093380764, guid: 5512ecef00a62664cae57de8f1498be4, type: 3}
+  - monsterPrefab: {fileID: 1102426181093380764, guid: a32fb1137b39c56449f12f2ff9bfa60a, type: 3}
     spawnPositions:
     - {x: 329.5, y: -150, z: 0}
     - {x: 334.5, y: -139, z: 0}

@@ -48,9 +48,10 @@ public class ChestBase : MonoBehaviour
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
 
         // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
-        Renderer renderer = GetComponent<Renderer>();
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("IsOpen", true);
+
         Collider2D collider2D = GetComponent<Collider2D>();
-        renderer.enabled = false;
         collider2D.enabled = false;
 
         StartCoroutine(CoChestTextOff());
@@ -58,7 +59,7 @@ public class ChestBase : MonoBehaviour
 
     private IEnumerator CoChestTextOff()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
         UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
         GameObject.Destroy(gameObject);
     }

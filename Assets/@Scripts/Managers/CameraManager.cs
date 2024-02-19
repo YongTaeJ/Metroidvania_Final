@@ -5,10 +5,10 @@ using Cinemachine;
 
 public class CameraManager : Singleton<CameraManager>
 {
-    [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+    public CinemachineVirtualCamera VirtualCamera {get; private set;}
     private float originScreenY = 0.5f;
     private bool isCameraMove = false; //카메라 움직임과 임펄스가 동시에 일어나면 m_Screen이 이상한 수치에 고정됨
-
+    private Transform _originalFollowTransform;
     public override bool Initialize()
     {
         return base.Initialize();
@@ -24,14 +24,14 @@ public class CameraManager : Singleton<CameraManager>
 
     public void GetCamera(CinemachineVirtualCamera camera)
     {
-        _virtualCamera = camera;
+        VirtualCamera = camera;
     }
 
     public void MoveCamera(Vector2 direction)
     {
         isCameraMove = true;
 
-        CinemachineFramingTransposer framingTransposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        CinemachineFramingTransposer framingTransposer = VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
             if (framingTransposer != null)
             {
@@ -55,12 +55,37 @@ public class CameraManager : Singleton<CameraManager>
 
     public void ResetCamera()
     {
-        CinemachineFramingTransposer framingTransposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        CinemachineFramingTransposer framingTransposer = VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         if (framingTransposer != null)
         {
             framingTransposer.m_ScreenY = originScreenY;
         }
         StartCoroutine(ResetCameraMove());
+    }
+
+    /// <summary>
+    /// 시네머신 카메라를 원하는 타겟으로 옮기는 기능입니다.
+    /// </summary>
+    /// <param name="Target"></param>
+    public void ChangeCameraTarget(Transform Target)
+    {
+        if (_originalFollowTransform == null)
+        {
+            _originalFollowTransform = VirtualCamera.Follow;
+        }
+
+        VirtualCamera.Follow = Target;
+    }
+
+    /// <summary>
+    /// ChangeCameraTarget으로 변경했던 타겟을 원래 상태(플레이어)에게 돌리는 기능입니다.
+    /// </summary>
+    public void ReturnCameraTarget()
+    {
+        if (_originalFollowTransform != null)
+        {
+            VirtualCamera.Follow = _originalFollowTransform;
+        }
     }
 }
