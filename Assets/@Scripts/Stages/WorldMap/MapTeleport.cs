@@ -61,7 +61,7 @@ public class MapTeleport : MonoBehaviour
 
         if (_selectedButtonIndex == 0)
         {
-            GameManager.Instance.player._Hp = GameManager.Instance.player._maxHp;
+            GameManager.Instance.player._hp = GameManager.Instance.player._maxHp;
         }
     }
 

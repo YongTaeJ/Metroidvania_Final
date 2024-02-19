@@ -506,23 +506,15 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!Input.GetKey(KeyCode.DownArrow) && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 0))
+            if (!Input.GetKey(KeyCode.DownArrow) && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 _player._skills[0].Activate();
             }
-            else
-            {
-                Debug.Log("아이템 없음");
-            }
 
-            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 1))
+            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _player._skills[1].Activate();
                 _player.Invincible = true;
-            }
-            else
-            {
-                Debug.Log("아이템 없음");
             }
         }
     }

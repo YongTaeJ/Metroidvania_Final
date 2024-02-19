@@ -6,7 +6,7 @@ using TMPro;
 
 public class Skill_SwordAuror : SkillBase
 {
-    private GameObject _swordAurorPrefab;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -19,6 +19,8 @@ public class Skill_SwordAuror : SkillBase
         {
             return false;
         }
+        
+        
         GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Skill);
         SwordAuror();
         return true;
@@ -27,7 +29,7 @@ public class Skill_SwordAuror : SkillBase
     private void SwordAuror()
     {
         if (GameManager.Instance.player == null) return;
-        _swordAurorPrefab = Resources.Load<GameObject>("Skills/SwordAuror");
+
         GameObject swordAurorPrefab = ResourceManager.Instance.InstantiatePrefab("SwordAuror", pooling: true);
         float swordAurorScale = GameManager.Instance.player._controller.IsFacingRight ? 1 : -1;
         swordAurorPrefab.transform.localScale = new Vector2(swordAurorScale, 1);

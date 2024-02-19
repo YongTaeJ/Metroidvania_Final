@@ -4,12 +4,37 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using System;
 
 public class Player : MonoBehaviour, IDamagable
 {
     public int _maxHp = 10;
-    public int _Hp;
+    public int _hp;
     public int _damage = 5;
+    public int _maxMana = 100;
+    public int _mana;
+
+    public int HP
+    {
+        get { return _hp; }
+        set
+        {
+            Debug.Log($"HP Changed: {_hp}/{_maxHp}");
+            _hp = value;
+            OnHealthChanged?.Invoke(_hp, _maxHp);
+        }
+    }
+
+    public int Mana
+    {
+        get { return _mana; }
+        set
+        {
+            _mana = value;
+            OnManaChanged?.Invoke(_mana, _maxMana);
+        }
+    }
+
     public bool IsHit
     {
         get
@@ -64,6 +89,10 @@ public class Player : MonoBehaviour, IDamagable
     public PlayerInputController _controller;
     private PlayerInput _playerInput;
     private CinemachineImpulseSource _impulseSource;
+
+    public event Action<float, float> OnHealthChanged;
+    public event Action<float, float> OnManaChanged;
+
     private void Awake()
     {
         _controller = GetComponent<PlayerInputController>();
@@ -80,7 +109,8 @@ public class Player : MonoBehaviour, IDamagable
     private void Initialized()
     {
         SetSkill();
-        _Hp = _maxHp;
+        HP = _maxHp;
+        _mana = _maxMana;
     }
 
     public void SetSkill()
@@ -122,13 +152,13 @@ public class Player : MonoBehaviour, IDamagable
             Invincible = true;
             StartCoroutine(FlashPlayer());
             IsHit = true;
-            GameManager.Instance.player._Hp -= damage;
+            HP -= damage;
             StartCoroutine(ResetHurtAnimation());
             StartCoroutine(Knockback(target));
             CameraManager.Instance.CameraShake(_impulseSource, _shakeForce);
-            if (GameManager.Instance.player._Hp <= 0)
+            if (HP <= 0)
             {
-                GameManager.Instance.player._Hp = 0;
+                HP = 0;
                 OnDie();
             }
         }
@@ -155,7 +185,6 @@ public class Player : MonoBehaviour, IDamagable
         Invincible = false;
     }
 
-    // TODO 연속해서 맞을경우 알파값이 낮은 상태로 고정되는 버그 있음 애니메이션에 적용해서 이부분은 없앨수 있을듯
     private IEnumerator FlashPlayer()
     {
         float flashSpeed = 0.1f;
@@ -194,7 +223,7 @@ public class Player : MonoBehaviour, IDamagable
         transform.position = new Vector3(263f, 0f, 0f);
         IsAlive = true;
         _playerInput.enabled = true;
-        _Hp = _maxHp;
+        Initialized();
         UIManager.Instance.SetFixedUI(true);
         UIManager.Instance.ClosePopupUI(PopupType.GameOver);
     }

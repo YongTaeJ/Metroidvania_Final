@@ -6,15 +6,20 @@ public class HealthHeartBar : MonoBehaviour
 {
     private GameObject heartPrefab;
     List<PlayerHeart> hearts = new List<PlayerHeart>();
-
+    private Transform healthUI;
     private void Awake()
     {
         heartPrefab = Resources.Load<GameObject>("UI/Heart");
+        healthUI = transform.Find("HealthUI");
     }
 
-    public void Update()
+    private void OnEnable()
     {
-        DrawHearts();
+        if (GameManager.Instance != null && GameManager.Instance.player != null)
+        {
+            //GameManager.Instance.player.OnHealthChanged += DrawHearts;
+            DrawHearts();
+        }
     }
 
     public void DrawHearts()
@@ -30,7 +35,7 @@ public class HealthHeartBar : MonoBehaviour
 
         for(int i = 0;i < hearts.Count; i++)
         {
-            int heartStatusRemainder = (int)Mathf.Clamp(GameManager.Instance.player._Hp - (i * 2), 0, 2);
+            int heartStatusRemainder = (int)Mathf.Clamp(GameManager.Instance.player._hp - (i * 2), 0, 2);
             hearts[i].SetHeartImage((HeartStatus)heartStatusRemainder);
         }
     }

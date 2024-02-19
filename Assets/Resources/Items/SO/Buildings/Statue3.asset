@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82f7d3499ff23ae40af0d1973b7c3df8, type: 3}
-  m_Name: VillagerHouse 3
+  m_Name: Statue3
   m_EditorClassIdentifier: 
   _ID: 10002
   _constructName: "\uC5EC\uC2E0\uC0C1\uC7AC\uAC743"

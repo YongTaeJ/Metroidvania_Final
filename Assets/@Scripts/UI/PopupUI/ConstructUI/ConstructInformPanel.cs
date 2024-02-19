@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConstructInformPanel : MonoBehaviour, IInformable
+public class ConstructInformPanel : MonoBehaviour
 {
     #region variables
     private Image _buildingImage;
@@ -31,8 +31,15 @@ public class ConstructInformPanel : MonoBehaviour, IInformable
         _constructButton = transform.Find("ConstructButton").GetComponent<ConstructButton>();
     }
 
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void SetInformPanel(Item item)
     {
+        gameObject.SetActive(true);
+
         int ID = item.ItemData.ID;
 
         var data = ItemManager.Instance.GetItemData(ItemType.Building, ID);
@@ -85,7 +92,7 @@ public class ConstructInformPanel : MonoBehaviour, IInformable
         if(materials.Count == 0)
         {
             Debug.Log("건설 시 요구 재료는 꼭 필요합니다. 추가 요망!!");
-            _materialText.text = "";
+            _materialText.text = "요구 재료 : 없음";
             return;
         }
 
