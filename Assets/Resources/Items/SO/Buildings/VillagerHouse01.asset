@@ -15,8 +15,19 @@ MonoBehaviour:
   _ID: 5
   _constructName: "\uC8FC\uBBFC\uC758 \uC9D1"
   _constructDescription: "\uB9C8\uC744 \uC8FC\uBBFC\uC758 \uC9D1\uC785\uB2C8\uB2E4."
-  _requiredConditions: []
-  _requiredMaterials: []
+  _effectDescription: 
+  _requiredConditions:
+  - itemType: 1
+    ID: 0
+  - itemType: 3
+    ID: 0
+  - itemType: 9
+    ID: 0
+  _requiredMaterials:
+  - ID: 0
+    Stock: 10
+  - ID: 0
+    Stock: 20
   _statElements: []
   _buildingData:
     buildingPrefab: {fileID: 5243295841220544545, guid: 08e8781462a009940ba03c8fd95c7b73, type: 3}

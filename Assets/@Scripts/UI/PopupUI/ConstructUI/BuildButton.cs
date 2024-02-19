@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class BuildingButton : MonoBehaviour
+public class BuildButton : MonoBehaviour
 {
     #region variables
     private TMP_Text _nameText;
@@ -43,7 +44,13 @@ public class BuildingButton : MonoBehaviour
         var SO = SOManager.Instance.GetBuildingSO(ID);
         Sprite sprite = ItemManager.Instance.GetSprite(ItemType.Building, ID);
         _nameText.text = SO.ConstructName;
-
+        SetBuildable();
+        _image.sprite = sprite;
+    }
+    
+    private void SetBuildable()
+    {
+        var SO = SOManager.Instance.GetBuildingSO(_ID);
         if(SO.IsBuildable())
         {
             SetYes();
@@ -52,8 +59,6 @@ public class BuildingButton : MonoBehaviour
         {
             SetNo();
         }
-
-        _image.sprite = sprite;
     }
 
 
@@ -78,6 +83,7 @@ public class BuildingButton : MonoBehaviour
     public bool IsValidButton()
     {
         // 해당 건물이 없으면 => 지을 수 있으니까 True
+        SetBuildable();
         bool flag = ItemManager.Instance.HasItem(ItemType.Building, _ID);
         return !flag;
     }
