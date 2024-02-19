@@ -53,7 +53,9 @@ public class ConstructYNPanel : YNPanel
         GameObject buildingPrefab = buildingSO.BuildingData.buildingPrefab;
         Vector3 buildingPosition = buildingSO.BuildingData.buildingPosition;
         GameObject buildingObject = Instantiate(buildingPrefab, buildingPosition, Quaternion.identity);
-        
+        Animator animator = buildingObject.GetComponent<Animator>();
+        animator.SetBool("IsConstruct", true);
+
         HideUI(true);
 
         CameraManager.Instance.ChangeCameraTarget(buildingObject.gameObject.transform);

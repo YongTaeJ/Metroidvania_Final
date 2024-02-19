@@ -47,7 +47,6 @@ public class ChestBase : MonoBehaviour
         UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
 
-        // 아래의 renderer 부분을 애니메이션으로 교체할 수 있을듯
         Animator animator = GetComponent<Animator>();
         animator.SetBool("IsOpen", true);
 
