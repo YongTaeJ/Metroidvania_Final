@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PortalTrigger : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _checkCanvas;
+    private Canvas _checkCanvas;
     [SerializeField]
     private int _portalIndex;
     [SerializeField]
@@ -15,7 +15,7 @@ public class PortalTrigger : MonoBehaviour
 
     private void Awake()
     {
-        _checkCanvas.SetActive(false);
+        _checkCanvas = MapManager.Instance.CheckCanvas;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,7 +60,7 @@ public class PortalTrigger : MonoBehaviour
 
     private void CheckBuyPortal()
     {
-        _checkCanvas.SetActive(true);
+        _checkCanvas.gameObject.SetActive(true);
     }
 
     private void BuyPortal()
@@ -71,13 +71,13 @@ public class PortalTrigger : MonoBehaviour
 
     public void ClickYes()
     {
-        _checkCanvas.SetActive(false);
+        _checkCanvas.gameObject.SetActive(false);
         BuyPortal();
         Debug.Log(ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex));
     }
     public void ClickNo()
     {
-        _checkCanvas.SetActive(false);
+        _checkCanvas.gameObject.SetActive(false);
         Debug.Log("Cancel");
     }
 }

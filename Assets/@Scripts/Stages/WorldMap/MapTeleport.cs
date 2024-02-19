@@ -8,43 +8,53 @@ using UnityEngine.UI;
 
 public class MapTeleport : MonoBehaviour
 {
-    // 순간이동 위치 - 마을, 포탈1(시작부분), 포탈2(보스방 앞), 포탈3(미니보스방)
-    // 포탈4(TD부분), 포탈5(Stage 2 입구), 포탈6(Stage 3 입구)
+    // 포탈 위치
+    // ID - 0 : Town - 마을
+    // ID - 1 : Stair - Stage 1 보스방 앞
+    // ID - 2 : Shelter - Stage 1 좌측상단 챌린지방
+    // ID - 3 : Cathedral - Stage 2 입구
 
     [SerializeField] 
-    private GameObject _checkCanvas;
+    private Canvas _checkCanvas;
     private int _selectedButtonIndex;
+    public Camera _mapCamera;
 
     public Button[] portalButtons;
-    public Transform[] portalLocations;
+    public Vector3[] portalLocations;
     public TextMeshProUGUI portalText;
 
     private void Awake()
     {
-        _checkCanvas.SetActive(false);
+        _checkCanvas = MapManager.Instance.CheckCanvas;
+        _mapCamera = GetComponentInChildren<Camera>();
 
         for (int i = 0; i < portalButtons.Length; i++)
         {
             int index = i;
             portalButtons[i].onClick.AddListener(() => ClickTeleport(index));
         }
+
+        //portalLocations[0] = new Vector3(264, 0, 0);
+        //portalLocations[1] = new Vector3(301, -188.5f, 0);
+        //portalLocations[2] = new Vector3(210, 104.5f, 0);
+        //portalLocations[3] = new Vector3(416.5f, -146.5f, 0);
     }
 
     public void ClickTeleport(int index)
     {
         _selectedButtonIndex = index;
         PortalText(index);
-        _checkCanvas.SetActive(true);
+        _checkCanvas.gameObject.SetActive(true);
 
         if (index != 0)
         {
-            MapManager.Instance.moveMapCamera(portalLocations[_selectedButtonIndex].position);
+            MoveMapCamera(portalLocations[_selectedButtonIndex]);
         }
     }
 
     public void ClickYes()
     {
-        _checkCanvas.SetActive(false);
+        _checkCanvas.gameObject.SetActive(false);
         MapManager.Instance.CloseLargeMap();
         Teleport(_selectedButtonIndex);
         UIManager.Instance.OpenPopupUI(PopupType.Interact);
@@ -57,32 +67,39 @@ public class MapTeleport : MonoBehaviour
 
     public void ClickNo()
     {
-        _checkCanvas.SetActive(false);
+        _checkCanvas.gameObject.SetActive(false);
     }
 
     private void Teleport(int index)
     {
         StartCoroutine(CoTeleportDelay(0.8f));
         GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
-        GameManager.Instance.player.transform.position = portalLocations[index].position;
+        GameManager.Instance.player.transform.position = portalLocations[index];
     }
 
     private IEnumerator CoTeleportDelay(float seconds)
     {
-        MapManager.Instance.LoadingImage(true);
+        MapManager.Instance.LoadImage(true);
         yield return new WaitForSeconds(seconds);
-        MapManager.Instance.LoadingImage(false);
+        MapManager.Instance.LoadImage(false);
     }
 
     private void PortalText(int index)
     {
+        ItemData itemData = ItemManager.Instance.GetItemData(ItemType.Map, index);
+        string portalName = itemData.Name;
         if (index == 0)
         {
             portalText.text = "마을(으/로)\r\n" + "이동하시겠습니까?";
         }
         else
         {
-            portalText.text = "포탈" + index + "(으/로)\r\n" + "이동하시겠습니까?";
+            portalText.text = portalName + "(으/로)\r\n" + "이동하시겠습니까?";
         }
+    }
+
+    private void MoveMapCamera(Vector3 position)
+    {
+        _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
     }
 }

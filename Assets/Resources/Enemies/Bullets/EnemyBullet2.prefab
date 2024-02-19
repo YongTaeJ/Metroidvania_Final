@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -754107926, guid: a6b486892ae44d549bac32df4aa81cf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.78039217}
   m_FlipX: 0
@@ -139,7 +139,7 @@ Transform:
   m_Children:
   - {fileID: 2523346322655153245}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &957608758545577470
 Rigidbody2D:

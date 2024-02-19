@@ -2,31 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class MapManager : Singleton<MapManager>
 {
-    [SerializeField] private GameObject _worldMap;
-    [SerializeField] private GameObject _worldMapUI;
-    public GameObject _loadingImage;
-    private Camera _mapCamera;
-
-    public MapData _mapData;
-
+    public Canvas WorldMap { get; private set; }
+    public Canvas Portal { get; private set; }
+    public Canvas CheckCanvas { get; private set; }
+    public Canvas LoadingImage { get; private set; }
+    public GameObject MapTiles { get; private set; }
     public bool IsWorldMapOpen { get; private set; }
+    public MapData MapData { get; private set; }
+
+
+    private PlayerInput _mapInputActions;
 
     protected override void Awake()
     {
         base.Awake();
+        AssignProperties();
+    }
+    private void AssignProperties()
+    {
+        Canvas worldMapPrefab = Resources.Load<Canvas>("Map/WorldMap");
+        Canvas portalPrefab = Resources.Load<Canvas>("Map/Portal");
+        Canvas mapCheckPrefab = Resources.Load<Canvas>("Map/MapCheck");
+        Canvas loadingImagePrefab = Resources.Load<Canvas>("Map/LoadingImage");
+        GameObject MapTilesPrefab = Resources.Load<GameObject>("Map/MapTiles");
 
-        CloseLargeMap();
-        _mapData = GetComponent<MapData>();
-        _mapCamera = GetComponentInChildren<Camera>();
-        this.GetComponent<PlayerInput>().enabled = false;
+        WorldMap = Instantiate(worldMapPrefab, transform);
+        Portal = Instantiate(portalPrefab, transform);
+        CheckCanvas = Instantiate(mapCheckPrefab, transform);
+        LoadingImage = Instantiate(loadingImagePrefab, transform);
+        MapTiles = Instantiate(MapTilesPrefab, transform);
 
-        // 이거 두개는 묶어서 포탈 쪽으로 넘기기
-        _worldMapUI.SetActive(false);
-        _loadingImage.SetActive(false);
+        MapData = GetComponentInChildren<MapData>();
+        _mapInputActions = GetComponentInChildren<PlayerInput>();
 
+        if (_mapInputActions != null)
+        {
+            _mapInputActions.enabled = false;
+        }
     }
 
     private void Update()
@@ -35,7 +51,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (!IsWorldMapOpen)
             {
-                _mapData.UpdateMapData();
+                MapData.UpdateMapData();
                 OpenLargeMap();
             }
             else
@@ -47,7 +63,7 @@ public class MapManager : Singleton<MapManager>
 
     public void OpenLargeMap()
     {
-        _worldMap.SetActive(true);
+        WorldMap.gameObject.SetActive(true);
         IsWorldMapOpen = true;
         Time.timeScale = 0;
 
@@ -56,42 +72,31 @@ public class MapManager : Singleton<MapManager>
         if (GameManager.Instance.player != null)
         {
             GameManager.Instance.player.GetComponent<PlayerInput>().enabled = false;
-            
-            this.GetComponent<PlayerInput>().enabled = true;
-            Vector3 _playerPosition = GameManager.Instance.player.transform.position;
-            moveMapCamera(_playerPosition);
-
-            //_worldMapUI.SetActive(true);
+            var MapControl = GetComponentInChildren<PlayerInput>();
+            MapControl.enabled = true;
+            Vector3 position = GameManager.Instance.player.transform.position;
+            Camera camera = GetComponentInChildren<Camera>();
+            camera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
         }
     }
 
     public void CloseLargeMap()
     {
-        _worldMap.SetActive(false);
-        _worldMapUI.SetActive(false);
-        IsWorldMapOpen = false;
-        Time.timeScale = 1.0f;
-
         if (GameManager.Instance.player != null)
         {
+            var MapControl = GetComponentInChildren<PlayerInput>();
+            MapControl.enabled = false;
             GameManager.Instance.player.GetComponent<PlayerInput>().enabled = true;
-            this.GetComponent<PlayerInput>().enabled = false;
         }
+
+        WorldMap.gameObject.SetActive(false);
+        Portal.gameObject.SetActive(false);
+        IsWorldMapOpen = false;
+        Time.timeScale = 1.0f;
     }
 
-
-    /// <summary>
-    /// 맵 이동 시에 카메라 위치를 보정해주는 함수입니다.
-    /// </summary>
-    /// <param name="position"></param>
-    public void moveMapCamera(Vector3 position)
+    public void LoadImage(bool isActive)
     {
-        _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
-    }
-
-    // 이건 포탈 쪽으로 넘어갈 예정
-    public void LoadingImage(bool isActive)
-    {
-        _loadingImage.SetActive(isActive);
+        LoadingImage.gameObject.SetActive(isActive);
     }
 }

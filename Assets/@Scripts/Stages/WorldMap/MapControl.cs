@@ -8,12 +8,19 @@ using UnityEngine.UI;
 
 public class MapControl : MonoBehaviour
 {
-    [SerializeField] private Vector2 _minCameraBound;
-    [SerializeField] private Vector2 _maxCameraBound;
-    [SerializeField] private Camera _mapCamera;
+    private Vector2 _minCameraBound;
+    private Vector2 _maxCameraBound;
+    public Camera _mapCamera;
 
     private Vector2 _mapMove;
     private float _scrollSpeed = 0.5f;
+
+    private void Awake()
+    {
+        _minCameraBound = new Vector2(-20, -150);
+        _maxCameraBound = new Vector2(375, 50);
+        _mapCamera = GetComponentInChildren<Camera>();
+    }
 
 
     private void Update()
