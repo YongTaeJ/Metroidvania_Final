@@ -5,47 +5,59 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-/// <summary>
-/// 리펙토링 필요
-/// </summary>
 public class SkillUI : MonoBehaviour
 {
-    private GameObject SwordAuror;
-    private GameObject PlungeAttack;
+    private Dictionary<int, GameObject> skillUIObjects = new Dictionary<int, GameObject>();
+
     private void Start()
     {
-        FindChildObject();
+        InitializeSkillUI();
+        UpdateSkillUI();
     }
 
-    private void Update()
-    {
-        ActivateChildObject();
-    }
 
-    private void FindChildObject()
+    private void InitializeSkillUI()
     {
-        SwordAuror = transform.Find("Skill_SwordAuror").gameObject;
-        PlungeAttack = transform.Find("Skill_PlungeAttack").gameObject;
-
-        if (SwordAuror != null)
+       
+        foreach (Transform child in transform)
         {
-            SwordAuror.SetActive(false);
-        }
-        if (PlungeAttack != null)
-        {
-            PlungeAttack.SetActive(false);
+            int skillId = GetSkillI(child.name);
+            if (skillId != -1) 
+            {
+                skillUIObjects[skillId] = child.gameObject;
+                child.gameObject.SetActive(false);
+            }
         }
     }
 
-    private void ActivateChildObject()
+    private int GetSkillI(string name)
     {
-        if (SwordAuror != null && ItemManager.Instance.HasItem(ItemType.Skill, 0))
+        if (name.Contains("Skill_SwordAuror"))
         {
-            SwordAuror.SetActive(true);
+            return 0;
         }
-        if (PlungeAttack != null && ItemManager.Instance.HasItem(ItemType.Skill, 1))
+        else if (name.Contains("Skill_PlungeAttack"))
         {
-            PlungeAttack.SetActive(true);
+            return 1;
         }
+        else
+        {
+            return -1;
+        }
+    }
+
+    private void UpdateSkillUI()
+    {
+        foreach (var skillUI in skillUIObjects)
+        {
+            int skillId = skillUI.Key;
+            GameObject uiObject = skillUI.Value;
+            uiObject.SetActive(ItemManager.Instance.HasItem(ItemType.Skill, skillId));
+        }
+    }
+
+    public void RefreshSkills()
+    {
+        UpdateSkillUI();
     }
 }
