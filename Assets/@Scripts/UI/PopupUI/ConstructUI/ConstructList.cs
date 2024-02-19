@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BuildingList : MonoBehaviour
+public class ConstructList : MonoBehaviour
 {
     private GameObject _buildingButton;
     private Transform _contentContainer;
-    private List<BuildingButton> _buildingButtons;
+    private List<BuildButton> _buildingButtons;
 
     public void Initialize(ConstructUI parents)
     {
-        _buildingButtons = new List<BuildingButton>();
-        _buildingButton = Resources.Load<GameObject>("UI/BuildingButton");
+        _buildingButtons = new List<BuildButton>();
+        _buildingButton = Resources.Load<GameObject>("UI/BuildButton");
         _contentContainer = transform.Find("Viewport/Content");
 
         var buildings = ItemManager.Instance.GetItemDict(ItemType.Building);
@@ -21,7 +21,7 @@ public class BuildingList : MonoBehaviour
         {
             if(building.Stock == 0)
             {
-                var buildingButton = Instantiate(_buildingButton, _contentContainer).GetComponent<BuildingButton>();
+                var buildingButton = Instantiate(_buildingButton, _contentContainer).GetComponent<BuildButton>();
                 buildingButton.Initialize(building.ItemData.ID);
                 buildingButton.InitAction(parents);
                 _buildingButtons.Add(buildingButton);

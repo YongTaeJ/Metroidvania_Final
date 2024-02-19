@@ -565,7 +565,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (context.started)
         {
-            UIManager.Instance.OpenPopupUI(PopupType.Status);
+            UIManager.Instance.OpenPopupUI(PopupType.Inventory);
         }
     }
 

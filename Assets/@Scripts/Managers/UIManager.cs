@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public enum PopupType
 {
     None,
-    Status, // => 삭제 필요!
     ToolTip,
     ChatBox,
     Pause,

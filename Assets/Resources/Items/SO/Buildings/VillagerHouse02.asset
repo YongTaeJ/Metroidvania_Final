@@ -15,6 +15,7 @@ MonoBehaviour:
   _ID: 3
   _constructName: "\uC8FC\uBBFC\uC758 \uC9D1"
   _constructDescription: "\uB9C8\uC744 \uC8FC\uBBFC\uC758 \uC9D1\uC785\uB2C8\uB2E4."
+  _effectDescription: 
   _requiredConditions: []
   _requiredMaterials: []
   _statElements: []

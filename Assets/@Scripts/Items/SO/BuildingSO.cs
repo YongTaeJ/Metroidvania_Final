@@ -10,6 +10,8 @@ public class BuildingSO : ScriptableObject, IHasID
     [SerializeField] private int _ID;
     [SerializeField] private string _constructName;
     [SerializeField] private string _constructDescription;
+    // => 효과는 생산성을 위해 코드를 통한 분류가 아니라 단순 텍스트를 통해 설명
+    [SerializeField] private string _effectDescription;
     [SerializeField] private List<RequiredCondition> _requiredConditions;
     [SerializeField] private List<RequiredMaterial> _requiredMaterials;
     [SerializeField] private List<StatElement> _statElements;
@@ -18,6 +20,7 @@ public class BuildingSO : ScriptableObject, IHasID
     public int ID { get {return _ID;} set { } }
     public string ConstructName => _constructName;
     public string ConstructDescription => _constructDescription;
+    public string EffectDescription => _effectDescription;
     public List<RequiredCondition> RequiredConditions => _requiredConditions;
     public List<RequiredMaterial> RequiredMaterials => _requiredMaterials;
     public List<StatElement> StatElements => _statElements;
