@@ -28,6 +28,7 @@ public class InventorySlotContanier : MonoBehaviour
     public void ShowSlots(ItemType type)
     {
         Refresh();
+        gameObject.SetActive(true);
         InventoryItemSlots currentSlots = _inventorySlots[type];
         currentSlots.gameObject.SetActive(true);
     }

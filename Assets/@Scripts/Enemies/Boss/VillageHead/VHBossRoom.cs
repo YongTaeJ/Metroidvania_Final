@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +12,6 @@ public class VHBossRoom : BossRoom
     [SerializeField] private int _chatID_defeat_0;
     [SerializeField] private int _chatID_defeat_1;
     private VHEntrySet _VHEntrySet;
-    private Vector3 _deadLocation;
     #endregion
 
     protected override IEnumerator EnterBossRoom()
@@ -63,14 +61,10 @@ public class VHBossRoom : BossRoom
         chatDatas = ChatManager.Instance.GetChatData(_chatID_defeat_1);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
-        // 전투가 끝났으므로 문을 엽니다.
+        // 전투가 끝났으므로 문을 열고, 아이템을 드랍합니다.
+        DropManager.Instance.DropItem(_dropTableIndex, _deadLocation);
         DoorControl(false);
         _playerInput.enabled = true;
-    }
-
-    public void GetDeadLocation(Vector3 location)
-    {
-        _deadLocation = location;
     }
 
 }

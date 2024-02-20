@@ -56,6 +56,8 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
 
         if(_currentHP <= 0)
         {
+            StopAllCoroutines();
+            _spriteRenderer.material = _originalMaterial;
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Dead]);
             return;
         }

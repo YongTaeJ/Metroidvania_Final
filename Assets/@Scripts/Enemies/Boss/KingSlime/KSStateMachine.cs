@@ -11,7 +11,7 @@ public class KSStateMachine : BossStateMachine
         StateDictionary = new()
         {
             {EnemyStateType.Hurt, new KSHurtState(this)},
-            {EnemyStateType.Dead, new EnemyDeadState(this)}
+            {EnemyStateType.Dead, new KSDeadState(this)}
         };
 
         AttackList = new()
