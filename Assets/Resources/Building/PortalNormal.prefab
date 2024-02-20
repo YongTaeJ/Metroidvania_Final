@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 7573260289809303082}
   - component: {fileID: 8021091470649871726}
   - component: {fileID: 31617038247404532}
+  - component: {fileID: 154106722293614998}
   m_Layer: 0
   m_Name: PortalNormal
   m_TagString: Untagged
@@ -470,6 +471,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abd800a112b90d48bdff77224c5e6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkCanvas: {fileID: 0}
+  _buyPortal: {fileID: 0}
   _portalIndex: 0
   _portalPrice: 50
+--- !u!114 &154106722293614998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5496346380615788531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d593562ede4224fbede46be4fcbc54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _portalIndex: 0
