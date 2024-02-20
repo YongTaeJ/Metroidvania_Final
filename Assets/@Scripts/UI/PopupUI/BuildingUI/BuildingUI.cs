@@ -15,7 +15,18 @@ public class BuildingUI : MonoBehaviour
 
         BuildingList.Initialize(this);
 
+        // ExitButton
         Button exitButton = transform.Find("ExitButton").GetComponent<Button>();
         exitButton.onClick.AddListener(() => gameObject.SetActive(false) );
+
+        // ToBuildingButton
+        Button toInventoryUIButton = transform.Find("ToInventoryUIButton").GetComponent<Button>();
+        toInventoryUIButton.onClick.AddListener
+        ( () =>
+        {
+            UIManager.Instance.OpenPopupUI(PopupType.Inventory);
+            gameObject.SetActive(false);
+        }
+        );
     }
 }
