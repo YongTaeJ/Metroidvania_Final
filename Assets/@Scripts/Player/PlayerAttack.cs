@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void ExecuteAttack()
+    private void ExecuteAttack()
     {
         if (hitEnemies.Count == 0) return; // 충돌한 Enemy가 없으면 반환
 
@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
             // 가장 가까운 Enemy에 대한 공격 수행
             Attack(closestEnemy.enemy);
-
+            GameManager.Instance.player.GainMana(5);
             // 공격 후 리스트 클리어
             hitEnemies.Clear();
         }

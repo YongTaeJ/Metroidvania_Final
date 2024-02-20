@@ -26,9 +26,10 @@ public class SkillBase : MonoBehaviour
 
     public virtual bool Activate()
     {
-        if (_cooldown > 0) return false;
-        _cooldown = Cooldown;
+        if (_cooldown > 0 || GameManager.Instance.player.Mana < ManaCost) return false; // 쿨다운이 남아있거나 마나가 부족하면 활성화하지 않습니다.
 
+        _cooldown = Cooldown;
+        GameManager.Instance.player.ConsumeMana(ManaCost);
         return true;
     }
 }

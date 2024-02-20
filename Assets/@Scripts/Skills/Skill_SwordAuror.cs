@@ -10,7 +10,8 @@ public class Skill_SwordAuror : SkillBase
     public override void Initialize()
     {
         base.Initialize();
-        Cooldown = 5f;
+        Cooldown = .2f;
+        ManaCost = 30;
     }
 
     public override bool Activate()

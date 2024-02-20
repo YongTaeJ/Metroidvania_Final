@@ -12,7 +12,8 @@ public class Skill_PlungeAttack : SkillBase
     public override void Initialize()
     {
         base.Initialize();
-        Cooldown = 5f;
+        Cooldown = .2f;
+        ManaCost = 35;
         _impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 

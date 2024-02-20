@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CameraManager : Singleton<CameraManager>
 {
-    public CinemachineVirtualCamera VirtualCamera {get; private set;}
+    public CinemachineVirtualCamera VirtualCamera;
     private float originScreenY = 0.5f;
     private bool isCameraMove = false; //카메라 움직임과 임펄스가 동시에 일어나면 m_Screen이 이상한 수치에 고정됨
     private Transform _originalFollowTransform;

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -125,6 +126,8 @@ public class PlayerInputController : MonoBehaviour
         _touchingDirection = GetComponent<TouchingDirection>();
         _animator = GetComponent<Animator>();
         _player = GetComponent<Player>();
+
+       
     }
 
     private void FixedUpdate()
@@ -165,6 +168,11 @@ public class PlayerInputController : MonoBehaviour
     {
         _moveInput = direction;
         Iswalking = _moveInput != Vector2.zero;
+    }
+
+    public Vector2 MoveInput()
+    {
+        return _moveInput;
     }
 
     private void Flip()

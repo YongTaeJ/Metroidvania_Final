@@ -19,9 +19,12 @@ public class Player : MonoBehaviour, IDamagable
         get { return _hp; }
         set
         {
-            Debug.Log($"HP Changed: {_hp}/{_maxHp}");
-            _hp = value;
-            OnHealthChanged?.Invoke(_hp, _maxHp);
+            int newValue = Mathf.Clamp(value, 0, _maxHp);
+            if (_hp != newValue)
+            {
+                _hp = newValue;
+                OnHealthChanged?.Invoke(_hp, _maxHp);
+            }
         }
     }
 
@@ -30,8 +33,12 @@ public class Player : MonoBehaviour, IDamagable
         get { return _mana; }
         set
         {
-            _mana = value;
-            OnManaChanged?.Invoke(_mana, _maxMana);
+            int newValue = Mathf.Clamp(value, 0, _maxMana);
+            if (_mana != newValue)
+            {
+                _mana = newValue;
+                OnManaChanged?.Invoke(_mana, _maxMana);
+            }
         }
     }
 
@@ -162,6 +169,17 @@ public class Player : MonoBehaviour, IDamagable
                 OnDie();
             }
         }
+    }
+
+    public void ConsumeMana(int amount)
+    {
+        Mana -= amount;
+        if (Mana < 0) Mana = 0; 
+    }
+
+    public void GainMana(int amount)
+    {
+        Mana += amount;
     }
 
     private IEnumerator Knockback(Transform target)
