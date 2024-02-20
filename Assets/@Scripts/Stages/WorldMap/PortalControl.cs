@@ -5,18 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PortalControl : MonoBehaviour
 {
-    private int _portalIndex;
-    private PortalTrigger _portalTrigger;
+    [SerializeField] private int _portalIndex;
+    [SerializeField] private int _portalPrice = 50;
     protected PlayerInput _playerInput;
-
-    private void Awake()
-    {
-        _portalTrigger = GetComponent<PortalTrigger>();
-        if (_portalTrigger != null)
-        {
-            _portalIndex = _portalTrigger.PortalIndex;
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -51,10 +42,9 @@ public class PortalControl : MonoBehaviour
         }
         else
         {
-            _portalTrigger.PopupBuyPortal();
+            MapManager.Instance.ActivateBuyPortalUI(_portalIndex, _portalPrice);
         }
     }
-
     public void ClosePortalMap()
     {
         MapManager.Instance.CloseLargeMap();

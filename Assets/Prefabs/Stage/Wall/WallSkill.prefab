@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7426578311378480788}
   - component: {fileID: 9113519137816460183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tileset_02_188
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2890237826068833562}
   - component: {fileID: 7743574546825102423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tileset_02_181
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3221233018769377783}
   - component: {fileID: 2217244888146248895}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tileset_02_214
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 259467129764697535}
   - component: {fileID: -5685557308569944390}
   - component: {fileID: 9209541624034889668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644906145618080621}
   - component: {fileID: 1976251726355976512}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
