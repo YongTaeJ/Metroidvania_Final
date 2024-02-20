@@ -125,4 +125,13 @@ public class MapManager : Singleton<MapManager>
     {
         LoadingImage.gameObject.SetActive(false);
     }
+
+    public void ActivateBuyPortalUI(int portalIndex, int portalPrice)
+    {
+        BuyPortal buyPortalScript = BuyPortal.GetComponentInChildren<BuyPortal>();
+        if (buyPortalScript != null)
+        {
+            buyPortalScript.ActivateUI(portalIndex, portalPrice);
+        }
+    }
 }

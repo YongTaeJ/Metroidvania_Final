@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2686167334143087123}
   - component: {fileID: 5291074058296424395}
   - component: {fileID: 423585400115383125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,9 +142,9 @@ GameObject:
   - component: {fileID: 1687575983224037172}
   - component: {fileID: 8083758615108225952}
   - component: {fileID: 8098086258940504173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallNormal
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
