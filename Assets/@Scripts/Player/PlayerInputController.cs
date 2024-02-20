@@ -104,18 +104,11 @@ public class PlayerInputController : MonoBehaviour
     public int _dashCount;
 
     // Action
-
     public event Action OnInteraction;
 
     // Coroutine
-
     private Coroutine _coMoveCamera;
 
-    //임시
-
-    private GameObject attackEffectPrefab;
-    private GameObject attackEffect2Prefab;
-    private GameObject wallSlideEffectPrefab;
     #endregion
 
     #region MonoBehaviour
@@ -224,18 +217,6 @@ public class PlayerInputController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        //if (_isDashing) return;
-
-        //if (_jumpCount > 0 && !_isWallJumping)
-        //{
-        //    GroundJump(context);
-        //}
-
-        //if(context.performed && CanWallJump())
-        //{
-        //    WallJump();
-        //}
-
         if (enabled)
         {
             if (context.started && !_isDashing)
@@ -301,55 +282,6 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    //private void GroundJump(InputAction.CallbackContext context)
-    //{
-    //    if (context.performed && _touchingDirection.IsGrounded)
-    //    {
-    //        PerformJump(_jumpPower);
-    //    }
-    //    else if (context.canceled)
-    //    {
-    //        ReduceJumpVelocity();
-    //    }
-    //}
-
-    //private void WallJump()
-    //{
-    //    _isWallJumping = true;
-    //    _wallJumpDirection = _isFacingRight ? 1f : -1f;
-    //    _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
-    //    _wallJumpTimer = _wallJumpTime;
-    //    _animator.SetTrigger(AnimatorHash.WallJump);
-    //    FlipCharacterDirectionOnWallJump();
-    //    Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
-    //}
-
-    //private void PerformJump(float power)
-    //{
-    //    _animator.SetTrigger(AnimatorHash.Jump);
-    //    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, power);
-    //    _jumpCount--;
-    //}
-
-    //private void ReduceJumpVelocity()
-    //{
-    //    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-    //    _jumpCount--;
-    //}
-
-    //private void FlipCharacterDirectionOnWallJump()
-    //{
-    //if (transform.localScale.x != _wallJumpDirection)
-    //    {
-    //        _isFacingRight = !_isFacingRight;
-    //        Vector3 localScale = transform.localScale;
-    //        localScale.x *= -1f;
-    //        transform.localScale = localScale;
-    //    }
-    //}
-
-
-
     private void CancelWallJump()
     {
         _isWallJumping = false;
@@ -361,7 +293,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
+            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y < 0 && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
             {
                 IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
@@ -385,23 +317,19 @@ public class PlayerInputController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
 
-            wallSlideEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/WallSlideEffect");
+            GameObject wallSlideParticle = ResourceManager.Instance.InstantiatePrefab("WallSlideParticle", pooling: true);
             if (!_touchingDirection.IsWall)
             {
                 yield return null;
             }
-            GameObject wallSlideEffect = PoolManager.Instance.Pop(wallSlideEffectPrefab);
 
-            float wallSlideDirection = IsFacingRight ? 0.25f : -0.25f;
-            Vector2 point = new Vector2(transform.position.x + wallSlideDirection, transform.position.y + 1.2f);
-            wallSlideEffect.transform.position = point;
+            float wallSlideDirection = IsFacingRight ? 0.5f : -0.5f;
+            Vector2 point = new Vector2(transform.position.x + wallSlideDirection, transform.position.y);
+            wallSlideParticle.transform.position = point;
 
             float wallSlideScale = IsFacingRight ? -1 : 1;
             Vector3 scale = new Vector3(wallSlideScale, 1, 1);
-            wallSlideEffect.transform.localScale = scale;
-
-            float wallSlideRotation = IsFacingRight ? 90 : 270;
-            wallSlideEffect.transform.rotation = Quaternion.Euler(0, 0, wallSlideRotation);
+            wallSlideParticle.transform.localScale = scale;
         }
     }
 

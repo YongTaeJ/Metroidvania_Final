@@ -9,14 +9,34 @@ public class ParticleMaterialChanger : MonoBehaviour
 
     public void ChangeMaterial(string enemy)
     {
-        // 적의 이름에 따라 적절한 머테리얼을 찾는 로직 구현
-       
-        // 여기서는 단순화를 위해 첫 번째 머테리얼을 사용합니다.
-        Material selectedMaterial = materials[0]; // 실제 게임에서는 enemyColor에 따라 선택해야 합니다.
+        int materialIndex = 0; // 기본 머테리얼 인덱스
 
-        // 파티클 시스템의 렌더러 컴포넌트를 가져옵니다.
+        // 적의 이름에 따라 머테리얼 인덱스 결정
+        switch (enemy)
+        {
+            case "Orc_Melee":
+            case "Orc_Ranged":
+            case "Turret":
+                materialIndex = 1; 
+                break;
+            case "BlueSlime":
+            case "Soul":
+            case "TutorialSlime": 
+                materialIndex = 2; 
+                break;
+            case "Bat":
+                materialIndex = 3; 
+                break;
+            case "Ground":
+                materialIndex = 4;
+                break;
+            default:
+                materialIndex = 0; // 기본값, 명시되지 않은 적의 경우
+                break;
+        }
+
+        var selectedMaterial = materials[materialIndex];
         var particleRenderer = particleSystem.GetComponent<ParticleSystemRenderer>();
-        // 머테리얼을 교체합니다.
         particleRenderer.material = selectedMaterial;
     }
 }

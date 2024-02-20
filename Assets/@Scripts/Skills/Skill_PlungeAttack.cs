@@ -32,27 +32,8 @@ public class Skill_PlungeAttack : SkillBase
 
     public void Shockwaves()
     {
-        CameraManager.Instance.CameraShake(_impulseSource, 1f);
-        Vector3 playerPosition = transform.position;
-        float distanceBetweenShockwaves = 1.0f;
-
-        Vector3 leftShockwavePosition = new Vector3(playerPosition.x - distanceBetweenShockwaves, playerPosition.y + 0.55f, playerPosition.z);
-        GameObject leftShockwave = ResourceManager.Instance.InstantiatePrefab("PlungeAttack", pooling: true);
-        leftShockwave.transform.position = leftShockwavePosition;
-        leftShockwave.transform.localScale = new Vector2(1, 1);
-        Rigidbody2D leftShockwaveRb = leftShockwave.GetComponent<Rigidbody2D>();
-
-        Vector3 rightShockwavePosition = new Vector3(playerPosition.x + distanceBetweenShockwaves, playerPosition.y + 0.55f, playerPosition.z);
-        GameObject rightShockwave = ResourceManager.Instance.InstantiatePrefab("PlungeAttack", pooling: true);
-        rightShockwave.transform.position = rightShockwavePosition;
-        rightShockwave.transform.localScale = new Vector2(-1, 1);
-        Rigidbody2D rightShockwaveRb = rightShockwave.GetComponent<Rigidbody2D>();
-
-        if (leftShockwaveRb != null && rightShockwaveRb != null)
-        {
-            float speed = 30f;
-            leftShockwaveRb.velocity = new Vector2(-speed, 0);
-            rightShockwaveRb.velocity = new Vector2(speed, 0);
-        }
+        CameraManager.Instance.CameraShake(_impulseSource, 2f);
+        GameObject Shockwave = ResourceManager.Instance.InstantiatePrefab("PlungeAttack", pooling: true);
+        Shockwave.transform.position = new Vector2(transform.position.x, transform.position.y + 2);
     }
 }

@@ -44,14 +44,12 @@ public class PauseUI : MonoBehaviour
 
     private void OnBackToMain()
     {
-        //스타트씬으로 돌아가기 ==있어야 하나?
         //SceneManager.LoadScene("StartScene");
     }
 
     private void OnExit()
     {
-        // 게임종료
-        //Application.Quit();
+        Application.Quit();
     }
 
     #endregion

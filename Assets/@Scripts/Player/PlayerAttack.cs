@@ -36,6 +36,12 @@ public class PlayerAttack : MonoBehaviour
             hitEnemies.Add(new EnemyHitInfo { enemy = collision.gameObject, distance = distance });
             ExecuteAttack();
         }
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
+            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial("Ground");
+            hitParticle.transform.position = collision.ClosestPoint(transform.position);
+        }
     }
 
     private void ExecuteAttack()
@@ -81,6 +87,7 @@ public class PlayerAttack : MonoBehaviour
         float hitParticleScale = GameManager.Instance.player._controller.IsFacingRight ? 1.0f : -1.0f;
 
         GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
+        hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(enemy.name);
         hitParticle.transform.position = spawnPosition;
         hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
 
