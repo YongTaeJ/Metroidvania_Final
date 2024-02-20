@@ -65,5 +65,6 @@ public class InventoryUI : MonoBehaviour
     private void Refresh()
     {
         CategoryImage.gameObject.SetActive(false);
+        InventorySlotContanier.gameObject.SetActive(false);
     }
 }

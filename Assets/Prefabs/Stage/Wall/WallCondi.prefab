@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1396349888488687141}
   - component: {fileID: 1693508308865602321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tileset_02_213
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1608531495110136020}
   - component: {fileID: 8071801770368585851}
   - component: {fileID: -6376123314025950110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallCondi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8509710939486700266}
   - component: {fileID: 281763801247931248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5097697965469355912}
   - component: {fileID: 6798825224352147490}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tileset_02_180
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7188404384022175970}
   - component: {fileID: 8035970775843004104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tileset_02_187
   m_TagString: Untagged
   m_Icon: {fileID: 0}

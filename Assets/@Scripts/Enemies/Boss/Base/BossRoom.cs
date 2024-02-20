@@ -14,7 +14,10 @@ public abstract class BossRoom : MonoBehaviour
     protected Collider2D _leftWall;
     protected Collider2D _rightWall;
     protected Transform _bossLocation;
+    protected Vector3 _deadLocation;
+    protected int _dropTableIndex;
     private bool _isProgress;
+
     #endregion
 
     #region MonoBehaviour
@@ -67,6 +70,16 @@ public abstract class BossRoom : MonoBehaviour
     {
         _isProgress = false;
         DoorControl(false);
+    }
+
+    public void GetDeadLocation(Vector3 location)
+    {
+        _deadLocation = location;
+    }
+
+    public void GetDropTableIndex(int ID)
+    {
+        _bossItemID = ID;
     }
 
     protected abstract IEnumerator EnterBossRoom();

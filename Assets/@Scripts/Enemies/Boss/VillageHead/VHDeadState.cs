@@ -7,6 +7,7 @@ public class VHDeadState : EnemyDeadState
     private VHBossRoom _bossRoom;
     public VHDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
+        // TODO => Boss Dead State 묶을 수 있음.
         _bossRoom = GameObject.Find("VHBossRoom").GetComponent<VHBossRoom>();
     }
 
@@ -14,8 +15,8 @@ public class VHDeadState : EnemyDeadState
     {
         if(_isDeadEnded)
         {
-            DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
             _bossRoom.GetDeadLocation(_stateMachine.transform.position);
+            _bossRoom.GetDropTableIndex(_stateMachine.EnemyData.DropTableIndex);
             _bossRoom.OnBossDead();
             MonoBehaviour.Destroy(_stateMachine.gameObject);
         }

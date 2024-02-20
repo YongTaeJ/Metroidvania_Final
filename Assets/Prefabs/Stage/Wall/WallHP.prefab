@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3870309719083236378}
   - component: {fileID: 7108052731599617514}
   - component: {fileID: 4901426482954903233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallHP
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,7 +130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4836131583030694314}
   - component: {fileID: 5811720479462365086}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PS_Tileset_12_21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7546081328828014380}
   - component: {fileID: 3389728682300260638}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 166660929115001224}
   - component: {fileID: 5114550747004013008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PS_Tileset_12_23
   m_TagString: Untagged
   m_Icon: {fileID: 0}

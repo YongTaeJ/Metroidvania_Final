@@ -161,8 +161,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 10
-  _Hp: 0
+  _hp: 0
   _damage: 0
+  _maxMana: 100
+  _mana: 0
+  _invincibilityTime: 0
   _animator: {fileID: 0}
   _rigidbody: {fileID: 0}
   _controller: {fileID: 0}

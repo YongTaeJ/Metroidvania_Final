@@ -34,6 +34,7 @@ public class MapTeleport : MonoBehaviour
             portalButtons[i].onClick.AddListener(() => ClickTeleport(index));
         }
 
+        UpdatePortalButton();
         //portalLocations[0] = new Vector3(264, 0, 0);
         //portalLocations[1] = new Vector3(301, -188.5f, 0);
         //portalLocations[2] = new Vector3(210, 104.5f, 0);
@@ -79,7 +80,7 @@ public class MapTeleport : MonoBehaviour
 
     private void PortalText(int index)
     {
-        ItemData itemData = ItemManager.Instance.GetItemData(ItemType.Map, index);
+        ItemData itemData = ItemManager.Instance.GetItemData(ItemType.Portal, index);
         string portalName = itemData.Name;
         if (index == 0)
         {
@@ -94,5 +95,20 @@ public class MapTeleport : MonoBehaviour
     private void MoveMapCamera(Vector3 position)
     {
         _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
+    }
+
+    private void UpdatePortalButton()
+    {
+        for (int i = 0; i < portalButtons.Length; i++)
+        {
+            if (ItemManager.Instance.HasItem(ItemType.Portal, i))
+            {
+                portalButtons[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                portalButtons[i].gameObject.SetActive(false);
+            }
+        }
     }
 }
