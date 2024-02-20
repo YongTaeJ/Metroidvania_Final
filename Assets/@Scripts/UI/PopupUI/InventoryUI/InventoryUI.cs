@@ -26,8 +26,19 @@ public class InventoryUI : MonoBehaviour
         InventorySlotContanier.Initialize(this);
         CategoryButtonContainer.Initialize(this);
 
-        Button button = transform.Find("ExitButton").GetComponent<Button>();
-        button.onClick.AddListener(() => gameObject.SetActive(false));
+        // ExitButton
+        Button exitButton = transform.Find("ExitButton").GetComponent<Button>();
+        exitButton.onClick.AddListener(() => gameObject.SetActive(false));
+
+        // ToBuildingButton
+        Button toBuildingUIButton = transform.Find("ToBuildingUIButton").GetComponent<Button>();
+        toBuildingUIButton.onClick.AddListener
+        ( () =>
+        {
+            UIManager.Instance.OpenPopupUI(PopupType.Building);
+            gameObject.SetActive(false);
+        }
+        );
 
         _isInitialized = true;
         

@@ -6,78 +6,42 @@ using UnityEngine.InputSystem;
 public class PortalTrigger : MonoBehaviour
 {
     [SerializeField]
-    private Canvas _checkCanvas;
+    private Canvas _buyPortal;
     [SerializeField]
     private int _portalIndex;
     [SerializeField]
     private int _portalPrice = 50;
-    protected PlayerInput _playerInput;
+
+    public int PortalIndex
+    {
+        get { return _portalIndex; }
+    }
 
     private void Awake()
     {
-        _checkCanvas = MapManager.Instance.CheckCanvas;
+        _buyPortal = MapManager.Instance.BuyPortal;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void PopupBuyPortal()
     {
-        if (collision.CompareTag("Player"))
-        {
-            _playerInput = collision.GetComponent<PlayerInput>();
-            var playerInputController = collision.GetComponent<PlayerInputController>();
-            playerInputController.OnInteraction += UsePortal;
-            UIManager.Instance.OpenPopupUI(PopupType.Interact);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            var playerInputController = collision.GetComponent<PlayerInputController>();
-            playerInputController.OnInteraction -= UsePortal;
-            UIManager.Instance.ClosePopupUI(PopupType.Interact);
-        }
-    }
-
-    private void UsePortal()
-    {
-        CheckHasPortal();
-        UIManager.Instance.ClosePopupUI(PopupType.Interact);
-    }
-
-    private void CheckHasPortal()
-    {
-        if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
-        {
-            MapManager.Instance.OpenLargeMap();
-        }
-        else
-        {
-            CheckBuyPortal();
-            Debug.Log("BUY PORTAL");
-        }
-    }
-
-    private void CheckBuyPortal()
-    {
-        _checkCanvas.gameObject.SetActive(true);
+        _buyPortal.gameObject.SetActive(true);
     }
 
     private void BuyPortal()
     {
-        ItemManager.Instance.AddItem(ItemType.Portal, _portalIndex);
         ItemManager.Instance.UseItem(ItemType.Gold, 0, _portalPrice);
+        ItemManager.Instance.AddItem(ItemType.Portal, _portalIndex);
+        Debug.Log("BuyPortal");
+        Debug.Log("UseGold");
     }
 
     public void ClickYes()
     {
-        _checkCanvas.gameObject.SetActive(false);
+        _buyPortal.gameObject.SetActive(false);
         BuyPortal();
-        Debug.Log(ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex));
     }
     public void ClickNo()
     {
-        _checkCanvas.gameObject.SetActive(false);
-        Debug.Log("Cancel");
+        _buyPortal.gameObject.SetActive(false);
     }
 }

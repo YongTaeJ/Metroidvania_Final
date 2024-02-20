@@ -18,7 +18,8 @@ public enum ItemType
     Building,
     Portal,
     Quest,
-    NPC
+    NPC,
+    Boss
 }
 
 public class Item

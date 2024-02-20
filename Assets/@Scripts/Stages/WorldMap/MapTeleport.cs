@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,15 +18,14 @@ public class MapTeleport : MonoBehaviour
     [SerializeField] 
     private Canvas _checkCanvas;
     private int _selectedButtonIndex;
-    public Camera _mapCamera;
+    private Camera _mapCamera;
 
-    public Button[] portalButtons;
-    public Vector3[] portalLocations;
-    public TextMeshProUGUI portalText;
+    [SerializeField] private Button[] portalButtons;
+    [SerializeField] private Vector3[] portalLocations;
+    [SerializeField] private TextMeshProUGUI portalText;
 
     private void Awake()
     {
-        _checkCanvas = MapManager.Instance.CheckCanvas;
         _mapCamera = GetComponentInChildren<Camera>();
 
         for (int i = 0; i < portalButtons.Length; i++)
@@ -55,8 +55,8 @@ public class MapTeleport : MonoBehaviour
     public void ClickYes()
     {
         _checkCanvas.gameObject.SetActive(false);
-        MapManager.Instance.CloseLargeMap();
         Teleport(_selectedButtonIndex);
+        MapManager.Instance.CloseLargeMap();
         UIManager.Instance.OpenPopupUI(PopupType.Interact);
 
         if (_selectedButtonIndex == 0)
@@ -72,16 +72,9 @@ public class MapTeleport : MonoBehaviour
 
     private void Teleport(int index)
     {
-        StartCoroutine(CoTeleportDelay(0.8f));
+        MapManager.Instance.LoadImage(true);
         GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
         GameManager.Instance.player.transform.position = portalLocations[index];
-    }
-
-    private IEnumerator CoTeleportDelay(float seconds)
-    {
-        MapManager.Instance.LoadImage(true);
-        yield return new WaitForSeconds(seconds);
-        MapManager.Instance.LoadImage(false);
     }
 
     private void PortalText(int index)

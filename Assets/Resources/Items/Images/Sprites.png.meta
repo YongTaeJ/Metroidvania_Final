@@ -3756,7 +3756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_173
+      name: BuildingIcon
       rect:
         serializedVersion: 2
         x: 416
@@ -5982,7 +5982,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_279
+      name: Inventory
       rect:
         serializedVersion: 2
         x: 736
@@ -6853,7 +6853,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BuildingIcon: 1598380160
       Equipment: -607506872
+      Inventory: -704791100
       Material: -376458160
       SkillBook: -867785791
       Sprites_0: 1758957638
@@ -6937,7 +6939,6 @@ TextureImporter:
       Sprites_170: -1130235671
       Sprites_171: 1049832603
       Sprites_172: -316366003
-      Sprites_173: 1598380160
       Sprites_174: 409783178
       Sprites_175: -1898101113
       Sprites_176: 1139890845
@@ -7052,7 +7053,6 @@ TextureImporter:
       Sprites_276: -350073655
       Sprites_277: 460910918
       Sprites_278: 1553641863
-      Sprites_279: -704791100
       Sprites_28: 1732866999
       Sprites_280: -1690682729
       Sprites_281: -1959937702

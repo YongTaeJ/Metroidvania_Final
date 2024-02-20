@@ -52,7 +52,7 @@ public class ChatBoxUI : MonoBehaviour
     }
     #endregion
 
-    #region ChatArea
+    #region private
     private IEnumerator TypeSentence(string sentence)
     {
         _chatText.text = "";
@@ -69,6 +69,20 @@ public class ChatBoxUI : MonoBehaviour
         return
         Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)
         || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) ||Input.GetKeyDown(KeyCode.C);
+    }
+
+    private void SetChatArea(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+        _chatArea.SetActive(isActive);
+        _choiceArea.gameObject.SetActive(!isActive);
+    }
+
+    private void SetChoiceArea(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+        _chatArea.SetActive(!isActive);
+        _choiceArea.gameObject.SetActive(isActive);
     }
     #endregion
 
@@ -113,20 +127,6 @@ public class ChatBoxUI : MonoBehaviour
 
         contextText.text = content;
         button.onClick.AddListener(unityAction);
-    }
-
-    private void SetChatArea(bool isActive)
-    {
-        gameObject.SetActive(isActive);
-        _chatArea.SetActive(isActive);
-        _choiceArea.gameObject.SetActive(!isActive);
-    }
-
-    private void SetChoiceArea(bool isActive)
-    {
-        gameObject.SetActive(isActive);
-        _chatArea.SetActive(!isActive);
-        _choiceArea.gameObject.SetActive(isActive);
     }
 
     public void CloseButtons()

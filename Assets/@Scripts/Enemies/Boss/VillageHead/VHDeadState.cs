@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class VHDeadState : EnemyDeadState
 {
-    private BossRoom _bossRoom;
+    private VHBossRoom _bossRoom;
     public VHDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _bossRoom = GameObject.Find("VHBossRoom").GetComponent<BossRoom>();
+        _bossRoom = GameObject.Find("VHBossRoom").GetComponent<VHBossRoom>();
     }
 
     public override void OnStateStay()
@@ -15,7 +15,8 @@ public class VHDeadState : EnemyDeadState
         if(_isDeadEnded)
         {
             DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
-            _bossRoom.InvokeInteract(_stateMachine.transform.position);
+            _bossRoom.GetDeadLocation(_stateMachine.transform.position);
+            _bossRoom.OnBossDead();
             MonoBehaviour.Destroy(_stateMachine.gameObject);
         }
     }
