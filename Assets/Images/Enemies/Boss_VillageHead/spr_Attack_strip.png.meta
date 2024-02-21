@@ -126,12 +126,12 @@ TextureImporter:
       name: spr_Attack_strip_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 8
-        width: 82
-        height: 64
+        x: 0
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,12 +147,12 @@ TextureImporter:
       name: spr_Attack_strip_1
       rect:
         serializedVersion: 2
-        x: 220
-        y: 8
-        width: 82
-        height: 64
+        x: 170
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: spr_Attack_strip_2
       rect:
         serializedVersion: 2
-        x: 390
-        y: 8
-        width: 82
-        height: 64
+        x: 340
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,12 +189,12 @@ TextureImporter:
       name: spr_Attack_strip_3
       rect:
         serializedVersion: 2
-        x: 560
-        y: 8
-        width: 82
-        height: 64
+        x: 510
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: spr_Attack_strip_4
       rect:
         serializedVersion: 2
-        x: 730
-        y: 8
-        width: 82
-        height: 64
+        x: 680
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,12 +231,12 @@ TextureImporter:
       name: spr_Attack_strip_5
       rect:
         serializedVersion: 2
-        x: 900
-        y: 8
-        width: 82
-        height: 64
+        x: 850
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,12 +252,12 @@ TextureImporter:
       name: spr_Attack_strip_6
       rect:
         serializedVersion: 2
-        x: 1070
-        y: 8
-        width: 82
-        height: 64
+        x: 1020
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -273,12 +273,12 @@ TextureImporter:
       name: spr_Attack_strip_7
       rect:
         serializedVersion: 2
-        x: 1240
-        y: 8
-        width: 82
-        height: 64
+        x: 1190
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -294,12 +294,12 @@ TextureImporter:
       name: spr_Attack_strip_8
       rect:
         serializedVersion: 2
-        x: 1410
-        y: 8
-        width: 82
-        height: 64
+        x: 1360
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -315,12 +315,12 @@ TextureImporter:
       name: spr_Attack_strip_9
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 8
-        width: 82
-        height: 64
+        x: 1530
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -336,12 +336,12 @@ TextureImporter:
       name: spr_Attack_strip_10
       rect:
         serializedVersion: 2
-        x: 1750
-        y: 8
-        width: 82
-        height: 64
+        x: 1700
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -357,12 +357,12 @@ TextureImporter:
       name: spr_Attack_strip_11
       rect:
         serializedVersion: 2
-        x: 1920
-        y: 8
-        width: 82
-        height: 64
+        x: 1870
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -378,12 +378,12 @@ TextureImporter:
       name: spr_Attack_strip_12
       rect:
         serializedVersion: 2
-        x: 2090
-        y: 8
-        width: 82
-        height: 64
+        x: 2040
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -399,12 +399,12 @@ TextureImporter:
       name: spr_Attack_strip_13
       rect:
         serializedVersion: 2
-        x: 2260
-        y: 8
-        width: 82
-        height: 64
+        x: 2210
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -420,12 +420,12 @@ TextureImporter:
       name: spr_Attack_strip_14
       rect:
         serializedVersion: 2
-        x: 2430
-        y: 8
-        width: 82
-        height: 64
+        x: 2380
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -441,12 +441,12 @@ TextureImporter:
       name: spr_Attack_strip_15
       rect:
         serializedVersion: 2
-        x: 2600
-        y: 8
-        width: 82
-        height: 64
+        x: 2550
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -462,12 +462,12 @@ TextureImporter:
       name: spr_Attack_strip_16
       rect:
         serializedVersion: 2
-        x: 2770
-        y: 8
-        width: 82
-        height: 64
+        x: 2720
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -483,12 +483,12 @@ TextureImporter:
       name: spr_Attack_strip_17
       rect:
         serializedVersion: 2
-        x: 2940
-        y: 8
-        width: 82
-        height: 64
+        x: 2890
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -504,12 +504,12 @@ TextureImporter:
       name: spr_Attack_strip_18
       rect:
         serializedVersion: 2
-        x: 3110
-        y: 8
-        width: 82
-        height: 64
+        x: 3060
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -525,12 +525,12 @@ TextureImporter:
       name: spr_Attack_strip_19
       rect:
         serializedVersion: 2
-        x: 3280
-        y: 8
-        width: 82
-        height: 64
+        x: 3230
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -546,12 +546,12 @@ TextureImporter:
       name: spr_Attack_strip_20
       rect:
         serializedVersion: 2
-        x: 3450
-        y: 8
-        width: 82
-        height: 64
+        x: 3400
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -567,12 +567,12 @@ TextureImporter:
       name: spr_Attack_strip_21
       rect:
         serializedVersion: 2
-        x: 3620
-        y: 8
-        width: 82
-        height: 64
+        x: 3570
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -588,12 +588,12 @@ TextureImporter:
       name: spr_Attack_strip_22
       rect:
         serializedVersion: 2
-        x: 3790
-        y: 8
-        width: 82
-        height: 64
+        x: 3740
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -609,12 +609,12 @@ TextureImporter:
       name: spr_Attack_strip_23
       rect:
         serializedVersion: 2
-        x: 3960
-        y: 8
-        width: 82
-        height: 64
+        x: 3910
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -630,12 +630,12 @@ TextureImporter:
       name: spr_Attack_strip_24
       rect:
         serializedVersion: 2
-        x: 4130
-        y: 8
-        width: 82
-        height: 64
+        x: 4080
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -651,12 +651,12 @@ TextureImporter:
       name: spr_Attack_strip_25
       rect:
         serializedVersion: 2
-        x: 4300
-        y: 8
-        width: 82
-        height: 64
+        x: 4250
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -672,12 +672,12 @@ TextureImporter:
       name: spr_Attack_strip_26
       rect:
         serializedVersion: 2
-        x: 4470
-        y: 8
-        width: 82
-        height: 64
+        x: 4420
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -693,12 +693,12 @@ TextureImporter:
       name: spr_Attack_strip_27
       rect:
         serializedVersion: 2
-        x: 4640
-        y: 8
-        width: 82
-        height: 64
+        x: 4590
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -714,12 +714,12 @@ TextureImporter:
       name: spr_Attack_strip_28
       rect:
         serializedVersion: 2
-        x: 4810
-        y: 8
-        width: 82
-        height: 64
+        x: 4760
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -735,12 +735,12 @@ TextureImporter:
       name: spr_Attack_strip_29
       rect:
         serializedVersion: 2
-        x: 4980
-        y: 8
-        width: 82
-        height: 64
+        x: 4930
+        y: 0
+        width: 170
+        height: 96
       alignment: 9
-      pivot: {x: 0.35, y: 0.5}
+      pivot: {x: 0.47, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

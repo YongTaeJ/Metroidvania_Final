@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 public class CreatureEditor : EditorWindow
 {
     private static Grid grid;
@@ -158,3 +157,4 @@ public class CreatureEditor : EditorWindow
         }
     }
 }
+#endif

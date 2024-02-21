@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -14,7 +15,11 @@ public class InventoryUI : MonoBehaviour
     public GameObject ItemPopupUIPrefab {get; private set;}
     #endregion
 
+    #region variables
+    private GameObject _dim;
+    private GameObject _exitButton;
     private bool _isInitialized = false;
+    #endregion
 
     private void Awake()
     {
@@ -26,8 +31,11 @@ public class InventoryUI : MonoBehaviour
         InventorySlotContanier.Initialize(this);
         CategoryButtonContainer.Initialize(this);
 
+        _dim = transform.Find("DataIndependent/Dim").gameObject;
+
         // ExitButton
-        Button exitButton = transform.Find("ExitButton").GetComponent<Button>();
+        _exitButton = transform.Find("ExitButton").gameObject;
+        Button exitButton = _exitButton.GetComponent<Button>();
         exitButton.onClick.AddListener(() => gameObject.SetActive(false));
 
         // ToBuildingButton
@@ -59,6 +67,8 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         if(!_isInitialized) return;
+
+        PopupAction();
         Refresh();
     }
 
@@ -66,5 +76,23 @@ public class InventoryUI : MonoBehaviour
     {
         CategoryImage.gameObject.SetActive(false);
         InventorySlotContanier.gameObject.SetActive(false);
+    }
+
+    private void PopupAction()
+    {
+        float time = 1f;
+
+        _dim.SetActive(false);
+        _exitButton.SetActive(false);
+
+        transform.localScale = Vector2.zero;
+        transform.DOScale(time, 1).SetEase(Ease.OutBounce);
+
+        TimerManager.Instance.StartTimer(time,
+        () =>
+        {
+            _exitButton.SetActive(true);
+            _dim.SetActive(true);
+        });
     }
 }

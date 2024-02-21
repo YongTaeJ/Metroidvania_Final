@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using System;
 
+#if UNITY_EDITOR
 public class MapEditorWindow : EditorWindow
 {
     private static Grid grid;
@@ -76,4 +74,4 @@ public class MapEditorWindow : EditorWindow
         //GUILayout.EndArea();
     }
 }
-
+#endif

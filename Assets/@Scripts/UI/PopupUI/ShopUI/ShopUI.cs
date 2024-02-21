@@ -1,3 +1,4 @@
+using DG.Tweening;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,11 +8,15 @@ using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
+    #region properties
     public ShoppingList ShoppingList {get; private set;}
     public BuyPopup BuyPopup {get; private set;}
+    #endregion
 
+    #region variables
     private TMP_Text _goldText;
     private Button _exitButton;
+    #endregion
 
     private void Awake()
     {
@@ -39,6 +44,8 @@ public class ShopUI : MonoBehaviour
     private void OnEnable()
     {
         if(_goldText == null) return;
+
+        PopupAction();
         
         var items = ItemManager.Instance.GetItemDict(ItemType.Gold);
         items[0].OnStockChanged -= ChangeGoldText;
@@ -54,5 +61,24 @@ public class ShopUI : MonoBehaviour
     private void ChangeGoldText(int x)
     {
         _goldText.text = "소지금 : " + x.ToString() + "Gold";
+    }
+
+    private void PopupAction()
+    {
+        float time = 1f;
+
+        _exitButton.gameObject.SetActive(false);
+        _goldText.gameObject.SetActive(false);
+
+        transform.localScale = Vector2.zero;
+        transform.DOScale(1, time).SetEase(Ease.OutBounce);
+
+        TimerManager.Instance.StartTimer(time,
+        () =>
+        {
+            _exitButton.gameObject.SetActive(true);
+            _goldText.gameObject.SetActive(true);
+        }
+        );
     }
 }

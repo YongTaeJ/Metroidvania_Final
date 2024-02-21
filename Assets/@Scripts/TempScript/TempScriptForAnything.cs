@@ -15,8 +15,10 @@ public class TempScriptForAnything : MonoBehaviour
     {
     }
 
+
+    [ContextMenu("Open Popup")]
     public void OpenShop()
     {
-        UIManager.Instance.OpenShopUI(0);
+        UIManager.Instance.OpenPopupUI(PopupType.Construct);
     }
 }

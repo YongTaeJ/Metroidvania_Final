@@ -16,6 +16,7 @@ public abstract class BossRoom : MonoBehaviour
     protected Transform _bossLocation;
     protected Vector3 _deadLocation;
     protected int _dropTableIndex;
+    protected GameObject _currentBoss;
     private bool _isProgress;
 
     #endregion
@@ -68,6 +69,10 @@ public abstract class BossRoom : MonoBehaviour
 
     public virtual void OnPlayerDead()
     {
+        if(_currentBoss != null)
+        {
+            Destroy(_currentBoss);
+        }
         _isProgress = false;
         DoorControl(false);
     }
@@ -79,7 +84,7 @@ public abstract class BossRoom : MonoBehaviour
 
     public void GetDropTableIndex(int ID)
     {
-        _bossItemID = ID;
+        _dropTableIndex = ID;
     }
 
     protected abstract IEnumerator EnterBossRoom();

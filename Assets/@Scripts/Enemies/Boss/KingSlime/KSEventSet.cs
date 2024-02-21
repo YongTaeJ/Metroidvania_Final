@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,5 +24,15 @@ public class KSEventSet : MonoBehaviour
     public void Talk()
     {
         _animator.SetTrigger(AnimatorHash.Walk);
+    }
+
+    public float Up()
+    {
+        float time = 1;
+
+        Jump();
+        transform.DOMoveY(10, time);
+
+        return time;
     }
 }

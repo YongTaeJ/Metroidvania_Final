@@ -1,12 +1,8 @@
-using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Claims;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerInputController : MonoBehaviour
 {

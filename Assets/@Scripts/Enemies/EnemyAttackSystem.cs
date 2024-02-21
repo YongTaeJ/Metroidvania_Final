@@ -13,9 +13,9 @@ public class EnemyAttackSystem : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && other.TryGetComponent<IDamagable>(out var component))
         {
-            other.GetComponent<IDamagable>().GetDamaged(_damage, this.transform);
+            component.GetDamaged(_damage, this.transform);
         }
     }
 }

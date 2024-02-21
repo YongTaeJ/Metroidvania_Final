@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,15 @@ using UnityEngine.UI;
 
 public class BuildingUI : MonoBehaviour
 {
+    #region properties
     public BuildingInformPanel BuildingInformPanel {get; private set;}
     public BuildingList BuildingList {get; private set;}
+    #endregion
+
+    #region variables
+    public GameObject _exitButton;
+    private bool _isInitialized = false;
+    #endregion
 
     private void Awake()
     {
@@ -16,7 +24,8 @@ public class BuildingUI : MonoBehaviour
         BuildingList.Initialize(this);
 
         // ExitButton
-        Button exitButton = transform.Find("ExitButton").GetComponent<Button>();
+        _exitButton = transform.Find("ExitButton").gameObject;
+        Button exitButton = _exitButton.GetComponent<Button>();
         exitButton.onClick.AddListener(() => gameObject.SetActive(false) );
 
         // ToBuildingButton
@@ -28,5 +37,17 @@ public class BuildingUI : MonoBehaviour
             gameObject.SetActive(false);
         }
         );
+
+        _isInitialized = true;
+    }
+
+    private void OnEnable()
+    {
+        if(!_isInitialized) return;
+
+        _exitButton.SetActive(false);
+        transform.position = new Vector3(960, 2160, 0);
+        transform.DOMoveY(540, 1).SetEase(Ease.OutBack);
+        TimerManager.Instance.StartTimer(1f, () => _exitButton.SetActive(true));
     }
 }

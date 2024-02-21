@@ -8,6 +8,7 @@ public class KSBossRoom : BossRoom
     [SerializeField] private int _chatID_encounter_0;
     [SerializeField] private int _chatID_encounter_1;
     [SerializeField] private int _chatID_defeat_0;
+    [SerializeField] private int _chatID_defeat_1;
     private KSEventSet _KSEventSet;
     private GameObject _KingSlimePrefab;
     #endregion
@@ -21,6 +22,7 @@ public class KSBossRoom : BossRoom
     protected override IEnumerator EnterBossRoom()
     {
         List<(string, string)> chatDatas;
+        _playerInput.enabled = false;
 
         chatDatas = ChatManager.Instance.GetChatData(_chatID_encounter_0);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
@@ -35,7 +37,8 @@ public class KSBossRoom : BossRoom
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         // 보스 생성 후 게임 시작
-        Instantiate(_KingSlimePrefab, _KSEventSet.transform.position, Quaternion.identity);
+        _playerInput.enabled = true;
+        _currentBoss = Instantiate(_KingSlimePrefab, _KSEventSet.transform.position, Quaternion.identity);
         _KSEventSet.gameObject.SetActive(false);
     }
 
@@ -49,9 +52,15 @@ public class KSBossRoom : BossRoom
         chatDatas = ChatManager.Instance.GetChatData(_chatID_defeat_0);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
-        // TODO => 점프해서 올라가는 느낌으로 사라지기
+        float time = _KSEventSet.Up();
+        yield return new WaitForSeconds(time);
 
         DropManager.Instance.DropItem(_dropTableIndex, _deadLocation);
+        chatDatas = ChatManager.Instance.GetChatData(_chatID_defeat_1);
+        yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
+
+        Destroy(_KSEventSet.gameObject);
+
         DoorControl(false);
         _playerInput.enabled = true;
     }

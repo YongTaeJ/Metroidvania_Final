@@ -22,9 +22,9 @@ public class Rock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.CompareTag("Player"))
+        if(other.collider.CompareTag("Player") && other.gameObject.TryGetComponent<IDamagable>(out var component))
         {
-            other.collider.GetComponent<IDamagable>().GetDamaged(1, transform);
+            component.GetDamaged(1, transform);
             Instantiate(_rockCrashEffect, transform.position, quaternion.identity);
             Destroy(gameObject);
         }

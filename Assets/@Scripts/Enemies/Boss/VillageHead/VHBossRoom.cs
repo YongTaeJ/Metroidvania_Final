@@ -12,7 +12,14 @@ public class VHBossRoom : BossRoom
     [SerializeField] private int _chatID_defeat_0;
     [SerializeField] private int _chatID_defeat_1;
     private VHEntrySet _VHEntrySet;
+    private GameObject _VillageHeadPrefab;
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _VillageHeadPrefab = Resources.Load<GameObject>("Enemies/Bosses/VillageHead/Boss_VillageHead");
+    }
 
     protected override IEnumerator EnterBossRoom()
     {
@@ -30,6 +37,7 @@ public class VHBossRoom : BossRoom
         _VHEntrySet = Instantiate
         (Resources.Load<GameObject>("Enemies/Bosses/VillageHead/VillageHead_EntrySet"), _bossLocation.position, Quaternion.identity)
         .GetComponent<VHEntrySet>();
+        _VHEntrySet.Initialize(this);
 
         // 참조를 통해 모션을 재생하고, 일련의 행동이 끝나면 전투를 시작합니다.
         _VHEntrySet.Jump();
@@ -39,9 +47,6 @@ public class VHBossRoom : BossRoom
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         _VHEntrySet.Taunt();
-        yield return new WaitForSeconds(1.2f);
-
-        _playerInput.enabled = true;
     }
 
     protected override IEnumerator EndBattle()
@@ -64,6 +69,12 @@ public class VHBossRoom : BossRoom
         // 전투가 끝났으므로 문을 열고, 아이템을 드랍합니다.
         DropManager.Instance.DropItem(_dropTableIndex, _deadLocation);
         DoorControl(false);
+        _playerInput.enabled = true;
+    }
+
+    public void BattleStart()
+    {
+        _currentBoss = Instantiate(_VillageHeadPrefab, _VHEntrySet.transform.position, Quaternion.identity);
         _playerInput.enabled = true;
     }
 
