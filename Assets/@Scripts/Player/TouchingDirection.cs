@@ -61,25 +61,7 @@ public class TouchingDirection : MonoBehaviour
     private void Update()
     {
         IsGrounded = _touchingCol.Cast(Vector2.down, castFilter, groundHit, groundDistance) > 0;
-
-        int hits = _touchingCol.Cast(_wallCheckDirection, castFilter, wallHit, wallDistance);
-
-        if (hits > 0)
-        {
-            for (int i = 0; i < hits; i++)
-            {
-                if (wallHit[i].point.y > transform.position.y)
-                {
-                    IsWall = true;
-                    return; 
-                }
-            }
-            IsWall = false;
-        }
-        else
-        {
-            IsWall = false;
-        }
+        IsWall = _touchingCol.Cast(_wallCheckDirection, castFilter, wallHit, wallDistance) > 0;
     }
 
     public void LandEffect()

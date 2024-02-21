@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 8313418671852989989}
   - component: {fileID: 3914823283756952318}
   m_Layer: 5
-  m_Name: BackToMainBtn
+  m_Name: SaveDateDelBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,8 +460,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MENU
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 67a379a8b32e84c499fe19c488737207, type: 2}
-  m_sharedMaterial: {fileID: -5431234400253083097, guid: 67a379a8b32e84c499fe19c488737207, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40f862ebb5ef30845b1fe38054514be5, type: 2}
+  m_sharedMaterial: {fileID: -3220987083819873078, guid: 40f862ebb5ef30845b1fe38054514be5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 6954299430492174273}
   - component: {fileID: 6053922099553353099}
   m_Layer: 5
-  m_Name: BackToMainTxt
+  m_Name: SaveDateDelTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBA54\uC778 \uBA54\uB274"
+  m_text: "\uC138\uC774\uBE0C \uB370\uC774\uD130 \uC0AD\uC81C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40f862ebb5ef30845b1fe38054514be5, type: 2}
   m_sharedMaterial: {fileID: -3220987083819873078, guid: 40f862ebb5ef30845b1fe38054514be5, type: 2}
@@ -620,8 +620,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -994,7 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contiuneBtn: {fileID: 1849290069412215435}
   optionBtn: {fileID: 4383458681130200684}
-  backToMainBtn: {fileID: 3914823283756952318}
+  saveDateDelBtn: {fileID: 3914823283756952318}
   exitBtn: {fileID: 1229049511503574325}
 --- !u!1 &5810288846630603246
 GameObject:

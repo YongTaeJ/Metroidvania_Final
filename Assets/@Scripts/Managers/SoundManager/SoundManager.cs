@@ -3,15 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public abstract class SoundManager<T> : Singleton<SoundManager<T>>
-{ 
+public abstract class SoundManager<T> : MonoBehaviour where T : SoundManager<T>
+{
+    #region Singleton
+    private static T instance = null;
+    public static T Instance
+    {
+        get { return instance; }
+    }
+
+    protected virtual void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError(string.Format("허용되지 않은 중복 인스턴스 => {0}", typeof(T)));
+            Destroy(this);
+            return;
+        }
+
+        instance = (T)this;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+    #endregion
+
     [SerializeField]
     private AudioMixer audioMixer = null;
-
-    public override bool Initialize()
-    {
-        return base.Initialize();
-    }
 
     protected abstract void SetVolume(float volumeScale);
 
@@ -26,7 +49,7 @@ public abstract class SoundManager<T> : Singleton<SoundManager<T>>
         float linearValue = Mathf.Lerp(min, max, volumeScale);
         // Convert volume to dB
         float dBValue = 20 * Mathf.Log10(linearValue);
-
+        Debug.Log($"{volumeParameterName},{dBValue}");
         audioMixer.SetFloat(volumeParameterName, dBValue);
     }
 }
