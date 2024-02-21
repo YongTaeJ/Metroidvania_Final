@@ -13,23 +13,19 @@ public class PortalTrigger : MonoBehaviour
     private void Awake()
     {
         _buyPortal = MapManager.Instance.BuyPortal;
+        Animator animator = GetComponent<Animator>();
+
+        if (animator != null )
+        {
+            if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
+            {
+                animator.SetBool("IsActivate", true);
+            }
+        }
     }
 
     public void PopupBuyPortal()
     {
         _buyPortal.gameObject.SetActive(true);
-    }
-    private void BuyPortal(int _portalIndex)
-    {
-        if (ItemManager.Instance.UseItem(ItemType.Gold, 0, _portalPrice))
-        {
-            ItemManager.Instance.AddItem(ItemType.Portal, _portalIndex);
-            GameManager.Instance.SaveGame();
-            Debug.Log("포탈 구매");
-        }
-        else
-        {
-            Debug.Log("골드 부족");
-        }
     }
 }

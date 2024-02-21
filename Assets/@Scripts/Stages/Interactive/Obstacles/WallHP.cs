@@ -5,7 +5,7 @@ using UnityEngine;
 public class WallHP : WallBase
 {
     [SerializeField]
-    private int _wallHP = 1;
+    private int _wallHP = 5;
 
     protected override void WallReact(Collider2D collision)
     {
