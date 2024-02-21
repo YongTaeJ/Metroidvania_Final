@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SFX : SoundManager<SFX>
 {
     #region Set SFX
 
     public AudioSource AudioSource { get; set; }
-    private float volumeScale = 1.0f;
+    private float volumeScale = 0.2f;
     public float VolumeScale
     {
         get
@@ -21,10 +22,11 @@ public class SFX : SoundManager<SFX>
         }
     }
 
-    public override bool Initialize()
+    protected override void Awake()
     {
+        base.Awake();
         this.AudioSource = GetComponent<AudioSource>();
-        return base.Initialize();
+        LoadVolumeSettings();
     }
 
     protected override void SetVolume(float volumeScale)
@@ -47,6 +49,11 @@ public class SFX : SoundManager<SFX>
     [Header("Enemy")]
     public AudioClip enemyAttack;
 
+    private void LoadVolumeSettings()
+    {
+        float savedVolume = PlayerPrefs.GetFloat("SFXVolume");
+        VolumeScale = savedVolume;
+    }
 
     public void PlayOneShot(AudioClip clip, float volumeScale = 1.0f)
     {

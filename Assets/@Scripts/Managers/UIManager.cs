@@ -17,7 +17,8 @@ public enum PopupType
     Construct,
     Shop,
     Inventory,
-    Building
+    Building,
+    Option
 }
 
 public enum DisposableType

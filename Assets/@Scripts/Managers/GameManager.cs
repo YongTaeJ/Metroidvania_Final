@@ -46,4 +46,10 @@ public class GameManager : Singleton<GameManager>
 
         return true;
     }
+
+    public void DeleteSaveFile()
+    {
+        File.Delete(_dataPath);
+        Debug.Log("저장된 데이터 삭제");
+    }
 }

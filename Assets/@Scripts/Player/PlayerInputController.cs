@@ -116,7 +116,6 @@ public class PlayerInputController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _player = GetComponent<Player>();
 
-       
     }
 
     private void FixedUpdate()
@@ -240,6 +239,9 @@ public class PlayerInputController : MonoBehaviour
             {
                 if (!_isWallJumping && _touchingDirection.IsWall)
                 {
+                    isWallSlideEffect = false;
+                    StopCoroutine("WallSlideEffect");
+                    _isWallSliding = false;
                     _isWallJumping = true;
                     _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
                     _wallJumpTimer = 0f;
@@ -289,7 +291,8 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y < 0 && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
+            bool isCollidingWithWall = CheckWallCollision();
+            if (isCollidingWithWall & !_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y < 0 && !_isWallJumping && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
             {
                 IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
@@ -302,23 +305,43 @@ public class PlayerInputController : MonoBehaviour
             else
             {
                 IsWallSliding = false;
-                isWallSlideEffect = false;
+                if (isWallSlideEffect)
+                {
+                    isWallSlideEffect = false;
+                    StopCoroutine("WallSlideEffect");
+                }
             }
         }
     }
 
+    private bool CheckWallCollision()
+    {
+        Vector2 boxSize = new Vector2(1f, 0.5f); // 벽과의 접촉을 확인하기 위한 박스 크기를 적절히 조정하세요.
+        Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y); // 캐릭터의 측면에 박스 위치 조정
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask); // wallLayer는 벽 레이어 마스크입니다.
+
+        foreach (var collider in colliders)
+        {
+            if (collider != null)
+            {
+                return true; // 벽과 충돌하는 콜라이더가 하나라도 있다면 true 반환
+            }
+        }
+        return false; // 충돌하는 벽이 없다면 false 반환
+    }
+
     private IEnumerator WallSlideEffect()
     {
-        while (isWallSlideEffect == true)
+        while (isWallSlideEffect)
         {
+            
             yield return new WaitForSeconds(0.1f);
-
-            GameObject wallSlideParticle = ResourceManager.Instance.InstantiatePrefab("WallSlideParticle", pooling: true);
-            if (!_touchingDirection.IsWall)
+            if (!isWallSlideEffect || !_isWallSliding)
             {
-                yield return null;
+                yield break;
             }
-
+            GameObject wallSlideParticle = ResourceManager.Instance.InstantiatePrefab("WallSlideParticle", pooling: true);
+        
             float wallSlideDirection = IsFacingRight ? 0.5f : -0.5f;
             Vector2 point = new Vector2(transform.position.x + wallSlideDirection, transform.position.y);
             wallSlideParticle.transform.position = point;
@@ -446,6 +469,7 @@ public class PlayerInputController : MonoBehaviour
             if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _player._skills[1].Activate();
+
                 _player.Invincible = true;
             }
         }
@@ -507,9 +531,7 @@ public class PlayerInputController : MonoBehaviour
         {
             //if 켜진 UI가 없다면
             UIManager.Instance.OpenPopupUI(PopupType.Pause);
-            Time.timeScale = 0f;
             //else if 켜진 Popup이 있다면 UI SetActive(false)
-
         }
     }
 
