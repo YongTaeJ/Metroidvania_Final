@@ -17,8 +17,8 @@ public class MapControl : MonoBehaviour
 
     private void Awake()
     {
-        _minCameraBound = new Vector2(-20, -150);
-        _maxCameraBound = new Vector2(375, 50);
+        _minCameraBound = new Vector2(-25, -200);
+        _maxCameraBound = new Vector2(490, 50);
         _mapCamera = GetComponentInChildren<Camera>();
     }
 

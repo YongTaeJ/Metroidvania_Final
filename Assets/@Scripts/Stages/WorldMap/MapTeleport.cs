@@ -97,7 +97,7 @@ public class MapTeleport : MonoBehaviour
         _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
     }
 
-    private void UpdatePortalButton()
+    public void UpdatePortalButton()
     {
         for (int i = 0; i < portalButtons.Length; i++)
         {

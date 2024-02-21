@@ -31,6 +31,13 @@ public class PortalControl : MonoBehaviour
 
     private void UsePortal()
     {
+        MapTeleport mapTeleport = GetComponent<MapTeleport>();
+
+        if (mapTeleport != null)
+        {
+            mapTeleport.UpdatePortalButton();
+        }
+
         CheckHasPortal();
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
     }
@@ -39,6 +46,12 @@ public class PortalControl : MonoBehaviour
         if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
         {
             MapManager.Instance.OpenPortalMap();
+            Animator animator = GetComponent<Animator>();
+
+            if (animator != null)
+            {
+                animator.SetBool("IsActivate", true);
+            }
         }
         else
         {
