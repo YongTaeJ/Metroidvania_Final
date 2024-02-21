@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SFX : SoundManager<SFX>
 {
     #region Set SFX
@@ -19,12 +20,6 @@ public class SFX : SoundManager<SFX>
             this.volumeScale = Mathf.Clamp01(value);
             SetVolume(this.volumeScale);
         }
-    }
-
-    public override bool Initialize()
-    {
-        this.AudioSource = GetComponent<AudioSource>();
-        return base.Initialize();
     }
 
     protected override void SetVolume(float volumeScale)

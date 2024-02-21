@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class BGM : SoundManager<BGM>
 {
     #region Set BGM
@@ -20,14 +22,6 @@ public class BGM : SoundManager<BGM>
             SetVolume(this.volumeScale);
         }
     }
-
-    public override bool Initialize()
-    {
-        this.AudioSource = GetComponent<AudioSource>();
-        return base.Initialize();
-    }
-        
-       
 
     protected override void SetVolume(float volumeScale)
     {
