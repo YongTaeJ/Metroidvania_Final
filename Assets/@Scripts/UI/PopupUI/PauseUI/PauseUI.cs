@@ -11,7 +11,7 @@ public class PauseUI : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button contiuneBtn;
     [SerializeField] private Button optionBtn;
-    [SerializeField] private Button backToMainBtn;
+    [SerializeField] private Button saveDateDelBtn;
     [SerializeField] private Button exitBtn;
 
     #endregion
@@ -22,7 +22,7 @@ public class PauseUI : MonoBehaviour
     {
         contiuneBtn.onClick.AddListener(OnContinueGame);
         optionBtn.onClick.AddListener(OnOption);
-        backToMainBtn.onClick.AddListener(OnBackToMain);
+        saveDateDelBtn.onClick.AddListener(OnSaveDateDel);
         exitBtn.onClick.AddListener(OnExit);
     }
 
@@ -32,19 +32,19 @@ public class PauseUI : MonoBehaviour
 
     private void OnContinueGame()
     {
-        this.gameObject.SetActive(false);
+        UIManager.Instance.ClosePopupUI(PopupType.Pause);
         Time.timeScale = 1.0f;
     }
 
     private void OnOption()
     {
-        // 옵션 팝업 띄우기
-        //UIManager.Instance.PopupUI(PopupType.Option);
+        UIManager.Instance.ClosePopupUI(PopupType.Pause);
+        UIManager.Instance.OpenPopupUI(PopupType.Option);
     }
 
-    private void OnBackToMain()
+    private void OnSaveDateDel()
     {
-        //SceneManager.LoadScene("StartScene");
+        GameManager.Instance.DeleteSaveFile();
     }
 
     private void OnExit()
