@@ -406,7 +406,7 @@ public class PlayerInputController : MonoBehaviour
     // TODO 리펙토링 필요해 보임
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(_player.playerStatus.Stats[PlayerStatusType.AttackSpeed]);
         IsAttacking = false;
     }
 

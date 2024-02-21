@@ -27,12 +27,12 @@ public class BGM : SoundManager<BGM>
     {
         base.Awake();
         this.AudioSource = GetComponent<AudioSource>();
-        LoadVolumeSettings();
     }
 
     protected override void SetVolume(float volumeScale)
     {
         SetVolume("BGM", volumeScale);
+        Debug.Log("볼륨 조절");
     }
 
     #endregion
@@ -45,11 +45,12 @@ public class BGM : SoundManager<BGM>
     private void Start()
     {
         Play(bgm, true); //시작 브금 스타트
+        LoadVolumeSettings();
     }
 
     private void LoadVolumeSettings()
     {
-        float savedVolume = PlayerPrefs.GetFloat("BGMVolume");
+        float savedVolume = PlayerPrefs.GetFloat("BGMVolume",0.5f);
         VolumeScale = savedVolume;
     }
 

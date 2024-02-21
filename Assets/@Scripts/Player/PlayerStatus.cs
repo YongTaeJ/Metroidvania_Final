@@ -53,10 +53,9 @@ public enum PlayerStatusType
 public class PlayerStatusData
 {
     // TODO => Defalut value 여기서 설정하면 될 듯??
-    public float HP;
-    public float Damage;
-    public float Mana;
-    public float ManaRegenerate;
-    public float MovementSpeed;
-    public float AttackSpeed;
+    public float HP = 10f;
+    public float Damage = 5f;
+    public float Mana = 100f;
+    public float ManaRegenerate = 5f;
+    public float AttackSpeed = 0.2f;
 }

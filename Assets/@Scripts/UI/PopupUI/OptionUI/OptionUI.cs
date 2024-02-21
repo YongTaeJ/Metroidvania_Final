@@ -55,12 +55,12 @@ public class OptionUI : MonoBehaviour
 
     private void Initialize()
     {
-        float bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 0.5f);
+        float bgmVolume = PlayerPrefs.GetFloat("BGMVolume");
         BGM.Instance.VolumeScale = bgmVolume;
         bgmSlider.value = bgmVolume;
         bgmInputField.text = Mathf.RoundToInt(bgmVolume * 100).ToString();
 
-        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
         SFX.Instance.VolumeScale = sfxVolume;
         sfxSlider.value = sfxVolume;
         sfxInputField.text = Mathf.RoundToInt(sfxVolume * 100).ToString();

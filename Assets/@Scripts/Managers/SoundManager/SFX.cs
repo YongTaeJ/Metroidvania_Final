@@ -49,9 +49,14 @@ public class SFX : SoundManager<SFX>
     [Header("Enemy")]
     public AudioClip enemyAttack;
 
+    private void Start()
+    {
+        LoadVolumeSettings();
+    }
+
     private void LoadVolumeSettings()
     {
-        float savedVolume = PlayerPrefs.GetFloat("SFXVolume");
+        float savedVolume = PlayerPrefs.GetFloat("SFXVolume",0.5f);
         VolumeScale = savedVolume;
     }
 

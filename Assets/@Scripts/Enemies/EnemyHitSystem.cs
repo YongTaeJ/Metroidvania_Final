@@ -20,8 +20,8 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
     private PlayerFinder _playerFinder;
     private EnemyStateMachine _stateMachine;
     private int _maxEndurance;
-    private int _maxHP;
-    private int _currentHP;
+    private float _maxHP;
+    private float _currentHP;
     private int _currentEndurance;
     private bool _isInvincible;
     #endregion
@@ -45,7 +45,7 @@ public class EnemyHitSystem : MonoBehaviour, IDamagable
         _flashDuration = 0.15f;
     }
 
-    public void GetDamaged(int damage, Transform target)
+    public void GetDamaged(float damage, Transform target)
     {
         if(_isInvincible) return;
         
