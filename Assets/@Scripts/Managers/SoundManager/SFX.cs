@@ -8,7 +8,7 @@ public class SFX : SoundManager<SFX>
     #region Set SFX
 
     public AudioSource AudioSource { get; set; }
-    private float volumeScale = 1.0f;
+    private float volumeScale = 0.2f;
     public float VolumeScale
     {
         get
@@ -20,6 +20,13 @@ public class SFX : SoundManager<SFX>
             this.volumeScale = Mathf.Clamp01(value);
             SetVolume(this.volumeScale);
         }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        this.AudioSource = GetComponent<AudioSource>();
+        LoadVolumeSettings();
     }
 
     protected override void SetVolume(float volumeScale)
@@ -42,6 +49,11 @@ public class SFX : SoundManager<SFX>
     [Header("Enemy")]
     public AudioClip enemyAttack;
 
+    private void LoadVolumeSettings()
+    {
+        float savedVolume = PlayerPrefs.GetFloat("SFXVolume");
+        VolumeScale = savedVolume;
+    }
 
     public void PlayOneShot(AudioClip clip, float volumeScale = 1.0f)
     {

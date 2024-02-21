@@ -9,7 +9,7 @@ public class BGM : SoundManager<BGM>
     #region Set BGM
 
     public AudioSource AudioSource { get; set; }
-    private float volumeScale = 1.0f;
+    private float volumeScale = 0.2f;
     public float VolumeScale
     {
         get
@@ -21,6 +21,13 @@ public class BGM : SoundManager<BGM>
             this.volumeScale = Mathf.Clamp01(value);
             SetVolume(this.volumeScale);
         }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        this.AudioSource = GetComponent<AudioSource>();
+        LoadVolumeSettings();
     }
 
     protected override void SetVolume(float volumeScale)
@@ -38,6 +45,12 @@ public class BGM : SoundManager<BGM>
     private void Start()
     {
         Play(bgm, true); //시작 브금 스타트
+    }
+
+    private void LoadVolumeSettings()
+    {
+        float savedVolume = PlayerPrefs.GetFloat("BGMVolume");
+        VolumeScale = savedVolume;
     }
 
     public void Play(AudioClip clip, bool isLoop)

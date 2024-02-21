@@ -7,9 +7,10 @@ public class TestScene : Singleton<TestScene>
     protected override void Start()
     {
         base.Start();
-        UIManager.Instance.Initialize();
+        
         SOManager.Instance.Initialize();
         ResourceManager.Instance.Initialize();
+        UIManager.Instance.Initialize();
         PoolManager.Instance.Initialize();
         MonsterPoolManager.Instance.Initialize();
         ItemManager.Instance.Initialize();

@@ -49,7 +49,7 @@ public abstract class SoundManager<T> : MonoBehaviour where T : SoundManager<T>
         float linearValue = Mathf.Lerp(min, max, volumeScale);
         // Convert volume to dB
         float dBValue = 20 * Mathf.Log10(linearValue);
-
+        Debug.Log($"{volumeParameterName},{dBValue}");
         audioMixer.SetFloat(volumeParameterName, dBValue);
     }
 }

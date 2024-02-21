@@ -26,6 +26,16 @@ public class PauseUI : MonoBehaviour
         exitBtn.onClick.AddListener(OnExit);
     }
 
+    private void OnEnable()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void OnDisable()
+    {
+        Time.timeScale = 1f;
+    }
+
     #endregion
 
     #region OnClick
@@ -33,7 +43,6 @@ public class PauseUI : MonoBehaviour
     private void OnContinueGame()
     {
         UIManager.Instance.ClosePopupUI(PopupType.Pause);
-        Time.timeScale = 1.0f;
     }
 
     private void OnOption()
