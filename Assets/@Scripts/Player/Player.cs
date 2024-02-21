@@ -8,36 +8,34 @@ using System;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    public int _maxHp = 10;
-    public int _hp;
-    public int _damage = 5;
-    public int _maxMana = 100;
-    public int _mana;
+    public PlayerStatus playerStatus;
+    public float _hp;
+    public float _mana;
 
-    public int HP
+    public float HP
     {
         get { return _hp; }
         set
         {
-            int newValue = Mathf.Clamp(value, 0, _maxHp);
+            float newValue = Mathf.Clamp(value, 0, playerStatus.Stats[PlayerStatusType.HP]);
             if (_hp != newValue)
             {
                 _hp = newValue;
-                OnHealthChanged?.Invoke(_hp, _maxHp);
+                OnHealthChanged?.Invoke(_hp, playerStatus.Stats[PlayerStatusType.HP]);
             }
         }
     }
 
-    public int Mana
+    public float Mana
     {
         get { return _mana; }
         set
         {
-            int newValue = Mathf.Clamp(value, 0, _maxMana);
+            float newValue = Mathf.Clamp(value, 0, playerStatus.Stats[PlayerStatusType.Mana]);
             if (_mana != newValue)
             {
                 _mana = newValue;
-                OnManaChanged?.Invoke(_mana, _maxMana);
+                OnManaChanged?.Invoke(_mana, playerStatus.Stats[PlayerStatusType.Mana]);
             }
         }
     }
@@ -102,12 +100,17 @@ public class Player : MonoBehaviour, IDamagable
 
     private void Awake()
     {
+        GameManager.Instance.player = this;
         _controller = GetComponent<PlayerInputController>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _playerInput = GetComponent<PlayerInput>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
-        GameManager.Instance.player = this;
+
+        PlayerStatusData data = new PlayerStatusData();
+        playerStatus = new PlayerStatus(data);
+
+
         Initialized();
     }
 
@@ -116,8 +119,8 @@ public class Player : MonoBehaviour, IDamagable
     private void Initialized()
     {
         SetSkill();
-        HP = _maxHp;
-        _mana = _maxMana;
+        HP = playerStatus.Stats[PlayerStatusType.HP];
+        _mana = playerStatus.Stats[PlayerStatusType.Mana];
     }
 
     public void SetSkill()
@@ -151,7 +154,7 @@ public class Player : MonoBehaviour, IDamagable
 
     #endregion
 
-    public void GetDamaged(int damage, Transform target)
+    public void GetDamaged(float damage, Transform target)
     {
         if (Invincible == false && IsAlive)
         {
@@ -171,13 +174,13 @@ public class Player : MonoBehaviour, IDamagable
         }
     }
 
-    public void ConsumeMana(int amount)
+    public void ConsumeMana(float amount)
     {
         Mana -= amount;
         if (Mana < 0) Mana = 0; 
     }
 
-    public void GainMana(int amount)
+    public void GainMana(float amount)
     {
         Mana += amount;
     }

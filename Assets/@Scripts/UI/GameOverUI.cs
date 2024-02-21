@@ -33,7 +33,7 @@ public class GameOverUI : MonoBehaviour
 
     private IEnumerator FadeIn()
     {
-        UIManager.Instance.SetFixedUI(false);
+        //UIManager.Instance.SetFixedUI(false);
         float duration = 1.0f;
         float targetAlpha = 1.0f;
 
@@ -64,7 +64,7 @@ public class GameOverUI : MonoBehaviour
 
     public void RestartGame()
     {
-        UIManager.Instance.SetFixedUI(true);
+        //UIManager.Instance.SetFixedUI(true);
         Debug.Log("마을로 돌아가기");
         GameManager.Instance.player.OnContinue();
     }

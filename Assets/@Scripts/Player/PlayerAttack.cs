@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
 
             // 가장 가까운 Enemy에 대한 공격 수행
             Attack(closestEnemy.enemy);
-            GameManager.Instance.player.GainMana(5);
+            GameManager.Instance.player.GainMana(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.ManaRegenerate]);
             // 공격 후 리스트 클리어
             hitEnemies.Clear();
         }
@@ -70,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack(GameObject enemy)
     {
-        enemy.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player._damage, GameManager.Instance.player.transform);
+        enemy.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.Damage], GameManager.Instance.player.transform);
         StartCoroutine(HitPause(0.07f));
         CameraManager.Instance.CameraShake(_impulseSource, 1f);
         Vector2 attackPoint = enemy.transform.position;
