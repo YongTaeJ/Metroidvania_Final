@@ -32,7 +32,7 @@ public class Skill_PlungeAttack : SkillBase
 
     public void Shockwaves()
     {
-        SFX.Instance.PlayOneShot(SFX.Instance.PlungeAttack);
+        SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("PlungeAttack"));
         CameraManager.Instance.CameraShake(_impulseSource, 2f);
         GameObject Shockwave = ResourceManager.Instance.InstantiatePrefab("PlungeAttack", pooling: true);
         Shockwave.transform.position = new Vector2(transform.position.x, transform.position.y + 2);

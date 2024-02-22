@@ -36,27 +36,6 @@ public class SFX : SoundManager<SFX>
 
     #endregion
 
-    // 예시
-    [Header("UI")]
-    public AudioClip btnClick;
-
-    [Header("Item")]
-    public AudioClip itemDrop;
-
-    [Header("Player")]
-    public AudioClip playerAttack1;
-    public AudioClip playerAttack2;
-    public AudioClip Walk;
-    public AudioClip Jump;
-    public AudioClip Land;
-    public AudioClip Dash;
-    public AudioClip SwordAuror;
-    public AudioClip PlungeAttack;
-    public AudioClip wallSlide;
-
-    [Header("Enemy")]
-    public AudioClip enemyAttack;
-
     private void Start()
     {
         LoadVolumeSettings();

@@ -109,7 +109,11 @@ public class Player : MonoBehaviour, IDamagable
 
         PlayerStatusData data = new PlayerStatusData();
         playerStatus = new PlayerStatus(data);
-
+        // 임시로 여기서 위치 데이터 받아서 위치 이동
+        if (GameManager.Instance.LoadGame())
+        {
+            transform.position = new Vector3(GameManager.Instance.Data.playerPositionX, GameManager.Instance.Data.playerPositionY, GameManager.Instance.Data.playerPositionZ);
+        }
 
         Initialized();
     }

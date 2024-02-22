@@ -81,7 +81,7 @@ public class ConstructYNPanel : YNPanel
             AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             delay = clipInfo[0].clip.length;
         }
-        yield return new WaitForSeconds(delay + 1f);
+        yield return new WaitForSeconds(delay + 3f);
         HideUI(false);
         CameraManager.Instance.ReturnCameraTarget();
         Destroy(gameObject);

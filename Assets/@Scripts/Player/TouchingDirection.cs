@@ -29,7 +29,7 @@ public class TouchingDirection : MonoBehaviour
                 if (value) // IsGrounded가 true일 때만 랜드 이펙트 호출
                 {
                     LandEffect();
-                    SFX.Instance.PlayOneShot(SFX.Instance.Land);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Land"));
                 }
             }
         }

@@ -42,7 +42,25 @@ public class GameManager : Singleton<GameManager>
 
         string file = File.ReadAllText(_dataPath);
         GameData data = JsonConvert.DeserializeObject<GameData>(file);
-        if (data != null) this._data = data;
+        if (data != null)
+        {
+            this._data = data;
+
+            //매니저 초기화 상태에서 Null임 메인 씬 관리할때 수정해야할 듯
+            // 임시로 플레이어 Awake에서 데이터 받아서 이동
+            Debug.Log($"Player 객체 상태: {(player != null ? "Initialized" : "Null")}");
+
+            if (player != null)
+            {
+                Vector3 playerPosition = new Vector3(data.playerPositionX, data.playerPositionY, data.playerPositionZ);
+                player.transform.position = playerPosition;
+                Debug.Log("위치 로드");
+            }
+            else
+            {
+                Debug.Log("Player 객체가 Null입니다. 위치를 로드할 수 없습니다.");
+            }
+        }
 
         return true;
     }

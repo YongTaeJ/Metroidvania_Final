@@ -74,8 +74,22 @@ public class MapTeleport : MonoBehaviour
     private void Teleport(int index)
     {
         MapManager.Instance.LoadImage(true);
-        GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
-        GameManager.Instance.player.transform.position = portalLocations[index];
+        //GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
+        //GameManager.Instance.player.transform.position = portalLocations[index];
+
+        Vector3 newPosition = portalLocations[index];
+        GameManager.Instance.player.transform.position = newPosition;
+
+        // 새 위치 정보를 GameData에 저장합니다.
+        GameManager.Instance.Data.playerPositionX = newPosition.x;
+        GameManager.Instance.Data.playerPositionY = newPosition.y;
+        GameManager.Instance.Data.playerPositionZ = newPosition.z;
+
+        //GameManager.Instance.Data.playerPositionX = portalLocations[index].x;
+        //GameManager.Instance.Data.playerPositionY = portalLocations[index].y;
+        //GameManager.Instance.Data.playerPositionZ = portalLocations[index].z;
+
+        GameManager.Instance.SaveGame();
     }
 
     private void PortalText(int index)

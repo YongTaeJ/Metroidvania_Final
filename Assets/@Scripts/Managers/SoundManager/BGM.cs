@@ -37,16 +37,9 @@ public class BGM : SoundManager<BGM>
 
     #endregion
 
-    //예시
-    [Header("Game")]
-    public AudioClip StartScene; 
-    public AudioClip Boss;
-    public AudioClip Home;
-
-
     private void Start()
     {
-        Play(StartScene, true); //시작 브금 스타트
+        Play(ResourceManager.Instance.GetAudioClip("StartScene"), true); //시작 브금 스타트
         LoadVolumeSettings();
     }
 

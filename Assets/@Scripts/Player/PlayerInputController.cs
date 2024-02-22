@@ -204,7 +204,7 @@ public class PlayerInputController : MonoBehaviour
     {
         while (Iswalking && _touchingDirection.IsGrounded) 
         {
-            SFX.Instance.PlayOneShot(SFX.Instance.Walk);
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Walk"));
             yield return new WaitForSeconds(0.35f); 
         }
     }
@@ -270,7 +270,7 @@ public class PlayerInputController : MonoBehaviour
                 if (!_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
                 {
                     _animator.SetTrigger(AnimatorHash.Jump);
-                    SFX.Instance.PlayOneShot(SFX.Instance.Jump);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
                     _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
                     if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
                     {
@@ -298,7 +298,7 @@ public class PlayerInputController : MonoBehaviour
                     _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
                     _wallJumpTimer = 0f;
                     _animator.SetTrigger(AnimatorHash.WallJump);
-                    SFX.Instance.PlayOneShot(SFX.Instance.Jump);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
                     if (transform.localScale.x != _wallJumpDirection)
                     {
                         _isFacingRight = !_isFacingRight;
@@ -391,7 +391,7 @@ public class PlayerInputController : MonoBehaviour
     {
         while (isWallSlideEffect)
         {
-            SFX.Instance.PlayOneShot(SFX.Instance.wallSlide);
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallSlide"));
             yield return new WaitForSeconds(0.1f);
             if (!isWallSlideEffect || !_isWallSliding)
             {
@@ -476,7 +476,6 @@ public class PlayerInputController : MonoBehaviour
             if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
                 StartCoroutine(CoDash());
-                SFX.Instance.PlayOneShot(SFX.Instance.Dash);
             }
         }
     }
@@ -485,7 +484,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (_dashCount > 0)
         {
-            //_animator.SetTrigger(AnimatorHash.Dash);
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Dash"));
             _canDash = false;
             _isDashing = true;
 
@@ -524,7 +523,7 @@ public class PlayerInputController : MonoBehaviour
             if (!Input.GetKey(KeyCode.DownArrow) && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 _player._skills[0].Activate();
-                SFX.Instance.PlayOneShot(SFX.Instance.SwordAuror);
+                SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("SwordAuror"));
             }
 
             if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))

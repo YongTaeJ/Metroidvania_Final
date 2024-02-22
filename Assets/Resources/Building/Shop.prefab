@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5115676239264274586}
   - component: {fileID: 5924238931808291829}
+  - component: {fileID: 1981174072931757899}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   - {fileID: 8933680318613912286}
   - {fileID: 976296727939049697}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5924238931808291829
 Animator:
@@ -55,6 +56,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1981174072931757899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234950853861326434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47e26a06d835b8408daa4c18400da93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1753508114010730311
 GameObject:
   m_ObjectHideFlags: 0
