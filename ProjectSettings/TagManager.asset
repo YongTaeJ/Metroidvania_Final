@@ -6,9 +6,11 @@ TagManager:
   tags:
   - Enemy
   - PlayerAttack
-  - Challenge
   - Ground
   - SwordAuror
+  - Mimic
+  - Challenge
+  - PlungeAttack
   layers:
   - Default
   - TransparentFX

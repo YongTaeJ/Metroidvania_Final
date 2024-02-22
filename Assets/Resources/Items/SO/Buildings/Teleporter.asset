@@ -18,9 +18,10 @@ MonoBehaviour:
     \uC548\uC815\uC801\uC778 \uCC28\uC6D0\uBB38\uC744 \uB9CC\uB4ED\uB2C8\uB2E4. \uAC74\uC124\uD558\uBA74
     \uC774\uC138\uACC4\uC5D0 \uC788\uB294 \uCC28\uC6D0\uBB38\uACFC \uC790\uC720\uB86D\uAC8C
     \uC655\uB798\uD560 \uC218 \uC788\uAC8C \uB429\uB2C8\uB2E4."
+  _effectDescription: 
   _requiredConditions: []
   _requiredMaterials: []
   _statElements: []
   _buildingData:
     buildingPrefab: {fileID: 5496346380615788531, guid: 58d0efd24749f22429f0b7a72c8ed1e4, type: 3}
-    buildingPosition: {x: 235, y: -0.5, z: 0}
+    buildingPosition: {x: 224.5, y: -0.5, z: 0}

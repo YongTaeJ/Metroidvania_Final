@@ -10,9 +10,9 @@ public class TownEnter : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Renderer renderer = this.GetComponent<Renderer>();
-            renderer.material.DOColor(Color.black, 2f);
+            renderer.material.DOColor(Color.black, 1.8f);
 
-            Invoke("ColorReset", 2.4f);
+            Invoke("ColorReset", 1.8f);
         }
     }
 
@@ -20,6 +20,6 @@ public class TownEnter : MonoBehaviour
     {
 
         Renderer renderer = this.GetComponent<Renderer>();
-        renderer.material.DOColor(Color.white, 1f);
+        renderer.material.DOColor(Color.white, 0.6f);
     }
 }

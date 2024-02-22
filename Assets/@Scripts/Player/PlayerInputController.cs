@@ -62,7 +62,7 @@ public class PlayerInputController : MonoBehaviour
     private bool _isFacingRight = true;
 
     //Jump
-    private float _jumpPower = 20f;
+    private float _jumpPower = 21f;
     private bool _doubleJump = false;
 
     //Gravity

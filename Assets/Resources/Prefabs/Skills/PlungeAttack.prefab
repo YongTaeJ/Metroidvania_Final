@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8902544743338757683}
   m_Layer: 0
   m_Name: PlungeAttack
-  m_TagString: Untagged
+  m_TagString: PlungeAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

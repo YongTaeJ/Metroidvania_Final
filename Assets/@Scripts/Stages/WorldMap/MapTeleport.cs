@@ -35,7 +35,7 @@ public class MapTeleport : MonoBehaviour
         }
 
         UpdatePortalButton();
-        //portalLocations[0] = new Vector3(264, 0, 0);
+        //portalLocations[0] = new Vector3(224.5f, -.05f, 0);
         //portalLocations[1] = new Vector3(301, -188.5f, 0);
         //portalLocations[2] = new Vector3(210, 104.5f, 0);
         //portalLocations[3] = new Vector3(416.5f, -146.5f, 0);

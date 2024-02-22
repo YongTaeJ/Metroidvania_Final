@@ -28,25 +28,7 @@ public class TeleportTrap : MonoBehaviour
     private void OpenTrapText()
     {
         _teleportText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        
-        if (this.CompareTag("Mimic"))
-        {
-            _teleportText.text = "You just Actived Trap Card";
-        }
-
-        else if (this.CompareTag("Challenge"))
-        {
-            _teleportText.text = "You are not prepared!";
-        }
-
-        else if (this.CompareTag("TownPortal"))
-        {
-            _teleportText.text = "You enter dungeon";
-        }
-        else
-        {
-            _teleportText.text = "You are fallen. Try again";
-        }
+        _teleportText.text = "You are fallen, try again";
         UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         StartCoroutine(DeactiveText(2));
     }
