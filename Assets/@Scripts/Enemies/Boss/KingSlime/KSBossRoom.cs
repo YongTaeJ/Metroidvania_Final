@@ -24,6 +24,10 @@ public class KSBossRoom : BossRoom
         List<(string, string)> chatDatas;
         _playerInput.enabled = false;
 
+        _playerController.Move(Vector2.right);
+        yield return new WaitForSeconds(0.3f);
+        _playerController.Move(Vector2.zero);
+
         chatDatas = ChatManager.Instance.GetChatData(_chatID_encounter_0);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
