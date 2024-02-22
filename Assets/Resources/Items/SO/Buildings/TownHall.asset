@@ -14,13 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ID: 2
   _constructName: "\uB9C8\uC744 \uD68C\uAD00"
-  _constructDescription: "\uBB34\uB108\uC9C4 \uB9C8\uC744 \uD68C\uAD00\uC744 \uC7AC\uAC74\uD569\uB2C8\uB2E4.
-    \uAC74\uCD95\uC744 \uC644\uB8CC\uD55C \uC774\uD6C4\uC5D0\uB294 \uCD0C\uC7A5\uB2D8\uAED8
-    \uD5C8\uAC00\uC99D\uC744 \uBC1C\uAE09\uBC1B\uC544 \uC7AC\uAC74\uD560 \uC218 \uC788\uB294
-    \uAC74\uBB3C\uC774 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
-  _requiredConditions: []
-  _requiredMaterials: []
-  _statElements: []
+  _constructDescription: "\uBB34\uB108\uC9C4 \uB9C8\uC744 \uD68C\uAD00\uC744 \uC7AC\uAC74\uD569\uB2C8\uB2E4."
+  _effectDescription: "\uACF5\uACA9 \uC18D\uB3C4\uAC00 \uC18C\uD3ED \uC0C1\uC2B9\uD569\uB2C8\uB2E4."
+  _requiredConditions:
+  - itemType: 9
+    ID: 4
+  _requiredMaterials:
+  - ID: 0
+    Stock: 30
+  - ID: 1
+    Stock: 15
+  _statElements:
+  - statusType: 5
+    value: -0.05
+  _rewardElements: []
   _buildingData:
     buildingPrefab: {fileID: 4221605886855844917, guid: af2c1d15a088fe04f9a1f519afe5fe3b, type: 3}
     buildingPosition: {x: 245, y: 2.25, z: 0}

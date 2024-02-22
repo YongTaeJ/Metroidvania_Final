@@ -15,19 +15,19 @@ MonoBehaviour:
   _ID: 1
   _constructName: Shop
   _constructDescription: "\uC0C1\uC810 \uC8FC\uC778\uC744 \uB3C4\uC640 \uB9DD\uAC00\uC9C4
-    \uC0C1\uC810\uC744 \uB2E4\uC2DC \uC138\uC6B8 \uC218 \uC788\uC2B5\uB2C8\uB2E4.
-    \uB2E4\uC2DC \uC0C1\uC810\uC774 \uB4E4\uC5B4\uC11C\uBA74 \uC0C1\uC778\uC5D0\uAC8C
-    \uBB3C\uAC74\uC744 \uAD6C\uB9E4\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  _effectDescription: 
-  _requiredConditions:
-  - itemType: 1
-    ID: 0
+    \uC0C1\uC810\uC744 \uB2E4\uC2DC \uC138\uC6C1\uB2C8\uB2E4."
+  _effectDescription: "\uC0C1\uC810 \uC774\uC6A9 \uAC00\uB2A5"
+  _requiredConditions: []
   _requiredMaterials:
   - ID: 0
-    Stock: 10
-  - ID: 0
     Stock: 20
+  - ID: 1
+    Stock: 10
   _statElements: []
+  _rewardElements:
+  - ItemType: 9
+    ID: 2
+    Stock: 1
   _buildingData:
     buildingPrefab: {fileID: 234950853861326434, guid: 408f16a30cf7c02499a207eb2f583367, type: 3}
     buildingPosition: {x: 260, y: 3.8, z: 0}

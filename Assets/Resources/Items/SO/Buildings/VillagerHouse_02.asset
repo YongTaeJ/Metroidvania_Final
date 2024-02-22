@@ -10,15 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82f7d3499ff23ae40af0d1973b7c3df8, type: 3}
-  m_Name: VillagerHouse02
+  m_Name: VillagerHouse_02
   m_EditorClassIdentifier: 
-  _ID: 3
+  _ID: 5
   _constructName: "\uC8FC\uBBFC\uC758 \uC9D1"
   _constructDescription: "\uB9C8\uC744 \uC8FC\uBBFC\uC758 \uC9D1\uC785\uB2C8\uB2E4."
-  _effectDescription: 
-  _requiredConditions: []
-  _requiredMaterials: []
-  _statElements: []
+  _effectDescription: "\uB9C8\uC744 \uC8FC\uBBFC2\uAC00 \uB3CC\uC544\uC624\uACE0,
+    \uC801\uC744 \uACF5\uACA9\uD560 \uB54C \uB354 \uB9CE\uC740 \uAE30\uB825\uC744
+    \uD68C\uBCF5\uD569\uB2C8\uB2E4."
+  _requiredConditions:
+  - itemType: 6
+    ID: 4
+  _requiredMaterials:
+  - ID: 0
+    Stock: 25
+  - ID: 1
+    Stock: 15
+  _statElements:
+  - statusType: 4
+    value: 5
+  _rewardElements:
+  - ItemType: 9
+    ID: 3
+    Stock: 1
   _buildingData:
     buildingPrefab: {fileID: 8706551386021564540, guid: 0f2236626095f5d489f1caa937f7ce55, type: 3}
     buildingPosition: {x: 273, y: 2.2, z: 0}

@@ -3,7 +3,7 @@
     {
       "Index": "0",
       "MinGold": "2",
-      "MaxGold": "5",
+      "MaxGold": "4",
       "ItemID": "0",
       "DropRate": "20"
     },
@@ -12,35 +12,35 @@
       "MinGold": "3",
       "MaxGold": "6",
       "ItemID": "0",
-      "DropRate": "40"
+      "DropRate": "50"
     },
     {
       "Index": "2",
-      "MinGold": "4",
-      "MaxGold": "7",
+      "MinGold": "2",
+      "MaxGold": "4",
       "ItemID": "1",
       "DropRate": "20"
     },
     {
       "Index": "3",
-      "MinGold": "5",
+      "MinGold": "4",
       "MaxGold": "8",
       "ItemID": "1",
-      "DropRate": "40"
+      "DropRate": "50"
     },
     {
       "Index": "4",
       "MinGold": "100",
       "MaxGold": "150",
-      "ItemID": "10000",
-      "DropRate": "100"
+      "ItemID": "0",
+      "DropRate": "0"
     },
     {
       "Index": "5",
       "MinGold": "200",
       "MaxGold": "250",
-      "ItemID": "10000",
-      "DropRate": "100"
+      "ItemID": "0",
+      "DropRate": "0"
     },
     {
       "Index": "6",

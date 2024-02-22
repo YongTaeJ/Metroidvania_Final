@@ -50,7 +50,12 @@ public class BuyPopup : MonoBehaviour
 
         if(ItemManager.Instance.UseItem(ItemType.Gold, 0, cost))
         {
+            SFX.Instance.PlayOneShot("PurchaseSound");
             ItemManager.Instance.AddItem(_currentGoods.ItemType, _currentGoods.ID, quantity);
+        }
+        else
+        {
+            SFX.Instance.PlayOneShot("ShortMoneySound", 0.5f);
         }
     }
 
