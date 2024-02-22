@@ -66,6 +66,6 @@ public class ChestBase : MonoBehaviour
     protected virtual void ChestText()
     {
         _chestText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        _chestText.text = "You opened chest\n\r" + "but, nothing in the chest";
+        _chestText.text = "The chest is empty";
     }
 }
