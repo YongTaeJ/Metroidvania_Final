@@ -39,12 +39,14 @@ public class BGM : SoundManager<BGM>
 
     //예시
     [Header("Game")]
-    public AudioClip bgm; //예를 들어 시작 브금
+    public AudioClip StartScene; 
+    public AudioClip Boss;
+    public AudioClip Home;
 
 
     private void Start()
     {
-        Play(bgm, true); //시작 브금 스타트
+        Play(StartScene, true); //시작 브금 스타트
         LoadVolumeSettings();
     }
 

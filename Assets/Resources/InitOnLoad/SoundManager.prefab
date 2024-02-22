@@ -144,7 +144,15 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 4cee93b0c8ebfa243a93a52a1160fd2d, type: 2}
   btnClick: {fileID: 8300000, guid: 5a87d0fbbbd55fc44ac8bade11287a20, type: 3}
   itemDrop: {fileID: 8300000, guid: bd2206562cc751649800c54e322e996e, type: 3}
-  playerAttack: {fileID: 8300000, guid: 358e2634710587f4da3528b752db8ff5, type: 3}
+  playerAttack1: {fileID: 8300000, guid: d48f7de2c3a8a684c9d0802b3bf1714b, type: 3}
+  playerAttack2: {fileID: 8300000, guid: 4232eb795759ced418f648f3f52de30c, type: 3}
+  Walk: {fileID: 8300000, guid: 02990e5c689984c419b41a8a72ef4523, type: 3}
+  Jump: {fileID: 8300000, guid: e73923096c5a33945af46b335fb44fa9, type: 3}
+  Land: {fileID: 8300000, guid: 4808c6883572d1542bbb937deb88bf6e, type: 3}
+  Dash: {fileID: 8300000, guid: d661ebaad28f81e4d9b29b98b4fc5660, type: 3}
+  SwordAuror: {fileID: 8300000, guid: 15ce55255fd0c094bbb78da6755c9c26, type: 3}
+  PlungeAttack: {fileID: 8300000, guid: 974ed1edd4fc3084fbc2805655a26d25, type: 3}
+  wallSlide: {fileID: 8300000, guid: 383dcfe253419e84eb590487153ca002, type: 3}
   enemyAttack: {fileID: 8300000, guid: ea49a86513fadc248aca6d91b3bf3365, type: 3}
 --- !u!1 &3191009860386311738
 GameObject:
@@ -321,4 +329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 4cee93b0c8ebfa243a93a52a1160fd2d, type: 2}
-  bgm: {fileID: 8300000, guid: 555184f757c35934baea063b7e7bd01c, type: 3}
+  StartScene: {fileID: 8300000, guid: 868c7b38de0a24840bafbe3a856bbeb2, type: 3}
+  Boss: {fileID: 8300000, guid: 8667572e39809174da60b3a93de3e16f, type: 3}
+  Home: {fileID: 8300000, guid: 0730e251ae02fad44b8f13b5c29904d7, type: 3}

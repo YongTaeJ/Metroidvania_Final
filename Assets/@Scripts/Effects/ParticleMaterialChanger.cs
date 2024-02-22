@@ -23,7 +23,7 @@ public class ParticleMaterialChanger : MonoBehaviour
             case "Purple":
                 materialIndex = 3;
                 break;
-            case "Ground":
+            case "Wall":
                 materialIndex = 4;
                 break;
             default:

@@ -13,6 +13,8 @@ TagManager:
   - Purple
   - Green
   - Blue
+  - TownPortal
+  - Wall
   layers:
   - Default
   - TransparentFX

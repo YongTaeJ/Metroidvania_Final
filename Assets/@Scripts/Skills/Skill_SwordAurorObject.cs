@@ -47,5 +47,10 @@ public class Skill_SwordAurorObject : MonoBehaviour
             hitParticle.transform.position = spawnPosition;
             hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
         }
+        if (collision.CompareTag("Wall"))
+        {
+            GameObject wallHitParticle = ResourceManager.Instance.InstantiatePrefab("WallHitParticle", pooling: true);
+            wallHitParticle.transform.position = collision.ClosestPoint(transform.position);
+        }
     }
 }

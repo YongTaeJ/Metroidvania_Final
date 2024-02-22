@@ -37,11 +37,10 @@ public class PlayerAttack : MonoBehaviour
             hitEnemies.Add(new EnemyHitInfo { enemy = collision.gameObject, distance = distance });
             ExecuteAttack();
         }
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.CompareTag("Wall"))
         {
-            GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
-            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(collision.tag);
-            hitParticle.transform.position = collision.ClosestPoint(transform.position);
+            GameObject wallHitParticle = ResourceManager.Instance.InstantiatePrefab("WallHitParticle", pooling: true);
+            wallHitParticle.transform.position = collision.ClosestPoint(transform.position);
         }
     }
 

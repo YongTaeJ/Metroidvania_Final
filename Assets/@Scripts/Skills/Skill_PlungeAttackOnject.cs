@@ -12,7 +12,6 @@ public class Skill_PlungeAttackOnject : MonoBehaviour
     private CinemachineImpulseSource _impulseSource;
     private int enemyLayer;
 
-
     private void Awake()
     {
         _impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -45,6 +44,12 @@ public class Skill_PlungeAttackOnject : MonoBehaviour
             hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(collision.tag);
             hitParticle.transform.position = spawnPosition;
             hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
+        }
+
+        if (collision.CompareTag("Wall"))
+        {
+            GameObject wallHitParticle = ResourceManager.Instance.InstantiatePrefab("WallHitParticle", pooling: true);
+            wallHitParticle.transform.position = collision.ClosestPoint(transform.position);
         }
     }
 }
