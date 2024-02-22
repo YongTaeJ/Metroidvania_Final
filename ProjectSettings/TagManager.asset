@@ -15,6 +15,7 @@ TagManager:
   - Blue
   - TownPortal
   - Wall
+  - PlungeAttack
   layers:
   - Default
   - TransparentFX
