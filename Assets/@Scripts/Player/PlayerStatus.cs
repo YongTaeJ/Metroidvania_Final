@@ -53,7 +53,7 @@ public enum PlayerStatusType
 public class PlayerStatusData
 {
     public float HP = 10f;
-    public float Damage = 5f;
+    public float Damage = 10f;
     public float Mana = 100f;
     public float ManaRegenerate = 5f;
     public float AttackSpeed = 0.2f;
