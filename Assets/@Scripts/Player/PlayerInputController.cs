@@ -419,7 +419,7 @@ public class PlayerInputController : MonoBehaviour
                 if (_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack);
-                    SFX.Instance.PlayOneShot(SFX.Instance.playerAttack1);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("PlayerAttack1"));
                     GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp", pooling : true);
                     var playerAttack = attackEffect.GetComponent<PlayerAttack>();
                     
@@ -440,7 +440,7 @@ public class PlayerInputController : MonoBehaviour
                 else if (!_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack2);
-                    SFX.Instance.PlayOneShot(SFX.Instance.playerAttack2);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("PlayerAttack2"));
                     GameObject attackEffect2 = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp_2", pooling: true);
                     var playerAttack = attackEffect2.GetComponent<PlayerAttack>();
                     

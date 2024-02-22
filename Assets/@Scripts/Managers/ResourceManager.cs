@@ -6,10 +6,12 @@ public class ResourceManager : Singleton<ResourceManager>
 {
     private Dictionary<string, GameObject> prefaps = new();
     private Dictionary<string, Sprite> sprites = new();
+    private Dictionary<string, AudioClip> audios = new();
 
     public override bool Initialize()
     {
         LoadPrefabs("Prefabs", prefaps);
+        LoadAudioClip("AudioClip", audios);
         //LoadSprites("")
         // 스프라이트 현재 경로가 애매해서 보류
         return base.Initialize();
@@ -68,6 +70,25 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         if (!sprites.TryGetValue(spriteName, out Sprite sprite)) return null;
         return sprite;
+    }
+
+    #endregion
+
+    #region AudioClip
+
+    private void LoadAudioClip(string path, Dictionary<string, AudioClip> audios)
+    {
+        AudioClip[] objs = Resources.LoadAll<AudioClip>(path);
+        foreach (AudioClip obj in objs)
+        {
+            audios[obj.name] = obj;
+        }
+    }
+
+    public AudioClip GetAudioClip(string path)
+    {
+        if(!audios.TryGetValue(path, out AudioClip audio)) return null;
+        return audio;
     }
 
     #endregion
