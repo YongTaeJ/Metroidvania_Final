@@ -26,7 +26,7 @@ public class DropManager : Singleton<DropManager>
         return base.Initialize();
     }
 
-    private void DropCoin(int sumValue, Vector2 location)
+    public void DropCoin(int sumValue, Vector2 location)
     {
         // 현재 0~999원까지만 설계됨.
         int prefabindex = 0;
@@ -67,6 +67,17 @@ public class DropManager : Singleton<DropManager>
             dropitem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);
             dropitem.GetComponentInChildren<SpriteRenderer>().sprite = ItemManager.Instance.GetSprite(data.Name);
         }
+    }
+
+    // 추가한 코드
+    public void DropItem(ItemType itemType, int itemID, Vector2 dropLocation)
+    {
+        // 아이템 데이터 가져오기
+        ItemData data = ItemManager.Instance.GetItemData(itemType, itemID);
+        GameObject dropItem = PoolManager.Instance.Pop(_dropItem);
+        dropItem.transform.position = dropLocation;
+        dropItem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);
+        dropItem.GetComponentInChildren<SpriteRenderer>().sprite = ItemManager.Instance.GetSprite(data.Name);
     }
 }
 

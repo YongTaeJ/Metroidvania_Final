@@ -13,7 +13,7 @@ public class UniqueNumberForTestUI : MonoBehaviour
 
     private void Start()
     {
-        // TODO => 플레이어 생성할 때 받은 난수값을 적어두기
-        _uniqueNumberText.text = 50.ToString(); 
+        int randomUniqueNumber = GameManager.Instance.Data.randomUniqueNumber;
+        _uniqueNumberText.text = randomUniqueNumber.ToString();
     }
 }

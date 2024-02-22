@@ -59,7 +59,7 @@ public class LodingScene : MonoBehaviour
     {
         // TODO => 세이브 있는지 없는지 확인(없으면 그냥 true 만들고 break)
         // playerprefs로 확인하면 편하게 할 수 있을 것 같습니다.
-        if(false)
+        if(GameManager.Instance.LoadGame())
         {
             _isChatEnd = true;
             yield break;

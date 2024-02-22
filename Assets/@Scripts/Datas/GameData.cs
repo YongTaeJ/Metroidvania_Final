@@ -12,4 +12,6 @@ public class GameData
     public float playerPositionX;
     public float playerPositionY;
     public float playerPositionZ;
+    // 랜덤 정수 저장
+    public int randomUniqueNumber;
 }
