@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 7451347963660184592}
   m_Layer: 8
   m_Name: Soul
-  m_TagString: Enemy
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

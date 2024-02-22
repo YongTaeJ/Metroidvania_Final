@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     private CinemachineImpulseSource _impulseSource;
     private List<string> attackEffectPrefabs = new List<string>();
     public bool hasAttacked = false;
+    private int enemyLayer;
 
     /// <summary>
     /// 충돌한 Enemy와의 거리 정보를 저장하는 구조체
@@ -25,13 +26,13 @@ public class PlayerAttack : MonoBehaviour
     {
         attackEffectPrefabs = new List<string>(Globals.AttackEffects);
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+        enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.layer == enemyLayer)
         {
-            // 충돌한 Enemy와의 거리 계산
             float distance = Vector2.Distance(transform.position, collision.transform.position);
             hitEnemies.Add(new EnemyHitInfo { enemy = collision.gameObject, distance = distance });
             ExecuteAttack();
@@ -39,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
-            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial("Ground");
+            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(collision.tag);
             hitParticle.transform.position = collision.ClosestPoint(transform.position);
         }
     }
@@ -87,7 +88,7 @@ public class PlayerAttack : MonoBehaviour
         float hitParticleScale = GameManager.Instance.player._controller.IsFacingRight ? 1.0f : -1.0f;
 
         GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
-        hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(enemy.name);
+        hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(enemy.tag);
         hitParticle.transform.position = spawnPosition;
         hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
 

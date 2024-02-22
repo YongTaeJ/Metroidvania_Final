@@ -10,6 +10,7 @@ public class Skill_SwordAurorObject : MonoBehaviour
     private List<string> attackEffectPrefabs = new List<string>();
     private string _attackEffectPrefab;
     private CinemachineImpulseSource _impulseSource;
+    private int enemyLayer;
 
 
     private void Awake()
@@ -18,11 +19,12 @@ public class Skill_SwordAurorObject : MonoBehaviour
         attackEffectPrefabs = new List<string>(Globals.AttackEffects);
         int randomIndex = Random.Range(0, attackEffectPrefabs.Count);
         _attackEffectPrefab = attackEffectPrefabs[randomIndex];
+        enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.layer == enemyLayer)
         {
             collision.GetComponent<IDamagable>().GetDamaged(_damage, collision.transform);
 
@@ -41,7 +43,7 @@ public class Skill_SwordAurorObject : MonoBehaviour
             float hitParticleScale = GameManager.Instance.player._controller.IsFacingRight ? 1.0f : -1.0f;
 
             GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
-            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(collision.name);
+            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(collision.tag);
             hitParticle.transform.position = spawnPosition;
             hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
         }

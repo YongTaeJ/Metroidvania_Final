@@ -56,6 +56,7 @@ public class TouchingDirection : MonoBehaviour
         _touchingCol = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         castFilter.layerMask = groundLayerMask;
+
     }
 
     private void Update()

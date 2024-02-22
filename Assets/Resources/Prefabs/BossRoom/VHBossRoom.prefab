@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 2607130929349595975}
   - component: {fileID: 982116902430462638}
   - component: {fileID: 6782755294796336041}
+  - component: {fileID: 6207254446829629677}
   m_Layer: 0
   m_Name: CMBoss
   m_TagString: Untagged
@@ -286,6 +287,29 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 7444526919785460907}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &6207254446829629677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319053514496527898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &6262242075023156077
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +426,7 @@ Transform:
   - {fileID: 3971472942737460003}
   - {fileID: 2607130929349595975}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &7444526919785460907
 CompositeCollider2D:
@@ -518,6 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b051b1b83491c1d4cb0f32a0911625ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bossItemID: 0
   _chatID_encounter: 10000
   _chatID_defeat_0: 10001
   _chatID_defeat_1: 10002

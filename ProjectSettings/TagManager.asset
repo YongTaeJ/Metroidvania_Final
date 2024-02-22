@@ -9,6 +9,10 @@ TagManager:
   - Challenge
   - Ground
   - SwordAuror
+  - Mimic
+  - Purple
+  - Green
+  - Blue
   layers:
   - Default
   - TransparentFX

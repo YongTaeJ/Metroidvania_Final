@@ -235,7 +235,7 @@ public class PlayerInputController : MonoBehaviour
             }
             
             //Wall Jump
-            if (context.performed && _wallJumpTimer > 0f)
+            if (context.started && _wallJumpTimer > 0f)
             {
                 if (!_isWallJumping && _touchingDirection.IsWall)
                 {
@@ -256,6 +256,10 @@ public class PlayerInputController : MonoBehaviour
 
                     Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
                 }
+            }
+            else if (context.canceled)
+            {
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
             }
         }
 
@@ -292,7 +296,7 @@ public class PlayerInputController : MonoBehaviour
         if (enabled)
         {
             bool isCollidingWithWall = CheckWallCollision();
-            if (isCollidingWithWall & !_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y < 0 && !_isWallJumping && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
+            if (isCollidingWithWall & !_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y <= 0 && !_isWallJumping && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
             {
                 IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
@@ -316,9 +320,9 @@ public class PlayerInputController : MonoBehaviour
 
     private bool CheckWallCollision()
     {
-        Vector2 boxSize = new Vector2(1f, 0.5f); // 벽과의 접촉을 확인하기 위한 박스 크기를 적절히 조정하세요.
-        Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y); // 캐릭터의 측면에 박스 위치 조정
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask); // wallLayer는 벽 레이어 마스크입니다.
+        Vector2 boxSize = new Vector2(1f, 0.5f); 
+        Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask);
 
         foreach (var collider in colliders)
         {

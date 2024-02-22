@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -8,6 +9,7 @@ public class Rock : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
     private GameObject _rockCrashEffect;
+    private CinemachineImpulseSource _impulseSource;
 
     public void Initialize( Sprite sprite, float x, float y )
     {
@@ -15,6 +17,8 @@ public class Rock : MonoBehaviour
 
         _spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
+
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
 
         _spriteRenderer.sprite = sprite;
         _collider.size = new Vector2 (x,y);
@@ -26,11 +30,13 @@ public class Rock : MonoBehaviour
         {
             component.GetDamaged(1, transform);
             Instantiate(_rockCrashEffect, transform.position, quaternion.identity);
+            CameraManager.Instance.CameraShake(_impulseSource, 1f);
             Destroy(gameObject);
         }
         else if(other.collider.CompareTag("Ground"))
         {
             Instantiate(_rockCrashEffect, transform.position, quaternion.identity);
+            CameraManager.Instance.CameraShake(_impulseSource, 1f);
             Destroy(gameObject);
         }
     }
