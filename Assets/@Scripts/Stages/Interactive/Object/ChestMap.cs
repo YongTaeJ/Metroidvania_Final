@@ -32,6 +32,6 @@ public class ChestMap : ChestBase
     protected override void ChestText()
     {
         base.ChestText();
-        _chestText.text = "You acquired map piece";
+        _chestText.text = "You got map piece";
     }
 }

@@ -15,7 +15,6 @@ MonoBehaviour:
   spawnInfos:
   - monsterPrefab: {fileID: 383136230896217150, guid: 1d2ee46f7cc5f264d95c1679dbf61f61, type: 3}
     spawnPositions:
-    - {x: 245, y: -190.5, z: 0}
     - {x: 255, y: -190.5, z: 0}
     - {x: 250, y: -185.5, z: 0}
   - monsterPrefab: {fileID: 8349269620201448745, guid: d0b1dece992857e4ebfc91338b0aa504, type: 3}
