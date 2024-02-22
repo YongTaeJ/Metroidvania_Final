@@ -6,6 +6,11 @@ public class TempPlayer : MonoBehaviour
 {
     private void Start()
     {
-        GameManager.Instance.player.playerStatus.AddStat(PlayerStatusType.Damage, 100);
+        Invoke("SetPlayerPosition", 0.1f);
+    }
+
+    private void SetPlayerPosition()
+    {
+        GameManager.Instance.player.transform.position = new Vector2(-5, -3);
     }
 }

@@ -1,10 +1,82 @@
 {
   "ItemDatas": [
     {
+      "ItemType": "Boss",
+      "ID": "0",
+      "Name": "KingSlime",
+      "Description": "보스 잡았는지 여부 확인용"
+    },
+    {
+      "ItemType": "Boss",
+      "ID": "1",
+      "Name": "VillageHead",
+      "Description": "보스 잡았는지 여부 확인용"
+    },
+    {
+      "ItemType": "Building",
+      "ID": "0",
+      "Name": "Teleporter",
+      "Description": "이세계에서 넘어온 순간이동 기계입니다. 이유는 모르겠으나 몬스터들은 쓰지 못한다고 합니다."
+    },
+    {
+      "ItemType": "Building",
+      "ID": "1",
+      "Name": "Shop",
+      "Description": "마을에 하나밖에 없는 상점입니다. 사실 물건은 다 창고에 있었다고 하네요."
+    },
+    {
+      "ItemType": "Building",
+      "ID": "2",
+      "Name": "TownHall",
+      "Description": "시골의 권위와 위엄을 상징하는 마을 회관입니다."
+    },
+    {
+      "ItemType": "Building",
+      "ID": "3",
+      "Name": "MyHome",
+      "Description": "이제 돌아오면 반겨주는 집이 있습니다."
+    },
+    {
+      "ItemType": "Building",
+      "ID": "4",
+      "Name": "VillagerHouse",
+      "Description": "마을 주민1의 집. 편안해 보입니다."
+    },
+    {
+      "ItemType": "Building",
+      "ID": "5",
+      "Name": "VillagerHouse",
+      "Description": "마을 주민2의 집. 똑같이 생겼지만 들어가면 내부는 다릅니다."
+    },
+    {
+      "ItemType": "Equipment",
+      "ID": "0",
+      "Name": "WindCloak",
+      "Description": "바람의 호의가 담긴 망토입니다. 바람을 타고 돌진할 수 있습니다."
+    },
+    {
+      "ItemType": "Equipment",
+      "ID": "1",
+      "Name": "WallGloves",
+      "Description": "필요에 따라 점성을 조절할 수 있는 신비한 장갑입니다."
+    },
+    {
+      "ItemType": "Equipment",
+      "ID": "2",
+      "Name": "WingShoes",
+      "Description": "이세계의 축복이 담겨 있는 신발. 공중에서 한번 더 뛸 수 있습니다"
+    },
+    {
       "ItemType": "Gold",
       "ID": "0",
       "Name": "Gold",
       "Description": "이세계에서 가져온 금화입니다. 현실에서 통용되는 금화와는 다른 모습이지만 값어치는 비슷합니다."
+    },
+    {
+      "ItemType": "Map",
+      "ID": "0",
+      "Name": "MapPiece",
+      "Description": "지도 조각!"
     },
     {
       "ItemType": "Material",
@@ -16,97 +88,43 @@
       "ItemType": "Material",
       "ID": "1",
       "Name": "Brick",
-      "Description": "이세계에서 가져온 벽돌입니다. 여기서 벽돌 집을 본 적은 없지만 벽돌은 있네요."
+      "Description": "이세계에서 가져온 벽돌입니다. 성당의 일부분을 떼서 들고다니는 것 같습니다."
     },
     {
-      "ItemType": "Material",
-      "ID": "10000",
-      "Name": "StatuePiece",
-      "Description": "부서진 여신상의 파편입니다. 조각일 뿐인데도 강력한 힘이 느껴집니다."
-    },
-    {
-      "ItemType": "Equipment",
+      "ItemType": "NPC",
       "ID": "0",
-      "Name": "WindCloak",
-      "Description": "바람의 호의가 담긴 망토입니다. 착용한 사람은 바람을 타고 돌진할 수 있습니다."
+      "Name": "Villager1",
+      "Description": "기본 설명충 NPC"
     },
     {
-      "ItemType": "Map",
-      "ID": "0",
-      "Name": "MapPiece",
-      "Description": "지도 조각입니다. 아직 설명 미정"
-    },
-    {
-      "ItemType": "Equipment",
+      "ItemType": "NPC",
       "ID": "1",
-      "Name": "WallGloves",
-      "Description": "필요에 따라 점성을 조절할 수 있는 장갑입니다."
+      "Name": "Constructor",
+      "Description": "건축가(마을)"
     },
     {
-      "ItemType": "Skill",
-      "ID": "0",
-      "Name": "SwordAurorCrystalBlue",
-      "Description": "누군가의 기억이 담긴 크리스탈. 강한 마력을 담은 검기를 날립니다."
-    },
-    {
-      "ItemType": "Skill",
-      "ID": "1",
-      "Name": "PlungeAttackCrystalGreen",
-      "Description": "누군가의 기억이 담긴 크리스탈. 땅을 내려찍는 기술입니다."
-    },
-    {
-      "ItemType": "Building",
-      "ID": "10000",
-      "Name": "StatuePiece",
-      "Description": "보석 1"
-    },
-    {
-      "ItemType": "Building",
-      "ID": "10001",
-      "Name": "StatuePiece",
-      "Description": "보석 2"
-    },
-    {
-      "ItemType": "Building",
-      "ID": "10002",
-      "Name": "StatuePiece",
-      "Description": "보석 3"
-    },
-    {
-      "ItemType": "Building",
-      "ID": "0",
-      "Name": "Teleporter",
-      "Description": "마을에서 순간이동을 가능하게 하는 건물"
-    },
-    {
-      "ItemType": "Building",
-      "ID": "1",
-      "Name": "Shop",
-      "Description": "상점 이용이 가능해짐"
-    },
-    {
-      "ItemType": "Building",
+      "ItemType": "NPC",
       "ID": "2",
-      "Name": "TownHall",
-      "Description": "촌장님 오면 건축가능 스탯 올라감"
+      "Name": "Merchant",
+      "Description": "상인"
     },
     {
-      "ItemType": "Building",
+      "ItemType": "NPC",
       "ID": "3",
-      "Name": "Fountain",
-      "Description": "스탯이 올라가는 분수"
+      "Name": "Villager2",
+      "Description": "퀘스트 주는 주민"
     },
     {
-      "ItemType": "Building",
+      "ItemType": "NPC",
       "ID": "4",
-      "Name": "MyHome",
-      "Description": "내집마련!! 스탯 올라감"
+      "Name": "VillageHead",
+      "Description": "촌장님"
     },
     {
-      "ItemType": "Building",
+      "ItemType": "NPC",
       "ID": "5",
-      "Name": "VillagerHouse",
-      "Description": "다른 사람 집 스탯 올라감"
+      "Name": "Constructor",
+      "Description": "건축가(던전)"
     },
     {
       "ItemType": "Portal",
@@ -153,56 +171,20 @@
     {
       "ItemType": "Quest",
       "ID": "0",
-      "Name": "TestQuest",
-      "Description": "시험용 퀘스트."
+      "Name": "FindVillageHead",
+      "Description": "마을 사람2의 퀘스트! 촌장을 찾아주세요."
     },
     {
-      "ItemType": "NPC",
+      "ItemType": "Skill",
       "ID": "0",
-      "Name": "Villager1",
-      "Description": "일반 대화 확인용"
+      "Name": "Aura",
+      "Description": "강한 마력을 담은 검기를 날리는 방법에 대해 적혀있습니다. 이세계에는 마력에 반응하는 벽이 있다고..."
     },
     {
-      "ItemType": "NPC",
+      "ItemType": "Skill",
       "ID": "1",
-      "Name": "Constructor",
-      "Description": "건축 UI 확인용"
-    },
-    {
-      "ItemType": "NPC",
-      "ID": "2",
-      "Name": "Merchant",
-      "Description": "상점 UI 확인용"
-    },
-    {
-      "ItemType": "NPC",
-      "ID": "3",
-      "Name": "Villager2",
-      "Description": "퀘스트 확인용"
-    },
-    {
-      "ItemType": "NPC",
-      "ID": "4",
-      "Name": "VillageHead",
-      "Description": "정신차린 촌장님"
-    },
-    {
-      "ItemType": "Equipment",
-      "ID": "2",
-      "Name": "WingShoes",
-      "Description": "공중에서 한번 더 뛸 수 있습니다"
-    },
-    {
-      "ItemType": "Boss",
-      "ID": "0",
-      "Name": "KingSlime",
-      "Description": "보스 잡았는지 여부 확인용"
-    },
-    {
-      "ItemType": "Boss",
-      "ID": "1",
-      "Name": "VillageHead",
-      "Description": "보스 잡았는지 여부 확인용"
+      "Name": "Plunge",
+      "Description": "엄청난 힘으로 땅을 찍는 비법에 대해 적혀 있습니다. 이세계에는 강하게 찍는 힘에 반응하는 벽이 있다고..."
     }
   ]
 }

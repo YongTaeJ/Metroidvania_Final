@@ -72,7 +72,7 @@ public class ConstructInformPanel : MonoBehaviour
         }
 
         StringBuilder content = new StringBuilder();
-        content.Append("건설 요구사항: ");
+        content.Append("조건 : ");
 
         foreach(var condition in conditions)
         {
