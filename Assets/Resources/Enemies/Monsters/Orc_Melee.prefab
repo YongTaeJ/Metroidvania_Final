@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 54491743952695038}
   m_Layer: 8
   m_Name: Orc_Melee
-  m_TagString: Enemy
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

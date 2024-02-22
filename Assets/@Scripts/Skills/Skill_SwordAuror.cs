@@ -39,7 +39,7 @@ public class Skill_SwordAuror : SkillBase
 
         if (swordAurorRigidbody != null)
         {
-            float speed = 25f;
+            float speed = 15f;
             swordAurorRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
         }
         StartCoroutine(SwordAurorDespawn(swordAurorPrefab));
@@ -47,7 +47,7 @@ public class Skill_SwordAuror : SkillBase
 
     private IEnumerator SwordAurorDespawn(GameObject gameObject)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         ResourceManager.Instance.Destroy(gameObject);
     }
 }

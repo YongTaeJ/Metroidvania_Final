@@ -44,14 +44,27 @@ public class SFX : SoundManager<SFX>
     public AudioClip itemDrop;
 
     [Header("Player")]
-    public AudioClip playerAttack;
+    public AudioClip playerAttack1;
+    public AudioClip playerAttack2;
+    public AudioClip Walk;
+    public AudioClip Jump;
+    public AudioClip Land;
+    public AudioClip Dash;
+    public AudioClip SwordAuror;
+    public AudioClip PlungeAttack;
+    public AudioClip wallSlide;
 
     [Header("Enemy")]
     public AudioClip enemyAttack;
 
+    private void Start()
+    {
+        LoadVolumeSettings();
+    }
+
     private void LoadVolumeSettings()
     {
-        float savedVolume = PlayerPrefs.GetFloat("SFXVolume");
+        float savedVolume = PlayerPrefs.GetFloat("SFXVolume",0.5f);
         VolumeScale = savedVolume;
     }
 

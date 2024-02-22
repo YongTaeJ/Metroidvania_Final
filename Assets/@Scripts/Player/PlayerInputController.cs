@@ -104,6 +104,7 @@ public class PlayerInputController : MonoBehaviour
 
     // Coroutine
     private Coroutine _coMoveCamera;
+    private Coroutine _comoveSFX = null;
 
     #endregion
 
@@ -135,6 +136,32 @@ public class PlayerInputController : MonoBehaviour
             Gravity();
         }
 
+        // 캐릭터의 이동 상태와 접지 상태를 체크합니다.
+        bool isWalkingNow = _moveInput != Vector2.zero && _touchingDirection.IsGrounded;
+
+        // 이동 상태가 변경되었는지 확인합니다.
+        if (isWalkingNow != Iswalking)
+        {
+            Iswalking = isWalkingNow;
+
+            // 이동을 시작하면 코루틴을 시작합니다.
+            if (Iswalking)
+            {
+                if (_comoveSFX == null)
+                {
+                    _comoveSFX = StartCoroutine(CoMoveSFX());
+                }
+            }
+            else // 이동을 멈추면 코루틴을 중지합니다.
+            {
+                if (_comoveSFX != null)
+                {
+                    StopCoroutine(_comoveSFX);
+                    _comoveSFX = null;
+                }
+            }
+        }
+
         _animator.SetFloat(AnimatorHash.yVelocity, _rigidbody.velocity.y);
     }
 
@@ -146,6 +173,21 @@ public class PlayerInputController : MonoBehaviour
     {
         _moveInput = context.ReadValue<Vector2>();
         Iswalking = _moveInput != Vector2.zero;
+        if (Iswalking && _touchingDirection.IsGrounded)
+        {
+            if (_comoveSFX == null)
+            {
+                _comoveSFX = StartCoroutine(CoMoveSFX()); // 코루틴 시작
+            }
+        }
+        else
+        {
+            if (_comoveSFX != null)
+            {
+                StopCoroutine(_comoveSFX); // 코루틴 중지
+                _comoveSFX = null;
+            }
+        }
     }
 
     /// <summary>
@@ -156,6 +198,15 @@ public class PlayerInputController : MonoBehaviour
     {
         _moveInput = direction;
         Iswalking = _moveInput != Vector2.zero;
+    }
+
+    private IEnumerator CoMoveSFX()
+    {
+        while (Iswalking && _touchingDirection.IsGrounded) 
+        {
+            SFX.Instance.PlayOneShot(SFX.Instance.Walk);
+            yield return new WaitForSeconds(0.35f); 
+        }
     }
 
     public Vector2 MoveInput()
@@ -219,6 +270,7 @@ public class PlayerInputController : MonoBehaviour
                 if (!_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
                 {
                     _animator.SetTrigger(AnimatorHash.Jump);
+                    SFX.Instance.PlayOneShot(SFX.Instance.Jump);
                     _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
                     if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
                     {
@@ -235,7 +287,7 @@ public class PlayerInputController : MonoBehaviour
             }
             
             //Wall Jump
-            if (context.performed && _wallJumpTimer > 0f)
+            if (context.started && _wallJumpTimer > 0f)
             {
                 if (!_isWallJumping && _touchingDirection.IsWall)
                 {
@@ -246,6 +298,7 @@ public class PlayerInputController : MonoBehaviour
                     _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
                     _wallJumpTimer = 0f;
                     _animator.SetTrigger(AnimatorHash.WallJump);
+                    SFX.Instance.PlayOneShot(SFX.Instance.Jump);
                     if (transform.localScale.x != _wallJumpDirection)
                     {
                         _isFacingRight = !_isFacingRight;
@@ -256,6 +309,10 @@ public class PlayerInputController : MonoBehaviour
 
                     Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
                 }
+            }
+            else if (context.canceled)
+            {
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
             }
         }
 
@@ -292,7 +349,7 @@ public class PlayerInputController : MonoBehaviour
         if (enabled)
         {
             bool isCollidingWithWall = CheckWallCollision();
-            if (isCollidingWithWall & !_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y < 0 && !_isWallJumping && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
+            if (isCollidingWithWall & !_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y <= 0 && !_isWallJumping && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
             {
                 IsWallSliding = true;
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
@@ -316,9 +373,9 @@ public class PlayerInputController : MonoBehaviour
 
     private bool CheckWallCollision()
     {
-        Vector2 boxSize = new Vector2(1f, 0.5f); // 벽과의 접촉을 확인하기 위한 박스 크기를 적절히 조정하세요.
-        Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y); // 캐릭터의 측면에 박스 위치 조정
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask); // wallLayer는 벽 레이어 마스크입니다.
+        Vector2 boxSize = new Vector2(1f, 0.5f); 
+        Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask);
 
         foreach (var collider in colliders)
         {
@@ -334,7 +391,7 @@ public class PlayerInputController : MonoBehaviour
     {
         while (isWallSlideEffect)
         {
-            
+            SFX.Instance.PlayOneShot(SFX.Instance.wallSlide);
             yield return new WaitForSeconds(0.1f);
             if (!isWallSlideEffect || !_isWallSliding)
             {
@@ -362,6 +419,7 @@ public class PlayerInputController : MonoBehaviour
                 if (_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack);
+                    SFX.Instance.PlayOneShot(SFX.Instance.playerAttack1);
                     GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp", pooling : true);
                     var playerAttack = attackEffect.GetComponent<PlayerAttack>();
                     
@@ -382,6 +440,7 @@ public class PlayerInputController : MonoBehaviour
                 else if (!_isFirstAttack)
                 {
                     _animator.SetTrigger(AnimatorHash.Attack2);
+                    SFX.Instance.PlayOneShot(SFX.Instance.playerAttack2);
                     GameObject attackEffect2 = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp_2", pooling: true);
                     var playerAttack = attackEffect2.GetComponent<PlayerAttack>();
                     
@@ -406,7 +465,7 @@ public class PlayerInputController : MonoBehaviour
     // TODO 리펙토링 필요해 보임
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(_player.playerStatus.Stats[PlayerStatusType.AttackSpeed]);
         IsAttacking = false;
     }
 
@@ -417,6 +476,7 @@ public class PlayerInputController : MonoBehaviour
             if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
                 StartCoroutine(CoDash());
+                SFX.Instance.PlayOneShot(SFX.Instance.Dash);
             }
         }
     }
@@ -464,12 +524,12 @@ public class PlayerInputController : MonoBehaviour
             if (!Input.GetKey(KeyCode.DownArrow) && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 _player._skills[0].Activate();
+                SFX.Instance.PlayOneShot(SFX.Instance.SwordAuror);
             }
 
             if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _player._skills[1].Activate();
-
                 _player.Invincible = true;
             }
         }

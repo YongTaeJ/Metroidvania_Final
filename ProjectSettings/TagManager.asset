@@ -6,11 +6,15 @@ TagManager:
   tags:
   - Enemy
   - PlayerAttack
+  - Challenge
   - Ground
   - SwordAuror
   - Mimic
-  - Challenge
-  - PlungeAttack
+  - Purple
+  - Green
+  - Blue
+  - TownPortal
+  - Wall
   layers:
   - Default
   - TransparentFX

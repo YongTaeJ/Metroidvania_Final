@@ -29,6 +29,7 @@ public class TouchingDirection : MonoBehaviour
                 if (value) // IsGrounded가 true일 때만 랜드 이펙트 호출
                 {
                     LandEffect();
+                    SFX.Instance.PlayOneShot(SFX.Instance.Land);
                 }
             }
         }
@@ -56,6 +57,7 @@ public class TouchingDirection : MonoBehaviour
         _touchingCol = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
         castFilter.layerMask = groundLayerMask;
+
     }
 
     private void Update()

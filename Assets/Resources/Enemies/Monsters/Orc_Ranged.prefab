@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: -4892058851115828206}
   m_Layer: 8
   m_Name: Orc_Ranged
-  m_TagString: Enemy
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

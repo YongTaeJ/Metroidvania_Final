@@ -7,31 +7,27 @@ public class ParticleMaterialChanger : MonoBehaviour
     public ParticleSystem particleSystem; // 파티클 시스템 참조
     public Material[] materials; // 교체할 머테리얼 배열
 
-    public void ChangeMaterial(string enemy)
+    public void ChangeMaterial(string tag)
     {
-        int materialIndex = 0; // 기본 머테리얼 인덱스
+        int materialIndex;
 
         // 적의 이름에 따라 머테리얼 인덱스 결정
-        switch (enemy)
+        switch (tag)
         {
-            case "Orc_Melee":
-            case "Orc_Ranged":
-            case "Turret":
-                materialIndex = 1; 
+            case "Green":
+                materialIndex = 1;
                 break;
-            case "BlueSlime":
-            case "Soul":
-            case "TutorialSlime": 
-                materialIndex = 2; 
+            case "Blue":
+                materialIndex = 2;
                 break;
-            case "Bat":
-                materialIndex = 3; 
+            case "Purple":
+                materialIndex = 3;
                 break;
-            case "Ground":
+            case "Wall":
                 materialIndex = 4;
                 break;
             default:
-                materialIndex = 0; // 기본값, 명시되지 않은 적의 경우
+                materialIndex = 0; // 기본값, 명시되지 않은 태그의 경우
                 break;
         }
 

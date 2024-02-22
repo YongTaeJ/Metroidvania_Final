@@ -27,29 +27,32 @@ public class BGM : SoundManager<BGM>
     {
         base.Awake();
         this.AudioSource = GetComponent<AudioSource>();
-        LoadVolumeSettings();
     }
 
     protected override void SetVolume(float volumeScale)
     {
         SetVolume("BGM", volumeScale);
+        Debug.Log("볼륨 조절");
     }
 
     #endregion
 
     //예시
     [Header("Game")]
-    public AudioClip bgm; //예를 들어 시작 브금
+    public AudioClip StartScene; 
+    public AudioClip Boss;
+    public AudioClip Home;
 
 
     private void Start()
     {
-        Play(bgm, true); //시작 브금 스타트
+        Play(StartScene, true); //시작 브금 스타트
+        LoadVolumeSettings();
     }
 
     private void LoadVolumeSettings()
     {
-        float savedVolume = PlayerPrefs.GetFloat("BGMVolume");
+        float savedVolume = PlayerPrefs.GetFloat("BGMVolume",0.5f);
         VolumeScale = savedVolume;
     }
 
