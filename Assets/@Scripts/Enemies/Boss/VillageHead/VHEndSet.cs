@@ -14,8 +14,14 @@ public class VHEndSet : MonoBehaviour
         _effectRenderer = transform.Find("EffectSprite").GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        SFX.Instance.PlayOneShot("EnemyDeadSound", 0.5f);
+    }
+
     public void TriggerEffect()
     {
+        SFX.Instance.PlayOneShot("EnemyDeadSound", 0.5f);
         _effectRenderer.sortingOrder = 2;
         _effectAnimator.SetTrigger(AnimatorHash.Dead);
         Invoke("DestroyMySelf", 0.5f);

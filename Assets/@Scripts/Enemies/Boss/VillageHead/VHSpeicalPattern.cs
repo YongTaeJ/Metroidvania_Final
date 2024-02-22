@@ -32,10 +32,10 @@ public class VHSpeicalPattern : MonoBehaviour
 
     public void CreateRock()
     {
+        SFX.Instance.PlayOneShot("SummonRockSound");
         Rock rock = Instantiate(_rockPrefab, transform.position, Quaternion.identity).GetComponent<Rock>();
         rock.transform.position += Vector3.right * Random.Range(-_boundary, _boundary);
 
-        // TODO => 적당하게 position 조정
         int random = Random.Range(0, _variation);
         rock.Initialize(_rockDatas[random].Item1, _rockDatas[random].Item2, _rockDatas[random].Item3);
     }

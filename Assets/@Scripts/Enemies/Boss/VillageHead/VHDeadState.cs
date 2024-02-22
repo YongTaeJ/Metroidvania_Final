@@ -7,8 +7,13 @@ public class VHDeadState : EnemyDeadState
     private VHBossRoom _bossRoom;
     public VHDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        // TODO => Boss Dead State 묶을 수 있음.
         _bossRoom = GameObject.Find("VHBossRoom").GetComponent<VHBossRoom>();
+    }
+
+    public override void OnStateEnter()
+    {
+        base.OnStateEnter();
+        TimerManager.Instance.StartTimer(2.5f, () => SFX.Instance.PlayOneShot("VillageHeadDeadSound"));
     }
 
     public override void OnStateStay()

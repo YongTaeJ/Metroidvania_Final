@@ -12,13 +12,13 @@ public class VHSpecialAttackState : BossAttackState
     {
         
         BossPatternType = BossPatternType.Special;
-        // TODO => Find 개선이 필요할수도??
         _pattern = GameObject.Find("VillageHeadSpecialPattern").GetComponent<VHSpeicalPattern>();
     }
 
     public override void OnStateEnter()
     {
         base.OnStateEnter();
+        TimerManager.Instance.StartTimer(1.1f , () => SFX.Instance.PlayOneShot("VillageHeadTauntSound", 0.5f) );
         _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 5);
         _patternCount = 0;
@@ -41,7 +41,6 @@ public class VHSpecialAttackState : BossAttackState
 
         if(_patternCount <= 10)
         {
-            // TODO => 함성 이펙트 혹은 연출효과 부여!
             _pattern.CreateRock();
         }
         else

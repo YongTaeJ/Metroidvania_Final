@@ -18,6 +18,7 @@ public class NPCInteraction_Constructor_Event : NPCInteraction
 
         // Item docs ref.
         ItemManager.Instance.AddItem(ItemType.NPC, 1);
+        ItemManager.Instance.AddItem(ItemType.NPC, 5);
         // TODO => 사라지는 연출을 넣으면 좋을 듯
 
         chatDatas = ChatManager.Instance.GetChatData(_chatID_end);

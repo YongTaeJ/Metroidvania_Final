@@ -18,8 +18,8 @@ public class VHSpinAttackState : BossAttackState
         _spinCollider = stateMachine.transform.Find("Sprite/AttackPivot/SpinAttack").GetComponent<Collider2D>();
         _enemyTransform = stateMachine.transform;
         _rigidbody = stateMachine.Rigidbody;
-        _speed = stateMachine.EnemyData.Speed * 5f;
-        _rotateCount = 5;
+        _speed = stateMachine.EnemyData.Speed * 6.5f;
+        _rotateCount = 10;
     }
 
     public override void OnStateEnter()
@@ -51,6 +51,7 @@ public class VHSpinAttackState : BossAttackState
 
     protected override void OnAttack()
     {
+        SFX.Instance.PlayOneShot("VillageHeadSpinAttackSound", 0.5f);
         _attackCount++;
 
         if(_attackCount == _rotateCount)

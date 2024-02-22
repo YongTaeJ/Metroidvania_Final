@@ -38,7 +38,6 @@ public class BuyPopup : MonoBehaviour
         _currentGoods = data;
         _itemImage.sprite = ItemManager.Instance.GetSprite(data.ItemType, data.ID);
         _itemName.text = ItemManager.Instance.GetItemData(data.ItemType, data.ID).Name ;
-        // TODO => _itemCost.text = data.Stock.ToString(); QuantitySetter로 이관.
         _quantitySetter.ResetQuantity(data.Stock);
     }
 
@@ -51,12 +50,7 @@ public class BuyPopup : MonoBehaviour
 
         if(ItemManager.Instance.UseItem(ItemType.Gold, 0, cost))
         {
-            // TODO => 구매 완료 팝업같은거?
             ItemManager.Instance.AddItem(_currentGoods.ItemType, _currentGoods.ID, quantity);
-        }
-        else
-        {
-            // TODO => 구매 안됨 팝업같은거?
         }
     }
 

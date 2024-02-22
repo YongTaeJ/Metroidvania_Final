@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1097214262289664561}
   - {fileID: 4117196318791425282}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &342977992313682096
 Rigidbody2D:
@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 4117196318791425282}
   - component: {fileID: 3743003368148802849}
   - component: {fileID: 8423377984781356023}
-  - component: {fileID: 2009160124401400065}
   m_Layer: 0
   m_Name: Interact
   m_TagString: Untagged
@@ -188,19 +187,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5
---- !u!114 &2009160124401400065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5175387396209306977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f14180da2fa2fe418c6b7b21719302c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chatID: 100
 --- !u!1 &8914417248063477825
 GameObject:
   m_ObjectHideFlags: 0

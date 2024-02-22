@@ -39,11 +39,17 @@ public class DropItem : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            if(_itemType == ItemType.Gold) PlayCoinSound();
             ItemManager.Instance.AddItem(_itemType, _ID, _value);
             CancelInvoke();
             Vanish();
-            // TODO => 소리 + 이펙트, 이펙트는 안해도 될듯
         }
     }
     #endregion
+
+    private void PlayCoinSound()
+    {
+        var coinSound = ResourceManager.Instance.GetAudioClip("CoinSound");
+        SFX.Instance.PlayOneShot(coinSound, 0.3f);
+    }
 }

@@ -52,7 +52,6 @@ public enum PlayerStatusType
 [Serializable]
 public class PlayerStatusData
 {
-    // TODO => Defalut value 여기서 설정하면 될 듯??
     public float HP = 10f;
     public float Damage = 5f;
     public float Mana = 100f;

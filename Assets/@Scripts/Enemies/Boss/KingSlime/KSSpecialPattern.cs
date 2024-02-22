@@ -8,7 +8,7 @@ public class KSSpecialPattern : MonoBehaviour
     private Transform[] _summonLocations;
     private void Awake()
     {
-        _enemy = Resources.Load<GameObject>("Enemies/BlueSlime");
+        _enemy = Resources.Load<GameObject>("Enemies/Monsters/BlueSlime");
         _summonLocations = new Transform[2];
         _summonLocations[0] = transform.Find("SummonLocation1");
         _summonLocations[1] = transform.Find("SummonLocation2");
@@ -18,6 +18,7 @@ public class KSSpecialPattern : MonoBehaviour
     {
         foreach(var location in _summonLocations)
         {
+            SFX.Instance.PlayOneShot("SlimeSummonSound");
             Instantiate(_enemy, location.position, Quaternion.identity);
         }
     }

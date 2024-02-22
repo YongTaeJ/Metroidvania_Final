@@ -80,6 +80,7 @@ public class KSJumpAttackState : BossAttackState
     private void MakeShockWave()
     {
         _rigidbody.isKinematic = false;
+        SFX.Instance.PlayOneShot("KingSlimeJumpAttackSound", 0.3f);
         GameObject.Instantiate(_shockwave, _transform.position, quaternion.identity)
         .GetComponent<EnemyAttackSystem>().Initialize(_damage);
     }

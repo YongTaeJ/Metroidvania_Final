@@ -19,6 +19,7 @@ public class ChatBoxUI : MonoBehaviour
     private int _buttonIndex;
     private GameObject[] _choiceButtons;
     private bool _keyValue;
+    private AudioClip _nextChatSound;
 
     #endregion
 
@@ -30,6 +31,7 @@ public class ChatBoxUI : MonoBehaviour
         _chatText = transform.Find("ChatArea/ChatText").GetComponent<TMP_Text>();
         _choiceArea = transform.Find("ChoiceArea");
         _buttonIndex = 0;
+        _nextChatSound = ResourceManager.Instance.GetAudioClip("NextChatSound");
         GameObject choiceButton = Resources.Load<GameObject>("UI/ChoiceButton");
 
         _choiceButtons = new GameObject[4];
@@ -58,7 +60,6 @@ public class ChatBoxUI : MonoBehaviour
         _chatText.text = "";
         foreach ( char letter in sentence)
         {
-            // TODO => 입력시 스킵 추가
             _chatText.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
@@ -84,6 +85,11 @@ public class ChatBoxUI : MonoBehaviour
         _chatArea.SetActive(!isActive);
         _choiceArea.gameObject.SetActive(isActive);
     }
+
+    private void PlayNextChatSound()
+    {
+        SFX.Instance.PlayOneShot(_nextChatSound);
+    }
     #endregion
 
     #region public
@@ -103,6 +109,7 @@ public class ChatBoxUI : MonoBehaviour
         {
             if(_keyValue)
             {
+                PlayNextChatSound();
                 _nameText.text = chatDatas[currentIndex].name;
                 _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
                 yield return StartCoroutine(_typingCoroutine);

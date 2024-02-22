@@ -32,6 +32,7 @@ public class VHBasicAttack1State : BossAttackState
 
     protected override void OnAttack()
     {
+        SFX.Instance.PlayOneShot("EnemyAttackSound");
         _attackCollider.enabled = true;
     }
 
