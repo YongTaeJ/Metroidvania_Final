@@ -10,7 +10,7 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
     public EnemyMeleeAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        stateMachine.EventReceiver.OnAttackStarted += ActiveAttackCollider;
+        stateMachine.EventReceiver.OnAttackStarted += AttackStart;
         _attackCollider = _attackPivot.GetComponent<BoxCollider2D>();
         _attackCollider.enabled = false;
     }
@@ -27,11 +27,11 @@ public class EnemyMeleeAttackState : EnemyAttackState
 
         _attackCollider.enabled = false;
     }
-
-    private void ActiveAttackCollider()
-    {
-        _attackCollider.enabled = true;
-    }
     #endregion
 
+    private void AttackStart()
+    {
+        PlayAttackSound();
+        _attackCollider.enabled = true;
+    }
 }

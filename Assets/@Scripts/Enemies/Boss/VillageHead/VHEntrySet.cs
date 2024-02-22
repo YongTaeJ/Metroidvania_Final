@@ -19,6 +19,8 @@ public class VHEntrySet : MonoBehaviour
 
     public void Jump()
     {
+        TimerManager.Instance.StartTimer(0.5f, () => SFX.Instance.PlayOneShot("EnemyAttackSound", 0.5f));
+        TimerManager.Instance.StartTimer(1.05f, () => SFX.Instance.PlayOneShot("EnemyAttackSound", 0.5f));
         _animator.SetTrigger(AnimatorHash.Jump);
     }
 
@@ -29,6 +31,7 @@ public class VHEntrySet : MonoBehaviour
 
     public void Taunt()
     {
+        TimerManager.Instance.StartTimer(0.7f, () => SFX.Instance.PlayOneShot("VillageHeadTauntSound", 0.5f));
         _animator.SetTrigger("Taunt");
     }
 

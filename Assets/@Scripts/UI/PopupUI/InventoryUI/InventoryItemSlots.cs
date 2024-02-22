@@ -1,6 +1,4 @@
-using System.Data.Common;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.UI;
 
 public class InventoryItemSlots : MonoBehaviour
@@ -22,7 +20,11 @@ public class InventoryItemSlots : MonoBehaviour
                 _itemSlots[i].Initialize(type, i);
                 Button button = _itemSlots[i].GetComponent<Button>();
                 var item = items[i];
-                button.onClick.AddListener(() => UI.ItemPopupUI.SetInform(item));
+                button.onClick.AddListener(
+                () =>
+                {
+                    UI.ItemPopupUI.SetInform(item);
+                });
             }
         }
     }

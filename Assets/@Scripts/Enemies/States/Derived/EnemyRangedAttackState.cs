@@ -30,6 +30,7 @@ public class EnemyRangedAttackState : EnemyAttackState
     
     private void FireBullet()
     {
+        PlayAttackSound();
         Vector3 myPos = _attackPivot.position;
 
         EnemyBullet bullet = 

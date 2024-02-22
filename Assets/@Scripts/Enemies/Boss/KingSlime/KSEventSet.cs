@@ -6,13 +6,11 @@ using UnityEngine;
 public class KSEventSet : MonoBehaviour
 {
     #region variables
-    private Rigidbody2D _rigidbody;
     private Animator _animator;
     #endregion
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
     }
 
@@ -30,6 +28,7 @@ public class KSEventSet : MonoBehaviour
     {
         float time = 1;
 
+        SFX.Instance.PlayOneShot("SummonRockSound");
         Jump();
         transform.DOMoveY(10, time);
 

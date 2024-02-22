@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 [RequireComponent(typeof(AudioSource))]
 public class SFX : SoundManager<SFX>
@@ -49,6 +50,12 @@ public class SFX : SoundManager<SFX>
 
     public void PlayOneShot(AudioClip clip, float volumeScale = 1.0f)
     {
+        this.AudioSource.PlayOneShot(clip, volumeScale);
+    }
+
+    public void PlayOneShot(string name, float volumeScale = 1.0f)
+    {
+        AudioClip clip = ResourceManager.Instance.GetAudioClip(name);
         this.AudioSource.PlayOneShot(clip, volumeScale);
     }
 }

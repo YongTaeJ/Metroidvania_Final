@@ -40,4 +40,10 @@ public class EnemyAttackState : EnemyBaseState
     {
         _isAttackEnded = true;
     }
+
+    protected void PlayAttackSound()
+    {
+        var attackSound = ResourceManager.Instance.GetAudioClip("EnemyAttackSound");
+        SFX.Instance.PlayOneShot(attackSound, 0.5f);
+    }
 }

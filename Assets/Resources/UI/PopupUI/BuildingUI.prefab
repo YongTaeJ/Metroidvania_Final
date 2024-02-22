@@ -528,6 +528,7 @@ GameObject:
   - component: {fileID: 4761286293550729794}
   - component: {fileID: 5738004523967070774}
   - component: {fileID: 4064103809847597927}
+  - component: {fileID: 1274679730607104757}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -608,6 +609,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1274679730607104757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481864627394775863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def511cf90463d441b9f0a945d65a611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2102462571682916643
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,6 +2140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2738940871853813803}
   - component: {fileID: 6698161333662437315}
+  - component: {fileID: 4509155503008634555}
   m_Layer: 5
   m_Name: BuildingUI
   m_TagString: Untagged
@@ -2168,6 +2182,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22d263d9419090347999fb96e60f7705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exitButton: {fileID: 0}
+--- !u!114 &4509155503008634555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696208839642974492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c307542e99450b24aba3ef564cc22ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8392864561665808876

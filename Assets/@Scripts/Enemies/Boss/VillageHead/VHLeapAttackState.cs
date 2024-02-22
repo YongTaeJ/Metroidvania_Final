@@ -20,7 +20,7 @@ public class VHLeapAttackState : BossAttackState
         BossPatternType = BossPatternType.Ranged;
 
         _throwCollider = stateMachine.transform.Find("Sprite/AttackPivot/ThrowAttack").GetComponent<Collider2D>();
-        _bodyTriggerCollider = stateMachine.transform.Find("Sprite/AttackPivot").GetComponent<CapsuleCollider2D>();
+        _bodyTriggerCollider = stateMachine.transform.Find("Sprite/AttackPivot/Body").GetComponent<CapsuleCollider2D>();
         _bodyCollisionCollider = stateMachine.transform.GetComponent<Collider2D>();
         _rigidbody = stateMachine.Rigidbody;
 
@@ -53,6 +53,7 @@ public class VHLeapAttackState : BossAttackState
 
         if(_startCount == 1)
         {
+            SFX.Instance.PlayOneShot("EnemyAttackSound", 0.7f);
             _direction = _playerTransform.position.x - _transform.position.x > 0 ? 1 : -1 ;
             _objectFlip.Flip(_direction);
             _transform.DOMoveX(_playerTransform.position.x - _throwDistance * _direction, _jumpTime);
@@ -62,14 +63,16 @@ public class VHLeapAttackState : BossAttackState
         }
         else if(_startCount == 2)
         {
+            SFX.Instance.PlayOneShot("EnemyAttackSound");
             _throwCollider.enabled = true;
         }
         else if(_startCount == 3)
         {
+            SFX.Instance.PlayOneShot("VillageHeadLeapAttackSound", 0.5f);
             _bodyTriggerCollider.enabled = true;
             _bodyCollisionCollider.enabled = true;
             _rigidbody.isKinematic = false;
-            _transform.position += Vector3.right * _direction * _throwDistance;
+            _transform.position += Vector3.right * _direction * _throwDistance * 1.7f;
         }
     }
 
