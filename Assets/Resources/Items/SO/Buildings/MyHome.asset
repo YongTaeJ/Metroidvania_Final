@@ -16,9 +16,20 @@ MonoBehaviour:
   _constructName: "\uB0B4 \uC9D1"
   _constructDescription: "\uB0B4 \uC9D1\uC785\uB2C8\uB2E4. \uB0B4\uC9D1\uB9C8\uB828\uC758
     \uAFC8!!!"
+  _effectDescription: "\uD479 \uC26C\uC5B4\uC11C \uACF5\uACA9\uB825\uC774 \uC62C\uB77C\uAC11\uB2C8\uB2E4."
   _requiredConditions: []
-  _requiredMaterials: []
-  _statElements: []
+  _requiredMaterials:
+  - ID: 1
+    Stock: 50
+  - ID: 0
+    Stock: 30
+  _statElements:
+  - statusType: 2
+    value: 500
+  _rewardElements:
+  - ItemType: 3
+    ID: 0
+    Stock: 1
   _buildingData:
     buildingPrefab: {fileID: 6692332912189659294, guid: bbe0b0d6bb99e0e449bf48ed42d4c87a, type: 3}
     buildingPosition: {x: 296, y: 2.4, z: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public abstract class NPCInteraction : MonoBehaviour, IInteract
+public abstract class NPCInteraction : MonoBehaviour
 {
     #region variables
     protected ChatBoxUI _chatBoxUI;

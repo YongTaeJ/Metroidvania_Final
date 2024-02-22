@@ -53,10 +53,11 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
         
         GetComponent<EnemyHitSystem>().Initialize(this);
-        var attacks = GetComponentsInChildren<EnemyAttackSystem>();
-        foreach(var system in attacks)
+
+        var attackComponents = transform.Find("Sprite").GetComponentsInChildren<IHasDamage>();
+        foreach(var component in attackComponents)
         {
-            system.Initialize(EnemyData.Damage);
+            component.Initialize(EnemyData.Damage);
         }
     }
 

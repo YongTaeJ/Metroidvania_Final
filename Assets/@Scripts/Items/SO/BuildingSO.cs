@@ -15,6 +15,7 @@ public class BuildingSO : ScriptableObject, IHasID
     [SerializeField] private List<RequiredCondition> _requiredConditions;
     [SerializeField] private List<RequiredMaterial> _requiredMaterials;
     [SerializeField] private List<StatElement> _statElements;
+    [SerializeField] private List<InternalItemData> _rewardElements;
     [SerializeField] private BuildingData _buildingData;
 
     public int ID { get {return _ID;} set { } }
@@ -23,6 +24,7 @@ public class BuildingSO : ScriptableObject, IHasID
     public string EffectDescription => _effectDescription;
     public List<RequiredCondition> RequiredConditions => _requiredConditions;
     public List<RequiredMaterial> RequiredMaterials => _requiredMaterials;
+    public List<InternalItemData> RewardsElements => _rewardElements;
     public List<StatElement> StatElements => _statElements;
     public BuildingData BuildingData => _buildingData;
 
@@ -56,6 +58,23 @@ public class BuildingSO : ScriptableObject, IHasID
 
         return true;
     }
+
+    public void GiveReward()
+    {
+        // 스탯상승, 추가 리워드 제공
+        // 둘 중 하나만 있어도 문제없도록
+        var curStats = GameManager.Instance.player.playerStatus;
+
+        foreach(var element in StatElements)
+        {
+            curStats.AddStat(element.statusType, element.value);
+        }
+
+        foreach(var element in RewardsElements)
+        {
+            ItemManager.Instance.AddItem(element.ItemType, element.ID, element.Stock);
+        }
+    }
 }
 
 [Serializable]
@@ -75,7 +94,7 @@ public struct RequiredCondition
 [Serializable]
 public struct StatElement
 {
-    // TODO => StatType
+    public PlayerStatusType statusType;
     public float value;
 }
 

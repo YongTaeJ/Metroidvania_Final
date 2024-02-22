@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8281785145702148168}
   - component: {fileID: 1432862924356691189}
-  - component: {fileID: 8615947389586072069}
+  - component: {fileID: 404916367778593906}
   m_Layer: 0
   m_Name: AttackPivot
   m_TagString: Untagged
@@ -212,7 +212,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &8615947389586072069
+--- !u!114 &404916367778593906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3749800872983079168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37769eed93a00ee4c805e0522490862b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8535648e1f1962146b8b337fb1c362af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6218987371986142834

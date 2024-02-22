@@ -31,7 +31,6 @@ public class ConstructYNPanel : YNPanel
 
     protected override void OnClickYes()
     {
-        // TODO => 차후순위로 건축 기념 이벤트 혹은 UI를 넣을 수 있을 듯.
         var SO = SOManager.Instance.GetBuildingSO(_ID);
 
         foreach(var item in SO.RequiredMaterials)
@@ -40,6 +39,7 @@ public class ConstructYNPanel : YNPanel
         }
 
         ItemManager.Instance.AddItem(ItemType.Building, _ID);
+        SO.GiveReward();
 
         BuildingConstructAnimation(_ID);
 

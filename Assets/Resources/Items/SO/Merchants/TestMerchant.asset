@@ -16,13 +16,13 @@ MonoBehaviour:
   _goodsList:
   - ItemType: 2
     ID: 0
-    Cost: 50
-  - ItemType: 5
-    ID: 0
-    Cost: 200
+    Stock: 0
+  - ItemType: 2
+    ID: 1
+    Stock: 0
   - ItemType: 3
     ID: 0
-    Cost: 100
+    Stock: 0
   - ItemType: 1
     ID: 0
-    Cost: 0
+    Stock: 0
