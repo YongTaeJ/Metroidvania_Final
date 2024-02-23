@@ -27,6 +27,7 @@ public class BuyPortal : MonoBehaviour
     {
         if (ItemManager.Instance.UseItem(ItemType.Gold, 0, _portalPrice))
         {
+            SFX.Instance.PlayOneShot("PurchaseSound");
             ItemManager.Instance.AddItem(ItemType.Portal, _portalIndex);
 
             if (!ItemManager.Instance.HasItem(ItemType.Portal, 0))
@@ -38,6 +39,7 @@ public class BuyPortal : MonoBehaviour
         }
         else
         {
+            SFX.Instance.PlayOneShot("ShortMoneySound");
             _needGold.gameObject.SetActive(true);
         }
     }
