@@ -525,7 +525,7 @@ public class PlayerInputController : MonoBehaviour
                 _player._skills[0].Activate();
                 SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("SwordAuror"));
             }
-            else
+            else if(!ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 // 아이템이 없다는 표시의 UI나 뭔가를 띄우면 좋을듯
                 Debug.Log("아이템 없음");
@@ -536,7 +536,7 @@ public class PlayerInputController : MonoBehaviour
                 _player._skills[1].Activate();
                 _player.Invincible = true;
             }
-            else
+            else if(!ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 Debug.Log("아이템 없음");
             }
@@ -589,7 +589,16 @@ public class PlayerInputController : MonoBehaviour
     {
         if (context.started)
         {
-            UIManager.Instance.OpenPopupUI(PopupType.Inventory);
+            // 실시간으로 inventoryUI 상태를 확인
+            GameObject inventoryUI = UIManager.Instance.GetUI(PopupType.Inventory);
+            if (inventoryUI != null && inventoryUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+            }
+            else
+            {
+                UIManager.Instance.OpenPopupUI(PopupType.Inventory);
+            }
         }
     }
 
@@ -597,9 +606,23 @@ public class PlayerInputController : MonoBehaviour
     {
         if (context.started)
         {
-            //if 켜진 UI가 없다면
-            UIManager.Instance.OpenPopupUI(PopupType.Pause);
-            //else if 켜진 Popup이 있다면 UI SetActive(false)
+            // 실시간으로 PauseUI 상태를 확인
+            GameObject pauseUI = UIManager.Instance.GetUI(PopupType.Pause);
+            // 실시간으로 inventoryUI 상태를 확인
+            GameObject inventoryUI = UIManager.Instance.GetUI(PopupType.Inventory);
+
+            if (pauseUI != null && pauseUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Pause);
+            }
+            else if (inventoryUI != null && inventoryUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+            }
+            else
+            {
+                UIManager.Instance.OpenPopupUI(PopupType.Pause);
+            }
         }
     }
 

@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 195509539613833700}
   m_Layer: 8
   m_Name: KingSlime
-  m_TagString: Enemy
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
