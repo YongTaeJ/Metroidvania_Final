@@ -63,6 +63,7 @@ public class MapTeleport : MonoBehaviour
         if (_selectedButtonIndex == 0)
         {
             GameManager.Instance.player._hp = GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.HP];
+
         }
     }
 
