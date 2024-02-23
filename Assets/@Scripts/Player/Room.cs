@@ -30,7 +30,7 @@ public class Room : MonoBehaviour
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             CameraManager.Instance.GetCamera(_virtualCamera);
-            _framingTransposer.m_XDamping = 0.2f;
+            _framingTransposer.m_XDamping = 1f;
             virtualcam.SetActive(true);
         }
     }
