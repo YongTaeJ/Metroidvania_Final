@@ -10,11 +10,12 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public override bool Initialize()
     {
-        LoadPrefabs("Prefabs", prefaps);
-        LoadAudioClip("AudioClip", audios);
-        //LoadSprites("")
-        // 스프라이트 현재 경로가 애매해서 보류
-        return base.Initialize();
+        if(base.Initialize())
+        {
+            LoadPrefabs("Prefabs", prefaps);
+            LoadAudioClip("AudioClip", audios);
+        }
+        return true;
     }
 
     #region Prefab

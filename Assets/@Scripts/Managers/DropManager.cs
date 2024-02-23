@@ -13,17 +13,19 @@ public class DropManager : Singleton<DropManager>
 
     public override bool Initialize()
     {
-        TextAsset itemTable_Json = Resources.Load<TextAsset>("Json/DropTable");
-        _dropTables = JsonConvert.DeserializeObject<DropTableArray>(itemTable_Json.ToString()).DropTables;
-        
-        _dropItem = Resources.Load<GameObject>("Items/DropItem");
+        if (base.Initialize())
+        {
+            TextAsset itemTable_Json = Resources.Load<TextAsset>("Json/DropTable");
+            _dropTables = JsonConvert.DeserializeObject<DropTableArray>(itemTable_Json.ToString()).DropTables;
 
-        coinPrefabs = new GameObject[3];
-        coinPrefabs[0] = Resources.Load<GameObject>("Items/Coin1");
-        coinPrefabs[1] = Resources.Load<GameObject>("Items/Coin10");
-        coinPrefabs[2] = Resources.Load<GameObject>("Items/Coin100");
+            _dropItem = Resources.Load<GameObject>("Items/DropItem");
 
-        return base.Initialize();
+            coinPrefabs = new GameObject[3];
+            coinPrefabs[0] = Resources.Load<GameObject>("Items/Coin1");
+            coinPrefabs[1] = Resources.Load<GameObject>("Items/Coin10");
+            coinPrefabs[2] = Resources.Load<GameObject>("Items/Coin100");
+        }
+        return true;
     }
 
     public void DropCoin(int sumValue, Vector2 location)

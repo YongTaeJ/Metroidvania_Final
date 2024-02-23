@@ -12,10 +12,14 @@ public class ItemManager : Singleton<ItemManager>
 
      public override bool Initialize()
     {
-        LoadItem();
-        LoadSprites();
-        LoadSaveData(GameManager.Instance.Data.Inventory);
-        return base.Initialize();
+        if (base.Initialize())
+        {
+            LoadItem();
+            LoadSprites();
+            LoadSaveData(GameManager.Instance.Data.Inventory);
+            Debug.Log("아이템");
+        }
+        return true;
     }
 
     private void LoadItem()

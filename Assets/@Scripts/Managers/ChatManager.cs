@@ -12,9 +12,12 @@ public class ChatManager : Singleton<ChatManager>
 
     public override bool Initialize()
     {
-        GetDataFromResource();
+        if(base.Initialize())
+        {
+            GetDataFromResource();
 
-        return base.Initialize();
+        }
+        return true;
     }
 
     private void GetDataFromResource()
