@@ -347,6 +347,12 @@
       "ID": "116",
       "Name": "ItemChest16",
       "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "99",
+      "Name": "Challenge",
+      "Description": "르탄이 이미지가 들어있는 상자입니다."
     }
   ]
 }

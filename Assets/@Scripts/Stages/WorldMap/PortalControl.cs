@@ -40,7 +40,7 @@ public class PortalControl : MonoBehaviour
 
     private void UsePortal()
     {
-        MapTeleport mapTeleport = MapManager.Instance.GetComponentInChildren<MapTeleport>();
+        MapTeleport mapTeleport = MapManager.Instance.GetComponentInChildren<MapTeleport>(true);
 
         if (mapTeleport != null)
         {
