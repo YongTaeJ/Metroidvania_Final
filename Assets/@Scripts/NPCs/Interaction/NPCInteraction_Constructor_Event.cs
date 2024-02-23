@@ -27,6 +27,6 @@ public class NPCInteraction_Constructor_Event : NPCInteraction
         EndInteract(input);
 
         // TODO 해결 전 임시 코드
-        Destroy(transform.parent.gameObject);
+        transform.parent.gameObject.SetActive(false);
     }
 }

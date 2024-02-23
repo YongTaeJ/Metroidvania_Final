@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1066641731348757374}
   - component: {fileID: 8061050382120417018}
   m_Layer: 0
-  m_Name: PlayerFinder
+  m_Name: Interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5453704270445053693}
   m_Father: {fileID: 8363656353317695869}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -191,8 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f14180da2fa2fe418c6b7b21719302c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chatID_gameStart: 0
-  _chatID_remainder: 0
+  _chatID_gameStart: 100
+  _chatID_remainder: 101
 --- !u!1 &8055565735708664396
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +226,6 @@ Transform:
   m_Children:
   - {fileID: 2195791337559499874}
   - {fileID: 2649419442689906134}
-  - {fileID: 5453704270445053693}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,7 +333,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6753575652421370426}
-  m_Father: {fileID: 8363656353317695869}
+  m_Father: {fileID: 2649419442689906134}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

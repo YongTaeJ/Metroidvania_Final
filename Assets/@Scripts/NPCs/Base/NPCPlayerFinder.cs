@@ -15,7 +15,7 @@ public class NPCPlayerFinder : MonoBehaviour
 
     private void Awake()
     {
-        _objectFlip = new ObjectFlip(transform);
+        _objectFlip = new ObjectFlip(transform.parent);
         _interaction = GetComponent<NPCInteraction>();
         _press = GetComponentInChildren<Canvas>(true);
         if (_press != null) _press.gameObject.SetActive(false);

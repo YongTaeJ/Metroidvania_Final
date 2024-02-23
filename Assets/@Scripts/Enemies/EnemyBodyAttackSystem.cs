@@ -22,8 +22,14 @@ public class EnemyBodyAttackSystem : MonoBehaviour, IHasDamage
         if (other.gameObject.CompareTag("Player") && other.TryGetComponent<IDamagable>(out var component))
         {
             component.GetDamaged(_damage, this.transform);
-            _collider.enabled = false;
-            TimerManager.Instance.StartTimer(0.1f, () => _collider.enabled = true);
+            StartCoroutine(RefreshCollider());
         }
+    }
+
+    private IEnumerator RefreshCollider()
+    {
+        _collider.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        _collider.enabled = true;
     }
 }

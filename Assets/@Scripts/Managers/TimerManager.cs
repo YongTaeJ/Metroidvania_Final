@@ -15,7 +15,7 @@ public class TimerManager : Singleton<TimerManager>
             timers[i].restTime -= Time.deltaTime;
             if(timers[i].restTime <= 0)
             {
-                timers[i].OnTime();
+                timers[i]?.OnTime();
                 timers.RemoveAt(i);
             }
         }

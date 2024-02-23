@@ -97,6 +97,7 @@ public class Player : MonoBehaviour, IDamagable
 
     public event Action<float, float> OnHealthChanged;
     public event Action<float, float> OnManaChanged;
+    public event Action OnPlayerDead;
 
     private void Awake()
     {
@@ -218,6 +219,7 @@ public class Player : MonoBehaviour, IDamagable
             {
                 HP = 0;
                 OnDie();
+                OnPlayerDead?.Invoke();
             }
         }
     }

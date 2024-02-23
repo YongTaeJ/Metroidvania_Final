@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
         {
             // Save Data가 없는경우.
             // TODO: 초기화 작업 추가
+            InitItems();
 
             // 새 게임 시작 시 랜덤 정수 생성
             _data.randomUniqueNumber = UnityEngine.Random.Range(0, 2147483647);
@@ -62,5 +63,11 @@ public class GameManager : Singleton<GameManager>
     {
         File.Delete(_dataPath);
         Debug.Log("저장된 데이터 삭제");
+    }
+
+    private void InitItems()
+    {
+        ItemManager.Instance.AddItem(ItemType.NPC, 0);
+        ItemManager.Instance.AddItem(ItemType.NPC, 5);
     }
 }

@@ -51,6 +51,8 @@ public class KSBossRoom : BossRoom
     protected override IEnumerator EndBattle()
     {
         List<(string, string)> chatDatas;
+        
+         _playerInput.enabled = false;
 
         _KSEventSet.transform.position = _deadLocation;
         _KSEventSet.gameObject.SetActive(true);

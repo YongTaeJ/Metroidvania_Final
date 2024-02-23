@@ -41,6 +41,8 @@ public abstract class BossRoom : MonoBehaviour
             _isProgress = true;
             SetPlayerInput(other.gameObject);
             StartCoroutine(EnterBossRoom());
+            GameManager.Instance.player.OnPlayerDead -= OnPlayerDead;
+            GameManager.Instance.player.OnPlayerDead += OnPlayerDead;
         }
     }
     #endregion
@@ -70,8 +72,9 @@ public abstract class BossRoom : MonoBehaviour
         StartCoroutine(EndBattle());
     }
 
-    public virtual void OnPlayerDead()
+    protected virtual void OnPlayerDead()
     {
+        GameManager.Instance.player.OnPlayerDead -= OnPlayerDead;
         if(_currentBoss != null)
         {
             Destroy(_currentBoss);
