@@ -79,9 +79,7 @@ public class MapTeleport : MonoBehaviour
     private void Teleport(int index)
     {
         MapManager.Instance.LoadImage(true);
-        //GameManager.Instance.player.transform.position = new Vector3(0, 0, 0);
-        //GameManager.Instance.player.transform.position = portalLocations[index];
-
+       
         Vector3 newPosition = portalLocations[index];
         GameManager.Instance.player.transform.position = newPosition;
 
@@ -91,10 +89,6 @@ public class MapTeleport : MonoBehaviour
         GameManager.Instance.Data.playerPositionX = newPosition.x;
         GameManager.Instance.Data.playerPositionY = newPosition.y;
         GameManager.Instance.Data.playerPositionZ = newPosition.z;
-
-        //GameManager.Instance.Data.playerPositionX = portalLocations[index].x;
-        //GameManager.Instance.Data.playerPositionY = portalLocations[index].y;
-        //GameManager.Instance.Data.playerPositionZ = portalLocations[index].z;
 
         SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Teleport"));
         GameManager.Instance.SaveGame();

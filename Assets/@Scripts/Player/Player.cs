@@ -301,5 +301,13 @@ public class Player : MonoBehaviour, IDamagable
         Initialized();
         UIManager.Instance.SetFixedUI(true);
         UIManager.Instance.ClosePopupUI(PopupType.GameOver);
+        MapManager.Instance.LoadImage(true);
+        StartCoroutine(LoadingImage());
+    }
+
+    private IEnumerator LoadingImage()
+    {
+        yield return new WaitForSeconds(1f);
+        MapManager.Instance.LoadImage(false);
     }
 }

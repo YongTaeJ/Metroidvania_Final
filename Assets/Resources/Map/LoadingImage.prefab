@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4974272947908855574}
   - component: {fileID: 3993946294859339490}
   - component: {fileID: 1668460139541139274}
+  - component: {fileID: 4083361012369525073}
   m_Layer: 5
   m_Name: LoadingImage
   m_TagString: Untagged
@@ -104,6 +105,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4083361012369525073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64830049193506559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcbb4bb4861fc54a9a2271a0f74b5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingText: {fileID: 0}
 --- !u!1 &154275255931049149
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2746084, g: 0.37436345, b: 0.4811321, a: 1}
+  m_Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
