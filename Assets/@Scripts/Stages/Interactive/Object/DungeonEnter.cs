@@ -7,6 +7,13 @@ using UnityEngine.InputSystem;
 public class DungeonEnter : MonoBehaviour
 {
     protected PlayerInput _playerInput;
+    protected Canvas _press;
+
+    private void Awake()
+    {
+        _press = GetComponentInChildren<Canvas>(true);
+        if (_press != null) _press.gameObject.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,7 +22,8 @@ public class DungeonEnter : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction += EnterDungeon;
-            UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            //UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(true);
         }
     }
 
@@ -26,7 +34,8 @@ public class DungeonEnter : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= EnterDungeon;
-            UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            //UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(false);
         }
     }
 

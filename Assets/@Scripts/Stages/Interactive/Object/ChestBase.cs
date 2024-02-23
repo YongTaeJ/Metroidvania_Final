@@ -20,6 +20,7 @@ public class ChestBase : MonoBehaviour
     protected PlayerInput _playerInput;
     [SerializeField]
     protected int _chestID = 0;
+    protected Canvas _press;
 
     protected virtual void Awake()
     {
@@ -27,6 +28,8 @@ public class ChestBase : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        _press = GetComponentInChildren<Canvas>(true);
+        if (_press != null) _press.gameObject.SetActive(false);
     }
 
 
@@ -37,7 +40,7 @@ public class ChestBase : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction += OpenChest;
-            UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(true);
         }
     }
 
@@ -47,7 +50,7 @@ public class ChestBase : MonoBehaviour
         {
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= OpenChest;
-            UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(false);
         }
     }
 
@@ -56,7 +59,8 @@ public class ChestBase : MonoBehaviour
         ChestText();
         ItemManager.Instance.AddItem(ItemType.Chest, _chestID);
         UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
-        UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        //UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        if (_press != null) _press.gameObject.SetActive(false);
 
         Animator animator = GetComponent<Animator>();
         if (animator != null)

@@ -24,9 +24,13 @@ public class MapTeleport : MonoBehaviour
     [SerializeField] private Vector3[] portalLocations;
     [SerializeField] private TextMeshProUGUI portalText;
 
+    private Canvas _press;
+
     private void Awake()
     {
         _mapCamera = GetComponentInChildren<Camera>();
+        _press = GetComponentInChildren<Canvas>(true);
+        if (_press != null) _press.gameObject.SetActive(false);
 
         for (int i = 0; i < portalButtons.Length; i++)
         {
@@ -58,7 +62,8 @@ public class MapTeleport : MonoBehaviour
         _checkCanvas.gameObject.SetActive(false);
         Teleport(_selectedButtonIndex);
         MapManager.Instance.CloseLargeMap();
-        UIManager.Instance.OpenPopupUI(PopupType.Interact);
+        //UIManager.Instance.OpenPopupUI(PopupType.Interact);
+        if (_press != null) _press.gameObject.SetActive(true);
 
         if (_selectedButtonIndex == 0)
         {
