@@ -19,7 +19,8 @@ public enum ItemType
     Portal,
     Quest,
     NPC,
-    Boss
+    Boss,
+    Chest
 }
 
 public class Item

@@ -18,8 +18,8 @@ public class NPCInteraction_Constructor_Event : NPCInteraction
 
         // Item docs ref.
         ItemManager.Instance.AddItem(ItemType.NPC, 1);
-        ItemManager.Instance.AddItem(ItemType.NPC, 5);
-        // TODO => 사라지는 연출을 넣으면 좋을 듯
+        ItemManager.Instance.UseItem(ItemType.NPC, 5, 1);
+        transform.parent.Find("Sprite").gameObject.SetActive(false);
 
         chatDatas = ChatManager.Instance.GetChatData(_chatID_end);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
@@ -27,6 +27,6 @@ public class NPCInteraction_Constructor_Event : NPCInteraction
         EndInteract(input);
 
         // TODO 해결 전 임시 코드
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

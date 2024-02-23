@@ -90,6 +90,13 @@ public abstract class BossRoom : MonoBehaviour
         _dropTableIndex = ID;
     }
 
+    protected void PlayBossBGM()
+    {
+        BGM.Instance.Stop();
+        BGM.Instance.Play("Boss", true);
+    }
+
     protected abstract IEnumerator EnterBossRoom();
     protected abstract IEnumerator EndBattle();
+    protected abstract void PlayStageBGM();
 }

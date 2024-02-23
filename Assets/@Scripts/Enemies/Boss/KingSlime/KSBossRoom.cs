@@ -42,6 +42,7 @@ public class KSBossRoom : BossRoom
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         // 보스 생성 후 게임 시작
+        PlayBossBGM();
         _playerInput.enabled = true;
         _currentBoss = Instantiate(_KingSlimePrefab, _KSEventSet.transform.position, Quaternion.identity);
         _KSEventSet.gameObject.SetActive(false);
@@ -66,9 +67,14 @@ public class KSBossRoom : BossRoom
 
         Destroy(_KSEventSet.gameObject);
 
+        PlayStageBGM();
         DoorControl(false);
         _playerInput.enabled = true;
     }
 
-
+    protected override void PlayStageBGM()
+    {
+        BGM.Instance.Stop();
+        BGM.Instance.Play("Stage1", true);
+    }
 }

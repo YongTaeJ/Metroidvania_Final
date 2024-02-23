@@ -123,7 +123,7 @@
     {
       "ItemType": "NPC",
       "ID": "5",
-      "Name": "Constructor",
+      "Name": "Constructor_Dungeon",
       "Description": "건축가(던전)"
     },
     {
@@ -185,6 +185,168 @@
       "ID": "1",
       "Name": "Plunge",
       "Description": "엄청난 힘으로 땅을 찍는 비법에 대해 적혀 있습니다. 이세계에는 강하게 찍는 힘에 반응하는 벽이 있다고..."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "0",
+      "Name": "Chest00",
+      "Description": "빈 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "10",
+      "Name": "Ability00",
+      "Description": "WindCloak이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "11",
+      "Name": "Ability01",
+      "Description": "WallGloves이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "12",
+      "Name": "Ability02",
+      "Description": "WingShoes이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "20",
+      "Name": "Skill00",
+      "Description": "Aura가 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "21",
+      "Name": "Skill01",
+      "Description": "Plunge가 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "50",
+      "Name": "Map00",
+      "Description": "지도 조각이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "51",
+      "Name": "Map01",
+      "Description": "지도 조각이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "52",
+      "Name": "Map02",
+      "Description": "지도 조각이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "53",
+      "Name": "Map03",
+      "Description": "지도 조각이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "100",
+      "Name": "ItemChest00",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "101",
+      "Name": "ItemChest01",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "102",
+      "Name": "ItemChest02",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "103",
+      "Name": "ItemChest03",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "104",
+      "Name": "ItemChest04",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "105",
+      "Name": "ItemChest05",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "106",
+      "Name": "ItemChest06",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "107",
+      "Name": "ItemChest07",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "108",
+      "Name": "ItemChest08",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "109",
+      "Name": "ItemChest09",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "110",
+      "Name": "ItemChest10",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "111",
+      "Name": "ItemChest11",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "112",
+      "Name": "ItemChest12",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "113",
+      "Name": "ItemChest13",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "114",
+      "Name": "ItemChest14",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "115",
+      "Name": "ItemChest15",
+      "Description": "아이템이 담긴 상자입니다."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "116",
+      "Name": "ItemChest16",
+      "Description": "아이템이 담긴 상자입니다."
     }
   ]
 }
