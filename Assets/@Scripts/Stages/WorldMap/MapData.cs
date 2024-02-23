@@ -14,8 +14,8 @@ public class MapData : MonoBehaviour
     // MapTiles - 2 : 포탈 2번(Shelter) 위에 있는 공간에서 얻는 맵(히든 요소)
     // MapTiles - 3 : Stage 2 마지막에서 얻는 맵(위쪽)
 
-    private Tilemap[] _mapTilesData;
-    private Tilemap _curActiveTilemap;
+    private GameObject[] _mapTilesData;
+    private GameObject _curActiveMap;
 
     public GameObject mapTilesContainer;
 
@@ -26,18 +26,19 @@ public class MapData : MonoBehaviour
     {
         InitializeMapTilesData();
         _curMapData = ItemManager.Instance.GetItemStock(ItemType.Map, 0);
-        _curActiveTilemap = _mapTilesData[_curMapData];
-        _curActiveTilemap.gameObject.SetActive(true);
+        _curActiveMap = _mapTilesData[_curMapData];
+        _curActiveMap.gameObject.SetActive(true);
     }
 
     private void InitializeMapTilesData()
     {
         if (mapTilesContainer != null)
         {
+            _mapTilesData = new GameObject[mapTilesContainer.transform.childCount];
+            int i = 0;
             foreach (Transform mapTile in mapTilesContainer.transform)
             {
-                Tilemap[] mapTiles = mapTilesContainer.GetComponentsInChildren<Tilemap>(true);
-                _mapTilesData = mapTiles;
+                _mapTilesData[i++] = mapTile.gameObject;
             }
         }
     }
@@ -51,9 +52,9 @@ public class MapData : MonoBehaviour
             _curMapData = _newMapData;
         }
 
-        if (_curActiveTilemap != null)
+        if (_curActiveMap != null)
         {
-            _curActiveTilemap.gameObject.SetActive(false);
+            _curActiveMap.gameObject.SetActive(false);
         }
 
         if (_curMapData >= _mapTilesData.Length)
@@ -61,7 +62,7 @@ public class MapData : MonoBehaviour
             _curMapData = _mapTilesData.Length - 1;
         }
 
-        _curActiveTilemap = _mapTilesData[_curMapData];
-        _curActiveTilemap.gameObject.SetActive(true);
+        _curActiveMap = _mapTilesData[_curMapData];
+        _curActiveMap.gameObject.SetActive(true);
     }
 }
