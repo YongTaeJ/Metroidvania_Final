@@ -40,6 +40,7 @@ public class DungeonEnter : MonoBehaviour
     private void EnterDungeon()
     {
         EnterDungeonText();
+        if (_press != null) _press.gameObject.SetActive(false);
         GameManager.Instance.player.transform.position = new Vector3(290, -100, 0);
         BGM.Instance.Stop();
         BGM.Instance.Play("Stage1", true);
