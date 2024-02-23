@@ -645,8 +645,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5011675258972281906}
-        m_TargetAssemblyTypeName: PortalControl, Assembly-CSharp
+      - m_Target: {fileID: 3477197913756309406}
+        m_TargetAssemblyTypeName: MapTeleport, Assembly-CSharp
         m_MethodName: ClosePortalMap
         m_Mode: 1
         m_Arguments:
@@ -1209,7 +1209,6 @@ GameObject:
   - component: {fileID: 8425717401730090340}
   - component: {fileID: 4615126068943110356}
   - component: {fileID: 3477197913756309406}
-  - component: {fileID: 5011675258972281906}
   m_Layer: 5
   m_Name: PortalMap
   m_TagString: Untagged
@@ -1432,20 +1431,6 @@ MonoBehaviour:
   - {x: 210, y: -95, z: 0}
   - {x: 416.5, y: -146.5, z: 0}
   portalText: {fileID: 5289740741935575598}
---- !u!114 &5011675258972281906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3365192624860960683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07d593562ede4224fbede46be4fcbc54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _portalIndex: 0
-  _portalPrice: 50
 --- !u!1 &3480260266624608932
 GameObject:
   m_ObjectHideFlags: 0

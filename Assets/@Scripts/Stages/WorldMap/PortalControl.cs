@@ -40,7 +40,7 @@ public class PortalControl : MonoBehaviour
 
     private void UsePortal()
     {
-        MapTeleport mapTeleport = GetComponent<MapTeleport>();
+        MapTeleport mapTeleport = MapManager.Instance.GetComponentInChildren<MapTeleport>();
 
         if (mapTeleport != null)
         {
@@ -67,9 +67,5 @@ public class PortalControl : MonoBehaviour
         {
             MapManager.Instance.ActivateBuyPortalUI(_portalIndex, _portalPrice);
         }
-    }
-    public void ClosePortalMap()
-    {
-        MapManager.Instance.CloseLargeMap();
     }
 }
