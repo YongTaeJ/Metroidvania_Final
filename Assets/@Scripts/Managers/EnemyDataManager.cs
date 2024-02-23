@@ -12,9 +12,12 @@ public class EnemyDataManager : Singleton<EnemyDataManager>
 
     public override bool Initialize()
     {
-        enemyData_Json = Resources.Load<TextAsset>("Json/EnemyData");
-        _enemyData = JsonConvert.DeserializeObject<EnemyDataArray>(enemyData_Json.ToString());
-        return base.Initialize();
+        if (base.Initialize())
+        {
+            enemyData_Json = Resources.Load<TextAsset>("Json/EnemyData");
+            _enemyData = JsonConvert.DeserializeObject<EnemyDataArray>(enemyData_Json.ToString());
+        }
+        return true;
     }
 
     public EnemyData GetEnemyData(int index)

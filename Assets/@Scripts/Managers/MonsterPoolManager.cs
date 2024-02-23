@@ -69,8 +69,11 @@ public class MonsterPoolManager : Singleton<MonsterPoolManager>
 
     public override bool Initialize()
     {
-        InitializePools();
-        return base.Initialize();
+        if (base.Initialize())
+        {
+            InitializePools();
+        }
+        return true;
     }
 
     private void InitializePools()
