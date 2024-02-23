@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonStr);
         string code = System.Convert.ToBase64String(bytes);
 
-        File.WriteAllText(_dataPath, code);
+        File.WriteAllText(_dataPath, jsonStr);
     }
 
     public bool LoadGame()
@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
         byte[] bytes = System.Convert.FromBase64String(code);
         string jsonStr = System.Text.Encoding.UTF8.GetString(bytes);
 
-        GameData data = JsonConvert.DeserializeObject<GameData>(jsonStr);
+        GameData data = JsonConvert.DeserializeObject<GameData>(code);
         if (data != null)
         {
             this._data = data;

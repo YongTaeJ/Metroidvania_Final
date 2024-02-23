@@ -11,6 +11,7 @@ public class WallHP : WallBase
     {
         if (collision.CompareTag("PlayerAttack"))
         {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallReact"));
             _wallHP--;
 
             if (_wallHP <= 0)

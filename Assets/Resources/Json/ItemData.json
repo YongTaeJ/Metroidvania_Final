@@ -185,6 +185,12 @@
       "ID": "1",
       "Name": "Plunge",
       "Description": "엄청난 힘으로 땅을 찍는 비법에 대해 적혀 있습니다. 이세계에는 강하게 찍는 힘에 반응하는 벽이 있다고..."
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "0",
+      "Name": "Chest00",
+      "Description": "빈 상자입니다."
     }
   ]
 }

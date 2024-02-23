@@ -11,10 +11,13 @@ public class WallSkill : WallBase
     {
         if (collision.CompareTag("PlayerAttack"))
         {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallReact"));
             _wallHP = 1;
         }
+
         if (collision.CompareTag("SwordAuror"))
         {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallReact"));
             _wallHP--;
 
             if (_wallHP <= 0)

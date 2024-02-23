@@ -21,6 +21,7 @@ public class TeleportTrap : MonoBehaviour
         {
             collision.transform.position = _teleportPosition;
             GameManager.Instance.player.GetDamaged(2, transform);
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("TeleportTrap"));
             OpenTrapText();
         }
     }

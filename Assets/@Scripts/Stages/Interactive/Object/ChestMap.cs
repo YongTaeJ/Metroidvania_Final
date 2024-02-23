@@ -29,7 +29,7 @@ public class ChestMap : ChestBase
         }
         _curMapNumber = ItemManager.Instance.GetItemStock(ItemType.Map, 0);
 
-        if (_curMapNumber < _mapDataLimit)
+        for (int i = _curMapNumber; i <_mapDataLimit; i++)
         {
             ItemManager.Instance.AddItem(ItemType.Map, 0);
         }

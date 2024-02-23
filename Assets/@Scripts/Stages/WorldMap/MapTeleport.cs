@@ -89,6 +89,7 @@ public class MapTeleport : MonoBehaviour
         //GameManager.Instance.Data.playerPositionY = portalLocations[index].y;
         //GameManager.Instance.Data.playerPositionZ = portalLocations[index].z;
 
+        SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Teleport"));
         GameManager.Instance.SaveGame();
     }
 
