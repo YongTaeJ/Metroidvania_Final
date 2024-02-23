@@ -15,7 +15,7 @@ public class NPCPlayerFinder : MonoBehaviour
 
     private void Awake()
     {
-        _objectFlip = new ObjectFlip(transform.parent);
+        _objectFlip = new ObjectFlip(transform.parent.Find("Sprite"));
         _interaction = GetComponent<NPCInteraction>();
         _press = GetComponentInChildren<Canvas>(true);
         if (_press != null) _press.gameObject.SetActive(false);
@@ -49,7 +49,7 @@ public class NPCPlayerFinder : MonoBehaviour
     private void StartConversation()
     {
         float xDir = transform.position.x - _playerTransform.position.x;
-        _objectFlip.Flip(xDir);
+        _objectFlip.Flip(xDir * -1);
         StartCoroutine(_interaction.Interact(_playerInput));
     }
 }
