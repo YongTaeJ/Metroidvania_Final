@@ -9,8 +9,8 @@ using System;
 public class Player : MonoBehaviour, IDamagable
 {
     public PlayerStatus playerStatus;
-    public float _hp;
-    public float _mana;
+    private float _hp;
+    private float _mana;
 
     public float HP
     {
