@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Teleport : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Teleport : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.transform.position = _teleportPosition;
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Warp"));            
             OpenTrapText();
         }
     }

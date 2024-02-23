@@ -11,15 +11,14 @@ public class WallSkillPlunge : WallBase
     {
         if (collision.CompareTag("PlayerAttack"))
         {
-            Debug.Log("Attacked");
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallReact"));
             _wallHP = 1;
         }
 
         if (collision.CompareTag("PlungeAttack"))
         {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallReact"));
             _wallHP--;
-
-            Debug.Log("Plunge");
 
             if (_wallHP <= 0)
             {

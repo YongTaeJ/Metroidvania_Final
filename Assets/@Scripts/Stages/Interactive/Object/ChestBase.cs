@@ -18,6 +18,16 @@ public class ChestBase : MonoBehaviour
 
     protected TextMeshProUGUI _chestText;
     protected PlayerInput _playerInput;
+    [SerializeField]
+    protected int _chestID = 0;
+
+    protected virtual void Awake()
+    {
+        if (ItemManager.Instance.HasItem(ItemType.Chest, _chestID))
+        {
+            Destroy(gameObject);
+        }
+    }
 
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -44,12 +54,14 @@ public class ChestBase : MonoBehaviour
     protected virtual void OpenChest()
     {
         ChestText();
+        ItemManager.Instance.AddItem(ItemType.Chest, _chestID);
         UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
 
         Animator animator = GetComponent<Animator>();
         if (animator != null)
         {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Chest"));
             animator.SetBool("IsOpen", true);
         }
 
