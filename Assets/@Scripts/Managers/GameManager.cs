@@ -18,7 +18,6 @@ public class GameManager : Singleton<GameManager>
     {
         if(base.Initialize())
         {
-            Application.targetFrameRate = 60;
             _dataPath = Application.persistentDataPath + "/SaveData.json";
             Debug.Log(Application.persistentDataPath);
             if (!LoadGame())

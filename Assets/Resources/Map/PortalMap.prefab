@@ -793,8 +793,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PortalControl, Assembly-CSharp
+      - m_Target: {fileID: 3477197913756309406}
+        m_TargetAssemblyTypeName: MapTeleport, Assembly-CSharp
         m_MethodName: ClosePortalMap
         m_Mode: 1
         m_Arguments:
