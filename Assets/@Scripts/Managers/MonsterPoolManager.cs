@@ -108,13 +108,11 @@ public class MonsterPoolManager : Singleton<MonsterPoolManager>
     {
         if (!poolDictionary.ContainsKey(_monsterName) || poolDictionary[_monsterName].Count == 0)
         {
-            Debug.LogWarning("ERROR");
             return null;
         }
 
         if (!containerDictionary.TryGetValue(_monsterName, out Transform containerTransform))
         {
-            Debug.LogError("ERROR: Container not found for " + _monsterName);
             return null;
         }
         
@@ -134,7 +132,6 @@ public class MonsterPoolManager : Singleton<MonsterPoolManager>
     {
         if (!poolDictionary.ContainsKey(_monsterName))
         {
-            Debug.Log("Error");
             return;
         }
 
