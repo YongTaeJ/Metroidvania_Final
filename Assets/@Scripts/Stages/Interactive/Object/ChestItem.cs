@@ -47,11 +47,6 @@ public class ChestItem : ChestBase
         {
             DropManager.Instance.DropCoin(_chestGold, dropLocation);
         }
-        else if (_chestItem == ItemType.Skill)
-        {
-            DropManager.Instance.DropItem(_chestItem, _chestItemID, dropLocation);
-            GameManager.Instance.player.SetSkill();
-        }
         // 다른 아이템 드랍
         else
         {
