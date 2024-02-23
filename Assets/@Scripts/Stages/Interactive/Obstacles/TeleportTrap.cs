@@ -28,7 +28,7 @@ public class TeleportTrap : MonoBehaviour
     private void OpenTrapText()
     {
         _teleportText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        _teleportText.text = "You are fallen, try again";
+        _teleportText.text = "You are fallen\n\rtry again";
         UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
         StartCoroutine(DeactiveText(2));
     }
