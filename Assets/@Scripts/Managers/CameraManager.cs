@@ -9,6 +9,7 @@ public class CameraManager : Singleton<CameraManager>
     private float originScreenY = 0.5f;
     private bool isCameraMove = false; //카메라 움직임과 임펄스가 동시에 일어나면 m_Screen이 이상한 수치에 고정됨
     private Transform _originalFollowTransform;
+
     public override bool Initialize()
     {
         return base.Initialize();
@@ -86,6 +87,15 @@ public class CameraManager : Singleton<CameraManager>
         if (_originalFollowTransform != null)
         {
             VirtualCamera.Follow = _originalFollowTransform;
+        }
+    }
+
+
+    public void SetCameraTransitionActive(bool isActive)
+    {
+        if (VirtualCamera != null)
+        {
+            VirtualCamera.enabled = isActive;
         }
     }
 }

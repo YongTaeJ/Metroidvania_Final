@@ -525,11 +525,20 @@ public class PlayerInputController : MonoBehaviour
                 _player._skills[0].Activate();
                 SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("SwordAuror"));
             }
+            else
+            {
+                // 아이템이 없다는 표시의 UI나 뭔가를 띄우면 좋을듯
+                Debug.Log("아이템 없음");
+            }
 
             if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _player._skills[1].Activate();
                 _player.Invincible = true;
+            }
+            else
+            {
+                Debug.Log("아이템 없음");
             }
         }
     }
