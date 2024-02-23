@@ -22,13 +22,10 @@ public class GameManager : Singleton<GameManager>
         if (!LoadGame())
         {
             // Save Data가 없는경우.
-            // 초기화 작업을 수행한 후 초기 데이터를 저장.
             // TODO: 초기화 작업 추가
 
             // 새 게임 시작 시 랜덤 정수 생성
             _data.randomUniqueNumber = UnityEngine.Random.Range(0, 2147483647);
-
-            SaveGame();
         }
         return base.Initialize();
     }
@@ -36,6 +33,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SaveGame()
     {
+        Debug.Log("세이브");
         string jsonStr = JsonConvert.SerializeObject(_data);
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonStr);
         string code = System.Convert.ToBase64String(bytes);

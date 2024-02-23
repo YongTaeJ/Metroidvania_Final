@@ -35,6 +35,8 @@ public class DungeonEnter : MonoBehaviour
         EnterDungeonText();
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
         GameManager.Instance.player.transform.position = new Vector3(290, -100, 0);
+        BGM.Instance.Stop();
+        BGM.Instance.Play("Stage1", true);
         StartCoroutine(CoChestTextOff());
     }
     private IEnumerator CoChestTextOff()

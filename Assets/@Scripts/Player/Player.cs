@@ -109,24 +109,51 @@ public class Player : MonoBehaviour, IDamagable
 
         PlayerStatusData data = new PlayerStatusData();
         playerStatus = new PlayerStatus(data);
+
+        bool hasItemInRange = false;
+
+        // 0부터 3까지 순회하며 아이템 보유 여부 확인
+        for (int i = 0; i <= 3; i++)
+        {
+            if (ItemManager.Instance.HasItem(ItemType.Portal, i))
+            {
+                hasItemInRange = true;
+                break; // 아이템을 하나라도 찾았다면 반복문을 종료
+            }
+        }
+
         // 임시로 여기서 위치 데이터 받아서 위치 이동
         if (GameManager.Instance.LoadGame())
         {
             Debug.Log("저장된 위치가 있음");
             // 세이브 데이터가 있는 경우, 그 위치로 플레이어 이동
             transform.position = new Vector3(GameManager.Instance.Data.playerPositionX, GameManager.Instance.Data.playerPositionY, GameManager.Instance.Data.playerPositionZ);
+            if(GameManager.Instance.Data.playerPositionX == 224.5f)
+            {
+                BGM.Instance.Play("Home", true);
+            }
+            else if(GameManager.Instance.Data.playerPositionX == 301f || GameManager.Instance.Data.playerPositionX == 210f)
+            {
+                BGM.Instance.Play("Stage1", true);
+            }
+            else if(GameManager.Instance.Data.playerPositionX == 416.5f)
+            {
+                BGM.Instance.Play("Stage1", true);
+            }
         }
         // 세이브는 있는데 포탈을 타지 않아서 포지션 데이터가 저장되지 않았을 때
-        else if (GameManager.Instance.Data.playerPositionX == 0f && GameManager.Instance.Data.playerPositionY == 0f && GameManager.Instance.Data.playerPositionZ == 0f)
+        else if (hasItemInRange == true)
         {
             Debug.Log("저장된 데이터는 있으나 위치가 없음");
-            transform.position = new Vector3(290f, -5.8f, 0f);
+            transform.position = new Vector3(290f, 0f, 0f);
+            BGM.Instance.Play("Home", true);
         }
         else
         {
             Debug.Log("저장된 데이터가 없음");
             // 세이브 데이터가 없을 때의 시작 좌표
             transform.position = new Vector3(-18f, 0f, 0f);
+            BGM.Instance.Play("Home", true);
         }
 
 
