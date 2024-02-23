@@ -30,7 +30,6 @@ public class NPCPlayerFinder : MonoBehaviour
             var playerInputController = other.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= StartConversation;
             playerInputController.OnInteraction += StartConversation;
-            //UIManager.Instance.OpenPopupUI(PopupType.Interact);
             if (_press != null) _press.gameObject.SetActive(true);
         }
     }
@@ -41,7 +40,6 @@ public class NPCPlayerFinder : MonoBehaviour
         {
             var playerInputController = other.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= StartConversation;
-            //UIManager.Instance.ClosePopupUI(PopupType.Interact);
             if (_press != null) _press.gameObject.SetActive(false);
         } 
     }

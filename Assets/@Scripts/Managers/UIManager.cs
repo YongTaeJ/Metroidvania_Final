@@ -12,7 +12,6 @@ public enum PopupType
     ToolTip,
     ChatBox,
     Pause,
-    Interact,
     GameOver,
     Construct,
     Shop,

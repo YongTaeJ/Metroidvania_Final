@@ -22,7 +22,6 @@ public class DungeonEnter : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction += EnterDungeon;
-            //UIManager.Instance.OpenPopupUI(PopupType.Interact);
             if (_press != null) _press.gameObject.SetActive(true);
         }
     }
@@ -34,7 +33,6 @@ public class DungeonEnter : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= EnterDungeon;
-            //UIManager.Instance.ClosePopupUI(PopupType.Interact);
             if (_press != null) _press.gameObject.SetActive(false);
         }
     }
@@ -42,7 +40,6 @@ public class DungeonEnter : MonoBehaviour
     private void EnterDungeon()
     {
         EnterDungeonText();
-        UIManager.Instance.ClosePopupUI(PopupType.Interact);
         GameManager.Instance.player.transform.position = new Vector3(290, -100, 0);
         BGM.Instance.Stop();
         BGM.Instance.Play("Stage1", true);

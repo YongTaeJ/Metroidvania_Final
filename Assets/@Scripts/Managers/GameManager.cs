@@ -16,19 +16,21 @@ public class GameManager : Singleton<GameManager>
 
     public override bool Initialize()
     {
-        Application.targetFrameRate = 60;
-        _dataPath = Application.persistentDataPath + "/SaveData.json";
-        Debug.Log(Application.persistentDataPath);
-        if (!LoadGame())
+        if(base.Initialize())
         {
-            // Save Data가 없는경우.
-            // TODO: 초기화 작업 추가
-            InitItems();
+            Application.targetFrameRate = 60;
+            _dataPath = Application.persistentDataPath + "/SaveData.json";
+            Debug.Log(Application.persistentDataPath);
+            if (!LoadGame())
+            {
+                // Save Data가 없는경우.
+                InitItems();
 
-            // 새 게임 시작 시 랜덤 정수 생성
-            _data.randomUniqueNumber = UnityEngine.Random.Range(0, 2147483647);
+                // 새 게임 시작 시 랜덤 정수 생성
+                _data.randomUniqueNumber = UnityEngine.Random.Range(0, 2147483647);
+            }
         }
-        return base.Initialize();
+        return true;
     }
 
 
