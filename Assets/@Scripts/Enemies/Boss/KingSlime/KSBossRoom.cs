@@ -21,6 +21,7 @@ public class KSBossRoom : BossRoom
 
     protected override IEnumerator EnterBossRoom()
     {
+        DoorControl(true);
         List<(string, string)> chatDatas;
         _playerInput.enabled = false;
 

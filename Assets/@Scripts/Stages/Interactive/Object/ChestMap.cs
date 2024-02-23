@@ -21,6 +21,12 @@ public class ChestMap : ChestBase
         int _curMapNumber;
 
         base.OpenChest();
+
+        Animator animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("IsOpen", true);
+        }
         _curMapNumber = ItemManager.Instance.GetItemStock(ItemType.Map, 0);
 
         if (_curMapNumber < _mapDataLimit)

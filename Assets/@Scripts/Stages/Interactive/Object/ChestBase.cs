@@ -48,7 +48,10 @@ public class ChestBase : MonoBehaviour
         UIManager.Instance.ClosePopupUI(PopupType.Interact);
 
         Animator animator = GetComponent<Animator>();
-        animator.SetBool("IsOpen", true);
+        if (animator != null)
+        {
+            animator.SetBool("IsOpen", true);
+        }
 
         Collider2D collider2D = GetComponent<Collider2D>();
         collider2D.enabled = false;

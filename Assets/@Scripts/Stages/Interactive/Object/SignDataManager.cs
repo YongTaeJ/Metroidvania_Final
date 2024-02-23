@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +18,7 @@ public class SignDataManager : Singleton<SignDataManager>
         SignMessages.Add("Sign01", _signTexts.Sign01);
         SignMessages.Add("Sign02", _signTexts.Sign02);
         SignMessages.Add("Sign03", _signTexts.Sign03);
+        SignMessages.Add("Sign04", _signTexts.Sign04);
     }
 
     public string GetMessage(string SignId)
