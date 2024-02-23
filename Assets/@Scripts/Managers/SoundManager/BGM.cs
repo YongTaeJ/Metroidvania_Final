@@ -56,6 +56,14 @@ public class BGM : SoundManager<BGM>
         this.AudioSource.Play();
     }
 
+    public void Play(string name, bool isLoop)
+    {
+        AudioClip clip = ResourceManager.Instance.GetAudioClip(name);
+        this.AudioSource.loop = isLoop;
+        this.AudioSource.clip = clip;
+        this.AudioSource.Play();
+    }
+
     public void Stop()
     {
         this.AudioSource.Stop();

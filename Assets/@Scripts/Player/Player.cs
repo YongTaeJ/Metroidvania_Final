@@ -92,7 +92,7 @@ public class Player : MonoBehaviour, IDamagable
     public Animator _animator;
     public Rigidbody2D _rigidbody;
     public PlayerInputController _controller;
-    private PlayerInput _playerInput;
+    public PlayerInput _playerInput;
     private CinemachineImpulseSource _impulseSource;
 
     public event Action<float, float> OnHealthChanged;
@@ -112,8 +112,24 @@ public class Player : MonoBehaviour, IDamagable
         // 임시로 여기서 위치 데이터 받아서 위치 이동
         if (GameManager.Instance.LoadGame())
         {
+            Debug.Log("저장된 위치가 있음");
+            // 세이브 데이터가 있는 경우, 그 위치로 플레이어 이동
             transform.position = new Vector3(GameManager.Instance.Data.playerPositionX, GameManager.Instance.Data.playerPositionY, GameManager.Instance.Data.playerPositionZ);
         }
+        // 세이브는 있는데 포탈을 타지 않아서 포지션 데이터가 저장되지 않았을 때
+        else if (GameManager.Instance.Data.playerPositionX == 0f && GameManager.Instance.Data.playerPositionY == 0f && GameManager.Instance.Data.playerPositionZ == 0f)
+        {
+            Debug.Log("저장된 데이터는 있으나 위치가 없음");
+            transform.position = new Vector3(290f, -5.8f, 0f);
+        }
+        else
+        {
+            Debug.Log("저장된 데이터가 없음");
+            // 세이브 데이터가 없을 때의 시작 좌표
+            transform.position = new Vector3(-18f, 0f, 0f);
+        }
+
+
 
         Initialized();
     }
@@ -162,6 +178,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         if (Invincible == false && IsAlive)
         {
+            SFX.Instance.PlayOneShot("PlayerHit");
             _invincibilityTime = 1f;
             Invincible = true;
             StartCoroutine(FlashPlayer());
@@ -229,6 +246,8 @@ public class Player : MonoBehaviour, IDamagable
 
     private void OnDie()
     {
+        BGM.Instance.Stop();
+        BGM.Instance.Play("PlayerDie", false);
         IsAlive = false;
         _playerInput.enabled = false;
         _animator.SetTrigger(AnimatorHash.Dead);
@@ -245,6 +264,8 @@ public class Player : MonoBehaviour, IDamagable
 
     public void OnContinue()
     {
+        BGM.Instance.Stop();
+        BGM.Instance.Play("Home", true);
         transform.position = new Vector3(263f, 0f, 0f);
         IsAlive = true;
         _playerInput.enabled = true;
