@@ -10,16 +10,20 @@ public class StageChangeUI : MonoBehaviour
 
     private void OnEnable()
     {
+        FadeIn();
+    }
+
+    public void FadeIn()
+    {
         StartCoroutine(Fade(0, 1));
     }
 
-    public void FadeOut()
+    public void StartFadeOut()
     {
-        StartCoroutine(Fade(1, 0, true)); // FadeOut 호출 시 비활성화를 위한 파라미터 true 추가
+        StartCoroutine(Fade(1, 0, () => gameObject.SetActive(false)));
     }
 
-    // 코루틴에 비활성화 여부를 결정하는 추가 파라미터 include
-    IEnumerator Fade(float start, float end, bool deactivateOnComplete = false)
+    private IEnumerator Fade(float start, float end, System.Action onComplete = null)
     {
         float counter = 0f;
 
@@ -35,10 +39,6 @@ public class StageChangeUI : MonoBehaviour
             yield return null;
         }
 
-        // FadeOut이 완료된 후에만 오브젝트를 비활성화
-        if (deactivateOnComplete && end == 0)
-        {
-            UIManager.Instance.ClosePopupUI(PopupType.StageChange);
-        }
+        onComplete?.Invoke();
     }
 }

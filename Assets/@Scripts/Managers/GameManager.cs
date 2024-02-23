@@ -37,33 +37,24 @@ public class GameManager : Singleton<GameManager>
     public void SaveGame()
     {
         string jsonStr = JsonConvert.SerializeObject(_data);
-        File.WriteAllText(_dataPath, jsonStr);
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonStr);
+        string code = System.Convert.ToBase64String(bytes);
+
+        File.WriteAllText(_dataPath, code);
     }
 
     public bool LoadGame()
     {
         if (!File.Exists(_dataPath)) return false;
 
-        string file = File.ReadAllText(_dataPath);
-        GameData data = JsonConvert.DeserializeObject<GameData>(file);
+        string code = File.ReadAllText(_dataPath);
+        byte[] bytes = System.Convert.FromBase64String(code);
+        string jsonStr = System.Text.Encoding.UTF8.GetString(bytes);
+
+        GameData data = JsonConvert.DeserializeObject<GameData>(jsonStr);
         if (data != null)
         {
             this._data = data;
-
-            //매니저 초기화 상태에서 Null임 메인 씬 관리할때 수정해야할 듯
-            // 임시로 플레이어 Awake에서 데이터 받아서 이동
-            Debug.Log($"Player 객체 상태: {(player != null ? "Initialized" : "Null")}");
-
-            if (player != null)
-            {
-                Vector3 playerPosition = new Vector3(data.playerPositionX, data.playerPositionY, data.playerPositionZ);
-                player.transform.position = playerPosition;
-                Debug.Log("위치 로드");
-            }
-            else
-            {
-                Debug.Log("Player 객체가 Null입니다. 위치를 로드할 수 없습니다.");
-            }
         }
 
         return true;
