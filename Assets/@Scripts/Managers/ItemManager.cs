@@ -106,6 +106,11 @@ public class ItemManager : Singleton<ItemManager>
         {
             GameManager.Instance.Data.Inventory.Add(new InternalItemData { ItemType = itemType, ID = ID, Stock = value });
         }
+
+        if(itemType == ItemType.Skill)
+        {
+            GameManager.Instance.player.SetSkill();
+        }
     }
 
     public Dictionary<int, Item> GetItemDict(ItemType itemType)
