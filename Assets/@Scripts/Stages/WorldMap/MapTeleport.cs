@@ -29,8 +29,6 @@ public class MapTeleport : MonoBehaviour
     private void Awake()
     {
         _mapCamera = GetComponentInChildren<Camera>();
-        _press = GetComponentInChildren<Canvas>(true);
-        if (_press != null) _press.gameObject.SetActive(false);
 
         for (int i = 0; i < portalButtons.Length; i++)
         {
@@ -126,6 +124,10 @@ public class MapTeleport : MonoBehaviour
                 portalButtons[i].gameObject.SetActive(false);
             }
         }
+    }
+    public void ClosePortalMap()
+    {
+        MapManager.Instance.CloseLargeMap();
     }
 
     //임시용 BGM 컨트롤
