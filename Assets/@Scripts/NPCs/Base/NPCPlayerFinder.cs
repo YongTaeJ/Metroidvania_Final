@@ -9,6 +9,7 @@ public class NPCPlayerFinder : MonoBehaviour
     public Transform _playerTransform {get; private set;}
     public PlayerInput _playerInput {get; private set;}
     public ObjectFlip _objectFlip {get; private set;}
+    protected Canvas _press;
 
     #endregion
 
@@ -16,6 +17,8 @@ public class NPCPlayerFinder : MonoBehaviour
     {
         _objectFlip = new ObjectFlip(transform);
         _interaction = GetComponent<NPCInteraction>();
+        _press = GetComponentInChildren<Canvas>(true);
+        if (_press != null) _press.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,7 +30,8 @@ public class NPCPlayerFinder : MonoBehaviour
             var playerInputController = other.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= StartConversation;
             playerInputController.OnInteraction += StartConversation;
-            UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            //UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(true);
         }
     }
 
@@ -37,7 +41,8 @@ public class NPCPlayerFinder : MonoBehaviour
         {
             var playerInputController = other.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= StartConversation;
-            UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            //UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(false);
         } 
     }
 

@@ -8,6 +8,13 @@ public class PortalControl : MonoBehaviour
     [SerializeField] private int _portalIndex;
     [SerializeField] private int _portalPrice = 50;
     protected PlayerInput _playerInput;
+    protected Canvas _press;
+
+    private void Awake()
+    {
+        _press = GetComponentInChildren<Canvas>(true);
+        if (_press != null) _press.gameObject.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +23,8 @@ public class PortalControl : MonoBehaviour
             _playerInput = collision.GetComponent<PlayerInput>();
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction += UsePortal;
-            UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            //UIManager.Instance.OpenPopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -25,7 +33,8 @@ public class PortalControl : MonoBehaviour
         {
             var playerInputController = collision.GetComponent<PlayerInputController>();
             playerInputController.OnInteraction -= UsePortal;
-            UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            //UIManager.Instance.ClosePopupUI(PopupType.Interact);
+            if (_press != null) _press.gameObject.SetActive(false);
         }
     }
 
@@ -39,7 +48,8 @@ public class PortalControl : MonoBehaviour
         }
 
         CheckHasPortal();
-        UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        //UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        if (_press != null) _press.gameObject.SetActive(false);
     }
     private void CheckHasPortal()
     {

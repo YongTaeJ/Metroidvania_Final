@@ -8,23 +8,28 @@ public abstract class NPCInteraction : MonoBehaviour
 {
     #region variables
     protected ChatBoxUI _chatBoxUI;
+    protected Canvas _press;
     #endregion
 
     protected virtual void Awake()
     {
         _chatBoxUI = UIManager.Instance.GetUI(PopupType.ChatBox).GetComponent<ChatBoxUI>();
+        _press = GetComponentInChildren<Canvas>(true);
+        if (_press != null) _press.gameObject.SetActive(false);
     }
 
     protected void StartInteract(PlayerInput input)
     {
         input.enabled = false;
-        UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        //UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        if (_press != null) _press.gameObject.SetActive(false);
     }
 
     protected void EndInteract(PlayerInput input)
     {
         input.enabled = true;
-        UIManager.Instance.OpenPopupUI(PopupType.Interact);
+        //UIManager.Instance.OpenPopupUI(PopupType.Interact);
+        if (_press != null) _press.gameObject.SetActive(true);
     }
 
     public abstract IEnumerator Interact(PlayerInput input);

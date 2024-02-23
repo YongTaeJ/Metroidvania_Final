@@ -70,28 +70,31 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack(GameObject enemy)
     {
-        enemy.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.Damage], GameManager.Instance.player.transform);
-        StartCoroutine(HitPause(0.07f));
-        CameraManager.Instance.CameraShake(_impulseSource, 1f);
-        Vector2 attackPoint = enemy.transform.position;
+        if (enemy != null && enemy.gameObject != null)
+        {
+            enemy.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.Damage], GameManager.Instance.player.transform);
+            StartCoroutine(HitPause(0.07f));
+            CameraManager.Instance.CameraShake(_impulseSource, 1f);
+            Vector2 attackPoint = enemy.transform.position;
 
-        int randomIndex = Random.Range(0, attackEffectPrefabs.Count);
-        string attackEffectPrefab = attackEffectPrefabs[randomIndex];
+            int randomIndex = Random.Range(0, attackEffectPrefabs.Count);
+            string attackEffectPrefab = attackEffectPrefabs[randomIndex];
 
-        Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
-        Vector2 spawnPosition = attackPoint + randomOffset;
+            Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+            Vector2 spawnPosition = attackPoint + randomOffset;
 
-        GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab(attackEffectPrefab, pooling: true);
-        attackEffect.transform.position = spawnPosition;
+            GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab(attackEffectPrefab, pooling: true);
+            attackEffect.transform.position = spawnPosition;
 
-        float hitParticleScale = GameManager.Instance.player._controller.IsFacingRight ? 1.0f : -1.0f;
+            float hitParticleScale = GameManager.Instance.player._controller.IsFacingRight ? 1.0f : -1.0f;
 
-        GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
-        hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(enemy.tag);
-        hitParticle.transform.position = spawnPosition;
-        hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
+            GameObject hitParticle = ResourceManager.Instance.InstantiatePrefab("HitParticle", pooling: true);
+            hitParticle.GetComponent<ParticleMaterialChanger>().ChangeMaterial(enemy.tag);
+            hitParticle.transform.position = spawnPosition;
+            hitParticle.transform.localScale = new Vector3(hitParticleScale, 1, 1);
 
-        hasAttacked = true;
+            hasAttacked = true;
+        }
     }
 
     private IEnumerator HitPause(float pauseDuration)
