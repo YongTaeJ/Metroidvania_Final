@@ -20,9 +20,9 @@ MonoBehaviour:
   _requiredConditions: []
   _requiredMaterials:
   - ID: 0
-    Stock: 20
+    Stock: 2
   - ID: 1
-    Stock: 10
+    Stock: 1
   _statElements: []
   _rewardElements:
   - ItemType: 9

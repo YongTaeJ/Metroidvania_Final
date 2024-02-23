@@ -59,7 +59,6 @@ public class ChestBase : MonoBehaviour
         ChestText();
         ItemManager.Instance.AddItem(ItemType.Chest, _chestID);
         UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
-        //UIManager.Instance.ClosePopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(false);
 
         Animator animator = GetComponent<Animator>();

@@ -44,7 +44,7 @@ public class QuantitySetter : MonoBehaviour
         }
         else if(curValue > 99)
         {
-            _quantity = 0;
+            _quantity = 1;
         }
         else
         {

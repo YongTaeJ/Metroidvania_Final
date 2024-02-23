@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Teleporter
   m_EditorClassIdentifier: 
   _ID: 0
-  _constructName: "\uC548\uC815\uC801\uC778 \uCC28\uC6D0\uBB38 \uC81C\uC791"
+  _constructName: "\uC21C\uAC04\uC774\uB3D9\uAE30"
   _constructDescription: "\uAD34\uBB3C\uB4E4\uC774 \uB09C\uC785\uD558\uB2E4\uAC00
     \uC774\uC138\uACC4\uC5D0\uC11C \uC4F8\uB824\uB098\uC628 \uC21C\uAC04\uC774\uB3D9\uAE30\uB97C
     \uB2E4\uC2DC \uC138\uC6C1\uB2C8\uB2E4."
@@ -22,9 +22,9 @@ MonoBehaviour:
   _requiredConditions: []
   _requiredMaterials:
   - ID: 0
-    Stock: 5
+    Stock: 10
   - ID: 1
-    Stock: 5
+    Stock: 10
   _statElements: []
   _rewardElements: []
   _buildingData:

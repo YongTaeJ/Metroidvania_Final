@@ -21,14 +21,12 @@ public abstract class NPCInteraction : MonoBehaviour
     protected void StartInteract(PlayerInput input)
     {
         input.enabled = false;
-        //UIManager.Instance.ClosePopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(false);
     }
 
     protected void EndInteract(PlayerInput input)
     {
         input.enabled = true;
-        //UIManager.Instance.OpenPopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(true);
     }
 
