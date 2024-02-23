@@ -106,9 +106,6 @@ public class ItemManager : Singleton<ItemManager>
         {
             GameManager.Instance.Data.Inventory.Add(new InternalItemData { ItemType = itemType, ID = ID, Stock = value });
         }
-
-        //테스트
-        GameManager.Instance.SaveGame();
     }
 
     public Dictionary<int, Item> GetItemDict(ItemType itemType)

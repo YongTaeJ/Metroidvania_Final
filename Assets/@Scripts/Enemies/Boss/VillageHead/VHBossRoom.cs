@@ -46,6 +46,7 @@ public class VHBossRoom : BossRoom
         chatDatas = ChatManager.Instance.GetChatData(_chatID_encounter);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
+        PlayBossBGM();
         _VHEntrySet.Taunt();
     }
 
@@ -67,6 +68,7 @@ public class VHBossRoom : BossRoom
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         // 전투가 끝났으므로 문을 열고, 아이템을 드랍합니다.
+        PlayStageBGM();
         DropManager.Instance.DropItem(_dropTableIndex, _deadLocation);
         DoorControl(false);
         _playerInput.enabled = true;
@@ -78,4 +80,9 @@ public class VHBossRoom : BossRoom
         _playerInput.enabled = true;
     }
 
+    protected override void PlayStageBGM()
+    {
+        BGM.Instance.Stop();
+        BGM.Instance.Play("Stage1", true);
+    }
 }
