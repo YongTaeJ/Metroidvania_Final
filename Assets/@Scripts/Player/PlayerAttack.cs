@@ -72,7 +72,16 @@ public class PlayerAttack : MonoBehaviour
     {
         if (enemy != null && enemy.gameObject != null)
         {
-            enemy.GetComponent<IDamagable>().GetDamaged(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.Damage], GameManager.Instance.player.transform);
+            IDamagable damagable = enemy.GetComponent<IDamagable>();
+            if (damagable != null) // IDamagable 컴포넌트가 있을 경우
+            {
+                damagable.GetDamaged(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.Damage], GameManager.Instance.player.transform);
+                // 나머지 로직은 그대로 유지
+            }
+            else
+            {
+                Debug.LogError("Damagable 컴포넌트를 찾을 수 없습니다: " + enemy.name);
+            }
             StartCoroutine(HitPause(0.07f));
             CameraManager.Instance.CameraShake(_impulseSource, 1f);
             Vector2 attackPoint = enemy.transform.position;
