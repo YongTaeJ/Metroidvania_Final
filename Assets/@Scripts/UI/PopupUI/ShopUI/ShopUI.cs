@@ -48,6 +48,7 @@ public class ShopUI : MonoBehaviour
         PopupAction();
         
         var items = ItemManager.Instance.GetItemDict(ItemType.Gold);
+        ChangeGoldText(items[0].Stock);
         items[0].OnStockChanged -= ChangeGoldText;
         items[0].OnStockChanged += ChangeGoldText;
     }

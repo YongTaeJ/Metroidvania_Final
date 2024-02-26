@@ -22,8 +22,6 @@ public class ItemPopupUI : MonoBehaviour
 
         Button button = transform.Find("ExitButton").GetComponent<Button>();
         button.onClick.AddListener(() => gameObject.SetActive(false));
-
-        gameObject.SetActive(false);
     }
 
     public void SetInform(Item item)

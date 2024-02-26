@@ -84,6 +84,9 @@ public class ConstructYNPanel : YNPanel
         yield return new WaitForSeconds(delay + 3f);
         HideUI(false);
         CameraManager.Instance.ReturnCameraTarget();
+
+        // TODO => 건축물 대화 ㄱㄱ
+        
         Destroy(gameObject);
     }
 }

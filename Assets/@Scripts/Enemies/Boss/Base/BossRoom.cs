@@ -45,6 +45,17 @@ public abstract class BossRoom : MonoBehaviour
             GameManager.Instance.player.OnPlayerDead += OnPlayerDead;
         }
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            if(_currentBoss != null)
+            {
+                Destroy(_currentBoss);
+            }
+        }
+    }
     #endregion
 
     protected void DoorControl(bool isOpen)
@@ -75,10 +86,6 @@ public abstract class BossRoom : MonoBehaviour
     protected virtual void OnPlayerDead()
     {
         GameManager.Instance.player.OnPlayerDead -= OnPlayerDead;
-        if(_currentBoss != null)
-        {
-            Destroy(_currentBoss);
-        }
         _isProgress = false;
         DoorControl(false);
     }

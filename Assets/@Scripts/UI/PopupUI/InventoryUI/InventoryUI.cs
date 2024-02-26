@@ -76,6 +76,7 @@ public class InventoryUI : MonoBehaviour
     {
         CategoryImage.gameObject.SetActive(false);
         InventorySlotContanier.gameObject.SetActive(false);
+        ItemPopupUI.gameObject.SetActive(false);
     }
 
     private void PopupAction()
@@ -94,5 +95,17 @@ public class InventoryUI : MonoBehaviour
             _exitButton.SetActive(true);
             _dim.SetActive(true);
         });
+    }
+
+    public void CloseInventory()
+    {
+        if(ItemPopupUI.gameObject.activeSelf)
+        {
+            ItemPopupUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

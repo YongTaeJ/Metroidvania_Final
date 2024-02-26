@@ -20,6 +20,7 @@ public class ChatBoxUI : MonoBehaviour
     private GameObject[] _choiceButtons;
     private bool _keyValue;
     private AudioClip _nextChatSound;
+    private bool _isSkipped;
 
     #endregion
 
@@ -57,11 +58,37 @@ public class ChatBoxUI : MonoBehaviour
     #region private
     private IEnumerator TypeSentence(string sentence)
     {
+        _isSkipped = false;
+
         _chatText.text = "";
-        foreach ( char letter in sentence)
+        foreach (char letter in sentence)
         {
             _chatText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return ChatTimer();
+            if(_isSkipped)
+            {
+                _chatText.text = sentence;
+                yield break;
+            } 
+        }
+    }
+
+    private IEnumerator ChatTimer()
+    {
+        float time = 0f;
+
+        yield return null;
+
+        while(time < 0.05f)
+        {
+            time += Time.deltaTime;
+            if(IsKeyInput())
+            {
+                _isSkipped = true;
+                yield return null;
+                break;
+            }
+            yield return null;
         }
     }
 
@@ -69,7 +96,8 @@ public class ChatBoxUI : MonoBehaviour
     {
         return
         Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)
-        || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) ||Input.GetKeyDown(KeyCode.C);
+        || Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.C)
+        || Input.GetKeyDown(KeyCode.F);
     }
 
     private void SetChatArea(bool isActive)
@@ -90,6 +118,15 @@ public class ChatBoxUI : MonoBehaviour
     {
         SFX.Instance.PlayOneShot(_nextChatSound);
     }
+
+    private IEnumerator WaitForKeyInput()
+    {
+        while(!_keyValue)
+        {
+            yield return null;
+        }
+    }
+
     #endregion
 
     #region public
@@ -100,25 +137,19 @@ public class ChatBoxUI : MonoBehaviour
         int currentIndex = 0;
         int length = chatDatas.Count;
 
-        _nameText.text = chatDatas[currentIndex].name;
-        _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
-        yield return StartCoroutine(_typingCoroutine);
-        currentIndex++;
-
         while(currentIndex < length)
         {
-            if(_keyValue)
-            {
-                PlayNextChatSound();
-                _nameText.text = chatDatas[currentIndex].name;
-                _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
-                yield return StartCoroutine(_typingCoroutine);
-                currentIndex++;
-            }
-            yield return null;
+            PlayNextChatSound();
+
+            _nameText.text = chatDatas[currentIndex].name;
+            _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
+            yield return StartCoroutine(_typingCoroutine);
+            currentIndex++;
+
+            yield return WaitForKeyInput();
         }
 
-        while(!_keyValue) yield return null;
+        yield return WaitForKeyInput();
 
         SetChatArea(false);
     }
