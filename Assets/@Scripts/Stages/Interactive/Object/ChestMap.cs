@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChestMap : ChestBase
 {
-    [SerializeField] private MapData _mapData;
     [SerializeField] private int _mapDataLimit;
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -17,11 +16,28 @@ public class ChestMap : ChestBase
         base.OnTriggerExit2D(collision);
     }
 
+    protected override void OpenChest()
+    {
+        int _curMapNumber;
+
+        base.OpenChest();
+
+        Animator animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("IsOpen", true);
+        }
+        _curMapNumber = ItemManager.Instance.GetItemStock(ItemType.Map, 0);
+
+        for (int i = _curMapNumber; i <_mapDataLimit; i++)
+        {
+            ItemManager.Instance.AddItem(ItemType.Map, 0);
+        }
+    }
+
     protected override void ChestText()
     {
         base.ChestText();
-        _chestText.text = "You acquired map data";
-        _mapData._curMapData = 3;
-        _mapData.UpdateMapData(_mapData._curMapData);
+        _chestText.text = "You got map piece";
     }
 }

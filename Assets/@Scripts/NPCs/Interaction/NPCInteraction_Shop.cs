@@ -1,0 +1,50 @@
+using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine;
+
+public class NPCInteraction_Shop : NPCInteraction
+{
+    [SerializeField] private int _shopID;
+    [SerializeField] private int _chatID_start;
+    [SerializeField] private int _chatID_end;
+
+    public override IEnumerator Interact(PlayerInput input)
+    {
+        StartInteract(input);
+
+        var chatDatas = ChatManager.Instance.GetChatData(_chatID_start);
+        yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
+
+        yield return StartCoroutine(WaitForChoose());
+
+        chatDatas = ChatManager.Instance.GetChatData(_chatID_end);
+        yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
+
+        EndInteract(input);
+    }
+
+    private IEnumerator WaitForChoose()
+    {
+        int buttonValue = 0;
+
+        _chatBoxUI.MakeButton("구매하기", () => buttonValue = 1);
+        _chatBoxUI.MakeButton("그만두기", () => buttonValue = 2);
+
+        while(buttonValue == 0)
+        {
+            yield return null;
+        }
+
+        _chatBoxUI.CloseButtons();
+
+        if(buttonValue == 1)
+        {
+            UIManager.Instance.OpenShopUI(_shopID);
+            var obj = UIManager.Instance.GetUI(PopupType.Shop);
+            while(obj.activeInHierarchy)
+            {
+                yield return null;
+            }
+        }
+    }
+}

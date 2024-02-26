@@ -10,7 +10,6 @@ public class ChestItem : ChestBase
     [SerializeField] private ItemType _chestItem;
     [SerializeField] private int _chestItemID;
 
-
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -25,19 +24,40 @@ public class ChestItem : ChestBase
     {
         base.OpenChest();
 
+        // 원래 코드
+        //if (_chestItem == ItemType.Gold)
+        //{
+        //    ItemManager.Instance.AddItem(_chestItem, _chestItemID, _chestGold);
+        //}
+        //else if (_chestItem == ItemType.Skill)
+        //{
+        //    ItemManager.Instance.AddItem(_chestItem, _chestItemID);
+        //    GameManager.Instance.player.SetSkill();
+        //}
+        //else
+        //{
+        //    ItemManager.Instance.AddItem(_chestItem, _chestItemID);
+        //}
+
+        // 상자 위치를 드랍 위치로 사용합니다.
+        Vector2 dropLocation = new Vector2(transform.position.x+.7f, transform.position.y+.7f);
+
+        // 골드 드랍
         if (_chestItem == ItemType.Gold)
         {
-            // 마지막 150 부분에 골드량을 조절할 수 있게 변경하면 될듯
-            ItemManager.Instance.AddItem(_chestItem, _chestItemID, 150);
+            DropManager.Instance.DropCoin(_chestGold, dropLocation);
         }
+        // 다른 아이템 드랍
         else
         {
-            ItemManager.Instance.AddItem(_chestItem, _chestItemID);
+            DropManager.Instance.DropItem(_chestItem, _chestItemID, dropLocation);
         }
     }
 
+
     protected override void ChestText()
     {
+        base.ChestText();
         if (_chestItem == ItemType.Gold)
         {
             _chestText.text = "You got " + _chestGold + " Gold";
@@ -48,6 +68,5 @@ public class ChestItem : ChestBase
             string _chestItemName = _chestItemData.Name;
             _chestText.text = "You got " + _chestItemName;
         }
-        _panel.SetActive(true);
     }
 }

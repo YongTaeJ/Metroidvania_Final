@@ -19,7 +19,7 @@ public class KSBreathAttackState : BossAttackState
         _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 0);
         _currentBreathCount = 0;
-        _breathCount = Random.Range(2,5);
+        _breathCount = Random.Range(3,6);
     }
 
     public override void OnStateExit()
@@ -52,6 +52,7 @@ public class KSBreathAttackState : BossAttackState
     protected override void OnAttackEnd()
     {
         _currentBreathCount++;
+        SFX.Instance.PlayOneShot("KingSlimePullSound");
 
         if(_currentBreathCount == _breathCount)
         {

@@ -13,23 +13,25 @@ public class DropManager : Singleton<DropManager>
 
     public override bool Initialize()
     {
-        TextAsset itemTable_Json = Resources.Load<TextAsset>("Json/DropTable");
-        _dropTables = JsonConvert.DeserializeObject<DropTableArray>(itemTable_Json.ToString()).DropTables;
-        
-        _dropItem = Resources.Load<GameObject>("Items/DropItem");
+        if (base.Initialize())
+        {
+            TextAsset itemTable_Json = Resources.Load<TextAsset>("Json/DropTable");
+            _dropTables = JsonConvert.DeserializeObject<DropTableArray>(itemTable_Json.ToString()).DropTables;
 
-        coinPrefabs = new GameObject[3];
-        coinPrefabs[0] = Resources.Load<GameObject>("Items/Coin1");
-        coinPrefabs[1] = Resources.Load<GameObject>("Items/Coin10");
-        coinPrefabs[2] = Resources.Load<GameObject>("Items/Coin100");
+            _dropItem = Resources.Load<GameObject>("Items/DropItem");
 
-        return base.Initialize();
+            coinPrefabs = new GameObject[3];
+            coinPrefabs[0] = Resources.Load<GameObject>("Items/Coin1");
+            coinPrefabs[1] = Resources.Load<GameObject>("Items/Coin10");
+            coinPrefabs[2] = Resources.Load<GameObject>("Items/Coin100");
+        }
+        return true;
     }
 
-    private void DropCoin(int sumValue, Vector2 location)
+    public void DropCoin(int sumValue, Vector2 location)
     {
         // 현재 0~999원까지만 설계됨.
-        int prefabIndex = 0;
+        int prefabindex = 0;
         int value = 1;
         while(sumValue != 0)
         {
@@ -38,11 +40,11 @@ public class DropManager : Singleton<DropManager>
 
             for(int i=0; i < remainder; i++)
             {
-                Instantiate(coinPrefabs[prefabIndex], location, Quaternion.identity)
-                .GetComponent<DropItem>()
-                .Initialize(ItemType.Gold, 0, value);
+                var coin = PoolManager.Instance.Pop(coinPrefabs[prefabindex]);
+                coin.GetComponent<DropItem>().Initialize(ItemType.Gold, 0, value);
+                coin.transform.position = location;
             }
-
+            prefabindex++;
             value *= 10;
         }
     }
@@ -62,10 +64,22 @@ public class DropManager : Singleton<DropManager>
         {
             // 현재 Material만 드랍되는 것으로 설계됨.
             ItemData data = ItemManager.Instance.GetItemData(ItemType.Material, currentTable.ItemID);
-            GameObject dropitem = Instantiate(_dropItem, dropLocation, Quaternion.identity);
+            GameObject dropitem = PoolManager.Instance.Pop(_dropItem);
+            dropitem.transform.position = dropLocation;
             dropitem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);
             dropitem.GetComponentInChildren<SpriteRenderer>().sprite = ItemManager.Instance.GetSprite(data.Name);
         }
+    }
+
+    // 추가한 코드
+    public void DropItem(ItemType itemType, int itemID, Vector2 dropLocation)
+    {
+        // 아이템 데이터 가져오기
+        ItemData data = ItemManager.Instance.GetItemData(itemType, itemID);
+        GameObject dropItem = PoolManager.Instance.Pop(_dropItem);
+        dropItem.transform.position = dropLocation;
+        dropItem.GetComponent<DropItem>().Initialize(data.ItemType, data.ID, 1);
+        dropItem.GetComponentInChildren<SpriteRenderer>().sprite = ItemManager.Instance.GetSprite(data.Name);
     }
 }
 

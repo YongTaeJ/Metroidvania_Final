@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 45
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 223
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -169,7 +169,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 409
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -190,7 +190,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 594
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -211,7 +211,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 779
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -232,7 +232,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 953
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -253,7 +253,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1126
-        y: 9
+        y: 6
         width: 64
         height: 64
       alignment: 0
@@ -274,7 +274,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1296
-        y: 8
+        y: 6
         width: 64
         height: 64
       alignment: 0

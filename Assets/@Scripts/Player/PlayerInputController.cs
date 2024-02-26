@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Claims;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerInputController : MonoBehaviour
 {
@@ -24,6 +21,30 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    public bool IsFacingRight
+    {
+        get
+        {
+            return _isFacingRight;
+        }
+        private set
+        {
+            _isFacingRight = value;
+        }
+    }
+
+    public bool IsAttacking
+    {
+        get
+        {
+            return _isAttacking;
+        }
+        private set
+        {
+            _isAttacking = value;
+            _animator.SetBool(AnimatorHash.IsAttacking, value);
+        }
+    }
     #endregion
 
     #region Fileds
@@ -32,17 +53,17 @@ public class PlayerInputController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private TouchingDirection _touchingDirection;
     private Player _player;
-    private bool _isFacingRight = true;
     private float _speed = 10f;
     private Vector2 _moveInput;
 
     private bool _isWalking = false;
     private bool _isAttacking = false;
+    private bool _isFirstAttack = true;
+    private bool _isFacingRight = true;
 
     //Jump
-    private float _jumpPower = 20f;
-    public int _maxJump = 1;
-    public int _jumpCount;
+    private float _jumpPower = 21f;
+    private bool _doubleJump = false;
 
     //Gravity
     private float _baseGravity = 4f;
@@ -66,7 +87,7 @@ public class PlayerInputController : MonoBehaviour
     // WallJump
     private bool _isWallJumping;
     private float _wallJumpDirection;
-    private float _wallJumpTime = 0.3f;
+    private float _wallJumpTime = 0.25f;
     private float _wallJumpTimer;
     private Vector2 _wallJumpPower = new Vector2(5f, 15f);
 
@@ -77,11 +98,13 @@ public class PlayerInputController : MonoBehaviour
     private float _dashTime = 0.2f;
     private int _maxDash = 1;
     public int _dashCount;
-    private TrailRenderer _trailRenderer;
 
     // Action
-
     public event Action OnInteraction;
+
+    // Coroutine
+    private Coroutine _coMoveCamera;
+    private Coroutine _comoveSFX = null;
 
     #endregion
 
@@ -91,16 +114,9 @@ public class PlayerInputController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _touchingDirection = GetComponent<TouchingDirection>();
-        _trailRenderer = GetComponent<TrailRenderer>();
         _animator = GetComponent<Animator>();
         _player = GetComponent<Player>();
 
-        //임시 스킬 초기화. ==================================================================
-        _SwordAuror = GetComponent<Skill_SwordAuror>();
-        _PlungeAttack = GetComponent<Skill_PlungeAttack>();
-        _SwordAuror.Initialize();
-        _PlungeAttack.Initialize();
-        //====================================================================================
     }
 
     private void FixedUpdate()
@@ -120,6 +136,32 @@ public class PlayerInputController : MonoBehaviour
             Gravity();
         }
 
+        // 캐릭터의 이동 상태와 접지 상태를 체크합니다.
+        bool isWalkingNow = _moveInput != Vector2.zero && _touchingDirection.IsGrounded;
+
+        // 이동 상태가 변경되었는지 확인합니다.
+        if (isWalkingNow != Iswalking)
+        {
+            Iswalking = isWalkingNow;
+
+            // 이동을 시작하면 코루틴을 시작합니다.
+            if (Iswalking)
+            {
+                if (_comoveSFX == null)
+                {
+                    _comoveSFX = StartCoroutine(CoMoveSFX());
+                }
+            }
+            else // 이동을 멈추면 코루틴을 중지합니다.
+            {
+                if (_comoveSFX != null)
+                {
+                    StopCoroutine(_comoveSFX);
+                    _comoveSFX = null;
+                }
+            }
+        }
+
         _animator.SetFloat(AnimatorHash.yVelocity, _rigidbody.velocity.y);
     }
 
@@ -130,8 +172,22 @@ public class PlayerInputController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
-
         Iswalking = _moveInput != Vector2.zero;
+        if (Iswalking && _touchingDirection.IsGrounded)
+        {
+            if (_comoveSFX == null)
+            {
+                _comoveSFX = StartCoroutine(CoMoveSFX()); // 코루틴 시작
+            }
+        }
+        else
+        {
+            if (_comoveSFX != null)
+            {
+                StopCoroutine(_comoveSFX); // 코루틴 중지
+                _comoveSFX = null;
+            }
+        }
     }
 
     /// <summary>
@@ -142,6 +198,20 @@ public class PlayerInputController : MonoBehaviour
     {
         _moveInput = direction;
         Iswalking = _moveInput != Vector2.zero;
+    }
+
+    private IEnumerator CoMoveSFX()
+    {
+        while (Iswalking && _touchingDirection.IsGrounded) 
+        {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Walk"));
+            yield return new WaitForSeconds(0.35f); 
+        }
+    }
+
+    public Vector2 MoveInput()
+    {
+        return _moveInput;
     }
 
     private void Flip()
@@ -158,40 +228,77 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+    public void Look(InputAction.CallbackContext context)
+    {
+        Vector2 direction = context.ReadValue<Vector2>();
+        if (_moveInput.x == 0 && _touchingDirection.IsGrounded)
+        {
+            if (context.performed)
+            {
+                if (_coMoveCamera != null)
+                    StopCoroutine(_coMoveCamera);
+
+                _coMoveCamera = StartCoroutine(MoveCameraDelay(direction));
+            }
+            else if (context.canceled)
+            {
+                if (_coMoveCamera != null)
+                    StopCoroutine(_coMoveCamera);
+
+                CameraManager.Instance.ResetCamera();
+            }
+        }
+    }
+
+    private IEnumerator MoveCameraDelay(Vector2 direction)
+    {
+        yield return new WaitForSeconds(0.5f);
+        CameraManager.Instance.MoveCamera(direction);
+    }
+
+    private bool CanWallJump()
+    {
+        return _wallJumpTimer > 0f && _touchingDirection.IsWall;
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
         if (enabled)
         {
-            if (_jumpCount > 0)
+            if (context.started && !_isDashing)
             {
-                if (context.started && _touchingDirection.IsGrounded && !_isDashing)
+                if (!_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
                 {
-                    if (!_isWallJumping)
+                    _animator.SetTrigger(AnimatorHash.Jump);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
+                    if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
                     {
-                        _animator.SetTrigger(AnimatorHash.Jump);
-                        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
-                        _jumpCount--;
-                    }
-                }
-                else if (context.canceled)
-                {
-                    if (!_isWallJumping)
-                    {
-                        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-                        _jumpCount--;
+                        _doubleJump = !_doubleJump;
                     }
                 }
             }
-
+            else if (context.canceled)
+            {
+                if (!_isWallJumping)
+                {
+                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+                }
+            }
+            
             //Wall Jump
-            if (context.performed && _wallJumpTimer > 0f)
+            if (context.started && _wallJumpTimer > 0f)
             {
                 if (!_isWallJumping && _touchingDirection.IsWall)
                 {
+                    isWallSlideEffect = false;
+                    StopCoroutine("WallSlideEffect");
+                    _isWallSliding = false;
                     _isWallJumping = true;
                     _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
                     _wallJumpTimer = 0f;
                     _animator.SetTrigger(AnimatorHash.WallJump);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
                     if (transform.localScale.x != _wallJumpDirection)
                     {
                         _isFacingRight = !_isFacingRight;
@@ -203,23 +310,12 @@ public class PlayerInputController : MonoBehaviour
                     Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
                 }
             }
+            else if (context.canceled)
+            {
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+            }
         }
-    }
 
-    private void WallSlide()
-    {
-        if (enabled)
-        {
-            if (!_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
-            {
-                IsWallSliding = true;
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
-            }
-            else
-            {
-                IsWallSliding = false;
-            }
-        }
     }
 
     private void WallJump()
@@ -246,14 +342,121 @@ public class PlayerInputController : MonoBehaviour
         _isWallJumping = false;
     }
 
+    private bool isWallSlideEffect = false;
+
+    private void WallSlide()
+    {
+        if (enabled)
+        {
+            bool isCollidingWithWall = CheckWallCollision();
+            if (isCollidingWithWall & !_touchingDirection.IsGrounded & _touchingDirection.IsWall & _moveInput.x != 0 & _rigidbody.velocity.y <= 0 && !_isWallJumping && ItemManager.Instance.HasItem(ItemType.Equipment, 1))
+            {
+                IsWallSliding = true;
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Max(_rigidbody.velocity.y, -_wallSlideSpeed));
+                if (!isWallSlideEffect)
+                {
+                    isWallSlideEffect = true;
+                    StartCoroutine(WallSlideEffect());
+                }
+            }
+            else
+            {
+                IsWallSliding = false;
+                if (isWallSlideEffect)
+                {
+                    isWallSlideEffect = false;
+                    StopCoroutine("WallSlideEffect");
+                }
+            }
+        }
+    }
+
+    private bool CheckWallCollision()
+    {
+        Vector2 boxSize = new Vector2(1f, 0.5f); 
+        Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask);
+
+        foreach (var collider in colliders)
+        {
+            if (collider != null)
+            {
+                return true; // 벽과 충돌하는 콜라이더가 하나라도 있다면 true 반환
+            }
+        }
+        return false; // 충돌하는 벽이 없다면 false 반환
+    }
+
+    private IEnumerator WallSlideEffect()
+    {
+        while (isWallSlideEffect)
+        {
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallSlide"));
+            yield return new WaitForSeconds(0.1f);
+            if (!isWallSlideEffect || !_isWallSliding)
+            {
+                yield break;
+            }
+            GameObject wallSlideParticle = ResourceManager.Instance.InstantiatePrefab("WallSlideParticle", pooling: true);
+        
+            float wallSlideDirection = IsFacingRight ? 0.5f : -0.5f;
+            Vector2 point = new Vector2(transform.position.x + wallSlideDirection, transform.position.y);
+            wallSlideParticle.transform.position = point;
+
+            float wallSlideScale = IsFacingRight ? -1 : 1;
+            Vector3 scale = new Vector3(wallSlideScale, 1, 1);
+            wallSlideParticle.transform.localScale = scale;
+        }
+    }
+
     public void Attack(InputAction.CallbackContext context)
     {
         if (enabled)
         {
-            if (context.performed && _isAttacking == false)
+            if (context.performed && !IsAttacking && !_player.IsHit &&!_isDashing)
             {
-                _isAttacking = true;
-                _animator.SetTrigger(AnimatorHash.Attack);
+                IsAttacking = true;
+                if (_isFirstAttack)
+                {
+                    _animator.SetTrigger(AnimatorHash.Attack);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("PlayerAttack1"));
+                    GameObject attackEffect = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp", pooling : true);
+                    var playerAttack = attackEffect.GetComponent<PlayerAttack>();
+                    
+                    float attackDirection = IsFacingRight ? 1f : -1f;
+                    Vector2 attackPoint = new Vector2(transform.position.x + (attackDirection * 1.5f), transform.position.y + 0.5f);
+
+                    float attackscale = IsFacingRight ? 1f : -1f;
+                    Vector2 scale = new Vector2(attackscale, 1);
+
+                    attackEffect.transform.localScale = scale;
+                    attackEffect.transform.position = attackPoint;
+
+                    playerAttack.hasAttacked = false;
+
+                    _isFirstAttack = false;
+
+                }
+                else if (!_isFirstAttack)
+                {
+                    _animator.SetTrigger(AnimatorHash.Attack2);
+                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("PlayerAttack2"));
+                    GameObject attackEffect2 = ResourceManager.Instance.InstantiatePrefab("AttackEffect_Temp_2", pooling: true);
+                    var playerAttack = attackEffect2.GetComponent<PlayerAttack>();
+                    
+                    float attackDirection = IsFacingRight ? 1f : -1f;
+                    Vector2 attackPoint = new Vector2(transform.position.x + (attackDirection * 1.5f), transform.position.y + 0.1f);
+
+                    float attackscale = IsFacingRight ? 1f : -1f;
+                    Vector2 scale = new Vector2(attackscale, 1);
+
+                    attackEffect2.transform.localScale = scale;
+                    attackEffect2.transform.position = attackPoint;
+
+                    playerAttack.hasAttacked = false;
+
+                    _isFirstAttack = true;
+                }
                 StartCoroutine(ResetAttackAnimation());
             }
         }
@@ -262,13 +465,13 @@ public class PlayerInputController : MonoBehaviour
     // TODO 리펙토링 필요해 보임
     private IEnumerator ResetAttackAnimation()
     {
-        yield return new WaitForSeconds(0.5f);
-        _isAttacking = false;
+        yield return new WaitForSeconds(_player.playerStatus.Stats[PlayerStatusType.AttackSpeed]);
+        IsAttacking = false;
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (enabled)
+        if (!IsAttacking && !_player.IsHit)
         {
             if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
@@ -281,16 +484,30 @@ public class PlayerInputController : MonoBehaviour
     {
         if (_dashCount > 0)
         {
-            _animator.SetTrigger(AnimatorHash.Dash);
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Dash"));
             _canDash = false;
             _isDashing = true;
+
+            // 대쉬에 무적 필요한지?
+            _player._invincibilityTime = _dashTime;
             _player.Invincible = true;
+
             float originalGravity = _baseGravity;
             _rigidbody.gravityScale = 0f;
+
+            List<GameObject> dashEffects = new List<GameObject>();
+
             _rigidbody.velocity = new Vector2(transform.localScale.x * _dashPower, 0f);
-            _trailRenderer.emitting = true;
-            yield return new WaitForSeconds(_dashTime);
-            _trailRenderer.emitting = false;
+
+            float elapsedTime = 0f;
+            while (elapsedTime < _dashTime)
+            {
+                var dashEffect = ResourceManager.Instance.InstantiatePrefab("DashEffect", pooling: true);
+                dashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
+                dashEffects.Add(dashEffect);
+                yield return new WaitForSeconds(0.04f);
+                elapsedTime += 0.04f;
+            }
             _rigidbody.gravityScale = originalGravity;
             _isDashing = false;
             _dashCount--;
@@ -299,30 +516,27 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
-    // 임시 ===================================================================
-    private Skill_SwordAuror _SwordAuror;
-    private Skill_PlungeAttack _PlungeAttack;
-    // ========================================================================
-
     public void Skill(InputAction.CallbackContext context)
     {
         if (enabled)
         {
-            if (!Input.GetKey(KeyCode.DownArrow) && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 0))
+            if (!Input.GetKey(KeyCode.DownArrow) && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
-                _SwordAuror.Activate();
+                _player._skills[0].Activate();
+                SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("SwordAuror"));
             }
-            else
+            else if(!ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
+                // 아이템이 없다는 표시의 UI나 뭔가를 띄우면 좋을듯
                 Debug.Log("아이템 없음");
             }
 
-            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.performed && ItemManager.Instance.HasItem(ItemType.Skill, 1))
+            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
-                _PlungeAttack.Activate();
+                _player._skills[1].Activate();
                 _player.Invincible = true;
             }
-            else
+            else if(!ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 Debug.Log("아이템 없음");
             }
@@ -358,8 +572,12 @@ public class PlayerInputController : MonoBehaviour
     {
         if (_touchingDirection.IsGrounded)
         {
-            _jumpCount = _maxJump;
             _dashCount = _maxDash;
+
+            if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
+            {
+                _doubleJump = true;
+            }
         }
     }
 
@@ -371,7 +589,16 @@ public class PlayerInputController : MonoBehaviour
     {
         if (context.started)
         {
-            UIManager.Instance.OpenPopupUI(PopupType.Status);
+            // 실시간으로 inventoryUI 상태를 확인
+            GameObject inventoryUI = UIManager.Instance.GetUI(PopupType.Inventory);
+            if (inventoryUI != null && inventoryUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+            }
+            else
+            {
+                UIManager.Instance.OpenPopupUI(PopupType.Inventory);
+            }
         }
     }
 
@@ -379,11 +606,23 @@ public class PlayerInputController : MonoBehaviour
     {
         if (context.started)
         {
-            //if 켜진 UI가 없다면
-            UIManager.Instance.OpenPopupUI(PopupType.Pause);
-            Time.timeScale = 0f;
-            //else if 켜진 Popup이 있다면 UI SetActive(false)
+            // 실시간으로 PauseUI 상태를 확인
+            GameObject pauseUI = UIManager.Instance.GetUI(PopupType.Pause);
+            // 실시간으로 inventoryUI 상태를 확인
+            GameObject inventoryUI = UIManager.Instance.GetUI(PopupType.Inventory);
 
+            if (pauseUI != null && pauseUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Pause);
+            }
+            else if (inventoryUI != null && inventoryUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+            }
+            else
+            {
+                UIManager.Instance.OpenPopupUI(PopupType.Pause);
+            }
         }
     }
 

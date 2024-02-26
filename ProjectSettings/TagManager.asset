@@ -4,12 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Mimic
   - Enemy
   - PlayerAttack
   - Challenge
   - Ground
+  - SwordAuror
+  - Mimic
+  - Purple
+  - Green
+  - Blue
   - TownPortal
+  - Wall
+  - PlungeAttack
   layers:
   - Default
   - TransparentFX
@@ -21,6 +27,8 @@ TagManager:
   - Wall
   - Enemy
   - Item
+  - Player
+  - NPC
   - 
   - 
   - 
@@ -32,9 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - HiddenTiles
   - Chest
   - Map
   - 

@@ -17,7 +17,7 @@ public class EnemyBullet : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _speed = 10f;
         _direction = Vector2.up;
-        Invoke("DestroySelf", 5f);
+        Invoke("DestroySelf", 3f);
     }
 
     private void FixedUpdate()
@@ -27,9 +27,9 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && other.TryGetComponent<IDamagable>(out var component))
         {
-            other.GetComponent<IDamagable>().GetDamaged(_damage, this.transform);
+            component.GetDamaged(_damage, this.transform);
             CancelInvoke();
             Destroy(gameObject);
         }

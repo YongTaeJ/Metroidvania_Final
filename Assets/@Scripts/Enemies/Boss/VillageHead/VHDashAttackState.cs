@@ -48,6 +48,7 @@ public class VHDashAttackState : BossAttackState
         }
         else if(_startCount == 2)
         {
+            SFX.Instance.PlayOneShot("EnemyAttackSound");
             _attackCollider.enabled = true;
         }
     }
@@ -60,6 +61,7 @@ public class VHDashAttackState : BossAttackState
 
     private void DashToPlayer()
     {
+        SFX.Instance.PlayOneShot("VillageHeadDashSound");
         float distance = _distanceToPlayer;
         float directionX = _playerTransform.position.x - _transform.position.x;
 

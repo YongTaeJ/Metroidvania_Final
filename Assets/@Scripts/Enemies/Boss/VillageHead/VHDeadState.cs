@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class VHDeadState : EnemyDeadState
 {
-    private BossRoom _bossRoom;
+    private VHBossRoom _bossRoom;
     public VHDeadState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        _bossRoom = GameObject.Find("VHBossRoom").GetComponent<BossRoom>();
+        _bossRoom = GameObject.Find("VHBossRoom").GetComponent<VHBossRoom>();
+    }
+
+    public override void OnStateEnter()
+    {
+        base.OnStateEnter();
+        TimerManager.Instance.StartTimer(2.5f, () => SFX.Instance.PlayOneShot("VillageHeadDeadSound"));
     }
 
     public override void OnStateStay()
     {
         if(_isDeadEnded)
         {
-            DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
-            GameObject.Destroy(_stateMachine.gameObject);
-            _bossRoom.OpenDoor();
+            _bossRoom.GetDeadLocation(_stateMachine.transform.position);
+            _bossRoom.GetDropTableIndex(_stateMachine.EnemyData.DropTableIndex);
+            _bossRoom.OnBossDead();
+            MonoBehaviour.Destroy(_stateMachine.gameObject);
         }
     }
 }

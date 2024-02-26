@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,39 +6,26 @@ using UnityEngine.InputSystem;
 
 public class PortalTrigger : MonoBehaviour
 {
-    public bool CanUsePortal = false;
-    protected PlayerInput _playerInput;
+    [SerializeField] private Canvas _buyPortal;
+    [SerializeField] private int _portalIndex;
+    [SerializeField] private int _portalPrice = 50;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
     {
-        if (collision.CompareTag("Player"))
-        {
-            _playerInput = collision.GetComponent<PlayerInput>();
-            var playerInputController = collision.GetComponent<PlayerInputController>();
-            playerInputController.OnInteraction += UsePortal;
-            UIManager.Instance.OpenPopupUI(PopupType.Interact);
+        _buyPortal = MapManager.Instance.BuyPortal;
+        Animator animator = GetComponent<Animator>();
 
-            MapManager.Instance._portalTrigger = this;
-            CanUsePortal = true;
+        if (animator != null )
+        {
+            if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
+            {
+                animator.SetBool("IsActivate", true);
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void PopupBuyPortal()
     {
-        if (collision.CompareTag("Player"))
-        {
-            var playerInputController = collision.GetComponent<PlayerInputController>();
-            playerInputController.OnInteraction -= UsePortal;
-            UIManager.Instance.ClosePopupUI(PopupType.Interact);
-
-            MapManager.Instance._portalTrigger = null;
-            CanUsePortal = false;
-        }
-    }
-
-    private void UsePortal()
-    {
-        MapManager.Instance.OpenLargeMap();
-        UIManager.Instance.ClosePopupUI(PopupType.Interact);
+        _buyPortal.gameObject.SetActive(true);
     }
 }

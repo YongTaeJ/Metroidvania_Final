@@ -2,26 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class MapManager : Singleton<MapManager>
 {
-    [SerializeField] private GameObject _worldMap;
-    [SerializeField] private GameObject _worldMapUI;
-    public PortalTrigger _portalTrigger;
-    public GameObject _loadingImage;
-    private Camera _mapCamera;
-
+    public Canvas WorldMap { get; private set; }
+    public Canvas PortalMap { get; private set; }
+    public Canvas BuyPortal { get; private set; }
+    public Canvas LoadingImage { get; private set; }
+    public GameObject MapTiles { get; private set; }
     public bool IsWorldMapOpen { get; private set; }
+    public MapData MapData { get; private set; }
+
+
+    private PlayerInput _mapInputActions;
 
     protected override void Awake()
     {
         base.Awake();
+        AssignProperties();
+    }
+    private void AssignProperties()
+    {
+        Canvas worldMapPrefab = Resources.Load<Canvas>("Map/WorldMap");
+        Canvas portalMapPrefab = Resources.Load<Canvas>("Map/PortalMap");
+        Canvas buyPortalPrefab = Resources.Load<Canvas>("Map/BuyPortal");
+        Canvas loadingImagePrefab = Resources.Load<Canvas>("Map/LoadingImage");
+        GameObject MapTilesPrefab = Resources.Load<GameObject>("Map/MapTiles");
 
-        CloseLargeMap();
-        this.GetComponent<PlayerInput>().enabled = false;
-        _worldMapUI.SetActive(false);
-        _loadingImage.SetActive(false);
-        _mapCamera = GetComponentInChildren<Camera>();
+        WorldMap = Instantiate(worldMapPrefab, transform);
+        PortalMap = Instantiate(portalMapPrefab, transform);
+        BuyPortal = Instantiate(buyPortalPrefab, transform);
+        LoadingImage = Instantiate(loadingImagePrefab, transform);
+        MapTiles = Instantiate(MapTilesPrefab, transform);
+
+        MapData = GetComponentInChildren<MapData>();
+        _mapInputActions = GetComponentInChildren<PlayerInput>();
+
+        if (_mapInputActions != null)
+        {
+            _mapInputActions.enabled = false;
+        }
     }
 
     private void Update()
@@ -30,6 +51,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (!IsWorldMapOpen)
             {
+                MapData.UpdateMapData();
                 OpenLargeMap();
             }
             else
@@ -41,63 +63,75 @@ public class MapManager : Singleton<MapManager>
 
     public void OpenLargeMap()
     {
-        _worldMap.SetActive(true);
+        WorldMap.gameObject.SetActive(true);
         IsWorldMapOpen = true;
-        StopTime();
+        Time.timeScale = 0;
+
+        // 아래의 기능은 맵과 포탈 둘다 사용할 기능
 
         if (GameManager.Instance.player != null)
         {
             GameManager.Instance.player.GetComponent<PlayerInput>().enabled = false;
-            
-            this.GetComponent<PlayerInput>().enabled = true;
-            Vector3 _playerPosition = GameManager.Instance.player.transform.position;
-            moveMapCamera(_playerPosition);
-            _worldMapUI.SetActive(true);
+            var MapControl = GetComponentInChildren<PlayerInput>();
+            MapControl.enabled = true;
+            Vector3 position = GameManager.Instance.player.transform.position;
+            Camera camera = GetComponentInChildren<Camera>();
+            camera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
         }
+    }
 
-        //if (_portalTrigger != null && _portalTrigger.CanUsePortal)
-        //{
-        //    _worldMapUI.SetActive(true);
-        //}
+    public void OpenPortalMap()
+    {
+        PortalMap.gameObject.SetActive(true);
+        IsWorldMapOpen = true;
+        Time.timeScale = 0;
+
+        if (GameManager.Instance.player != null)
+        {
+            GameManager.Instance.player.GetComponent<PlayerInput>().enabled = false;
+            var MapControl = GetComponentInChildren<PlayerInput>();
+            MapControl.enabled = true;
+            Vector3 position = GameManager.Instance.player.transform.position;
+            Camera camera = GetComponentInChildren<Camera>();
+            camera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
+        }
     }
 
     public void CloseLargeMap()
     {
-        _worldMap.SetActive(false);
-        _worldMapUI.SetActive(false);
-        IsWorldMapOpen = false;
-        ResumeTime();
-
         if (GameManager.Instance.player != null)
         {
+            var MapControl = GetComponentInChildren<PlayerInput>();
+            MapControl.enabled = false;
             GameManager.Instance.player.GetComponent<PlayerInput>().enabled = true;
-            this.GetComponent<PlayerInput>().enabled = false;
+        }
+
+        WorldMap.gameObject.SetActive(false);
+        PortalMap.gameObject.SetActive(false);
+        IsWorldMapOpen = false;
+        Time.timeScale = 1.0f;
+
+        if (LoadingImage.gameObject.activeSelf)
+        {
+            Invoke("LoadImageClose", 1.2f);
         }
     }
 
-    /// <summary>
-    /// 시간을 정지하는 기능 - 일시정지 기능을 만들면 그 것을 사용하고
-    /// 이 기능은 그것을 상속받아서 사용하거나 같으면 참조해서 사용하게
-    /// </summary>
-    private void StopTime()
+    public void LoadImage(bool isActive)
     {
-        Time.timeScale = 0;
-        //AudioListener.pause = true;  // 사운드효과 사용시
+        LoadingImage.gameObject.SetActive(isActive);
+    }
+    public void LoadImageClose()
+    {
+        LoadingImage.gameObject.SetActive(false);
     }
 
-    private void ResumeTime()
+    public void ActivateBuyPortalUI(int portalIndex, int portalPrice)
     {
-        Time.timeScale = 1.0f;
-        //AudioListener.pause = false; // 사운드효과 사용시
-    }
-
-    public void moveMapCamera(Vector3 position)
-    {
-        _mapCamera.transform.position = new Vector3(position.x, position.y + 8, position.z - 10);
-    }
-
-    public void LoadingImage(bool isActive)
-    {
-        _loadingImage.SetActive(isActive);
+        BuyPortal buyPortalScript = BuyPortal.GetComponentInChildren<BuyPortal>();
+        if (buyPortalScript != null)
+        {
+            buyPortalScript.ActivateUI(portalIndex, portalPrice);
+        }
     }
 }

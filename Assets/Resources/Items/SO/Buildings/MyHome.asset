@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f7d3499ff23ae40af0d1973b7c3df8, type: 3}
+  m_Name: MyHome
+  m_EditorClassIdentifier: 
+  _ID: 3
+  _constructName: "\uB0B4 \uC9D1"
+  _constructDescription: "\uB0B4 \uC9D1\uC785\uB2C8\uB2E4. \uB0B4\uC9D1\uB9C8\uB828\uC758
+    \uAFC8!!!"
+  _effectDescription: "\uD479 \uC26C\uC5B4\uC11C \uCCB4\uB825\uC774 \uC62C\uB77C\uAC11\uB2C8\uB2E4."
+  _requiredConditions:
+  - itemType: 6
+    ID: 4
+  - itemType: 6
+    ID: 5
+  _requiredMaterials:
+  - ID: 1
+    Stock: 50
+  - ID: 0
+    Stock: 25
+  _statElements:
+  - statusType: 1
+    value: 5
+  _rewardElements: []
+  _buildingData:
+    buildingPrefab: {fileID: 6692332912189659294, guid: bbe0b0d6bb99e0e449bf48ed42d4c87a, type: 3}
+    buildingPosition: {x: 296, y: 2.4, z: 0}

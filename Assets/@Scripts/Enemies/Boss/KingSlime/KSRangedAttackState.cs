@@ -50,6 +50,7 @@ public class KSRangedAttackState : BossAttackState
 
     private void FireBullet()
     {
+        SFX.Instance.PlayOneShot("KingSlimeRangedAttackSound");
         Vector3 myPos = _attackPivot.position;
 
         EnemyBullet bullet = 

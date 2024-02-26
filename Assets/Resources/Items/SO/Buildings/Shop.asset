@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f7d3499ff23ae40af0d1973b7c3df8, type: 3}
+  m_Name: Shop
+  m_EditorClassIdentifier: 
+  _ID: 1
+  _constructName: Shop
+  _constructDescription: "\uC0C1\uC810 \uC8FC\uC778\uC744 \uB3C4\uC640 \uB9DD\uAC00\uC9C4
+    \uC0C1\uC810\uC744 \uB2E4\uC2DC \uC138\uC6C1\uB2C8\uB2E4."
+  _effectDescription: "\uC0C1\uC810 \uC774\uC6A9 \uAC00\uB2A5"
+  _requiredConditions: []
+  _requiredMaterials:
+  - ID: 0
+    Stock: 2
+  - ID: 1
+    Stock: 1
+  _statElements: []
+  _rewardElements:
+  - ItemType: 9
+    ID: 2
+    Stock: 1
+  _buildingData:
+    buildingPrefab: {fileID: 234950853861326434, guid: 408f16a30cf7c02499a207eb2f583367, type: 3}
+    buildingPosition: {x: 260, y: 3.8, z: 0}

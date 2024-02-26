@@ -18,6 +18,7 @@ public class EnemyDeadState : EnemyBaseState
     {
         _isDeadEnded = false;
         _animator.SetTrigger(AnimatorHash.Dead);
+        PlayDeadSound();
         GenerateDeadEffect();
     }
 
@@ -30,7 +31,8 @@ public class EnemyDeadState : EnemyBaseState
         if(_isDeadEnded)
         {
             DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
-            GameObject.Destroy(_stateMachine.gameObject);
+            _stateMachine.gameObject.SetActive(false);
+            _stateMachine.ResetMonster();
         }
     }
     #endregion
@@ -45,5 +47,10 @@ public class EnemyDeadState : EnemyBaseState
     private void EndState()
     {
         _isDeadEnded = true;
+    }
+
+    private void PlayDeadSound()
+    {
+        SFX.Instance.PlayOneShot("EnemyDeadSound", 0.3f);
     }
 }

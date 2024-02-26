@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
+/// <summary>
+/// 저장 가능한 요소들을 모아놓은 enum입니다.
+/// </summary>
 public enum ItemType
 {
     None,
@@ -11,7 +14,13 @@ public enum ItemType
     Material,
     Equipment,
     Map,
-    Skill
+    Skill,
+    Building,
+    Portal,
+    Quest,
+    NPC,
+    Boss,
+    Chest
 }
 
 public class Item
@@ -41,7 +50,8 @@ public class ItemData
     public string Description { get; set; }
 }
 
-public class SavedItemData
+[Serializable]
+public class InternalItemData
 {
     public ItemType ItemType;
     public int ID;

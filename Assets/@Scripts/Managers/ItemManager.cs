@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
+using JetBrains.Annotations;
 
 public class ItemManager : Singleton<ItemManager>
 {
@@ -11,9 +12,14 @@ public class ItemManager : Singleton<ItemManager>
 
      public override bool Initialize()
     {
-        LoadItem();
-        LoadSprites();
-        return base.Initialize();
+        if (base.Initialize())
+        {
+            LoadItem();
+            LoadSprites();
+            LoadSaveData(GameManager.Instance.Data.Inventory);
+            Debug.Log("아이템");
+        }
+        return true;
     }
 
     private void LoadItem()
@@ -32,7 +38,6 @@ public class ItemManager : Singleton<ItemManager>
 
             _items[data.ItemType].Add(data.ID, new Item(data));
         }
-        // TODO => 이후 Saved Data를 기준으로 Stock 설정. 없으면 Stock 전부 0인거 하나 만들어주기
     }
 
     private void LoadSprites()
@@ -44,6 +49,22 @@ public class ItemManager : Singleton<ItemManager>
         foreach(Sprite sprite in sprites)
         {
             ItemSprites.Add(sprite.name, sprite);
+        }
+    }
+
+    private void LoadSaveData(List<InternalItemData> inventoryData)
+    {
+        if (inventoryData == null) return;
+
+        foreach (var itemData in inventoryData)
+        {
+            if (_items.TryGetValue(itemData.ItemType, out Dictionary<int, Item> itemDict))
+            {
+                if (itemDict.TryGetValue(itemData.ID, out Item item))
+                {
+                    item.SetItemStock(itemData.Stock);
+                }
+            }
         }
     }
 
@@ -68,6 +89,32 @@ public class ItemManager : Singleton<ItemManager>
         Item currentItem = _items[itemType][ID];
         int sumValue = currentItem.Stock + value;
         currentItem.SetItemStock(sumValue);
+
+        if (GameManager.Instance.Data.Inventory == null)
+        {
+            GameManager.Instance.Data.Inventory = new List<InternalItemData>();
+        }
+
+        bool found = false;
+        foreach (var itemData in GameManager.Instance.Data.Inventory)
+        {
+            if (itemData.ItemType == itemType && itemData.ID == ID)
+            {
+                itemData.Stock += value;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            GameManager.Instance.Data.Inventory.Add(new InternalItemData { ItemType = itemType, ID = ID, Stock = value });
+        }
+
+        if(itemType == ItemType.Skill)
+        {
+            GameManager.Instance.player.SetSkill();
+        }
     }
 
     public Dictionary<int, Item> GetItemDict(ItemType itemType)
@@ -78,6 +125,12 @@ public class ItemManager : Singleton<ItemManager>
     public Sprite GetSprite(string itemName)
     {
         return ItemSprites[itemName];
+    }
+
+    public Sprite GetSprite(ItemType itemType, int ID)
+    {
+        string curName = _items[itemType][ID].ItemData.Name;
+        return ItemSprites[curName];
     }
 
     public ItemData GetItemData(ItemType itemType, int ID)
@@ -93,6 +146,12 @@ public class ItemManager : Singleton<ItemManager>
     public int GetItemStock(ItemType itemType, int ID)
     {
         return _items[itemType][ID].Stock;
+    }
+
+    public Item GetItem(ItemType itemType, int ID)
+    {
+        // StockChanged 접근이 필요한 경우!!!!!
+        return _items[itemType][ID];
     }
 }
 

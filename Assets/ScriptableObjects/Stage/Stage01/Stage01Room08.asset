@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73874e2cd87d7f4db295de9709ed242, type: 3}
+  m_Name: Stage01Room08
+  m_EditorClassIdentifier: 
+  spawnInfos:
+  - monsterPrefab: {fileID: 7908628980623800049, guid: 490f118fadc800946b8da6a1bd578ee2, type: 3}
+    spawnPositions:
+    - {x: 191, y: -163.5, z: 0}
+    - {x: 193.5, y: -171.5, z: 0}
+    - {x: 193.5, y: -179.5, z: 0}
+  - monsterPrefab: {fileID: 8349269620201448745, guid: d0b1dece992857e4ebfc91338b0aa504, type: 3}
+    spawnPositions:
+    - {x: 190, y: -152.5, z: 0}

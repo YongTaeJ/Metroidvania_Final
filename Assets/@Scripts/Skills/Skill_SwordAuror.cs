@@ -6,11 +6,12 @@ using TMPro;
 
 public class Skill_SwordAuror : SkillBase
 {
-    private GameObject _swordAurorPrefab;
+
     public override void Initialize()
     {
         base.Initialize();
-        Cooldown = 5f;
+        Cooldown = .2f;
+        ManaCost = 30;
     }
 
     public override bool Activate()
@@ -19,23 +20,34 @@ public class Skill_SwordAuror : SkillBase
         {
             return false;
         }
+        
+        
         GameManager.Instance.player._animator.SetTrigger(AnimatorHash.Skill);
-        LaunchProjectile();
+        SwordAuror();
         return true;
     }
 
-    private void LaunchProjectile()
+    private void SwordAuror()
     {
         if (GameManager.Instance.player == null) return;
-        _swordAurorPrefab = Resources.Load<GameObject>("Skills/SwordAuror");
-        Quaternion rotation = Quaternion.Euler(0, 0, GameManager.Instance.player.transform.localScale.x > 0 ? 0 : 180);
-        GameObject projectile = Instantiate(_swordAurorPrefab, transform.position, rotation);
-        Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 
-        if (projectileRigidbody != null)
+        GameObject swordAurorPrefab = ResourceManager.Instance.InstantiatePrefab("SwordAuror", pooling: true);
+        float swordAurorScale = GameManager.Instance.player._controller.IsFacingRight ? 1 : -1;
+        swordAurorPrefab.transform.localScale = new Vector2(swordAurorScale, 1);
+        swordAurorPrefab.transform.position = transform.position;
+        Rigidbody2D swordAurorRigidbody = swordAurorPrefab.GetComponent<Rigidbody2D>();
+
+        if (swordAurorRigidbody != null)
         {
-            float speed = 30f;
-            projectileRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
+            float speed = 15f;
+            swordAurorRigidbody.velocity = new Vector2(GameManager.Instance.player.transform.localScale.x > 0 ? speed : -speed, 0f);
         }
+        StartCoroutine(SwordAurorDespawn(swordAurorPrefab));
+    }
+
+    private IEnumerator SwordAurorDespawn(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(1f);
+        ResourceManager.Instance.Destroy(gameObject);
     }
 }
