@@ -6,7 +6,6 @@ public class TempPlayer : MonoBehaviour
 {
     private void Start()
     {
-        ItemManager.Instance.AddItem(ItemType.Gold, 0, 500);
     }
 
     private void SetPlayerPosition()

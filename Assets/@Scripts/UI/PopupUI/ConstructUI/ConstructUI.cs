@@ -37,8 +37,8 @@ public class ConstructUI : MonoBehaviour
         if(!_isInitialized) return;
 
         _exitButton.SetActive(false);
-        transform.position = new Vector3(960, 2160, 0);
-        transform.DOMoveY(540, 1).SetEase(Ease.OutBack);
+        transform.position = new Vector3(Screen.width / 2, Screen.height * 2 , 0);
+        transform.DOMoveY(Screen.height / 2, 1).SetEase(Ease.OutBack);
         TimerManager.Instance.StartTimer(1f, () => _exitButton.SetActive(true));   
     }
 }
