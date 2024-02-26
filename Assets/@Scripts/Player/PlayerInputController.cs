@@ -591,9 +591,14 @@ public class PlayerInputController : MonoBehaviour
         {
             // 실시간으로 inventoryUI 상태를 확인
             GameObject inventoryUI = UIManager.Instance.GetUI(PopupType.Inventory);
+            GameObject BuildingUI = UIManager.Instance.GetUI(PopupType.Building);
             if (inventoryUI != null && inventoryUI.activeSelf)
             {
                 UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+            }
+            else if (BuildingUI != null && BuildingUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Building);
             }
             else
             {
@@ -610,6 +615,8 @@ public class PlayerInputController : MonoBehaviour
             GameObject pauseUI = UIManager.Instance.GetUI(PopupType.Pause);
             // 실시간으로 inventoryUI 상태를 확인
             GameObject inventoryUI = UIManager.Instance.GetUI(PopupType.Inventory);
+            GameObject constructUI = UIManager.Instance.GetUI(PopupType.Construct);
+            GameObject buildingUI = UIManager.Instance.GetUI(PopupType.Building);
 
             if (pauseUI != null && pauseUI.activeSelf)
             {
@@ -618,6 +625,14 @@ public class PlayerInputController : MonoBehaviour
             else if (inventoryUI != null && inventoryUI.activeSelf)
             {
                 UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+            }
+            else if (constructUI != null && constructUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Construct);
+            }
+            else if (buildingUI != null && buildingUI.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.Building);
             }
             else
             {
