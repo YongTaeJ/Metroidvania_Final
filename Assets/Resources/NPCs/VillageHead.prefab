@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chatID_normal: 600
-  _chatID_allClear: 60
+  _chatID_allClear: 601
 --- !u!1 &8914417248063477825
 GameObject:
   m_ObjectHideFlags: 0

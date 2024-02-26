@@ -23,9 +23,9 @@ MonoBehaviour:
   - itemType: 6
     ID: 5
   _requiredMaterials:
-  - ID: 1
-    Stock: 50
   - ID: 0
+    Stock: 50
+  - ID: 1
     Stock: 25
   _statElements:
   - statusType: 1

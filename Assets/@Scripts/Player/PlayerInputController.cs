@@ -593,7 +593,8 @@ public class PlayerInputController : MonoBehaviour
             GameObject BuildingUI = UIManager.Instance.GetUI(PopupType.Building);
             if (inventoryUI != null && inventoryUI.activeSelf)
             {
-                UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+                var inventory = inventoryUI.GetComponent<InventoryUI>();
+                inventory.CloseInventory();
             }
             else if (BuildingUI != null && BuildingUI.activeSelf)
             {
@@ -623,7 +624,8 @@ public class PlayerInputController : MonoBehaviour
             }
             else if (inventoryUI != null && inventoryUI.activeSelf)
             {
-                UIManager.Instance.ClosePopupUI(PopupType.Inventory);
+                var inventory = inventoryUI.GetComponent<InventoryUI>();
+                inventory.CloseInventory();
             }
             else if (constructUI != null && constructUI.activeSelf)
             {

@@ -6,14 +6,25 @@ using UnityEngine.InputSystem;
 
 public class NPCInteraction_Construct : NPCInteraction
 {
+    [SerializeField] private int _chatID_first;
     [SerializeField] private int _chatID_start;
     [SerializeField] private int _chatID_end;
+    private bool _isFirst = false;
 
     public override IEnumerator Interact(PlayerInput input)
     {
         StartInteract(input);
 
-        var chatDatas = ChatManager.Instance.GetChatData(_chatID_start);
+        List<(string, string)> chatDatas;
+
+        if(!_isFirst)
+        {
+            _isFirst = true;
+            chatDatas = ChatManager.Instance.GetChatData(_chatID_first);
+            yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
+        }
+
+        chatDatas = ChatManager.Instance.GetChatData(_chatID_start);
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         yield return StartCoroutine(WaitForChoose());
