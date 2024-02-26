@@ -27,6 +27,7 @@ public class BGM : SoundManager<BGM>
     {
         base.Awake();
         this.AudioSource = GetComponent<AudioSource>();
+        LoadVolumeSettings();
     }
 
     protected override void SetVolume(float volumeScale)
