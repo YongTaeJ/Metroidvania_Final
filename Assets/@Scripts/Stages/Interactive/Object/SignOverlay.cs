@@ -1,4 +1,6 @@
+using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SignOverlay : SignBase
@@ -19,6 +21,12 @@ public class SignOverlay : SignBase
 
     protected override void ClosePopupSign()
     {
+        StartCoroutine(CoClosePopupSign());
+    }
+
+    private IEnumerator CoClosePopupSign()
+    {
+        yield return new WaitForSeconds(0.7f);
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
     }
 }

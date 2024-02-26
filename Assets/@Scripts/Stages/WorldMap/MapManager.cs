@@ -59,6 +59,14 @@ public class MapManager : Singleton<MapManager>
                 CloseLargeMap();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(IsWorldMapOpen)
+            {
+                CloseLargeMap();
+            }
+        }
     }
 
     public void OpenLargeMap()

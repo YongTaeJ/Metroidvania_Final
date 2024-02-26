@@ -22,7 +22,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            DestroyAllMonsters();
+            Invoke("DestroyAllMonsters", 0.5f);
         }
     }
 

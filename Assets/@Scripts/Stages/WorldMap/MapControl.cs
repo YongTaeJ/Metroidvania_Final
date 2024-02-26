@@ -13,7 +13,7 @@ public class MapControl : MonoBehaviour
     public Camera _mapCamera;
 
     private Vector2 _mapMove;
-    private float _scrollSpeed = 0.5f;
+    private float _scrollSpeed = 0.7f;
 
     private void Awake()
     {
@@ -41,16 +41,16 @@ public class MapControl : MonoBehaviour
 
     public void MapEnlarge(InputAction.CallbackContext context)
     {
-        if (enabled && context.performed && _mapCamera.orthographicSize >= 15)
+        if (enabled && context.performed && _mapCamera.orthographicSize >= 10)
         {
-            _mapCamera.orthographicSize -= 4;
+            _mapCamera.orthographicSize -= 5;
         }
     }
     public void MapReduce(InputAction.CallbackContext context)
     {
-        if (enabled && context.performed && _mapCamera.orthographicSize <= 35)
+        if (enabled && context.performed && _mapCamera.orthographicSize <= 50)
         {
-            _mapCamera.orthographicSize += 4;
+            _mapCamera.orthographicSize += 5;
         }
     }
 }

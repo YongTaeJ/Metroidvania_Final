@@ -31,6 +31,7 @@ public class ChestMap : ChestBase
 
         for (int i = _curMapNumber; i <_mapDataLimit; i++)
         {
+            
             ItemManager.Instance.AddItem(ItemType.Map, 0);
         }
     }

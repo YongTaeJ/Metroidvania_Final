@@ -62,11 +62,6 @@ public class MapTeleport : MonoBehaviour
         MapManager.Instance.CloseLargeMap();
         //UIManager.Instance.OpenPopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(true);
-
-        if (_selectedButtonIndex == 0)
-        {
-            GameManager.Instance.player.HP = GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.HP];
-        }
     }
 
     public void ClickNo()

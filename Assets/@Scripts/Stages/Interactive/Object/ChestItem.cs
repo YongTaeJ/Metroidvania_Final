@@ -60,7 +60,7 @@ public class ChestItem : ChestBase
         base.ChestText();
         if (_chestItem == ItemType.Gold)
         {
-            _chestText.text = "You got " + _chestGold + " Gold";
+            _chestText.text = "There was some gold\r\nin the chest.";
         }
         else
         {
@@ -68,5 +68,10 @@ public class ChestItem : ChestBase
             string _chestItemName = _chestItemData.Name;
             _chestText.text = "You got " + _chestItemName;
         }
+    }
+
+    private void Helptext()
+    {
+        _chestText.text = "";
     }
 }

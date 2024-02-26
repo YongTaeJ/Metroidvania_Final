@@ -17,7 +17,6 @@ public abstract class SignBase : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // 너무 빨리 없어지는 느낌이면 코루틴으로 지연하여 없어지게
             ClosePopupSign();
         }
     }

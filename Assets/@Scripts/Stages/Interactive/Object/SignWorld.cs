@@ -18,6 +18,12 @@ public class SignWorld : SignBase
 
     protected override void ClosePopupSign()
     {
+        StartCoroutine(CoClosePopupSign());
+    }
+
+    private IEnumerator CoClosePopupSign()
+    {
+        yield return new WaitForSeconds(0.7f);
         _canvas.gameObject.SetActive(false);
     }
 }

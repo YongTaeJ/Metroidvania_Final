@@ -59,6 +59,6 @@ public class DungeonEnter : MonoBehaviour
     private void EnterDungeonText()
     {
         TextMeshProUGUI Text = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        Text.text = "You Enter The Dungeon";
+        Text.text = "You Entered The Dungeon";
     }
 }
