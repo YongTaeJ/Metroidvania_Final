@@ -27,15 +27,15 @@ public class TeleportTrap : MonoBehaviour
 
     private void OpenTrapText()
     {
-        _teleportText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
+        _teleportText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
         _teleportText.text = "You are fallen\n\rtry again";
-        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         StartCoroutine(DeactiveText(2));
     }
 
     private IEnumerator DeactiveText(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
+        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
     }
 }

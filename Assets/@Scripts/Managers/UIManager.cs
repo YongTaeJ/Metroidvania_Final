@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public enum PopupType
 {
     None,
-    ToolTip,
+    AToolTip,
     ChatBox,
     Pause,
     GameOver,
