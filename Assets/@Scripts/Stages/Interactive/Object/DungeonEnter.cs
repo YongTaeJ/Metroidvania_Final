@@ -51,14 +51,14 @@ public class DungeonEnter : MonoBehaviour
         MapManager.Instance.LoadImage(true);
         yield return new WaitForSeconds(1f);
         MapManager.Instance.LoadImage(false);
-        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         yield return new WaitForSeconds(1.8f);
-        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
+        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
     }
 
     private void EnterDungeonText()
     {
-        TextMeshProUGUI Text = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI Text = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
         Text.text = "You Enter The Dungeon";
     }
 }

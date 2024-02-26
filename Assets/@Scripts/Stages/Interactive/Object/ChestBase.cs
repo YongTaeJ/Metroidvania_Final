@@ -58,7 +58,7 @@ public class ChestBase : MonoBehaviour
     {
         ChestText();
         ItemManager.Instance.AddItem(ItemType.Chest, _chestID);
-        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         if (_press != null) _press.gameObject.SetActive(false);
 
         Animator animator = GetComponent<Animator>();
@@ -74,16 +74,16 @@ public class ChestBase : MonoBehaviour
         StartCoroutine(CoChestTextOff());
     }
 
-    private IEnumerator CoChestTextOff()
+    protected virtual IEnumerator CoChestTextOff()
     {
-        yield return new WaitForSeconds(1f);
-        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
+        yield return new WaitForSeconds(1.4f);
+        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
         GameObject.Destroy(gameObject);
     }
 
     protected virtual void ChestText()
     {
-        _chestText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
+        _chestText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
         _chestText.text = "The chest is empty";
     }
 }

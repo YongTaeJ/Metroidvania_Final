@@ -12,13 +12,13 @@ public class SignOverlay : SignBase
     protected override void OpenPopupSign()
     {
         _signMessage = SignDataManager.Instance.GetMessage(_signID);
-        _signText = UIManager.Instance.GetUI(PopupType.ToolTip).GetComponentInChildren<TextMeshProUGUI>();
+        _signText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
         _signText.text = _signMessage;
-        UIManager.Instance.OpenPopupUI(PopupType.ToolTip);
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
     }
 
     protected override void ClosePopupSign()
     {
-        UIManager.Instance.ClosePopupUI(PopupType.ToolTip);
+        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
     }
 }
