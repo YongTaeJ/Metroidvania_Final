@@ -7,11 +7,23 @@ public class PortalControl : MonoBehaviour
 {
     [SerializeField] private int _portalIndex;
     [SerializeField] private int _portalPrice = 50;
+    private Canvas _buyPortal;
     protected PlayerInput _playerInput;
     protected Canvas _press;
 
+
     private void Awake()
     {
+        _buyPortal = MapManager.Instance.BuyPortal;
+        Animator animator = GetComponent<Animator>();
+
+        if (animator != null)
+        {
+            if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
+            {
+                animator.SetBool("IsActivate", true);
+            }
+        }
         _press = GetComponentInChildren<Canvas>(true);
         if (_press != null) _press.gameObject.SetActive(false);
     }
@@ -46,7 +58,8 @@ public class PortalControl : MonoBehaviour
         {
             mapTeleport.UpdatePortalButton();
         }
-
+        GameManager.Instance.player.HP = GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.HP];
+        // 체력회복 효과음 추가
         CheckHasPortal();
         //UIManager.Instance.ClosePopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(false);
@@ -67,5 +80,9 @@ public class PortalControl : MonoBehaviour
         {
             MapManager.Instance.ActivateBuyPortalUI(_portalIndex, _portalPrice);
         }
+    }
+    public void PopupBuyPortal()
+    {
+        _buyPortal.gameObject.SetActive(true);
     }
 }

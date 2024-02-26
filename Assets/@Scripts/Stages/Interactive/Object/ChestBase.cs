@@ -61,10 +61,11 @@ public class ChestBase : MonoBehaviour
         UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         if (_press != null) _press.gameObject.SetActive(false);
 
+        SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Chest"));
+
         Animator animator = GetComponent<Animator>();
         if (animator != null)
         {
-            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Chest"));
             animator.SetBool("IsOpen", true);
         }
 
@@ -74,7 +75,7 @@ public class ChestBase : MonoBehaviour
         StartCoroutine(CoChestTextOff());
     }
 
-    protected virtual IEnumerator CoChestTextOff()
+    private IEnumerator CoChestTextOff()
     {
         yield return new WaitForSeconds(1.4f);
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
