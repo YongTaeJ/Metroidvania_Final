@@ -7,17 +7,18 @@ public class DropItem : MonoBehaviour
     private ItemType _itemType;
     private int _ID;
     private int _value;
-    private bool _isGrounded = false;
+    private bool _dropstate = false;
     public ParticleSystem itemGlowEffect;
     public void Initialize(ItemType itemType, int ID, int value)
     {
         _itemType = itemType;
         _ID = ID;
         _value = value;
-
+        _dropstate = false;
         Invoke("Vanish", 30f);
         PopItem();
         ToggleGlowEffect();
+        StartCoroutine(DropDelay());
     }
 
     private void ToggleGlowEffect()
@@ -57,17 +58,9 @@ public class DropItem : MonoBehaviour
 
     #region Monobehaviour
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            _isGrounded = true;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && _isGrounded)
+        if (collision.CompareTag("Player") && _dropstate)
         {
             // 아이템 획득 로직 처리
             CollectItem();
@@ -82,21 +75,17 @@ public class DropItem : MonoBehaviour
         Vanish();
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if(other.CompareTag("Player"))
-    //    {
-    //        if(_itemType == ItemType.Gold) PlayCoinSound();
-    //        ItemManager.Instance.AddItem(_itemType, _ID, _value);
-    //        CancelInvoke();
-    //        Vanish();
-    //    }
-    //}
     #endregion
 
     private void PlayCoinSound()
     {
         var coinSound = ResourceManager.Instance.GetAudioClip("CoinSound");
         SFX.Instance.PlayOneShot(coinSound, 0.3f);
+    }
+
+    private IEnumerator DropDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _dropstate = true;
     }
 }

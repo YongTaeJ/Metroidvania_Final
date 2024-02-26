@@ -29,6 +29,7 @@ public class Skill_SwordAuror : SkillBase
 
     private void SwordAuror()
     {
+        SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("SwordAuror"));
         if (GameManager.Instance.player == null) return;
 
         GameObject swordAurorPrefab = ResourceManager.Instance.InstantiatePrefab("SwordAuror", pooling: true);

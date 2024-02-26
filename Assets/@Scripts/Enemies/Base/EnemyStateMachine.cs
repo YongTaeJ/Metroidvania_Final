@@ -28,6 +28,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     public Animator Animator {get; private set;}
     public EnemyAnimationEventReceiver EventReceiver {get; private set;}
     public ObjectFlip ObjectFlip {get; private set;}
+    public Collider2D Collider { get; private set;}
     #endregion
 
     #region Monobehaviour
@@ -43,6 +44,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     public virtual void Initialize()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<Collider2D>();
 
         EventReceiver = GetComponentInChildren<EnemyAnimationEventReceiver>();
         PlayerFinder = GetComponentInChildren<PlayerFinder>();
@@ -64,6 +66,12 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     public void ResetMonster()
     {
         GetComponent<EnemyHitSystem>().ResetHPCondition();
+        var attackComponents = transform.Find("Sprite").GetComponentsInChildren<EnemyBodyAttackSystem>();
+        foreach (var component in attackComponents)
+        {
+            component._collider.enabled = true;
+        }
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
         StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 }

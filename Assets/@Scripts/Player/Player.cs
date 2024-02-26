@@ -113,15 +113,11 @@ public class Player : MonoBehaviour, IDamagable
 
         bool hasItemInRange = false;
 
-        // 0부터 3까지 순회하며 아이템 보유 여부 확인
-        for (int i = 0; i <= 3; i++)
+        if (ItemManager.Instance.HasItem(ItemType.Chest, 102))
         {
-            if (ItemManager.Instance.HasItem(ItemType.Portal, i))
-            {
-                hasItemInRange = true;
-                break; // 아이템을 하나라도 찾았다면 반복문을 종료
-            }
+            hasItemInRange = true;
         }
+
 
         // 임시로 여기서 위치 데이터 받아서 위치 이동
         if (GameManager.Instance.LoadGame())
@@ -142,17 +138,13 @@ public class Player : MonoBehaviour, IDamagable
                 BGM.Instance.Play("Stage1", true);
             }
         }
-        // 세이브는 있는데 포탈을 타지 않아서 포지션 데이터가 저장되지 않았을 때
         else if (hasItemInRange == true)
         {
-            Debug.Log("저장된 데이터는 있으나 위치가 없음");
             transform.position = new Vector3(290f, 0f, 0f);
             BGM.Instance.Play("Home", true);
         }
         else
         {
-            Debug.Log("저장된 데이터가 없음");
-            // 세이브 데이터가 없을 때의 시작 좌표
             transform.position = new Vector3(-18f, 0f, 0f);
             BGM.Instance.Play("Home", true);
         }
@@ -268,8 +260,9 @@ public class Player : MonoBehaviour, IDamagable
             GetComponent<SpriteRenderer>().color = originalColor;
             yield return new WaitForSeconds(flashSpeed);
         }
+        GetComponent<SpriteRenderer>().color = originalColor;
         yield break;
-        //GetComponent<SpriteRenderer>().color = originalColor; //알파값을 마지막에 원래 색으로 변경하는 코드 추가해서 버그 수정
+         //알파값을 마지막에 원래 색으로 변경하는 코드 추가해서 버그 수정
     }
 
 
@@ -294,10 +287,9 @@ public class Player : MonoBehaviour, IDamagable
     public void OnContinue()
     {
         BGM.Instance.Stop();
-        BGM.Instance.Play("Home", true);
-        transform.position = new Vector3(263f, 0f, 0f);
-        IsAlive = true;
-        _playerInput.enabled = true;
+        //BGM.Instance.Play("Home", true);
+        //transform.position = new Vector3(263f, 0f, 0f);
+        ContinuePosition();
         Initialized();
         UIManager.Instance.SetFixedUI(true);
         UIManager.Instance.ClosePopupUI(PopupType.GameOver);
@@ -309,5 +301,21 @@ public class Player : MonoBehaviour, IDamagable
     {
         yield return new WaitForSeconds(1f);
         MapManager.Instance.LoadImage(false);
+        IsAlive = true;
+        _playerInput.enabled = true;
+    }
+
+    private void ContinuePosition()
+    {
+        if (ItemManager.Instance.HasItem(ItemType.Chest, 102))
+        {
+            transform.position = new Vector3(290f, 0f, 0f);
+            BGM.Instance.Play("Home", true);
+        }
+        else
+        {
+            transform.position = new Vector3(-18f, 0f, 0f);
+            BGM.Instance.Play("Home", true);
+        }
     }
 }

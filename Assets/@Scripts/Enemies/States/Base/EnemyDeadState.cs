@@ -17,6 +17,12 @@ public class EnemyDeadState : EnemyBaseState
     public override void OnStateEnter()
     {
         _isDeadEnded = false;
+        var attackComponents = _stateMachine.transform.Find("Sprite").GetComponentsInChildren<EnemyBodyAttackSystem>();
+        _stateMachine.gameObject.layer = LayerMask.NameToLayer("EnemyDead");
+        foreach (var component in attackComponents)
+        {
+            component._collider.enabled = false;
+        }
         _animator.SetTrigger(AnimatorHash.Dead);
         PlayDeadSound();
         GenerateDeadEffect();

@@ -523,7 +523,6 @@ public class PlayerInputController : MonoBehaviour
             if (!Input.GetKey(KeyCode.DownArrow) && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {
                 _player._skills[0].Activate();
-                SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("SwordAuror"));
             }
             else if(!ItemManager.Instance.HasItem(ItemType.Skill, 0))
             {

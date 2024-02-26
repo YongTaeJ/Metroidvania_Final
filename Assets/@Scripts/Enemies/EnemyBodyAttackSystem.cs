@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBodyAttackSystem : MonoBehaviour, IHasDamage
 {
     private int _damage;
-    private Collider2D _collider;
+    public Collider2D _collider;
 
     private void Awake()
     {
