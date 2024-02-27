@@ -21,6 +21,14 @@ public class KSBossRoom : BossRoom
         _pattern = GameObject.Find("KSSpecialPattern").GetComponent<KSSpecialPattern>();
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            _pattern.DestroyEnemies();
+        }
+    }
+
     protected override IEnumerator EnterBossRoom()
     {
         DoorControl(true);
@@ -53,8 +61,9 @@ public class KSBossRoom : BossRoom
     protected override IEnumerator EndBattle()
     {
         List<(string, string)> chatDatas;
-        
-         _playerInput.enabled = false;
+
+        _pattern.DestroyEnemies();
+        _playerInput.enabled = false;
 
         _KSEventSet.transform.position = _deadLocation;
         _KSEventSet.gameObject.SetActive(true);
@@ -70,7 +79,6 @@ public class KSBossRoom : BossRoom
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         Destroy(_KSEventSet.gameObject);
-        _pattern.DestroyEnemies();
 
         PlayStageBGM();
         DoorControl(false);

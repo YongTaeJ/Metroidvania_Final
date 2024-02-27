@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ChestItem : ChestBase
@@ -67,11 +68,50 @@ public class ChestItem : ChestBase
             ItemData _chestItemData = ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
             string _chestItemName = _chestItemData.Name;
             _chestText.text = "You got " + _chestItemName;
+            
+            if (_chestItem == ItemType.Skill || _chestItem == ItemType.Equipment)
+            {
+                Invoke("HelpText", 1.3f);
+            }
         }
     }
 
-    private void Helptext()
+    private void HelpText()
     {
-        _chestText.text = "";
+        _chestText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
+
+        if (_chestItem == ItemType.Skill && _chestItemID == 0)
+        {
+            _chestText.text = "Press \"A\" To Aura Attack";
+        }
+
+        if (_chestItem == ItemType.Skill && _chestItemID == 1)
+        {
+            _chestText.text = "Press \"↓\" + \"A\" To Plunge Attack";
+        }
+
+        if (_chestItem == ItemType.Equipment && _chestItemID == 0)
+        {
+            _chestText.text = "Press \"C\" to Dash!";
+        }
+
+        if (_chestItem == ItemType.Equipment && _chestItemID == 1)
+        {
+            _chestText.text = "Now! You can climb walls";
+        }
+
+        if (_chestItem == ItemType.Equipment && _chestItemID == 2)
+        {
+            _chestText.text = "Now! You can jump once more";
+        }
+
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
+        StartCoroutine(CoHelpTextOff());
+    }
+    private IEnumerator CoHelpTextOff()
+    {
+        yield return new WaitForSeconds(1.4f);
+        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
+        GameObject.Destroy(gameObject);
     }
 }
