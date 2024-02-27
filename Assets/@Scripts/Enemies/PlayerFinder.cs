@@ -32,5 +32,13 @@ public class PlayerFinder : MonoBehaviour
             IsPlayerEnter = false;
         }
     }
+
+    public void Initialize()
+    {
+        IsPlayerEnter = false;
+        CurrentTransform = null;
+        Debug.Log("초기화");
+    }
+
     #endregion
 }

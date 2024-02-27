@@ -16,6 +16,11 @@ TagManager:
   - TownPortal
   - Wall
   - PlungeAttack
+  - Room
+  - Tutorial
+  - Town
+  - Stage01
+  - Stage02
   layers:
   - Default
   - TransparentFX
@@ -29,7 +34,7 @@ TagManager:
   - Item
   - Player
   - NPC
-  - 
+  - EnemyDead
   - 
   - 
   - 

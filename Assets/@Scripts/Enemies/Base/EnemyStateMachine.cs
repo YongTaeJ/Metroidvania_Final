@@ -33,6 +33,16 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 
     #region Monobehaviour
 
+    protected virtual void Awake()
+    {
+        Rigidbody = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<Collider2D>();
+
+        EventReceiver = GetComponentInChildren<EnemyAnimationEventReceiver>();
+        PlayerFinder = GetComponentInChildren<PlayerFinder>();
+        Animator = GetComponentInChildren<Animator>();
+    }
+
     protected virtual void Start()
     {
         Initialize();
@@ -43,17 +53,9 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
 
     public virtual void Initialize()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
-        Collider = GetComponent<Collider2D>();
-
-        EventReceiver = GetComponentInChildren<EnemyAnimationEventReceiver>();
-        PlayerFinder = GetComponentInChildren<PlayerFinder>();
-        Animator = GetComponentInChildren<Animator>();
-
         ObjectFlip = new ObjectFlip(transform);
-
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
-        
+        PlayerFinder.Initialize();
         GetComponent<EnemyHitSystem>().Initialize(this);
 
         var attackComponents = transform.Find("Sprite").GetComponentsInChildren<IHasDamage>();
@@ -61,17 +63,18 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         {
             component.Initialize(EnemyData.Damage);
         }
+        var bodyAttackComponents = transform.Find("Sprite").GetComponentsInChildren<EnemyBodyAttackSystem>();
+        foreach (var component in bodyAttackComponents)
+        {
+            component._collider.enabled = true;
+        }
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
     public void ResetMonster()
     {
         GetComponent<EnemyHitSystem>().ResetHPCondition();
-        var attackComponents = transform.Find("Sprite").GetComponentsInChildren<EnemyBodyAttackSystem>();
-        foreach (var component in attackComponents)
-        {
-            component._collider.enabled = true;
-        }
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        
         StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 }

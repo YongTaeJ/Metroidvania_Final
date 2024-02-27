@@ -56,6 +56,9 @@ public class PlayerInputController : MonoBehaviour
     private float _speed = 10f;
     private Vector2 _moveInput;
 
+    [SerializeField] private Transform cameraFollowTransform;
+    private float cameraDamping = 1.0f;
+
     private bool _isWalking = false;
     private bool _isAttacking = false;
     private bool _isFirstAttack = true;
@@ -97,7 +100,7 @@ public class PlayerInputController : MonoBehaviour
     private float _dashPower = 15f;
     private float _dashTime = 0.2f;
     private int _maxDash = 1;
-    public int _dashCount;
+    private int _dashCount;
 
     // Action
     public event Action OnInteraction;
@@ -136,15 +139,12 @@ public class PlayerInputController : MonoBehaviour
             Gravity();
         }
 
-        // 캐릭터의 이동 상태와 접지 상태를 체크합니다.
         bool isWalkingNow = _moveInput != Vector2.zero && _touchingDirection.IsGrounded;
 
-        // 이동 상태가 변경되었는지 확인합니다.
         if (isWalkingNow != Iswalking)
         {
             Iswalking = isWalkingNow;
 
-            // 이동을 시작하면 코루틴을 시작합니다.
             if (Iswalking)
             {
                 if (_comoveSFX == null)
@@ -152,7 +152,7 @@ public class PlayerInputController : MonoBehaviour
                     _comoveSFX = StartCoroutine(CoMoveSFX());
                 }
             }
-            else // 이동을 멈추면 코루틴을 중지합니다.
+            else 
             {
                 if (_comoveSFX != null)
                 {
@@ -160,6 +160,19 @@ public class PlayerInputController : MonoBehaviour
                     _comoveSFX = null;
                 }
             }
+        }
+
+        if (Iswalking)
+        {
+            cameraDamping = 0.0f;
+            Vector3 targetPosition = new Vector3(cameraFollowTransform.position.x + 0.5f, cameraFollowTransform.position.y, cameraFollowTransform.position.z);
+            cameraFollowTransform.position = Vector3.Lerp(cameraFollowTransform.position, targetPosition, cameraDamping);
+        }
+        else
+        {
+            cameraDamping = 1.0f;
+            Vector3 targetPosition = new Vector3(cameraFollowTransform.position.x, cameraFollowTransform.position.y, cameraFollowTransform.position.z);
+            cameraFollowTransform.position = Vector3.Lerp(cameraFollowTransform.position, targetPosition, Time.deltaTime * cameraDamping);
         }
 
         _animator.SetFloat(AnimatorHash.yVelocity, _rigidbody.velocity.y);
@@ -252,7 +265,7 @@ public class PlayerInputController : MonoBehaviour
 
     private IEnumerator MoveCameraDelay(Vector2 direction)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         CameraManager.Instance.MoveCamera(direction);
     }
 
