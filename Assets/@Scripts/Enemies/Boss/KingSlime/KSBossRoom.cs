@@ -11,12 +11,14 @@ public class KSBossRoom : BossRoom
     [SerializeField] private int _chatID_defeat_1;
     private KSEventSet _KSEventSet;
     private GameObject _KingSlimePrefab;
+    private KSSpecialPattern _pattern;
     #endregion
 
     protected override void Awake()
     {
         base.Awake();
         _KingSlimePrefab = Resources.Load<GameObject>("Enemies/Bosses/KingSlime/KingSlime");
+        _pattern = GameObject.Find("KSSpecialPattern").GetComponent<KSSpecialPattern>();
     }
 
     protected override IEnumerator EnterBossRoom()
@@ -68,6 +70,7 @@ public class KSBossRoom : BossRoom
         yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         Destroy(_KSEventSet.gameObject);
+        _pattern.DestroyEnemies();
 
         PlayStageBGM();
         DoorControl(false);
