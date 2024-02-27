@@ -77,9 +77,18 @@ public class ChestBase : MonoBehaviour
 
     private IEnumerator CoChestTextOff()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(1.2f);
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
-        GameObject.Destroy(gameObject);
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.enabled = false;
+        }
+        yield return new WaitForSeconds(1.5f);
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void ChestText()

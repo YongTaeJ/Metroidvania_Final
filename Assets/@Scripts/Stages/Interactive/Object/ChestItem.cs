@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ChestItem : ChestBase
@@ -60,18 +61,58 @@ public class ChestItem : ChestBase
         base.ChestText();
         if (_chestItem == ItemType.Gold)
         {
-            _chestText.text = "There was some gold\r\nin the chest.";
+            _chestText.text = "상자에는 약간의 골드가 들어있었다";
         }
         else
         {
             ItemData _chestItemData = ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
             string _chestItemName = _chestItemData.Name;
+            // 아래를 descrition을 받아오는 방향으로 수정
             _chestText.text = "You got " + _chestItemName;
+            
+            if (_chestItem == ItemType.Skill || _chestItem == ItemType.Equipment)
+            {
+                Invoke("HelpText", 1.3f);
+            }
         }
     }
 
-    private void Helptext()
+    private void HelpText()
     {
-        _chestText.text = "";
+        _chestText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
+
+        if (_chestItem == ItemType.Skill && _chestItemID == 0)
+        {
+            _chestText.text = "이제 A키를 눌러서\n\r오러 공격을 할 수 있다";
+        }
+
+        if (_chestItem == ItemType.Skill && _chestItemID == 1)
+        {
+            _chestText.text = "공중에서 ↓ 와 A 키를 누르면\n\r낙하 공격을 할 수 있다";
+        }
+
+        if (_chestItem == ItemType.Equipment && _chestItemID == 0)
+        {
+            _chestText.text = "이제 C키를 눌러서\n\r대쉬를 할 수 있다";
+        }
+
+        if (_chestItem == ItemType.Equipment && _chestItemID == 1)
+        {
+            _chestText.text = "이제 벽을 짚고 점프할 수 있다";
+        }
+
+        if (_chestItem == ItemType.Equipment && _chestItemID == 2)
+        {
+            _chestText.text = "이제 공중에서 점프를\n\r한 번 더 할 수 있다";
+        }
+
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
+        StartCoroutine(CoHelpTextOff());
+    }
+    private IEnumerator CoHelpTextOff()
+    {
+        yield return new WaitForSeconds(1.4f);
+        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
+        GameObject.Destroy(gameObject);
     }
 }
