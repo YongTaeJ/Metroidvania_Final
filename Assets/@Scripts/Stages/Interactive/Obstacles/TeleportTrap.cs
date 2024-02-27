@@ -45,11 +45,11 @@ public class TeleportTrap : MonoBehaviour
     {
         if (_teleportID == 0)
         {
-            _teleportText.text = "You are fallen\n\rtry again";
+            _teleportText.text = "떨어지고 말았다\n\r다시 시도해보자";
         }
         else if (_teleportID == 1)
         {
-            _teleportText.text = "Worng path.\n\rCheck the Chandelier";
+            _teleportText.text = "잘못된 길이었다\n\r샹들리에를 확인해보자";
         }
     }
 }
