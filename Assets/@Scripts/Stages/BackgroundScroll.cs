@@ -26,16 +26,16 @@ public class BackgroundScroll : MonoBehaviour
         {
             _layers[i].transform.Translate(Vector3.left * _scrollSpeed * Time.deltaTime);
 
-            if (deltaMovement.x > 0 && _layers[i].transform.position.x < _lastPlayerPosition.x - _layerLength)
+            if (deltaMovement.x > 0 && _layers[i].transform.position.x < _lastPlayerPosition.x - 1.5 *_layerLength)
             {
                 Vector3 newPos = _layers[i].transform.position;
-                newPos.x += 2 * _layerLength;
+                newPos.x += 4 * _layerLength;
                 _layers[i].transform.position = newPos;
             }
-            else if (deltaMovement.x < 0 && _layers[i].transform.position.x > _lastPlayerPosition.x + _layerLength)
+            else if (deltaMovement.x < 0 && _layers[i].transform.position.x > _lastPlayerPosition.x + 1.5 * _layerLength)
             {
                 Vector3 newPos = _layers[i].transform.position;
-                newPos.x -= 2 * _layerLength;
+                newPos.x -= 4 * _layerLength;
                 _layers[i].transform.position = newPos;
             }
         }
