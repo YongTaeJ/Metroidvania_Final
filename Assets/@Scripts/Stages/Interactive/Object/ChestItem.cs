@@ -87,7 +87,8 @@ public class ChestItem : ChestBase
 
         if (_chestItem == ItemType.Skill && _chestItemID == 1)
         {
-            _chestText.text = "Press \"↓\" + \"A\" To Plunge Attack";
+            _chestText.fontSize = 42;
+            _chestText.text = "When You in the air,\n\rPress \"↓\" + \"A\" To Plunge Attack";
         }
 
         if (_chestItem == ItemType.Equipment && _chestItemID == 0)
@@ -111,6 +112,7 @@ public class ChestItem : ChestBase
     private IEnumerator CoHelpTextOff()
     {
         yield return new WaitForSeconds(1.4f);
+        _chestText.fontSize = 48;
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
         GameObject.Destroy(gameObject);
     }

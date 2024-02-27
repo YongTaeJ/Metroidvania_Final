@@ -14,6 +14,8 @@ public class TeleportTrap : MonoBehaviour
     private TextMeshProUGUI _teleportText;
     [SerializeField]
     private Vector3 _teleportPosition;
+    [SerializeField]
+    private int _teleportID;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,7 +30,7 @@ public class TeleportTrap : MonoBehaviour
     private void OpenTrapText()
     {
         _teleportText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        _teleportText.text = "You are fallen\n\rtry again";
+        TrapText();
         UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         StartCoroutine(DeactiveText(2));
     }
@@ -37,5 +39,17 @@ public class TeleportTrap : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
+    }
+
+    private void TrapText()
+    {
+        if (_teleportID == 0)
+        {
+            _teleportText.text = "You are fallen\n\rtry again";
+        }
+        else if (_teleportID == 1)
+        {
+            _teleportText.text = "Worng path.\n\rCheck the Chandelier";
+        }
     }
 }

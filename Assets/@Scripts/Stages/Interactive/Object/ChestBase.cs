@@ -80,7 +80,10 @@ public class ChestBase : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
         Renderer renderer = GetComponent<Renderer>();
-        renderer.enabled = false;
+        if (renderer != null)
+        {
+            renderer.enabled = false;
+        }
         yield return new WaitForSeconds(1.5f);
         if (gameObject != null)
         {
