@@ -20,6 +20,8 @@ public class ConstructYNPanel : YNPanel
 
     public void InitAction(ConstructUI constructUI)
     {
+        OnRefresh -= constructUI.InformPanel.Refresh;
+        OnRefresh += constructUI.InformPanel.Refresh;
         OnRefresh -= constructUI.BuildingList.RefreshValidButtons;
         OnRefresh += constructUI.BuildingList.RefreshValidButtons;
     }
@@ -41,14 +43,14 @@ public class ConstructYNPanel : YNPanel
         ItemManager.Instance.AddItem(ItemType.Building, _ID);
         SO.GiveReward();
 
-        BuildingConstructAnimation(_ID);
+        BuildingConstructAnimation();
 
         OnRefresh.Invoke();
     }
 
-    private void BuildingConstructAnimation(int buildingID)
+    private void BuildingConstructAnimation()
     {
-        var buildingSO = SOManager.Instance.GetBuildingSO(buildingID);
+        var buildingSO = SOManager.Instance.GetBuildingSO(_ID);
 
         GameObject buildingPrefab = buildingSO.BuildingData.buildingPrefab;
         Vector3 buildingPosition = buildingSO.BuildingData.buildingPosition;
@@ -60,7 +62,7 @@ public class ConstructYNPanel : YNPanel
 
         CameraManager.Instance.ChangeCameraTarget(buildingObject.gameObject.transform);
 
-        StartCoroutine(Recover(buildingObject));
+        StartCoroutine(Recover(buildingObject, 1000 + _ID));
     }
 
     private void HideUI(bool hide)
@@ -72,7 +74,7 @@ public class ConstructYNPanel : YNPanel
         }
     }
 
-    private IEnumerator Recover(GameObject obj, float delay = 0f)
+    private IEnumerator Recover(GameObject obj, int chatID, float delay = 0f)
     {
         Animator animator = obj.GetComponent<Animator>();
 
@@ -85,7 +87,8 @@ public class ConstructYNPanel : YNPanel
         HideUI(false);
         CameraManager.Instance.ReturnCameraTarget();
 
-        // TODO => 건축물 대화 ㄱㄱ
+        // TODO => Disposable로 바꾼 뒤에 처리
+        // yield return StartCoroutine(ChatManager.Instance.StartChat(chatID));
         
         Destroy(gameObject);
     }

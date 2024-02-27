@@ -19,6 +19,7 @@ public class TownNPCCheck : MonoBehaviour
         foreach(int ID in _NPCs.Keys)
         {
             bool isValid = ItemManager.Instance.HasItem(ItemType.NPC, ID);
+            
             if(isValid)
             {
                 _NPCs[ID].SetActive(true);
@@ -43,6 +44,7 @@ public class TownNPCCheck : MonoBehaviour
                 if(item.ItemData.Name == name)
                 {
                     _NPCs.Add(item.ItemData.ID, Instantiate(obj, obj.transform.position, obj.transform.rotation, parentTransform));
+                    _NPCs[item.ItemData.ID].SetActive(false);
                     break;
                 }
             }

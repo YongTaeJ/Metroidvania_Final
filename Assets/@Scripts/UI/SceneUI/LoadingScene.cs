@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LodingScene : MonoBehaviour
+public class LoadingScene : MonoBehaviour
 {
     [SerializeField] private Slider progressBar; // 진행률을 표시할 UI 슬라이더
     [SerializeField] private TMP_Text _storyText;
@@ -48,6 +48,7 @@ public class LodingScene : MonoBehaviour
             // 최소 로딩 시간이 지났고, 실제 로딩도 완료 + 게임 처음 시작시에는 텍스트 대기!
             if (Time.time - startTime >= minimumLoadingTime && operation.progress >= 0.9f && _isChatEnd)
             {
+                _clickText.enabled = true;
                 operation.allowSceneActivation = true;
             }
 
@@ -57,12 +58,15 @@ public class LodingScene : MonoBehaviour
 
     private IEnumerator StartChat()
     {
-        // TODO => 세이브 있는지 없는지 확인(없으면 그냥 true 만들고 break)
-        // playerprefs로 확인하면 편하게 할 수 있을 것 같습니다.
-        if(GameManager.Instance.LoadGame())
+        // Temp Code.
+        if(PlayerPrefs.HasKey("Skip"))
         {
             _isChatEnd = true;
             yield break;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Skip", 1);
         }
 
         yield return StartCoroutine(Chat(

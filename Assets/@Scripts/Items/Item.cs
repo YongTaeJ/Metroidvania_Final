@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -47,6 +48,8 @@ public class ItemData
     public ItemType ItemType {get; set; }
     public int ID {get; set; }
     public string Name {get; set; }
+    public string TypeKor {get; set;}
+    public string NameKor {get; set;}
     public string Description { get; set; }
 }
 
@@ -56,4 +59,16 @@ public class InternalItemData
     public ItemType ItemType;
     public int ID;
     public int Stock;
+
+    public InternalItemData()
+    {
+        // for Json Convert.
+    }
+
+    public InternalItemData(Item item)
+    {
+        ItemType = item.ItemData.ItemType;
+        ID = item.ItemData.ID;
+        Stock = item.Stock;
+    }
 }

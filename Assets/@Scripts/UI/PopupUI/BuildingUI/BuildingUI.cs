@@ -13,6 +13,7 @@ public class BuildingUI : MonoBehaviour
 
     #region variables
     private GameObject _exitButton;
+    private GameObject _dim;
     private bool _isInitialized = false;
     #endregion
 
@@ -22,6 +23,8 @@ public class BuildingUI : MonoBehaviour
         BuildingList = transform.Find("DataDependent/BuildingList").GetComponent<BuildingList>();
 
         BuildingList.Initialize(this);
+
+        _dim = transform.Find("DataIndependent/Dim").gameObject;
 
         // ExitButton
         _exitButton = transform.Find("ExitButton").gameObject;
@@ -46,9 +49,14 @@ public class BuildingUI : MonoBehaviour
         if(!_isInitialized) return;
 
         _exitButton.SetActive(false);
+        _dim.SetActive(false);
 
         transform.position = new Vector3(Screen.width / 2, Screen.height * 2 , 0);
         transform.DOMoveY(Screen.height / 2, 1).SetEase(Ease.OutBack);
-        TimerManager.Instance.StartTimer(1f, () => _exitButton.SetActive(true));
+        TimerManager.Instance.StartTimer(1f, () =>
+        {
+            _exitButton.SetActive(true);
+            _dim.SetActive(true);
+        } );
     }
 }

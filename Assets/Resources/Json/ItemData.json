@@ -4,354 +4,472 @@
       "ItemType": "Boss",
       "ID": "0",
       "Name": "KingSlime",
+      "TypeKor": "보스",
+      "NameKor": "킹슬라임",
       "Description": "보스 잡았는지 여부 확인용"
     },
     {
       "ItemType": "Boss",
       "ID": "1",
       "Name": "VillageHead",
+      "TypeKor": "보스",
+      "NameKor": "촌장님",
       "Description": "보스 잡았는지 여부 확인용"
     },
     {
       "ItemType": "Building",
       "ID": "0",
       "Name": "Teleporter",
-      "Description": "이세계에서 넘어온 순간이동 기계입니다. 이유는 모르겠으나 몬스터들은 쓰지 못한다고 합니다."
+      "TypeKor": "건물",
+      "NameKor": "순간이동기",
+      "Description": "괴물들이 난입하다가 이세계에서 쓸려나온 순간이동기를 다시 파냅니다."
     },
     {
       "ItemType": "Building",
       "ID": "1",
       "Name": "Shop",
-      "Description": "마을에 하나밖에 없는 상점입니다. 사실 물건은 다 창고에 있었다고 하네요."
+      "TypeKor": "건물",
+      "NameKor": "상점",
+      "Description": "상점 주인을 도와 망가진 상점을 다시 세웁니다."
     },
     {
       "ItemType": "Building",
       "ID": "2",
       "Name": "TownHall",
-      "Description": "시골의 권위와 위엄을 상징하는 마을 회관입니다."
+      "TypeKor": "건물",
+      "NameKor": "마을 회관",
+      "Description": "무너진 마을 회관을 재건합니다."
     },
     {
       "ItemType": "Building",
       "ID": "3",
       "Name": "MyHome",
-      "Description": "이제 돌아오면 반겨주는 집이 있습니다."
+      "TypeKor": "건물",
+      "NameKor": "내 집",
+      "Description": "내 집입니다. 내집마련의 꿈!!!"
     },
     {
       "ItemType": "Building",
       "ID": "4",
       "Name": "VillagerHouse",
-      "Description": "마을 주민1의 집. 편안해 보입니다."
+      "TypeKor": "건물",
+      "NameKor": "마을주민2 집",
+      "Description": "마을 주민1의 집. 포근해 보입니다."
     },
     {
       "ItemType": "Building",
       "ID": "5",
       "Name": "VillagerHouse",
+      "TypeKor": "건물",
+      "NameKor": "마을주민1 집",
       "Description": "마을 주민2의 집. 똑같이 생겼지만 들어가면 내부는 다릅니다."
     },
     {
       "ItemType": "Equipment",
       "ID": "0",
       "Name": "WindCloak",
+      "TypeKor": "장비",
+      "NameKor": "바람의 망토",
       "Description": "바람의 호의가 담긴 망토입니다. 바람을 타고 돌진할 수 있습니다."
     },
     {
       "ItemType": "Equipment",
       "ID": "1",
       "Name": "WallGloves",
+      "TypeKor": "장비",
+      "NameKor": "끈적한 장갑",
       "Description": "필요에 따라 점성을 조절할 수 있는 신비한 장갑입니다."
     },
     {
       "ItemType": "Equipment",
       "ID": "2",
       "Name": "WingShoes",
+      "TypeKor": "장비",
+      "NameKor": "날개 달린 신발",
       "Description": "이세계의 축복이 담겨 있는 신발. 공중에서 한번 더 뛸 수 있습니다"
     },
     {
       "ItemType": "Gold",
       "ID": "0",
       "Name": "Gold",
+      "TypeKor": "돈",
+      "NameKor": "금화",
       "Description": "이세계에서 가져온 금화입니다. 현실에서 통용되는 금화와는 다른 모습이지만 값어치는 비슷합니다."
     },
     {
       "ItemType": "Map",
       "ID": "0",
       "Name": "MapPiece",
+      "TypeKor": "지도",
+      "NameKor": "지도",
       "Description": "지도 조각!"
     },
     {
       "ItemType": "Material",
       "ID": "0",
       "Name": "Wood",
+      "TypeKor": "재료",
+      "NameKor": "목재",
       "Description": "이세계에서 가져온 목재입니다. 몬스터들이 왜 나무를 들고 다닐까요?"
     },
     {
       "ItemType": "Material",
       "ID": "1",
       "Name": "Brick",
+      "TypeKor": "재료",
+      "NameKor": "벽돌",
       "Description": "이세계에서 가져온 벽돌입니다. 성당의 일부분을 떼서 들고다니는 것 같습니다."
     },
     {
       "ItemType": "NPC",
       "ID": "0",
       "Name": "Villager1",
+      "TypeKor": "주민",
+      "NameKor": "마을주민1",
       "Description": "기본 설명충 NPC"
     },
     {
       "ItemType": "NPC",
       "ID": "1",
       "Name": "Constructor",
+      "TypeKor": "주민",
+      "NameKor": "건축가",
       "Description": "건축가(마을)"
     },
     {
       "ItemType": "NPC",
       "ID": "2",
       "Name": "Merchant",
+      "TypeKor": "주민",
+      "NameKor": "상인",
       "Description": "상인"
     },
     {
       "ItemType": "NPC",
       "ID": "3",
       "Name": "Villager2",
+      "TypeKor": "주민",
+      "NameKor": "마을주민2",
       "Description": "퀘스트 주는 주민"
     },
     {
       "ItemType": "NPC",
       "ID": "4",
       "Name": "VillageHead",
+      "TypeKor": "주민",
+      "NameKor": "촌장님",
       "Description": "촌장님"
     },
     {
       "ItemType": "NPC",
       "ID": "5",
       "Name": "Constructor_Dungeon",
+      "TypeKor": "주민",
+      "NameKor": "던전에 있는 건축가",
       "Description": "건축가(던전)"
     },
     {
       "ItemType": "Portal",
       "ID": "0",
       "Name": "Town",
+      "TypeKor": "포탈",
+      "NameKor": "마을",
       "Description": "마을에 위치한 포탈입니다."
     },
     {
       "ItemType": "Portal",
       "ID": "1",
       "Name": "Forest's Stair",
+      "TypeKor": "포탈",
+      "NameKor": "숲의 계단",
       "Description": "이질적인 느낌이 느껴지는 계단"
     },
     {
       "ItemType": "Portal",
       "ID": "2",
       "Name": "Forest's Shelter",
+      "TypeKor": "포탈",
+      "NameKor": "숲의 피난처",
       "Description": "숲속에 숨겨진 피난처"
     },
     {
       "ItemType": "Portal",
       "ID": "3",
-      "Name": "Cathedral",
+      "Name": "Cathedral Entry",
+      "TypeKor": "포탈",
+      "NameKor": "대성당 입구",
       "Description": "대성당 입구"
     },
     {
       "ItemType": "Portal",
       "ID": "4",
       "Name": "EE",
+      "TypeKor": "포탈",
+      "NameKor": "다람쥐",
       "Description": "EE22"
     },
     {
       "ItemType": "Portal",
       "ID": "5",
       "Name": "FF",
+      "TypeKor": "포탈",
+      "NameKor": "거북이",
       "Description": "FF22"
     },
     {
       "ItemType": "Portal",
       "ID": "6",
       "Name": "GG",
+      "TypeKor": "포탈",
+      "NameKor": "토끼",
       "Description": "GG22"
     },
     {
       "ItemType": "Quest",
       "ID": "0",
       "Name": "FindVillageHead",
+      "TypeKor": "퀘스트",
+      "NameKor": "마을 촌장님을 찾아라!",
       "Description": "마을 사람2의 퀘스트! 촌장을 찾아주세요."
     },
     {
       "ItemType": "Skill",
       "ID": "0",
       "Name": "Aura",
+      "TypeKor": "스킬북",
+      "NameKor": "오러 블레이드",
       "Description": "강한 마력을 담은 검기를 날리는 방법에 대해 적혀있습니다. 이세계에는 마력에 반응하는 벽이 있다고..."
     },
     {
       "ItemType": "Skill",
       "ID": "1",
       "Name": "Plunge",
+      "TypeKor": "스킬북",
+      "NameKor": "낙하 공격",
       "Description": "엄청난 힘으로 땅을 찍는 비법에 대해 적혀 있습니다. 이세계에는 강하게 찍는 힘에 반응하는 벽이 있다고..."
     },
     {
       "ItemType": "Chest",
       "ID": "0",
       "Name": "Chest00",
-      "Description": "빈 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "빈 상자입니다"
     },
     {
       "ItemType": "Chest",
       "ID": "10",
       "Name": "Ability00",
-      "Description": "WindCloak이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "바람의 망토를 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "11",
       "Name": "Ability01",
-      "Description": "WallGloves이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "끈적한 장갑을 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "12",
       "Name": "Ability02",
-      "Description": "WingShoes이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "날개 달린 신발을 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "20",
       "Name": "Skill00",
-      "Description": "Aura가 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "오러 블레이드를 배웠다"
     },
     {
       "ItemType": "Chest",
       "ID": "21",
       "Name": "Skill01",
-      "Description": "Plunge가 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "낙하 공격을 배웠다"
     },
     {
       "ItemType": "Chest",
       "ID": "50",
       "Name": "Map00",
-      "Description": "지도 조각이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "지도 조각을 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "51",
       "Name": "Map01",
-      "Description": "지도 조각이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "지도 조각을 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "52",
       "Name": "Map02",
-      "Description": "지도 조각이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "지도 조각을 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "53",
       "Name": "Map03",
-      "Description": "지도 조각이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "지도 조각을 얻었다"
     },
     {
       "ItemType": "Chest",
       "ID": "100",
       "Name": "ItemChest00",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 벽돌이 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "101",
       "Name": "ItemChest01",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "102",
       "Name": "ItemChest02",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "103",
       "Name": "ItemChest03",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "104",
       "Name": "ItemChest04",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "105",
       "Name": "ItemChest05",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "106",
       "Name": "ItemChest06",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "107",
       "Name": "ItemChest07",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "108",
       "Name": "ItemChest08",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 목재가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "109",
       "Name": "ItemChest09",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "110",
       "Name": "ItemChest10",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "111",
       "Name": "ItemChest11",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "112",
       "Name": "ItemChest12",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "113",
       "Name": "ItemChest13",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "114",
       "Name": "ItemChest14",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "115",
       "Name": "ItemChest15",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "116",
       "Name": "ItemChest16",
-      "Description": "아이템이 담긴 상자입니다."
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "상자에는 약간의 골드가 들어있었다"
     },
     {
       "ItemType": "Chest",
       "ID": "99",
       "Name": "Challenge",
+      "TypeKor": "상자",
+      "NameKor": "상자",
       "Description": "르탄이 이미지가 들어있는 상자입니다."
     }
   ]

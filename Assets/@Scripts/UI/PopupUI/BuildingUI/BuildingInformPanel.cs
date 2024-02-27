@@ -29,7 +29,7 @@ public class BuildingInformPanel : MonoBehaviour
         _buildingImage.gameObject.SetActive(true);
         _buildingImage.sprite = sprite;
         _descriptionText.text = itemData.Description;
-        _nameText.text = itemData.Name;
+        _nameText.text = itemData.NameKor;
         _effectText.text = effect;
     }
 

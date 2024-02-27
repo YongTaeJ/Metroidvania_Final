@@ -120,7 +120,7 @@ public class Player : MonoBehaviour, IDamagable
 
 
         // 임시로 여기서 위치 데이터 받아서 위치 이동
-        if (GameManager.Instance.LoadGame())
+        if (GameManager.Instance.IsFileExits())
         {
             Debug.Log("저장된 위치가 있음");
             // 세이브 데이터가 있는 경우, 그 위치로 플레이어 이동

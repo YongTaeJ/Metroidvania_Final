@@ -18,6 +18,7 @@ public class ConstructInformPanel : MonoBehaviour
     public void Initialize(ConstructUI constructUI)
     {
         InitComponents();
+
         _constructButton.Initialize(constructUI);
     }
 
@@ -31,11 +32,6 @@ public class ConstructInformPanel : MonoBehaviour
         _constructButton = transform.Find("ConstructButton").GetComponent<ConstructButton>();
     }
 
-    private void OnDisable()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void SetInformPanel(Item item)
     {
         gameObject.SetActive(true);
@@ -47,9 +43,9 @@ public class ConstructInformPanel : MonoBehaviour
         var SO = SOManager.Instance.GetBuildingSO(ID);
 
         _buildingImage.sprite = sprite;
-        _nameText.text = data.Name;
+        _nameText.text = data.NameKor;
         SetConditionText(SO.RequiredConditions);
-        _descriptionText.text = SO.ConstructDescription;
+        _descriptionText.text = data.Description;
         SetMaterialText(SO.RequiredMaterials);
 
         if(SO.IsBuildable())
@@ -62,12 +58,16 @@ public class ConstructInformPanel : MonoBehaviour
         }
     }
 
+    public void Refresh()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void SetConditionText(List<RequiredCondition> conditions)
     {
         if(conditions.Count == 0)
         {
-            _conditionText.alignment = TextAlignmentOptions.Center;
-            _conditionText.text = "없음";
+            _conditionText.text = "조건 : 없음";
             return;
         }
 
@@ -76,14 +76,13 @@ public class ConstructInformPanel : MonoBehaviour
 
         foreach(var condition in conditions)
         {
-            content.Append(ItemManager.Instance.GetItemData(condition.itemType, condition.ID).Name);
+            content.Append(ItemManager.Instance.GetItemData(condition.itemType, condition.ID).NameKor);
             content.Append(", ");
         }
 
         content.Remove(content.Length-2, 2);
         content.Append(" 보유");
 
-        _conditionText.alignment = TextAlignmentOptions.CaplineLeft;
         _conditionText.text = content.ToString();
     }
 
@@ -101,7 +100,7 @@ public class ConstructInformPanel : MonoBehaviour
 
         foreach(var material in materials)
         {
-            content.Append(ItemManager.Instance.GetItemData(ItemType.Material, material.ID).Name);
+            content.Append(ItemManager.Instance.GetItemData(ItemType.Material, material.ID).NameKor);
             content.Append(' ');
             content.Append(material.Stock);
             content.Append("개, ");

@@ -29,8 +29,8 @@ public class ItemPopupUI : MonoBehaviour
         gameObject.SetActive(true);
         
         _itemImage.sprite = ItemManager.Instance.GetSprite(item.ItemData.Name);
-        _itemName.text = item.ItemData.Name;
-        _itemType.text = item.ItemData.ItemType.ToString();
+        _itemName.text = item.ItemData.NameKor;
+        _itemType.text = item.ItemData.TypeKor;
         _itemDescription.text = item.ItemData.Description;
 
         if(item.Stock != 0)

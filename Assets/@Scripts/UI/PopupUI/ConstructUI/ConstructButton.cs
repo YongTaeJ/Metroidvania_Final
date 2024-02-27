@@ -8,6 +8,7 @@ public class ConstructButton : MonoBehaviour
     private Button _button;
     private GameObject _YNPanel;
     private ConstructUI _constructUI;
+    private ConstructInformPanel _informPanel;
     #endregion
 
     public void Initialize(ConstructUI constructUI)

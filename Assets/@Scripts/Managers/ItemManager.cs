@@ -10,14 +10,12 @@ public class ItemManager : Singleton<ItemManager>
     private Dictionary<ItemType, Dictionary<int, Item>> _items;
     public Dictionary<string, Sprite> ItemSprites {get; set;}
 
-     public override bool Initialize()
+    public override bool Initialize()
     {
         if (base.Initialize())
         {
             LoadItem();
             LoadSprites();
-            LoadSaveData(GameManager.Instance.Data.Inventory);
-            Debug.Log("아이템");
         }
         return true;
     }
@@ -52,11 +50,11 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    private void LoadSaveData(List<InternalItemData> inventoryData)
+    public void LoadData(List<InternalItemData> inventoryData)
     {
         if (inventoryData == null) return;
 
-        foreach (var itemData in inventoryData)
+        foreach (InternalItemData itemData in inventoryData)
         {
             if (_items.TryGetValue(itemData.ItemType, out Dictionary<int, Item> itemDict))
             {
@@ -89,27 +87,6 @@ public class ItemManager : Singleton<ItemManager>
         Item currentItem = _items[itemType][ID];
         int sumValue = currentItem.Stock + value;
         currentItem.SetItemStock(sumValue);
-
-        if (GameManager.Instance.Data.Inventory == null)
-        {
-            GameManager.Instance.Data.Inventory = new List<InternalItemData>();
-        }
-
-        bool found = false;
-        foreach (var itemData in GameManager.Instance.Data.Inventory)
-        {
-            if (itemData.ItemType == itemType && itemData.ID == ID)
-            {
-                itemData.Stock += value;
-                found = true;
-                break;
-            }
-        }
-
-        if (!found)
-        {
-            GameManager.Instance.Data.Inventory.Add(new InternalItemData { ItemType = itemType, ID = ID, Stock = value });
-        }
 
         if(itemType == ItemType.Skill)
         {
@@ -150,7 +127,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public Item GetItem(ItemType itemType, int ID)
     {
-        // StockChanged 접근이 필요한 경우!!!!!
+        // 1. OnStockChanged 접근이 필요한 경우
         return _items[itemType][ID];
     }
 }

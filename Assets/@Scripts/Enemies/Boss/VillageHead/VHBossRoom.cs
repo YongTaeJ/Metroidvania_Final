@@ -19,12 +19,6 @@ public class VHBossRoom : BossRoom
     {
         base.Awake();
         _VillageHeadPrefab = Resources.Load<GameObject>("Enemies/Bosses/VillageHead/Boss_VillageHead");
-
-        // TEMP CODE. (1차 버그난 분들을 위해...)
-        if(ItemManager.Instance.HasItem(ItemType.Boss, 1) && !ItemManager.Instance.HasItem(ItemType.NPC, 4))
-        {
-            ItemManager.Instance.AddItem(ItemType.NPC, 4);
-        }
     }
 
     protected override IEnumerator EnterBossRoom()

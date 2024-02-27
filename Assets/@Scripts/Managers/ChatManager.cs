@@ -8,6 +8,7 @@ public class ChatManager : Singleton<ChatManager>
 {
     #region variables
     private Dictionary<int, List<(string name, string chat)>> _chatDataList;
+    private ChatBoxUI _chatBoxUI;
     #endregion
 
     public override bool Initialize()
@@ -15,7 +16,7 @@ public class ChatManager : Singleton<ChatManager>
         if(base.Initialize())
         {
             GetDataFromResource();
-
+            InitComponents();
         }
         return true;
     }
@@ -37,9 +38,20 @@ public class ChatManager : Singleton<ChatManager>
         }
     }
 
+    private void InitComponents()
+    {
+        _chatBoxUI = UIManager.Instance.GetUI(PopupType.ChatBox).GetComponent<ChatBoxUI>();
+    }
+
     public List<(string, string)> GetChatData(int ID)
     {
         return _chatDataList[ID];
+    }
+
+    public IEnumerator StartChat(int ID)
+    {
+        var chatDatas = GetChatData(ID);
+        yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
     }
 }
 

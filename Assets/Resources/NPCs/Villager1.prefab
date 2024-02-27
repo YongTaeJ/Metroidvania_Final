@@ -194,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chatID_gameStart: 100
   _chatID_remainder: 101
+  _chatID_buildComplete: 102
 --- !u!1 &8055565735708664396
 GameObject:
   m_ObjectHideFlags: 0

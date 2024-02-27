@@ -37,7 +37,7 @@ public class BuyPopup : MonoBehaviour
         gameObject.SetActive(true);
         _currentGoods = data;
         _itemImage.sprite = ItemManager.Instance.GetSprite(data.ItemType, data.ID);
-        _itemName.text = ItemManager.Instance.GetItemData(data.ItemType, data.ID).Name ;
+        _itemName.text = ItemManager.Instance.GetItemData(data.ItemType, data.ID).NameKor ;
         _quantitySetter.ResetQuantity(data.Stock);
     }
 

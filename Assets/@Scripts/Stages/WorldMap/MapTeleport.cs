@@ -90,7 +90,7 @@ public class MapTeleport : MonoBehaviour
     private void PortalText(int index)
     {
         ItemData itemData = ItemManager.Instance.GetItemData(ItemType.Portal, index);
-        string portalName = itemData.Name;
+        string portalName = itemData.NameKor;
         if (index == 0)
         {
             portalText.text = "마을(으/로)\r\n" + "이동하시겠습니까?";

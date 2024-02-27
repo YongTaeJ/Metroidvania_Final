@@ -136,16 +136,14 @@ public class ChatBoxUI : MonoBehaviour
 
         int currentIndex = 0;
         int length = chatDatas.Count;
-
+        
         while(currentIndex < length)
         {
             PlayNextChatSound();
-
             _nameText.text = chatDatas[currentIndex].name;
             _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
             yield return StartCoroutine(_typingCoroutine);
             currentIndex++;
-
             yield return WaitForKeyInput();
         }
 

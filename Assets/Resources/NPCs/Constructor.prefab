@@ -222,8 +222,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1808712614387708694}
-  - component: {fileID: 855439046958410577}
   - component: {fileID: 576173825825374760}
+  - component: {fileID: 855439046958410577}
   - component: {fileID: 7585956767258710680}
   m_Layer: 0
   m_Name: Interact
@@ -248,18 +248,6 @@ Transform:
   m_Father: {fileID: 1489999198244498018}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &855439046958410577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4873966175991721588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee24c7f22f51294a8003ea40ca581ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &576173825825374760
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -295,6 +283,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &855439046958410577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873966175991721588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee24c7f22f51294a8003ea40ca581ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7585956767258710680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,8 +307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64c086a1fe555148ac8bda07d267ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chatID_start: 200
-  _chatID_end: 201
+  _chatID_first: 200
+  _chatID_start: 201
+  _chatID_end: 202
 --- !u!1 &7371514454796422513
 GameObject:
   m_ObjectHideFlags: 0

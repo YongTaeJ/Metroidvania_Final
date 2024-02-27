@@ -31,7 +31,7 @@ public class GoodsButton : MonoBehaviour
         gameObject.SetActive(true);
         _goodsData = data;
         _image.sprite = ItemManager.Instance.GetSprite(data.ItemType, data.ID);
-        _nameText.text = ItemManager.Instance.GetItemData(data.ItemType, data.ID).Name;
+        _nameText.text = ItemManager.Instance.GetItemData(data.ItemType, data.ID).NameKor;
         _costText.text = "가격 : " + data.Stock.ToString() + " Gold";
     }
 

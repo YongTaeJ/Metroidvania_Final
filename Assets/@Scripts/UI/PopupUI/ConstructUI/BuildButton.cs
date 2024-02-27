@@ -41,9 +41,9 @@ public class BuildButton : MonoBehaviour
 
     private void InitDatas(int ID)
     {
-        var SO = SOManager.Instance.GetBuildingSO(ID);
+        var data = ItemManager.Instance.GetItemData(ItemType.Building, ID);
         Sprite sprite = ItemManager.Instance.GetSprite(ItemType.Building, ID);
-        _nameText.text = SO.ConstructName;
+        _nameText.text = data.NameKor;
         SetBuildable();
         _image.sprite = sprite;
     }

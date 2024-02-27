@@ -14,10 +14,13 @@ public class ConstructUI : MonoBehaviour
     #region variables
     private bool _isInitialized = false;
     private GameObject _exitButton;
+    private GameObject _dim;
     #endregion
 
     private void Awake() 
     {
+        _dim = transform.Find("DataIndependent/Dim").gameObject;
+
         // ExitButton
         _exitButton = transform.Find("ExitButton").gameObject;
         Button button = _exitButton.GetComponent<Button>();
@@ -36,9 +39,18 @@ public class ConstructUI : MonoBehaviour
     {
         if(!_isInitialized) return;
 
+        InformPanel.Refresh();
+
         _exitButton.SetActive(false);
+        _dim.SetActive(false);
+
         transform.position = new Vector3(Screen.width / 2, Screen.height * 2 , 0);
         transform.DOMoveY(Screen.height / 2, 1).SetEase(Ease.OutBack);
-        TimerManager.Instance.StartTimer(1f, () => _exitButton.SetActive(true));   
+
+        TimerManager.Instance.StartTimer(1f, () =>
+        {
+            _exitButton.SetActive(true);
+            _dim.SetActive(true);
+        } ); 
     }
 }

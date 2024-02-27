@@ -19,6 +19,7 @@ public class NPCInteraction_Constructor_Event : NPCInteraction
         // Item docs ref.
         ItemManager.Instance.AddItem(ItemType.NPC, 1);
         ItemManager.Instance.UseItem(ItemType.NPC, 5, 1);
+        
         transform.parent.Find("Sprite").gameObject.SetActive(false);
 
         chatDatas = ChatManager.Instance.GetChatData(_chatID_end);
