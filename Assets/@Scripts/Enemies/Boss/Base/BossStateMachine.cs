@@ -13,6 +13,11 @@ public abstract class BossStateMachine : EnemyStateMachine
     public List<BossBaseState> PrepareList {get; protected set;}
     #endregion
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
         Initialize();

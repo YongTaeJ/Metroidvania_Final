@@ -117,7 +117,7 @@ public class MonsterPoolManager : Singleton<MonsterPoolManager>
         }
         
         GameObject objectToSpawn = poolDictionary[_monsterName].Dequeue();
-
+        objectToSpawn.GetComponent<EnemyStateMachine>().Initialize();
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
         objectToSpawn.transform.SetParent(containerTransform);

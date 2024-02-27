@@ -8,19 +8,14 @@ public class StageChangeUI : MonoBehaviour
     public Image fadePanel;
     public float fadeDuration = 1.0f;
 
-    private void OnEnable()
+    public void FadeIn(System.Action onComplete = null)
     {
-        FadeIn();
+        StartCoroutine(Fade(1.0f, 0.0f, onComplete));
     }
 
-    public void FadeIn()
+    public void FadeOut(System.Action onComplete = null)
     {
-        StartCoroutine(Fade(0, 1));
-    }
-
-    public void StartFadeOut()
-    {
-        StartCoroutine(Fade(1, 0, () => gameObject.SetActive(false)));
+        StartCoroutine(Fade(0.0f, 1.0f, onComplete));
     }
 
     private IEnumerator Fade(float start, float end, System.Action onComplete = null)

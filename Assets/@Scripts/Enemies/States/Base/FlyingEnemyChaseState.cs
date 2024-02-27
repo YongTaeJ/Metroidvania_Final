@@ -35,14 +35,17 @@ public class FlyingEnemyChaseState : EnemyBaseState
 
     public override void OnStateStay()
     {
-        _currentTime += Time.deltaTime;
-        if(_currentTime >= _attackTime && _stateMachine.StateDictionary.ContainsKey(EnemyStateType.Attack))
+        if(_playerTransform)
         {
-            _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Attack]);
-            return;
-        }
+            _currentTime += Time.deltaTime;
+            if (_currentTime >= _attackTime && _stateMachine.StateDictionary.ContainsKey(EnemyStateType.Attack))
+            {
+                _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Attack]);
+                return;
+            }
 
-        MoveToPlayer();
+            MoveToPlayer();
+        }
     }
 
     private void MoveToPlayer()

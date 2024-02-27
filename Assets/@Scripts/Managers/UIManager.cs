@@ -18,7 +18,8 @@ public enum PopupType
     Inventory,
     Building,
     Option,
-    StageChange
+    StageChange,
+    StageImege
 }
 
 public enum DisposableType
