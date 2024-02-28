@@ -5,20 +5,21 @@ using UnityEngine;
 public class WallHeal : WallBase
 {
     [SerializeField]
-    private float _wallHP = 4;
+    private float _wallHP = 5;
     [SerializeField]
-    private float _wallHeal = 0.5f;
+    private float _wallHeal = 2f;
     protected override void WallReact(Collider2D collision)
     {
         if (collision.CompareTag("PlayerAttack"))
         {
             SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallReact"));
             _wallHP--;
-            GameManager.Instance.player.GainHP(_wallHeal);
 
 
             if (_wallHP <= 0)
             {
+                GameManager.Instance.player.GainHP(_wallHeal);
+                SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallHeal"), 0.2f);
                 StartCoroutine(CoRecoverWall());
             }
         }
@@ -26,12 +27,12 @@ public class WallHeal : WallBase
 
     IEnumerator CoRecoverWall()
     {
-        GameObject wall = transform.Find("Wall").gameObject;
+        GameObject wall = transform.Find("WallHeal").gameObject;
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         wall.gameObject.SetActive(false);
         boxCollider.GetComponent<BoxCollider2D>().enabled = false;
-        yield return new WaitForSeconds(1f);
-        _wallHP = 4;
+        yield return new WaitForSeconds(10f);
+        _wallHP = 5;
         wall.gameObject.SetActive(true);
         boxCollider.GetComponent<BoxCollider2D>().enabled = true;
     }

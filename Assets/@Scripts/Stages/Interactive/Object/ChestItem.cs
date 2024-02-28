@@ -61,7 +61,7 @@ public class ChestItem : ChestBase
         base.ChestText();
         if (_chestItem == ItemType.Gold)
         {
-            _chestText.text = "상자에는 약간의 골드가 들어있었다";
+            _chestText.text = "";
         }
         else
         {

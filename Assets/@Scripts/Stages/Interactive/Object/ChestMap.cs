@@ -27,6 +27,7 @@ public class ChestMap : ChestBase
         {
             animator.SetBool("IsOpen", true);
         }
+        SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("ChestMap"));
         _curMapNumber = ItemManager.Instance.GetItemStock(ItemType.Map, 0);
 
         for (int i = _curMapNumber; i <_mapDataLimit; i++)
