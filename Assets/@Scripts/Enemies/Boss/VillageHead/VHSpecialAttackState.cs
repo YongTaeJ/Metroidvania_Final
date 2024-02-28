@@ -6,7 +6,6 @@ public class VHSpecialAttackState : BossAttackState
 {
     private VHSpeicalPattern _pattern;
     private int _patternCount;
-    private int _endCount;
 
     public VHSpecialAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
@@ -22,7 +21,6 @@ public class VHSpecialAttackState : BossAttackState
         _animator.SetTrigger(AnimatorHash.Attack);
         _animator.SetInteger(AnimatorHash.PatternNumber, 5);
         _patternCount = 0;
-        _endCount = 0;
     }
 
     public override void OnStateExit()
