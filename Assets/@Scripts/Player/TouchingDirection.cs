@@ -50,14 +50,13 @@ public class TouchingDirection : MonoBehaviour
         }
     }
 
-    public LayerMask groundLayerMask;
+    public LayerMask GroundLayerMask;
 
     private void Awake()
     {
         _touchingCol = GetComponent<BoxCollider2D>();
         _animator = GetComponent<Animator>();
-        castFilter.layerMask = groundLayerMask;
-
+        castFilter.layerMask = GroundLayerMask;
     }
 
     private void Update()
