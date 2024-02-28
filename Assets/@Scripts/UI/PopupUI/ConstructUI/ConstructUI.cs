@@ -9,6 +9,7 @@ public class ConstructUI : MonoBehaviour
     #region properties
     public ConstructInformPanel InformPanel { get; private set; }
     public ConstructList BuildingList { get; private set; }
+    public ConstructYNPanel YNPanel {get; private set;}
     #endregion
 
     #region variables
@@ -28,7 +29,9 @@ public class ConstructUI : MonoBehaviour
 
         InformPanel = GetComponentInChildren<ConstructInformPanel>();
         BuildingList = GetComponentInChildren<ConstructList>();
+        YNPanel = GetComponentInChildren<ConstructYNPanel>();
 
+        YNPanel.Initialize(this);
         InformPanel.Initialize(this);
         BuildingList.Initialize(this);
 

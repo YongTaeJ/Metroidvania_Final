@@ -213,7 +213,7 @@ Transform:
   - {fileID: 3846314917064964994}
   - {fileID: 7837742917169318617}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1540396683939724601
 BoxCollider2D:

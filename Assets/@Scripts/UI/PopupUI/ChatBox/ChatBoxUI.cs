@@ -1,9 +1,6 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -140,7 +137,14 @@ public class ChatBoxUI : MonoBehaviour
         while(currentIndex < length)
         {
             PlayNextChatSound();
-            _nameText.text = chatDatas[currentIndex].name;
+            if(chatDatas[currentIndex].name == null)
+            {
+                _nameText.text = "";
+            }
+            else
+            {
+                _nameText.text = chatDatas[currentIndex].name;
+            }
             _typingCoroutine = TypeSentence(chatDatas[currentIndex].chat);
             yield return StartCoroutine(_typingCoroutine);
             currentIndex++;

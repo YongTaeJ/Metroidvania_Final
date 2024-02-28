@@ -20,12 +20,14 @@ public class NPCInteraction_Shop : NPCInteraction
         if(!_isFirst)
         {
             _isFirst = true;
+            chatDatas = ChatManager.Instance.GetChatData(_chatID_first);
+            yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
+        }
+        else
+        {
             chatDatas = ChatManager.Instance.GetChatData(_chatID_start);
             yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
         }
-
-        chatDatas = ChatManager.Instance.GetChatData(_chatID_start);
-        yield return StartCoroutine(_chatBoxUI.StartChat(chatDatas));
 
         yield return StartCoroutine(WaitForChoose());
 

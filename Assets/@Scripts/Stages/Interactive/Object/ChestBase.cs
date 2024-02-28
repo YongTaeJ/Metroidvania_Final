@@ -58,7 +58,6 @@ public class ChestBase : MonoBehaviour
     {
         ChestText();
         ItemManager.Instance.AddItem(ItemType.Chest, _chestID);
-        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         if (_press != null) _press.gameObject.SetActive(false);
 
         SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Chest"));
@@ -75,7 +74,7 @@ public class ChestBase : MonoBehaviour
         StartCoroutine(CoChestTextOff());
     }
 
-    private IEnumerator CoChestTextOff()
+    protected virtual IEnumerator CoChestTextOff()
     {
         yield return new WaitForSeconds(1.2f);
         UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
@@ -94,6 +93,6 @@ public class ChestBase : MonoBehaviour
     protected virtual void ChestText()
     {
         _chestText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        _chestText.text = "The chest is empty";
+        _chestText.text = "상자는 비어있었다";
     }
 }

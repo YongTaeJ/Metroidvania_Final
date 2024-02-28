@@ -8,22 +8,34 @@ using UnityEngine;
 public class ConstructYNPanel : YNPanel
 {
     #region variables
-    private int _ID;
+    private int _currentID;
     private Action OnRefresh;
+    private ConstrcutIndicatorContainer _indicatorContainer;
     #endregion
 
-    public void Initialize(int ID)
+    public void Initialize(ConstructUI constructUI)
     {
-        _ID = ID;
         base.Initialize();
+        InitAction(constructUI);
+
+        _indicatorContainer = GetComponentInChildren<ConstrcutIndicatorContainer>();
+        _indicatorContainer.Initialize();
+        gameObject.SetActive(false);
     }
 
-    public void InitAction(ConstructUI constructUI)
+    private void InitAction(ConstructUI constructUI)
     {
         OnRefresh -= constructUI.InformPanel.Refresh;
         OnRefresh += constructUI.InformPanel.Refresh;
         OnRefresh -= constructUI.BuildingList.RefreshValidButtons;
         OnRefresh += constructUI.BuildingList.RefreshValidButtons;
+    }
+
+    public void OpenPanel(int ID)
+    {
+        _currentID = ID;
+        _indicatorContainer.SetIndicators(ID);
+        gameObject.SetActive(true);
     }
 
     protected override void OnClickNo()
@@ -33,14 +45,14 @@ public class ConstructYNPanel : YNPanel
 
     protected override void OnClickYes()
     {
-        var SO = SOManager.Instance.GetBuildingSO(_ID);
+        var SO = SOManager.Instance.GetBuildingSO(_currentID);
 
         foreach(var item in SO.RequiredMaterials)
         {
             ItemManager.Instance.UseItem(ItemType.Material, item.ID, item.Stock);
         }
 
-        ItemManager.Instance.AddItem(ItemType.Building, _ID);
+        ItemManager.Instance.AddItem(ItemType.Building, _currentID);
         SO.GiveReward();
 
         BuildingConstructAnimation();
@@ -50,7 +62,7 @@ public class ConstructYNPanel : YNPanel
 
     private void BuildingConstructAnimation()
     {
-        var buildingSO = SOManager.Instance.GetBuildingSO(_ID);
+        var buildingSO = SOManager.Instance.GetBuildingSO(_currentID);
 
         GameObject buildingPrefab = buildingSO.BuildingData.buildingPrefab;
         Vector3 buildingPosition = buildingSO.BuildingData.buildingPosition;
@@ -58,21 +70,13 @@ public class ConstructYNPanel : YNPanel
         Animator animator = buildingObject.GetComponent<Animator>();
         animator.SetBool("IsConstruct", true);
 
-        HideUI(true);
+        UIManager.Instance.SetEventMode(true);
 
         CameraManager.Instance.ChangeCameraTarget(buildingObject.gameObject.transform);
 
-        StartCoroutine(Recover(buildingObject, 1000 + _ID));
+        StartCoroutine(Recover(buildingObject, 1000 + _currentID));
     }
 
-    private void HideUI(bool hide)
-    {
-        Canvas[] canvases = FindObjectsOfType<Canvas>();
-        foreach (Canvas canvas in canvases)
-        {
-            canvas.enabled = !hide;
-        }
-    }
 
     private IEnumerator Recover(GameObject obj, int chatID, float delay = 0f)
     {
@@ -83,13 +87,21 @@ public class ConstructYNPanel : YNPanel
             AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             delay = clipInfo[0].clip.length;
         }
+
         yield return new WaitForSeconds(delay + 3f);
-        HideUI(false);
+
+        EventChatBoxUI chatBox = UIManager.Instance.GetDisposableUI<EventChatBoxUI>(DisposableType.EventChatBox);
+        chatBox.Initialize();
+
+        var chatDatas = ChatManager.Instance.GetChatData(chatID);
+
+        yield return StartCoroutine(chatBox.StartChat(chatDatas));
+
+        chatBox.EndChat();
+
+        UIManager.Instance.SetEventMode(false);
         CameraManager.Instance.ReturnCameraTarget();
 
-        // TODO => Disposable로 바꾼 뒤에 처리
-        // yield return StartCoroutine(ChatManager.Instance.StartChat(chatID));
-        
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

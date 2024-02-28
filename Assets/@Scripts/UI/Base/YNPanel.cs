@@ -10,7 +10,7 @@ public abstract class YNPanel : MonoBehaviour
     private Button _noButton;
     #endregion
 
-    public virtual void Initialize()
+    protected virtual void Initialize()
     {
         _yesButton = transform.Find("YesButton").GetComponent<Button>();
         _noButton = transform.Find("NoButton").GetComponent<Button>();

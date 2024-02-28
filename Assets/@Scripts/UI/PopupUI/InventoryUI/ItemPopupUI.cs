@@ -35,7 +35,14 @@ public class ItemPopupUI : MonoBehaviour
 
         if(item.Stock != 0)
         {
-            _stock.text = item.Stock.ToString() + "개 보유중";
+            if(item.ItemData.ItemType == ItemType.Material)
+            {
+                 _stock.text = item.Stock.ToString() + "개 보유중";
+            }
+            else
+            {
+                _stock.text = "보유중";
+            }
         }
         else
         {
