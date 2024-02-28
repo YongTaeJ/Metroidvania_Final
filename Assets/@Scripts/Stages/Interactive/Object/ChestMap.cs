@@ -40,6 +40,7 @@ public class ChestMap : ChestBase
     protected override void ChestText()
     {
         base.ChestText();
-        _chestText.text = "You got map piece";
+        _chestText.text = "지도 조각을 얻었다";
+        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
     }
 }

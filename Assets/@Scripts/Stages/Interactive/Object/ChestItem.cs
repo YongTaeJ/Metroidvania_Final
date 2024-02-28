@@ -59,17 +59,11 @@ public class ChestItem : ChestBase
     protected override void ChestText()
     {
         base.ChestText();
-        if (_chestItem == ItemType.Gold)
+        if (_chestItem != ItemType.Gold)
         {
-            _chestText.text = "";
-        }
-        else
-        {
-            ItemData _chestItemData = ItemManager.Instance.GetItemData(_chestItem, _chestItemID);
-            string _chestItemName = _chestItemData.Name;
-            // 아래를 descrition을 받아오는 방향으로 수정
-            _chestText.text = "You got " + _chestItemName;
-            
+            ItemData _chestItemData = ItemManager.Instance.GetItemData(ItemType.Chest, _chestID);
+            _chestText.text = _chestItemData.Description;
+            UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
             if (_chestItem == ItemType.Skill || _chestItem == ItemType.Equipment)
             {
                 Invoke("HelpText", 1.3f);
