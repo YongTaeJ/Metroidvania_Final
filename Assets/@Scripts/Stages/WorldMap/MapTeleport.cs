@@ -71,6 +71,7 @@ public class MapTeleport : MonoBehaviour
 
     private void Teleport(int index)
     {
+        GameManager.Instance.player._controller.CanMove = false;
         MapManager.Instance.LoadImage(true);
        
         Vector3 newPosition = portalLocations[index];

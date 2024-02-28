@@ -286,6 +286,7 @@ public class Player : MonoBehaviour, IDamagable
 
     public void OnContinue()
     {
+        _controller.CanMove = false;
         BGM.Instance.Stop();
         //BGM.Instance.Play("Home", true);
         //transform.position = new Vector3(263f, 0f, 0f);

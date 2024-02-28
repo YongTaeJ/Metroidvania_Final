@@ -5,6 +5,7 @@ using UnityEngine;
 public class TouchingDirection : MonoBehaviour
 {
     public ContactFilter2D castFilter;
+    public LayerMask GroundLayerMask;
     public float groundDistance = 0.05f;
     public float wallDistance = 0.2f;
 
@@ -50,7 +51,7 @@ public class TouchingDirection : MonoBehaviour
         }
     }
 
-    public LayerMask GroundLayerMask;
+    
 
     private void Awake()
     {

@@ -622,11 +622,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  groundDistance: 0.3
-  wallDistance: 0.2
-  groundLayerMask:
+  GroundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  groundDistance: 0.3
+  wallDistance: 0.2
 --- !u!114 &8734151917660046788
 MonoBehaviour:
   m_ObjectHideFlags: 0

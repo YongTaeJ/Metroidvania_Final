@@ -24,6 +24,7 @@ public class RoomTest : MonoBehaviour
     {
         if (collision.CompareTag("Tutorial") || collision.CompareTag("Town") || collision.CompareTag("Stage01") || collision.CompareTag("Stage02") && confiner != null)
         {
+            // 맵 이동 후 아직 안꺼졌는데 다시 이동할때 끄기
             if (_stageImageUI.gameObject.activeSelf)
             {
                 UIManager.Instance.ClosePopupUI(PopupType.StageImege);
@@ -89,6 +90,7 @@ public class RoomTest : MonoBehaviour
         GameManager.Instance.player._controller.Move(_movePos);
         yield return new WaitForSeconds(0.3f);
         GameManager.Instance.player._controller.Move(Vector2.zero);
+        GameManager.Instance.player._controller.CanMove = true;
     }
 
     private string GetStageText(string tag)

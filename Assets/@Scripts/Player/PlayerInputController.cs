@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,6 +46,9 @@ public class PlayerInputController : MonoBehaviour
             _animator.SetBool(AnimatorHash.IsAttacking, value);
         }
     }
+
+    public bool CanMove;
+
     #endregion
 
     #region Fileds
@@ -210,6 +214,7 @@ public class PlayerInputController : MonoBehaviour
     /// <param name="direction"></param>
     public void Move(Vector2 direction)
     {
+        if (!CanMove) return;
         _moveInput = direction;
         Iswalking = _moveInput != Vector2.zero;
     }
