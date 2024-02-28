@@ -49,7 +49,7 @@ public class DungeonEnter : MonoBehaviour
     private IEnumerator CoChestTextOff()
     {
         MapManager.Instance.LoadImage(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.8f);
         MapManager.Instance.LoadImage(false);
         UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         yield return new WaitForSeconds(1.8f);
