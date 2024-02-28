@@ -58,8 +58,11 @@ public class PortalControl : MonoBehaviour
         {
             mapTeleport.UpdatePortalButton();
         }
-        GameManager.Instance.player.HP = GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.HP];
-        // 체력회복 효과음 추가
+        if (ItemManager.Instance.HasItem(ItemType.Portal, _portalIndex))
+        {
+            GameManager.Instance.player.HP = GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.HP];
+            SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("WallHeal"), 0.2f);
+        }            
         CheckHasPortal();
         //UIManager.Instance.ClosePopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(false);

@@ -8,6 +8,7 @@ public abstract class WallBase : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         WallReact(collision);
+        GameManager.Instance.player.GainMana(GameManager.Instance.player.playerStatus.Stats[PlayerStatusType.ManaRegenerate]);
     }
     protected virtual void BreakWall()
     {
