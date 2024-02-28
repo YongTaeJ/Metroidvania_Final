@@ -16,7 +16,6 @@ TagManager:
   - TownPortal
   - Wall
   - PlungeAttack
-  - Room
   - Tutorial
   - Town
   - Stage01
@@ -42,7 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Platform
   - 
   - 
   - HiddenTiles

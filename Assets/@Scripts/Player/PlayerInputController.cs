@@ -104,6 +104,7 @@ public class PlayerInputController : MonoBehaviour
 
     // Action
     public event Action OnInteraction;
+    public event Action OnDropDownJump;
 
     // Coroutine
     private Coroutine _coMoveCamera;
@@ -278,9 +279,9 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (context.started && !_isDashing)
+            if (context.started && !_isDashing && !Input.GetKey(KeyCode.DownArrow))
             {
-                if (!_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
+                if ( !_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
                 {
                     _animator.SetTrigger(AnimatorHash.Jump);
                     SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
@@ -298,7 +299,12 @@ public class PlayerInputController : MonoBehaviour
                     _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
                 }
             }
-            
+
+            if (Input.GetKey(KeyCode.DownArrow) && context.started && _touchingDirection.IsGrounded)
+            {
+                OnDropDownJump?.Invoke();
+            }
+
             //Wall Jump
             if (context.started && _wallJumpTimer > 0f)
             {
@@ -388,7 +394,7 @@ public class PlayerInputController : MonoBehaviour
     {
         Vector2 boxSize = new Vector2(1f, 0.5f); 
         Vector2 boxPosition = new Vector2(transform.position.x + (Mathf.Sign(_moveInput.x) * boxSize.x / 2), transform.position.y);
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.groundLayerMask);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, 0, _touchingDirection.GroundLayerMask);
 
         foreach (var collider in colliders)
         {
@@ -543,7 +549,7 @@ public class PlayerInputController : MonoBehaviour
                 Debug.Log("아이템 없음");
             }
 
-            if (Input.GetKey(KeyCode.DownArrow) && !_touchingDirection.IsGrounded && context.started && ItemManager.Instance.HasItem(ItemType.Skill, 1))
+            if (Input.GetKey(KeyCode.DownArrow) && context.started && !_touchingDirection.IsGrounded  && ItemManager.Instance.HasItem(ItemType.Skill, 1))
             {
                 _player._skills[1].Activate();
                 _player.Invincible = true;
