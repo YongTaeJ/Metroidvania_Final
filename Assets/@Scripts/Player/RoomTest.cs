@@ -24,6 +24,10 @@ public class RoomTest : MonoBehaviour
     {
         if (collision.CompareTag("Tutorial") || collision.CompareTag("Town") || collision.CompareTag("Stage01") || collision.CompareTag("Stage02") && confiner != null)
         {
+            if (_stageImageUI.gameObject.activeSelf)
+            {
+                UIManager.Instance.ClosePopupUI(PopupType.StageImege);
+            }
             // 같은 태그의 경우에는 카메라 컨피너 설정만 업데이트
             if (lastCollisionTag == collision.tag)
             {
@@ -60,7 +64,7 @@ public class RoomTest : MonoBehaviour
         confiner.m_BoundingShape2D = collision;
         confiner.InvalidatePathCache();
 
-        string stageText = GetStageTextByTag(collision.tag);
+        string stageText = GetStageText(collision.tag);
 
         _stageChangeUI.FadeIn(() => {
             UIManager.Instance.SetFixedUI(true);
@@ -87,7 +91,7 @@ public class RoomTest : MonoBehaviour
         GameManager.Instance.player._controller.Move(Vector2.zero);
     }
 
-    private string GetStageTextByTag(string tag)
+    private string GetStageText(string tag)
     {
         switch (tag)
         {

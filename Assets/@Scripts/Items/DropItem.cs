@@ -9,6 +9,8 @@ public class DropItem : MonoBehaviour
     private int _value;
     private bool _dropstate = false;
     public ParticleSystem itemGlowEffect;
+    private float attractSpeed = 5f;
+
     public void Initialize(ItemType itemType, int ID, int value)
     {
         _itemType = itemType;
@@ -43,11 +45,10 @@ public class DropItem : MonoBehaviour
     private void PopItem()
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-
-        float x = Random.Range(-45f, 45f) / 360;
-        float y = 1 - x;
-
-        rigidbody.AddForce( new Vector2(x,y) * 300);
+        float angle = Random.Range(45, 135) * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        float forceMagnitude = Random.Range(300, 500); 
+        rigidbody.AddForce(direction * forceMagnitude);
     }
 
     private void Vanish()
@@ -57,15 +58,6 @@ public class DropItem : MonoBehaviour
 
 
     #region Monobehaviour
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && _dropstate)
-        {
-            // 아이템 획득 로직 처리
-            CollectItem();
-        }
-    }
 
     private void CollectItem()
     {
@@ -87,5 +79,27 @@ public class DropItem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         _dropstate = true;
+        StartCoroutine(AttractRoutine(GameManager.Instance.player.transform));
+    }
+
+    private IEnumerator AttractRoutine(Transform playerTransform)
+    {
+        float elapsedTime = 0f; // 경과 시간
+        float accelerationFactor = 100f; // 시간에 따른 가속도
+        float minDistanceToCollect = 0.3f; // 아이템이 먹어질 거리
+
+
+        while (Vector3.Distance(transform.position, playerTransform.position) > minDistanceToCollect)
+        {
+            elapsedTime += Time.deltaTime;
+            float currentSpeed = attractSpeed + (accelerationFactor * elapsedTime);
+
+            Vector3 step = Vector3.MoveTowards(transform.position, playerTransform.position, currentSpeed * Time.deltaTime);
+            GetComponent<Rigidbody2D>().MovePosition(step);
+
+            yield return null;
+        }
+
+        CollectItem(); // 아이템이 플레이어와 충분히 가까워졌을 때 수집 처리
     }
 }
