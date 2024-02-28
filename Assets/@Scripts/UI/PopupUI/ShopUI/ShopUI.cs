@@ -22,7 +22,7 @@ public class ShopUI : MonoBehaviour
     {
         ShoppingList = transform.Find("DataDependent/ShoppingList").GetComponent<ShoppingList>();
         BuyPopup = transform.Find("DataDependent/BuyPopup").GetComponent<BuyPopup>();
-        _goldText = transform.Find("DataDependent/GoldText").GetComponent<TMP_Text>();
+        _goldText = transform.Find("DataDependent/ShoppingList/GoldText").GetComponent<TMP_Text>();
         _exitButton = transform.Find("ExitButton").GetComponent<Button>();
 
         _exitButton.onClick.AddListener(() => gameObject.SetActive(false));
@@ -69,7 +69,6 @@ public class ShopUI : MonoBehaviour
         float time = 1f;
 
         _exitButton.gameObject.SetActive(false);
-        _goldText.gameObject.SetActive(false);
 
         transform.localScale = Vector2.zero;
         transform.DOScale(1, time).SetEase(Ease.OutBounce);
@@ -78,7 +77,6 @@ public class ShopUI : MonoBehaviour
         () =>
         {
             _exitButton.gameObject.SetActive(true);
-            _goldText.gameObject.SetActive(true);
         }
         );
     }

@@ -2,49 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class ChatBoxUI : MonoBehaviour
+/// <summary>
+/// 기존 ChatBox를 사용할 수 없을때 쓰는 UI입니다. 버튼이 없는거 빼면 사용법은 동일!
+/// </summary>
+public class EventChatBoxUI : MonoBehaviour
 {
     #region variables
     private TMP_Text _nameText;
     private TMP_Text _chatText;
-    private Transform _choiceArea;
-    private GameObject _chatArea;
     private IEnumerator _typingCoroutine;
-    private int _buttonIndex;
-    private GameObject[] _choiceButtons;
     private bool _keyValue;
-    private AudioClip _nextChatSound;
     private bool _isSkipped;
 
     #endregion
 
     #region MonoBehaviour
-    private void Awake()
-    {
-        _chatArea = transform.Find("ChatArea").gameObject;
-        _nameText = transform.Find("ChatArea/NameText").GetComponent<TMP_Text>();
-        _chatText = transform.Find("ChatArea/ChatText").GetComponent<TMP_Text>();
-        _choiceArea = transform.Find("ChoiceArea");
-        _buttonIndex = 0;
-        _nextChatSound = ResourceManager.Instance.GetAudioClip("NextChatSound");
-        GameObject choiceButton = Resources.Load<GameObject>("UI/ChoiceButton");
-
-        _choiceButtons = new GameObject[4];
-        for(int i=0; i < 4; i++)
-        {
-            _choiceButtons[i] = Instantiate(choiceButton, _choiceArea);
-            _choiceButtons[i].SetActive(false);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if(_choiceButtons == null) return;
-        CloseButtons();
-    }
 
     private void Update()
     {
@@ -97,23 +70,9 @@ public class ChatBoxUI : MonoBehaviour
         || Input.GetKeyDown(KeyCode.F);
     }
 
-    private void SetChatArea(bool isActive)
-    {
-        gameObject.SetActive(isActive);
-        _chatArea.SetActive(isActive);
-        _choiceArea.gameObject.SetActive(!isActive);
-    }
-
-    private void SetChoiceArea(bool isActive)
-    {
-        gameObject.SetActive(isActive);
-        _chatArea.SetActive(!isActive);
-        _choiceArea.gameObject.SetActive(isActive);
-    }
-
     private void PlayNextChatSound()
     {
-        SFX.Instance.PlayOneShot(_nextChatSound);
+        SFX.Instance.PlayOneShot("NextChatSound");
     }
 
     private IEnumerator WaitForKeyInput()
@@ -129,8 +88,6 @@ public class ChatBoxUI : MonoBehaviour
     #region public
     public IEnumerator StartChat(List<(string name, string chat)> chatDatas)
     {
-        SetChatArea(true);
-
         int currentIndex = 0;
         int length = chatDatas.Count;
         
@@ -150,33 +107,18 @@ public class ChatBoxUI : MonoBehaviour
             currentIndex++;
             yield return WaitForKeyInput();
         }
-
         yield return WaitForKeyInput();
-
-        SetChatArea(false);
     }
 
-    public void MakeButton(string content, UnityAction unityAction)
+    public void EndChat()
     {
-        SetChoiceArea(true);
-        
-        GameObject buttonObj = _choiceButtons[_buttonIndex++];
-        buttonObj.SetActive(true);
-        Button button = buttonObj.GetComponent<Button>();
-        TMP_Text contextText = buttonObj.transform.Find("ContentText").GetComponent<TMP_Text>();
-
-        contextText.text = content;
-        button.onClick.AddListener(unityAction);
+        Destroy(gameObject);
     }
 
-    public void CloseButtons()
+    public void Initialize()
     {
-        _buttonIndex = 0;
-        foreach(var obj in _choiceButtons)
-        {
-            obj.SetActive(false);
-            obj.GetComponent<Button>().onClick.RemoveAllListeners();
-        }
+        _nameText = transform.Find("ChatArea/NameText").GetComponent<TMP_Text>();
+        _chatText = transform.Find("ChatArea/ChatText").GetComponent<TMP_Text>();
     }
     #endregion
 }

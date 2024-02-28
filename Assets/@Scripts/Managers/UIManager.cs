@@ -25,6 +25,7 @@ public enum PopupType
 public enum DisposableType
 {
     None,
+    EventChatBox
 }
 
 public class UIManager : Singleton<UIManager>
@@ -152,11 +153,6 @@ public class UIManager : Singleton<UIManager>
         _popupUIElements[popupType].SetActive(false);
     }
 
-    public void MakeDisposableUI(DisposableType disposableType)
-    {
-        Instantiate(_disposableUIElements[disposableType], _disposableUI);
-    }
-
     public GameObject GetUI(PopupType popupType)
     {
         return _popupUIElements[popupType];
@@ -168,6 +164,19 @@ public class UIManager : Singleton<UIManager>
         {
             UI.SetActive(isActive);
         }
+    }
+
+    public void SetEventMode(bool isEvent)
+    {
+        _popupUI.GetComponent<Canvas>().enabled = !isEvent;
+        _fixedUI.GetComponent<Canvas>().enabled = !isEvent;
+        TempUI.GetComponent<Canvas>().enabled = !isEvent;
+    }
+
+    public T GetDisposableUI<T>(DisposableType type)
+    {
+        var target = Instantiate(_disposableUIElements[type], _disposableUI);
+        return target.GetComponent<T>();
     }
 
     public void OpenShopUI(int ID)
