@@ -227,6 +227,11 @@ public class Player : MonoBehaviour, IDamagable
         Mana += amount;
     }
 
+    public void GainHP(float amount)
+    {
+        HP += amount;
+    }
+
     private IEnumerator Knockback(Transform target)
     {
         float direction = Mathf.Sign(target.position.x - transform.position.x);
