@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
-public class KSRangedAttackState : BossAttackState
+public class KSDoubleAttackState : BossAttackState
 {
     private int _bulletIndex;
     private GameObject _bulletPrefab;
     private int _damage;
+    private int _breathCount;
+    private int _currentBreathCount;
+    private GameObject _breathArea;
 
-    public KSRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public KSDoubleAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         BossPatternType = BossPatternType.Ranged;   
+        _breathArea = _attackPivot.Find("BreathArea").gameObject;
         _bulletIndex = stateMachine.EnemyData.BulletIndex;
         _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet" + _bulletIndex.ToString() );
         _damage = stateMachine.EnemyData.Damage;
@@ -20,8 +23,12 @@ public class KSRangedAttackState : BossAttackState
     public override void OnStateEnter()
     {
         base.OnStateEnter();
+
         _animator.SetTrigger(AnimatorHash.Attack);
-        _animator.SetInteger(AnimatorHash.PatternNumber, 1);
+        _animator.SetInteger(AnimatorHash.PatternNumber, 4);
+
+        _breathCount = Random.Range(3,6);
+        _currentBreathCount = 0;
 
         _eventReceiver.OnBulletFire -= FireBullet;
         _eventReceiver.OnBulletFire += FireBullet;
@@ -40,17 +47,38 @@ public class KSRangedAttackState : BossAttackState
         if(_isAttackEnded)
         {
             (_stateMachine as BossStateMachine).PatternTransition();
+            return;
+        }
+
+        if(_currentBreathCount > 0)
+        {
+            GetDirection();
+            _objectFlip.Flip(_direction);
         }
     }
 
     protected override void OnAttack()
     {
-        // X
+        _breathArea.SetActive(true);
     }
 
     protected override void OnAttackEnd()
     {
-        _isAttackEnded = true;
+        _currentBreathCount++;
+
+        if(_currentBreathCount < _breathCount)
+        {
+            SFX.Instance.PlayOneShot("KingSlimePullSound");
+        }
+        else if(_currentBreathCount == _breathCount)
+        {
+            _animator.SetTrigger(AnimatorHash.Attack);
+            _breathArea.SetActive(false);
+        }
+        else
+        {
+            _isAttackEnded = true;
+        }
     }
 
     private void FireBullet()
@@ -59,7 +87,7 @@ public class KSRangedAttackState : BossAttackState
         Vector3 myPos = _attackPivot.position;
 
         EnemyBullet bullet = 
-        GameObject.Instantiate(_bulletPrefab, myPos, quaternion.identity)
+        GameObject.Instantiate(_bulletPrefab, myPos, Quaternion.identity)
         .GetComponent<EnemyBullet>();
 
         Vector3 direction = (_playerTransform.position - myPos).normalized;

@@ -33,11 +33,10 @@ public class PlayerFinder : MonoBehaviour
         }
     }
 
-    public void Initialize()
+    public virtual void Initialize()
     {
         IsPlayerEnter = false;
         CurrentTransform = null;
-        Debug.Log("초기화");
     }
 
     #endregion

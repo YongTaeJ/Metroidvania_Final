@@ -119,21 +119,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.41666666
-    functionName: Animation_AttackStarted
+    functionName: Animation_BulletFire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6
-    functionName: Animation_AttackStarted
+    functionName: Animation_BulletFire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.8
-    functionName: Animation_AttackStarted
+    functionName: Animation_BulletFire
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

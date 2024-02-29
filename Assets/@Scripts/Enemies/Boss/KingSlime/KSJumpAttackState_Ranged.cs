@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 using Unity.Mathematics;
 
-public class KSJumpAttackState : BossAttackState
+public class KSJumpAttackState_Ranged : BossAttackState
 {
     private Rigidbody2D _rigidbody;
     private int _attackCount;
@@ -13,9 +10,9 @@ public class KSJumpAttackState : BossAttackState
     private float _speed;
     private int _damage;
     private GameObject _shockwave;
-    public KSJumpAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public KSJumpAttackState_Ranged(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Random;
+        BossPatternType = BossPatternType.Ranged;
         _rigidbody = stateMachine.Rigidbody;
         _speed = stateMachine.EnemyData.Speed;
         _damage = stateMachine.EnemyData.Damage;

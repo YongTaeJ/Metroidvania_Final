@@ -61,7 +61,7 @@ public class ShopUI : MonoBehaviour
 
     private void ChangeGoldText(int x)
     {
-        _goldText.text = "소지금 : " + x.ToString() + "Gold";
+        _goldText.text = x.ToString() + "Gold";
     }
 
     private void PopupAction()

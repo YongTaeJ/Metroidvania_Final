@@ -19,7 +19,11 @@ public class KSStateMachine : BossStateMachine
             new KSBreathAttackState(this),
             new KSJumpAttackState(this),
             new KSSummonAttackState(this),
-            new KSRangedAttackState(this)
+            new KSRangedAttackState(this),
+            new KSDoubleAttackState(this),
+            new KSRangedAttackState_Melee(this),
+            new KSBreathAttackState_Ranged(this),
+            new KSDoubleAttackState_Melee(this)
         };
 
         PrepareList = new()

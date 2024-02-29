@@ -12,7 +12,7 @@ public class BossIdleState : BossBaseState
 
     public override void OnStateEnter()
     {
-        _idleTime = Random.Range(1f, 1.5f);
+        _idleTime = Random.Range(0.3f, 0.5f);
         _animator.SetTrigger(AnimatorHash.Prepare);
         _animator.SetBool(AnimatorHash.Idle, true);
     }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class QuantitySetter : MonoBehaviour
 {
     #region variables
+    private int _currentWallet;
     private int _currentCost;
     private int _quantity;
     private TMP_Text _quantityText;
@@ -36,15 +37,21 @@ public class QuantitySetter : MonoBehaviour
 
     private void SetQuantity(int value)
     {
+        // 1~99개가 최대
         int curValue = _quantity + value;
+        int expectCost = curValue * _currentCost;
 
         if(curValue <= 0)
         {
-            _quantity = 99;
+            _quantity = _currentWallet / _currentCost;
         }
         else if(curValue > 99)
         {
             _quantity = 1;
+        }
+        else if(expectCost > _currentWallet)
+        {
+            _quantity = _currentWallet / _currentCost;
         }
         else
         {
@@ -52,7 +59,7 @@ public class QuantitySetter : MonoBehaviour
         }
 
         _quantityText.text = _quantity.ToString();
-        _costText.text = "가격 : " + (_currentCost * _quantity).ToString() + " Gold";
+        _costText.text = "가격 : " + (_quantity * _currentCost).ToString() + " Gold";
     }
 
     public int GetCost()
@@ -67,6 +74,7 @@ public class QuantitySetter : MonoBehaviour
 
     public void ResetQuantity(int cost)
     {
+        _currentWallet = ItemManager.Instance.GetItemStock(ItemType.Gold, 0);
         _currentCost = cost;
         _quantity = 1;
 

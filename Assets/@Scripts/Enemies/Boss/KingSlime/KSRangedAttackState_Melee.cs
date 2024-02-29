@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class KSRangedAttackState : BossAttackState
+public class KSRangedAttackState_Melee : BossAttackState
 {
     private int _bulletIndex;
     private GameObject _bulletPrefab;
     private int _damage;
 
-    public KSRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public KSRangedAttackState_Melee(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Ranged;   
+        BossPatternType = BossPatternType.Melee;   
         _bulletIndex = stateMachine.EnemyData.BulletIndex;
         _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet" + _bulletIndex.ToString() );
         _damage = stateMachine.EnemyData.Damage;

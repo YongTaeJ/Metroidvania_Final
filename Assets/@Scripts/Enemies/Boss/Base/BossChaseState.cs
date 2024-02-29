@@ -22,7 +22,7 @@ public class BossChaseState : BossBaseState
 
     public override void OnStateEnter()
     {
-        _chaseTime = Random.Range(1f, 1.5f);
+        _chaseTime = Random.Range(0.5f, 0.7f);
         _animator.SetTrigger(AnimatorHash.Prepare);
         _animator.SetBool(AnimatorHash.Walk, true);
     }

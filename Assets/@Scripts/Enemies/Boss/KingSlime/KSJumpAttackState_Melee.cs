@@ -5,7 +5,7 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using Unity.Mathematics;
 
-public class KSJumpAttackState : BossAttackState
+public class KSJumpAttackState_Melee : BossAttackState
 {
     private Rigidbody2D _rigidbody;
     private int _attackCount;
@@ -13,9 +13,9 @@ public class KSJumpAttackState : BossAttackState
     private float _speed;
     private int _damage;
     private GameObject _shockwave;
-    public KSJumpAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public KSJumpAttackState_Melee(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Random;
+        BossPatternType = BossPatternType.Melee;
         _rigidbody = stateMachine.Rigidbody;
         _speed = stateMachine.EnemyData.Speed;
         _damage = stateMachine.EnemyData.Damage;
