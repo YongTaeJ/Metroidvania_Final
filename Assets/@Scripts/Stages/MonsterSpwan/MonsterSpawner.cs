@@ -9,10 +9,11 @@ public class MonsterSpawner : MonoBehaviour
 
     private GameObject[] _monsterPrefabs;
     private List<GameObject> _spawnedMonsters = new List<GameObject>();
+    public bool IsClear = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !IsClear)
         {
             SpawnMonster();
         }
@@ -22,7 +23,8 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Invoke("DestroyAllMonsters", 0.5f);
+            ClearCheck();
+            Invoke("DestroyAllMonsters", 0.1f);
         }
     }
 
@@ -50,6 +52,16 @@ public class MonsterSpawner : MonoBehaviour
                 }
             }
             _spawnedMonsters.Clear();
+        }
+    }
+
+    private void ClearCheck()
+    {
+        int remainMonster = _spawnedMonsters.Count(monster => monster.activeSelf);
+
+        if ((float)remainMonster <= (_spawnedMonsters.Count / 3.0f))
+        {
+            IsClear = true;
         }
     }
 
