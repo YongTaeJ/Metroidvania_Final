@@ -8,12 +8,14 @@ public class TouchingDirection : MonoBehaviour
     public LayerMask GroundLayerMask;
     public float groundDistance = 0.05f;
     public float wallDistance = 0.2f;
+    public float ceilingDistance = 0.05f;
 
     private Collider2D _touchingCol;
     private Animator _animator;
 
     private RaycastHit2D[] groundHit = new RaycastHit2D[5];
     private RaycastHit2D[] wallHit = new RaycastHit2D[5];
+    private RaycastHit2D[] ceilingHit = new RaycastHit2D[5];
 
     private bool _isGrounded;
 
@@ -51,7 +53,18 @@ public class TouchingDirection : MonoBehaviour
         }
     }
 
-    
+    private bool _isCeiling;
+    public bool IsCeiling
+    {
+        get
+        {
+            return _isCeiling;
+        }
+        private set
+        {
+            _isCeiling = value;
+        }
+    }
 
     private void Awake()
     {
@@ -62,8 +75,7 @@ public class TouchingDirection : MonoBehaviour
 
     private void Update()
     {
-        IsGrounded = _touchingCol.Cast(Vector2.down, castFilter, groundHit, groundDistance) > 0;
-        IsWall = _touchingCol.Cast(_wallCheckDirection, castFilter, wallHit, wallDistance) > 0;
+        
     }
 
     public void LandEffect()

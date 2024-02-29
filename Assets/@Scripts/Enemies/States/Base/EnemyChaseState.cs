@@ -44,13 +44,14 @@ public class EnemyChaseState : EnemyBaseState
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Idle]);
             return;
         }
-        
+
+
         float value = _playerFinder.CurrentTransform.position.x - _transform.position.x;
         _objectFlip.Flip(value);
-        
-        if(Mathf.Abs(value) < _attackDistance)
+
+        if (Mathf.Abs(value) < _attackDistance)
         {
-            if(_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var attackState))
+            if (_stateMachine.StateDictionary.TryGetValue(EnemyStateType.Attack, out var attackState))
                 _stateMachine.StateTransition(attackState);
             return;
         }
@@ -59,6 +60,7 @@ public class EnemyChaseState : EnemyBaseState
         FallCheck();
 
         _rigidbody.velocity = new Vector2(_direction.x * _speed, _rigidbody.velocity.y);
+
     }
 
     #endregion

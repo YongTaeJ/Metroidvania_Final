@@ -37,7 +37,6 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         Collider = GetComponent<Collider2D>();
-
         EventReceiver = GetComponentInChildren<EnemyAnimationEventReceiver>();
         PlayerFinder = GetComponentInChildren<PlayerFinder>();
         Animator = GetComponentInChildren<Animator>();
@@ -74,7 +73,6 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     public void ResetMonster()
     {
         GetComponent<EnemyHitSystem>().ResetHPCondition();
-        
         StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 }

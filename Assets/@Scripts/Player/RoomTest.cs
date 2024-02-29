@@ -11,6 +11,7 @@ public class RoomTest : MonoBehaviour
     private StageImageUI _stageImageUI;
     private Vector2 _movePos;
     private string lastCollisionTag = "";
+
     private void Start()
     {
         _virtualCamera = GetComponent<CinemachineVirtualCamera>();
@@ -22,7 +23,7 @@ public class RoomTest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Tutorial") || collision.CompareTag("Town") || collision.CompareTag("Stage01") || collision.CompareTag("Stage02") && confiner != null)
+        if ((collision.CompareTag("Tutorial") || collision.CompareTag("Town") || collision.CompareTag("Stage01") || collision.CompareTag("Stage02")) && confiner != null)
         {
             // 맵 이동 후 아직 안꺼졌는데 다시 이동할때 끄기
             if (_stageImageUI.gameObject.activeSelf)

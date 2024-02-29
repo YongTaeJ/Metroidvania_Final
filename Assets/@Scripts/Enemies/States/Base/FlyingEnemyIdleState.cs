@@ -37,12 +37,15 @@ public class FlyingEnemyIdleState : EnemyBaseState
             _stateMachine.StateTransition(_stateMachine.StateDictionary[EnemyStateType.Chase]);
         }
 
-        _currentTime += Time.deltaTime;
-
-        if(_currentTime >= _wanderTime)
+        if (_playerFinder.CurrentTransform)
         {
-            _currentTime = 0f;
-            RandomPatrol();
+            _currentTime += Time.deltaTime;
+
+            if (_currentTime >= _wanderTime)
+            {
+                _currentTime = 0f;
+                RandomPatrol();
+            }
         }
     }
 

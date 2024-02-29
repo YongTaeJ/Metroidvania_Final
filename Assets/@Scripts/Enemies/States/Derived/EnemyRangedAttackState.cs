@@ -30,16 +30,19 @@ public class EnemyRangedAttackState : EnemyAttackState
     
     private void FireBullet()
     {
-        PlayAttackSound();
-        Vector3 myPos = _attackPivot.position;
+        if (_playerFinder.CurrentTransform)
+        {
+            PlayAttackSound();
+            Vector3 myPos = _attackPivot.position;
 
-        EnemyBullet bullet = 
-        GameObject.Instantiate(_bulletPrefab, myPos, quaternion.identity)
-        .GetComponent<EnemyBullet>();
+            EnemyBullet bullet =
+            GameObject.Instantiate(_bulletPrefab, myPos, quaternion.identity)
+            .GetComponent<EnemyBullet>();
 
-        Vector3 direction = (_playerFinder.CurrentTransform.position - myPos).normalized;
+            Vector3 direction = (_playerFinder.CurrentTransform.position - myPos).normalized;
 
-        bullet.Initialize(direction, _damage);
+            bullet.Initialize(direction, _damage);
+        }
     }
 
 
