@@ -121,7 +121,7 @@ public class MapManager : Singleton<MapManager>
 
         if (LoadingImage.gameObject.activeSelf)
         {
-            Invoke("LoadImageClose", 1.2f);
+            Invoke("LoadImageClose", 1.5f);
         }
     }
 

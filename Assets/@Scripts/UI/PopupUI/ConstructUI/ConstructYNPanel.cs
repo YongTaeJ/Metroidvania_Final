@@ -67,6 +67,7 @@ public class ConstructYNPanel : YNPanel
         GameObject buildingPrefab = buildingSO.BuildingData.buildingPrefab;
         Vector3 buildingPosition = buildingSO.BuildingData.buildingPosition;
         GameObject buildingObject = Instantiate(buildingPrefab, buildingPosition, Quaternion.identity);
+        SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Construct"));
         Animator animator = buildingObject.GetComponent<Animator>();
         animator.SetBool("IsConstruct", true);
 

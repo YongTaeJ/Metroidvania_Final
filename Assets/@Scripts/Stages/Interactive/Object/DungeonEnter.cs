@@ -49,7 +49,7 @@ public class DungeonEnter : MonoBehaviour
     private IEnumerator CoChestTextOff()
     {
         MapManager.Instance.LoadImage(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.8f);
         MapManager.Instance.LoadImage(false);
         UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
         yield return new WaitForSeconds(1.8f);
@@ -59,6 +59,6 @@ public class DungeonEnter : MonoBehaviour
     private void EnterDungeonText()
     {
         TextMeshProUGUI Text = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        Text.text = "You Entered The Dungeon";
+        Text.text = "던전에 입장했습니다";
     }
 }
