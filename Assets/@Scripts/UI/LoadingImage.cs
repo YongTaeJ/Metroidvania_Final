@@ -47,7 +47,8 @@ public class LoadingImage : MonoBehaviour
             "인벤토리에서 보유 중인\n\r재료들을 볼 수 있습니다",
             "인벤토리에서 보유 중인\n\r스킬과 장비를 볼 수 있습니다",
             "대성당은 샹들리에를 따라가면\n\r꼭대기 층에 도달할 수 있습니다",
-            "아래 화살표와 Z키를 누르면\n\r내려갈 수 있는 발판도 존재합니다"
+            "아래 화살표와 Z키를 누르면\n\r내려갈 수 있는 발판도 존재합니다",
+            "마을에 다녀오면\n\r처치했던 몬스터들이 부활합니다"
             };
 
         int randomIndex = Random.Range(0, helptext.Length);
