@@ -53,6 +53,7 @@ public class PortalControl : MonoBehaviour
     private void UsePortal()
     {
         MapTeleport mapTeleport = MapManager.Instance.GetComponentInChildren<MapTeleport>(true);
+        mapTeleport.ClosePortalImage();
 
         if (mapTeleport != null)
         {

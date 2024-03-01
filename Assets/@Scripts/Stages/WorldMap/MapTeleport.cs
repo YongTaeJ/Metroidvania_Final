@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class MapTeleport : MonoBehaviour
     [SerializeField] private Button[] portalButtons;
     [SerializeField] private Vector3[] portalLocations;
     [SerializeField] private TextMeshProUGUI portalText;
+    [SerializeField] private GameObject[] portalImage;
 
     private Canvas _press;
 
@@ -45,13 +47,14 @@ public class MapTeleport : MonoBehaviour
 
     public void ClickTeleport(int index)
     {
+        ClosePortalImage();
         _selectedButtonIndex = index;
         PortalText(index);
         _checkCanvas.gameObject.SetActive(true);
 
-        if (index != 0)
+        if (index != portalButtons.Length)
         {
-            MoveMapCamera(portalLocations[_selectedButtonIndex]);
+            portalImage[index].SetActive(true);
         }
     }
 
@@ -62,6 +65,7 @@ public class MapTeleport : MonoBehaviour
         MapManager.Instance.CloseLargeMap();
         //UIManager.Instance.OpenPopupUI(PopupType.Interact);
         if (_press != null) _press.gameObject.SetActive(true);
+        ClosePortalImage();
     }
 
     public void ClickNo()
@@ -124,6 +128,14 @@ public class MapTeleport : MonoBehaviour
     public void ClosePortalMap()
     {
         MapManager.Instance.CloseLargeMap();
+    }
+
+    public void ClosePortalImage()
+    {
+        foreach (GameObject portal in portalImage)
+        {
+            portal.SetActive(false);
+        }
     }
 
     //임시용 BGM 컨트롤
