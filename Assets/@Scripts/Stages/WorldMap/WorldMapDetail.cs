@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class WorldMapDetail : MonoBehaviour
 {
     private int _selectedButtonIndex;
+    private GameObject _worldMapImage;
 
     [SerializeField] private Button[] _detailMapButton;
     [SerializeField] private Image[] _detailMapImage;
 
     private void Awake()
     {
+        _worldMapImage = transform.Find("WorldMapImage").gameObject;
+
         for (int i = 0; i < _detailMapButton.Length; i++)
         {
             int index = i;
@@ -26,6 +29,11 @@ public class WorldMapDetail : MonoBehaviour
         CloseDetailMapImage();
         _selectedButtonIndex = index;
         _detailMapImage[index].gameObject.SetActive(true);
+        _worldMapImage.SetActive(false);
+        for (int i = 0; i < _detailMapButton.Length; i++)
+        {
+            _detailMapButton[i].gameObject.SetActive(false);
+        }
     }
 
     public void CloseDetailMapImage()
@@ -34,6 +42,8 @@ public class WorldMapDetail : MonoBehaviour
         {
             img.gameObject.SetActive(false);
         }
+
+        _worldMapImage.SetActive(true);
     }
 
     public void UpdateDetailMapButton()
