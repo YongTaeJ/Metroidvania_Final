@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class PlayerStatus
 {
     public Dictionary<PlayerStatusType, float> Stats {get; private set;}
-
     public PlayerStatus(PlayerStatusData data)
     {
         // 초기화용 생성자

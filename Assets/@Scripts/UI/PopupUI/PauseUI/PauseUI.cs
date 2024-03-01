@@ -13,6 +13,7 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button optionBtn;
     [SerializeField] private Button saveDateDelBtn;
     [SerializeField] private Button exitBtn;
+    [SerializeField] private DeleteYNPanel _deleteYNPanel;
 
     #endregion
 
@@ -24,6 +25,7 @@ public class PauseUI : MonoBehaviour
         optionBtn.onClick.AddListener(OnOption);
         saveDateDelBtn.onClick.AddListener(OnSaveDateDel);
         exitBtn.onClick.AddListener(OnExit);
+        _deleteYNPanel.CloseUI();
     }
 
     private void OnEnable()
@@ -53,7 +55,7 @@ public class PauseUI : MonoBehaviour
 
     private void OnSaveDateDel()
     {
-        GameManager.Instance.DeleteSaveFile();
+        _deleteYNPanel.OpenUI();
     }
 
     private void OnExit()

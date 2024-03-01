@@ -398,9 +398,9 @@ GameObject:
   - component: {fileID: 4288818479663670126}
   - component: {fileID: 7444526919785460907}
   - component: {fileID: 7174637005532003100}
-  - component: {fileID: 8855709206435932232}
-  - component: {fileID: 8010255780299819511}
   - component: {fileID: 1473484971442110956}
+  - component: {fileID: 8010255780299819511}
+  - component: {fileID: 8855709206435932232}
   m_Layer: 0
   m_Name: VHBossRoom
   m_TagString: Untagged
@@ -530,35 +530,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 12.5}
   m_EdgeRadius: 0
---- !u!114 &8855709206435932232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8997294789971559837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b051b1b83491c1d4cb0f32a0911625ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bossItemID: 0
-  _chatID_encounter: 10000
-  _chatID_defeat_0: 10001
-  _chatID_defeat_1: 10002
---- !u!114 &8010255780299819511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8997294789971559837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 550de33fc847e4c4089eb172c2fa66f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  virtualcam: {fileID: 3319053514496527898}
 --- !u!50 &1473484971442110956
 Rigidbody2D:
   serializedVersion: 4
@@ -586,6 +557,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8010255780299819511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997294789971559837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550de33fc847e4c4089eb172c2fa66f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualcam: {fileID: 3319053514496527898}
+--- !u!114 &8855709206435932232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8997294789971559837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b051b1b83491c1d4cb0f32a0911625ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bossItemID: 0
+  _chatID_encounter: 10000
+  _chatID_defeat_0: 10001
+  _chatID_defeat_1: 10002
 --- !u!1001 &7891272110026855515
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
     public void SaveGame()
     {
         _data.Inventory = ConvertItemData();
+        _data.PlayerStatusData = GameManager.Instance.player.playerStatus.GetSaveData();
 
         string jsonStr = JsonConvert.SerializeObject(_data);
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonStr);
@@ -71,6 +72,7 @@ public class GameManager : Singleton<GameManager>
         {
             this._data = data;
         }
+
         ItemManager.Instance.LoadData(_data.Inventory);
     }
 

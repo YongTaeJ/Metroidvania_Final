@@ -21,11 +21,18 @@ public class KSBossRoom : BossRoom
         _pattern = GameObject.Find("KSSpecialPattern").GetComponent<KSSpecialPattern>();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected override void OnTriggerExit2D(Collider2D collision)
     {
+        base.OnTriggerExit2D(collision);
+
         if (collision.CompareTag("Player"))
         {
             _pattern.DestroyEnemies();
+            if(_KSEventSet != null)
+            {
+                Destroy(_KSEventSet);
+                _KSEventSet = null;
+            }
         }
     }
 
