@@ -39,8 +39,7 @@ public class BGM : SoundManager<BGM>
     #endregion
 
     private void Start()
-    {
-        Play(ResourceManager.Instance.GetAudioClip("StartScene"), true); //시작 브금 스타트
+    { 
         LoadVolumeSettings();
     }
 

@@ -40,7 +40,7 @@ public class DashEffect : MonoBehaviour
         color.a = _alpha;
         _spriteRenderer.color = color;
 
-        if (_alpha == 0)
+        if (_alpha <= 0.01f)
         {
             ResourceManager.Instance.Destroy(gameObject);
         }

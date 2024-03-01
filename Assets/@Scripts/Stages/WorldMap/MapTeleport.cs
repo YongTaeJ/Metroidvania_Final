@@ -77,8 +77,6 @@ public class MapTeleport : MonoBehaviour
         Vector3 newPosition = portalLocations[index];
         GameManager.Instance.player.transform.position = newPosition;
 
-        BGMConttroll(index);
-
         // 새 위치 정보를 GameData에 저장합니다.
         GameManager.Instance.Data.playerPositionX = newPosition.x;
         GameManager.Instance.Data.playerPositionY = newPosition.y;
@@ -124,25 +122,5 @@ public class MapTeleport : MonoBehaviour
     public void ClosePortalMap()
     {
         MapManager.Instance.CloseLargeMap();
-    }
-
-    //임시용 BGM 컨트롤
-    private void BGMConttroll(int index)
-    {
-        if (index == 0)
-        {
-            BGM.Instance.Stop();
-            BGM.Instance.Play("Home", true);
-        }
-        else if(index == 1 || index == 2) 
-        {
-            BGM.Instance.Stop();
-            BGM.Instance.Play("Stage1", true);
-        }
-        else if (index == 3)
-        {
-            BGM.Instance.Stop();
-            BGM.Instance.Play("Stage2", true);
-        }
     }
 }

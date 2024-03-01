@@ -88,6 +88,6 @@ public class KSBossRoom : BossRoom
     protected override void PlayStageBGM()
     {
         BGM.Instance.Stop();
-        BGM.Instance.Play("Stage1", true);
+        BGM.Instance.Play("Stage01", true);
     }
 }

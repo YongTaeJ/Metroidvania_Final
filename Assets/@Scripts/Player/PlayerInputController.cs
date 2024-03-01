@@ -249,24 +249,24 @@ public class PlayerInputController : MonoBehaviour
 
     public void Look(InputAction.CallbackContext context)
     {
-        Vector2 direction = context.ReadValue<Vector2>();
-        if (_moveInput.x == 0 && _touchingDirection.IsGrounded)
-        {
-            if (context.performed)
-            {
-                if (_coMoveCamera != null)
-                    StopCoroutine(_coMoveCamera);
+        //Vector2 direction = context.ReadValue<Vector2>();
+        //if (_moveInput.x == 0 && _touchingDirection.IsGrounded)
+        //{
+        //    if (context.performed)
+        //    {
+        //        if (_coMoveCamera != null)
+        //            StopCoroutine(_coMoveCamera);
 
-                _coMoveCamera = StartCoroutine(MoveCameraDelay(direction));
-            }
-            else if (context.canceled)
-            {
-                if (_coMoveCamera != null)
-                    StopCoroutine(_coMoveCamera);
+        //        _coMoveCamera = StartCoroutine(MoveCameraDelay(direction));
+        //    }
+        //    else if (context.canceled)
+        //    {
+        //        if (_coMoveCamera != null)
+        //            StopCoroutine(_coMoveCamera);
 
-                CameraManager.Instance.ResetCamera();
-            }
-        }
+        //        CameraManager.Instance.ResetCamera();
+        //    }
+        //}
     }
 
     private IEnumerator MoveCameraDelay(Vector2 direction)

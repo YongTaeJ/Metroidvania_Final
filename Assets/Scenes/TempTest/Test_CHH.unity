@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 537311269}
   - component: {fileID: 537311268}
   - component: {fileID: 537311267}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Room4
   m_TagString: Stage02
   m_Icon: {fileID: 0}
@@ -2569,7 +2569,7 @@ GameObject:
   - component: {fileID: 1176894415}
   - component: {fileID: 1176894414}
   - component: {fileID: 1176894416}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Room1
   m_TagString: Town
   m_Icon: {fileID: 0}
@@ -2916,7 +2916,7 @@ GameObject:
   - component: {fileID: 1382377040}
   - component: {fileID: 1382377039}
   - component: {fileID: 1382377038}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Room3 (1)
   m_TagString: Tutorial
   m_Icon: {fileID: 0}
@@ -3259,7 +3259,7 @@ GameObject:
   - component: {fileID: 1488558369}
   - component: {fileID: 1488558368}
   - component: {fileID: 1488558367}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Room3
   m_TagString: Tutorial
   m_Icon: {fileID: 0}
@@ -3605,7 +3605,7 @@ GameObject:
   - component: {fileID: 1785140767}
   - component: {fileID: 1785140766}
   - component: {fileID: 1785140770}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Room2
   m_TagString: Stage01
   m_Icon: {fileID: 0}

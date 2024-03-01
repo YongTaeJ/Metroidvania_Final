@@ -83,6 +83,8 @@ public class Player : MonoBehaviour, IDamagable
 
     private bool _isAlive = true;
 
+    public bool Init = false;
+
     private float _shakeForce = 1f;
 
     //Skill
@@ -111,6 +113,11 @@ public class Player : MonoBehaviour, IDamagable
         PlayerStatusData data = new PlayerStatusData();
         playerStatus = new PlayerStatus(data);
 
+        Initialized();
+    }
+
+    private void Start()
+    {
         bool hasItemInRange = false;
 
         if (ItemManager.Instance.HasItem(ItemType.Chest, 102))
@@ -118,40 +125,35 @@ public class Player : MonoBehaviour, IDamagable
             hasItemInRange = true;
         }
 
-
         // 임시로 여기서 위치 데이터 받아서 위치 이동
         if (GameManager.Instance.IsFileExits())
         {
             Debug.Log("저장된 위치가 있음");
             // 세이브 데이터가 있는 경우, 그 위치로 플레이어 이동
             transform.position = new Vector3(GameManager.Instance.Data.playerPositionX, GameManager.Instance.Data.playerPositionY, GameManager.Instance.Data.playerPositionZ);
-            if(GameManager.Instance.Data.playerPositionX == 224.5f)
-            {
-                BGM.Instance.Play("Home", true);
-            }
-            else if(GameManager.Instance.Data.playerPositionX == 301f || GameManager.Instance.Data.playerPositionX == 210f)
-            {
-                BGM.Instance.Play("Stage1", true);
-            }
-            else if(GameManager.Instance.Data.playerPositionX == 416.5f)
-            {
-                BGM.Instance.Play("Stage1", true);
-            }
+            //if (GameManager.Instance.Data.playerPositionX == 224.5f)
+            //{
+            //    BGM.Instance.Play("Home", true);
+            //}
+            //else if (GameManager.Instance.Data.playerPositionX == 301f || GameManager.Instance.Data.playerPositionX == 210f)
+            //{
+            //    BGM.Instance.Play("Stage1", true);
+            //}
+            //else if (GameManager.Instance.Data.playerPositionX == 416.5f)
+            //{
+            //    BGM.Instance.Play("Stage1", true);
+            //}
         }
         else if (hasItemInRange == true)
         {
-            transform.position = new Vector3(290f, 0f, 0f);
-            BGM.Instance.Play("Home", true);
+            transform.position = new Vector3(290f, -5f, 0f);
+            //BGM.Instance.Play("Home", true);
         }
         else
         {
             transform.position = new Vector3(-18f, 0f, 0f);
-            BGM.Instance.Play("Home", true);
+            //BGM.Instance.Play("Home", true);
         }
-
-
-
-        Initialized();
     }
 
     #region Set / Init
@@ -315,13 +317,13 @@ public class Player : MonoBehaviour, IDamagable
     {
         if (ItemManager.Instance.HasItem(ItemType.Chest, 102))
         {
-            transform.position = new Vector3(290f, 0f, 0f);
-            BGM.Instance.Play("Home", true);
+            transform.position = new Vector3(290f, -5f, 0f);
+            //BGM.Instance.Play("Home", true);
         }
         else
         {
             transform.position = new Vector3(-18f, 0f, 0f);
-            BGM.Instance.Play("Home", true);
+            //BGM.Instance.Play("Home", true);
         }
     }
 }

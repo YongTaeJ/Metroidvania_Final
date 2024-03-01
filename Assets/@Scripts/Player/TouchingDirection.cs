@@ -6,6 +6,7 @@ public class TouchingDirection : MonoBehaviour
 {
     public ContactFilter2D castFilter;
     public LayerMask GroundLayerMask;
+
     public float groundDistance = 0.05f;
     public float wallDistance = 0.2f;
     public float ceilingDistance = 0.05f;
@@ -13,9 +14,9 @@ public class TouchingDirection : MonoBehaviour
     private Collider2D _touchingCol;
     private Animator _animator;
 
-    private RaycastHit2D[] groundHit = new RaycastHit2D[5];
-    private RaycastHit2D[] wallHit = new RaycastHit2D[5];
-    private RaycastHit2D[] ceilingHit = new RaycastHit2D[5];
+    //private RaycastHit2D[] groundHit = new RaycastHit2D[5];
+    //private RaycastHit2D[] wallHit = new RaycastHit2D[5];
+    //private RaycastHit2D[] ceilingHit = new RaycastHit2D[5];
 
     private bool _isGrounded;
 
@@ -75,8 +76,30 @@ public class TouchingDirection : MonoBehaviour
 
     private void Update()
     {
-        
+        CheckGrounded();
+        CheckWall();
+        CheckCeiling();
     }
+
+    private void CheckGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(_touchingCol.bounds.center, Vector2.down, groundDistance + _touchingCol.bounds.extents.y, GroundLayerMask);
+        IsGrounded = hit.collider != null;
+    }
+
+    private void CheckWall()
+    {
+        Vector2 direction = _wallCheckDirection;
+        RaycastHit2D hit = Physics2D.Raycast(_touchingCol.bounds.center, direction, wallDistance + _touchingCol.bounds.extents.x, GroundLayerMask);
+        IsWall = hit.collider != null;
+    }
+
+    private void CheckCeiling()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(_touchingCol.bounds.center, Vector2.up, ceilingDistance + _touchingCol.bounds.extents.y, GroundLayerMask);
+        IsCeiling = hit.collider != null;
+    }
+
 
     public void LandEffect()
     {

@@ -18,6 +18,7 @@ public class StartScene : MonoBehaviour
     private void Start()
     {
         startBtn.onClick.AddListener(OnStartGame);
+        BGM.Instance.Play("StartScene", true);
     }
 
     #endregion

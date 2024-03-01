@@ -11,6 +11,7 @@ public class RoomTest : MonoBehaviour
     private StageImageUI _stageImageUI;
     private Vector2 _movePos;
     private string lastCollisionTag = "";
+    private bool isTransitioning = false;
 
     private void Start()
     {
@@ -23,8 +24,11 @@ public class RoomTest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isTransitioning) return;
+
         if ((collision.CompareTag("Tutorial") || collision.CompareTag("Town") || collision.CompareTag("Stage01") || collision.CompareTag("Stage02")) && confiner != null)
         {
+            isTransitioning = true;
             // 맵 이동 후 아직 안꺼졌는데 다시 이동할때 끄기
             if (_stageImageUI.gameObject.activeSelf)
             {
@@ -35,26 +39,50 @@ public class RoomTest : MonoBehaviour
             {
                 confiner.m_BoundingShape2D = collision;
                 confiner.InvalidatePathCache();
+                isTransitioning = false;
             }
-            else // 다른 태그의 경우에는 전체 로직 실행
+            else
             {
-                lastCollisionTag = collision.tag;
-                DetermineCollisionDirection(collision);
+                if(GameManager.Instance.player.Init)
+                {
+                    lastCollisionTag = collision.tag;
+                    DetermineCollisionDirection(collision);
 
-                // 플레이어 입력 비활성화 후 약간의 이동
-                StartCoroutine(PlayerMovePos());
-                GameManager.Instance.player._invincibilityTime = 3f;
-                GameManager.Instance.player.Invincible = true;
+                    // 플레이어 입력 비활성화 후 약간의 이동
+                    StartCoroutine(PlayerMovePos());
+                    GameManager.Instance.player._invincibilityTime = 3f;
+                    GameManager.Instance.player.Invincible = true;
 
-                // 팝업 UI 표시
-                UIManager.Instance.OpenPopupUI(PopupType.StageChange);
-                UIManager.Instance.SetFixedUI(false);
+                    // 팝업 UI 표시
+                    UIManager.Instance.OpenPopupUI(PopupType.StageChange);
+                    UIManager.Instance.SetFixedUI(false);
 
-                // 페이드 아웃 시작
-                _stageChangeUI.FadeOut();
+                    // 페이드 아웃 시작
+                    _stageChangeUI.FadeOut();
 
-                // 카메라 전환 코루틴 시작
-                StartCoroutine(CameraTransition(collision));
+                    // 카메라 전환 코루틴 시작
+                    StartCoroutine(CameraTransition(collision));
+                }
+                else
+                {
+                    lastCollisionTag = collision.tag;
+                    DetermineCollisionDirection(collision);
+
+                    // 플레이어 입력 비활성화 후 약간의 이동
+                    StartCoroutine(PlayerMovePos());
+                    GameManager.Instance.player._invincibilityTime = 3f;
+                    GameManager.Instance.player.Invincible = true;
+
+                    // 팝업 UI 표시
+                    UIManager.Instance.OpenPopupUI(PopupType.StageChange);
+                    UIManager.Instance.SetFixedUI(false);
+
+                    // 페이드 아웃 시작
+                    _stageChangeUI.SetDarkScreen();
+
+                    // 카메라 전환 코루틴 시작
+                    StartCoroutine(CameraTransition(collision));
+                }
             }
         }
     }
@@ -62,11 +90,12 @@ public class RoomTest : MonoBehaviour
     private IEnumerator CameraTransition(Collider2D collision)
     {
         yield return new WaitForSeconds(_stageChangeUI.fadeDuration);
-
+        BGM.Instance.Stop();
         confiner.m_BoundingShape2D = collision;
         confiner.InvalidatePathCache();
-
+        isTransitioning = false;
         string stageText = GetStageText(collision.tag);
+        string stageBGM = GetStageBGM(collision.tag);
 
         _stageChangeUI.FadeIn(() => {
             UIManager.Instance.SetFixedUI(true);
@@ -74,6 +103,8 @@ public class RoomTest : MonoBehaviour
             UIManager.Instance.OpenPopupUI(PopupType.StageImege);
             _stageImageUI.StartStageUI(stageText);
             GameManager.Instance.player._playerInput.enabled = true;
+            GameManager.Instance.player.Init = true;
+            BGM.Instance.Play(stageBGM, true);
         });
     }
 
@@ -108,6 +139,23 @@ public class RoomTest : MonoBehaviour
                 return "대성당";
             default:
                 return "알 수 없는 지역"; // 기본값
+        }
+    }
+
+    private string GetStageBGM(string tag)
+    {
+        switch (tag)
+        {
+            case "Tutorial":
+                return "Town";
+            case "Town":
+                return "Town";
+            case "Stage01":
+                return "Stage01";
+            case "Stage02":
+                return "Stage02";
+            default:
+                return null;
         }
     }
 }

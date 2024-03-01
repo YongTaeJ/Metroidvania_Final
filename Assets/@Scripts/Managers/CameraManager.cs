@@ -6,6 +6,7 @@ using Cinemachine;
 public class CameraManager : Singleton<CameraManager>
 {
     public CinemachineVirtualCamera VirtualCamera;
+    private CinemachineFramingTransposer framingTransposer;
     private float originScreenY = 0.5f;
     private bool isCameraMove = false; //카메라 움직임과 임펄스가 동시에 일어나면 m_Screen이 이상한 수치에 고정됨
     private Transform _originalFollowTransform;
@@ -26,13 +27,12 @@ public class CameraManager : Singleton<CameraManager>
     public void GetCamera(CinemachineVirtualCamera camera)
     {
         VirtualCamera = camera;
+        framingTransposer = VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
     }
 
     public void MoveCamera(Vector2 direction)
     {
         isCameraMove = true;
-
-        CinemachineFramingTransposer framingTransposer = VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
             if (framingTransposer != null)
             {
@@ -56,8 +56,6 @@ public class CameraManager : Singleton<CameraManager>
 
     public void ResetCamera()
     {
-        CinemachineFramingTransposer framingTransposer = VirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-
         if (framingTransposer != null)
         {
             framingTransposer.m_ScreenY = originScreenY;

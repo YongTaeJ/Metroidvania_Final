@@ -8,6 +8,13 @@ public class StageChangeUI : MonoBehaviour
     public Image fadePanel;
     public float fadeDuration = 1.0f;
 
+    public void SetDarkScreen()
+    {
+        Color newColor = fadePanel.color;
+        newColor.a = 1;
+        fadePanel.color = newColor;
+    }
+
     public void FadeIn(System.Action onComplete = null)
     {
         StartCoroutine(Fade(1.0f, 0.0f, onComplete));
