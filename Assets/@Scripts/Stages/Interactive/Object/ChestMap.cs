@@ -40,7 +40,14 @@ public class ChestMap : ChestBase
     protected override void ChestText()
     {
         base.ChestText();
-        _chestText.text = "지도 조각을 얻었다";
+        if (_chestID == 50)
+        {
+            _chestText.text = "지도 조각을 얻었다\n\r지도는 M키를 눌러서 열 수 있다";
+        }
+        else
+        {
+            _chestText.text = "지도 조각을 얻었다";
+        }
         UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
     }
 }
