@@ -46,13 +46,14 @@ public abstract class BossRoom : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
             if(_currentBoss != null)
             {
                 Destroy(_currentBoss);
+                _currentBoss = null;
             }
         }
     }

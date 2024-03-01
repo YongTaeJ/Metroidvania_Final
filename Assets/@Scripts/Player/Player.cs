@@ -108,8 +108,18 @@ public class Player : MonoBehaviour, IDamagable
         _playerInput = GetComponent<PlayerInput>();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
 
-        PlayerStatusData data = new PlayerStatusData();
-        playerStatus = new PlayerStatus(data);
+        // Init Status Data.
+        PlayerStatusData data;
+        if(GameManager.Instance.Data.PlayerStatusData != null)
+        {
+            data = GameManager.Instance.Data.PlayerStatusData;
+            playerStatus = new PlayerStatus(data);
+        }
+        else
+        {
+            data = new PlayerStatusData();
+            playerStatus = new PlayerStatus(data);
+        }
 
         bool hasItemInRange = false;
 
