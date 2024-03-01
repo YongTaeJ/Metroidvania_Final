@@ -10,11 +10,11 @@ public class MapManager : Singleton<MapManager>
     public Canvas PortalMap { get; private set; }
     public Canvas BuyPortal { get; private set; }
     public Canvas LoadingImage { get; private set; }
-    public GameObject MapTiles { get; private set; }
+    //public GameObject MapImages { get; private set; }
     public bool IsWorldMapOpen { get; private set; }
-    public MapData MapData { get; private set; }
 
-
+    private WorldMapImage _worldMapImage;
+    private PortalMapImage _portalMapImage;
     private PlayerInput _mapInputActions;
 
     protected override void Awake()
@@ -28,15 +28,14 @@ public class MapManager : Singleton<MapManager>
         Canvas portalMapPrefab = Resources.Load<Canvas>("Map/PortalMap");
         Canvas buyPortalPrefab = Resources.Load<Canvas>("Map/BuyPortal");
         Canvas loadingImagePrefab = Resources.Load<Canvas>("Map/LoadingImage");
-        GameObject MapTilesPrefab = Resources.Load<GameObject>("Map/MapTiles");
 
         WorldMap = Instantiate(worldMapPrefab, transform);
         PortalMap = Instantiate(portalMapPrefab, transform);
         BuyPortal = Instantiate(buyPortalPrefab, transform);
         LoadingImage = Instantiate(loadingImagePrefab, transform);
-        MapTiles = Instantiate(MapTilesPrefab, transform);
 
-        MapData = GetComponentInChildren<MapData>();
+        _worldMapImage = WorldMap.GetComponent<WorldMapImage>();
+        _portalMapImage = WorldMap.GetComponent<PortalMapImage>();
         _mapInputActions = GetComponentInChildren<PlayerInput>();
 
         if (_mapInputActions != null)
@@ -51,7 +50,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (!IsWorldMapOpen)
             {
-                MapData.UpdateMapData();
+                _worldMapImage.UpdateMapData();
                 OpenLargeMap();
             }
             else
