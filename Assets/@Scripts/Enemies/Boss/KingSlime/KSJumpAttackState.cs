@@ -15,7 +15,8 @@ public class KSJumpAttackState : BossAttackState
     private GameObject _shockwave;
     public KSJumpAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Random;
+        BossPatternTypes = new List<BossPatternType>() {BossPatternType.Ranged, BossPatternType.Melee, BossPatternType.Random };
+
         _rigidbody = stateMachine.Rigidbody;
         _speed = stateMachine.EnemyData.Speed;
         _damage = stateMachine.EnemyData.Damage;

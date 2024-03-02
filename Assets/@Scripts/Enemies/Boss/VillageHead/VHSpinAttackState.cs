@@ -14,7 +14,8 @@ public class VHSpinAttackState : BossAttackState
     private Rigidbody2D _rigidbody;
     public VHSpinAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Random;
+        BossPatternTypes = new List<BossPatternType>(){BossPatternType.Random};
+
         _spinCollider = stateMachine.transform.Find("Sprite/AttackPivot/SpinAttack").GetComponent<Collider2D>();
         _enemyTransform = stateMachine.transform;
         _rigidbody = stateMachine.Rigidbody;

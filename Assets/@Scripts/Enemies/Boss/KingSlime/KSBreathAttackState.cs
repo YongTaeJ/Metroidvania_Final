@@ -9,7 +9,7 @@ public class KSBreathAttackState : BossAttackState
     private GameObject _breathArea;
     public KSBreathAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Melee;
+        BossPatternTypes = new List<BossPatternType>() {BossPatternType.Ranged, BossPatternType.Melee };
         _breathArea = _attackPivot.Find("BreathArea").gameObject;
     }
 

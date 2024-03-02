@@ -17,7 +17,8 @@ public class VHLeapAttackState : BossAttackState
 
     public VHLeapAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Ranged;
+        BossPatternTypes = new List<BossPatternType>(){BossPatternType.Ranged};
+
 
         _throwCollider = stateMachine.transform.Find("Sprite/AttackPivot/ThrowAttack").GetComponent<Collider2D>();
         _bodyTriggerCollider = stateMachine.transform.Find("Sprite/AttackPivot/Body").GetComponent<CapsuleCollider2D>();

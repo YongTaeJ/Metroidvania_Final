@@ -11,7 +11,7 @@ public class KSRangedAttackState : BossAttackState
 
     public KSRangedAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Ranged;   
+        BossPatternTypes = new List<BossPatternType>() {BossPatternType.Ranged, BossPatternType.Melee };
         _bulletIndex = stateMachine.EnemyData.BulletIndex;
         _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet" + _bulletIndex.ToString() );
         _damage = stateMachine.EnemyData.Damage;

@@ -38,7 +38,7 @@ public class EnemyDeadState : EnemyBaseState
         {
             DropManager.Instance.DropItem(_stateMachine.EnemyData.DropTableIndex, _spriteTransform.position);
             _stateMachine.gameObject.SetActive(false);
-            _stateMachine.ResetMonster();
+            _stateMachine.DisappearMonster();
         }
     }
     #endregion

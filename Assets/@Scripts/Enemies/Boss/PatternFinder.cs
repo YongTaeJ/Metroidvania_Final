@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum BossPatternType
@@ -42,11 +40,14 @@ public class PatternFinder
         _attackPatterns = new Dictionary<BossPatternType, List<BossBaseState>>();
         foreach(var pattern in patterns)
         {
-            if(!_attackPatterns.ContainsKey(pattern.BossPatternType))
+            foreach(var type in pattern.BossPatternTypes)
             {
-                _attackPatterns[pattern.BossPatternType] = new List<BossBaseState>();
+                if(!_attackPatterns.ContainsKey(type))
+                {
+                    _attackPatterns[type] = new List<BossBaseState>();
+                }
+                _attackPatterns[type].Add(pattern);
             }
-            _attackPatterns[pattern.BossPatternType].Add(pattern);
         }
     }
 

@@ -51,7 +51,7 @@ public class MonsterSpawner : MonoBehaviour
                     var enemyStateMachine = monster.GetComponent<EnemyStateMachine>();
                     if (enemyStateMachine != null)
                     {
-                        enemyStateMachine.ResetMonster();
+                        enemyStateMachine.DisappearMonster();
                     }
                     monster.SetActive(false);
                 }

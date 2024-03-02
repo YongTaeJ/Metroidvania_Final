@@ -6,7 +6,7 @@ public class VHBasicAttack1State : BossAttackState
 {
     public VHBasicAttack1State(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Melee;
+        BossPatternTypes = new List<BossPatternType>(){BossPatternType.Melee};
     }
 
     public override void OnStateEnter()
