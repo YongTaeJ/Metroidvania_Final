@@ -7,7 +7,7 @@ public class KSSummonAttackState : BossAttackState
     private KSSpecialPattern _pattern;
     public KSSummonAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Special;
+        BossPatternTypes = new List<BossPatternType>() { BossPatternType.Special } ;
         _pattern = GameObject.Find("KSSpecialPattern").GetComponent<KSSpecialPattern>();
     }
 

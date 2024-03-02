@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 public class VHSpecialAttackState : BossAttackState
@@ -10,7 +11,8 @@ public class VHSpecialAttackState : BossAttackState
     public VHSpecialAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         
-        BossPatternType = BossPatternType.Special;
+        BossPatternTypes = new List<BossPatternType>(){BossPatternType.Special};
+
         _pattern = GameObject.Find("VillageHeadSpecialPattern").GetComponent<VHSpeicalPattern>();
     }
 
@@ -40,6 +42,7 @@ public class VHSpecialAttackState : BossAttackState
         if(_patternCount <= 10)
         {
             _pattern.CreateRock();
+            TimerManager.Instance.StartTimer(0.3f, () => _pattern.CreateRock());
         }
         else
         {

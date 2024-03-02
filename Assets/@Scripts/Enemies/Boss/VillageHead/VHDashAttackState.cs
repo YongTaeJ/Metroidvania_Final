@@ -9,7 +9,8 @@ public class VHDashAttackState : BossAttackState
     private int _startCount;
     public VHDashAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Ranged;
+        BossPatternTypes = new List<BossPatternType>(){BossPatternType.Ranged};
+
         _transform = stateMachine.transform;
         _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _objectFlip = stateMachine.ObjectFlip;

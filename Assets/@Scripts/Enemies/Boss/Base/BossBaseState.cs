@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BossBaseState : EnemyBaseState
 {
-    public BossPatternType BossPatternType {get; protected set;}
+    public List<BossPatternType> BossPatternTypes {get; protected set;}
     protected BossBaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
     }

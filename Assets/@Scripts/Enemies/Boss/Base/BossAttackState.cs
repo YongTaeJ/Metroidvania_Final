@@ -16,7 +16,6 @@ public abstract class BossAttackState : BossBaseState
     
     public BossAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Melee;
         _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot");
         _attackCollider = _attackPivot.GetComponent<Collider2D>();
         _eventReceiver = stateMachine.EventReceiver;

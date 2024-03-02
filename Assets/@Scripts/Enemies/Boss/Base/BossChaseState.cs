@@ -12,7 +12,6 @@ public class BossChaseState : BossBaseState
     private float _speed;
     public BossChaseState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.None;
         _enemyTransform = stateMachine.transform;
         _playerTransform = stateMachine.PlayerFinder.CurrentTransform;
         _speed = stateMachine.EnemyData.Speed;

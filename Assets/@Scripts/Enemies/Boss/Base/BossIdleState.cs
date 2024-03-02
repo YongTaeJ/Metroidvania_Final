@@ -7,7 +7,7 @@ public class BossIdleState : BossBaseState
     private float _idleTime;
     public BossIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.None;
+        
     }
 
     public override void OnStateEnter()

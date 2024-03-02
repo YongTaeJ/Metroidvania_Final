@@ -13,7 +13,7 @@ public class KSDoubleAttackState : BossAttackState
 
     public KSDoubleAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        BossPatternType = BossPatternType.Ranged;   
+        BossPatternTypes = new List<BossPatternType>() {BossPatternType.Ranged, BossPatternType.Melee };
         _breathArea = _attackPivot.Find("BreathArea").gameObject;
         _bulletIndex = stateMachine.EnemyData.BulletIndex;
         _bulletPrefab = Resources.Load<GameObject>("Enemies/Bullets/EnemyBullet" + _bulletIndex.ToString() );

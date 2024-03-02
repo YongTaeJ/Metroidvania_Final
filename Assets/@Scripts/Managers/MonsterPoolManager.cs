@@ -122,7 +122,7 @@ public class MonsterPoolManager : Singleton<MonsterPoolManager>
         objectToSpawn.transform.rotation = rotation;
         objectToSpawn.transform.SetParent(containerTransform);
         objectToSpawn.SetActive(true);
-        objectToSpawn.GetComponent<EnemyStateMachine>().Initialize();
+        objectToSpawn.GetComponent<EnemyStateMachine>().AppearMonster();
 
         poolDictionary[_monsterName].Enqueue(objectToSpawn);
 
@@ -139,7 +139,7 @@ public class MonsterPoolManager : Singleton<MonsterPoolManager>
         var enemyStateMachine = objectToReturn.GetComponent<EnemyStateMachine>();
         if (enemyStateMachine != null)
         {
-            enemyStateMachine.ResetMonster();
+            enemyStateMachine.DisappearMonster();
         }
 
         objectToReturn.SetActive(false);

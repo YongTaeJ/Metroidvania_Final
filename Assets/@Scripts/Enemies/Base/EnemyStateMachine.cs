@@ -54,7 +54,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
     {
         ObjectFlip = new ObjectFlip(transform);
         EnemyData = EnemyDataManager.Instance.GetEnemyData(ID);
-        PlayerFinder.Initialize();
+        
         GetComponent<EnemyHitSystem>().Initialize(this);
 
         var attackComponents = transform.Find("Sprite").GetComponentsInChildren<IHasDamage>();
@@ -62,17 +62,24 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         {
             component.Initialize(EnemyData.Damage);
         }
+
+        PlayerFinder.Initialize();
+    }
+
+    public void DisappearMonster()
+    {
+        GetComponent<EnemyHitSystem>().ResetHPCondition();
+        StateTransition(StateDictionary[EnemyStateType.Idle]);
+    }
+
+    public void AppearMonster()
+    {
         var bodyAttackComponents = transform.Find("Sprite").GetComponentsInChildren<EnemyBodyAttackSystem>();
         foreach (var component in bodyAttackComponents)
         {
             component._collider.enabled = true;
         }
+        PlayerFinder.Initialize();
         gameObject.layer = LayerMask.NameToLayer("Enemy");
-    }
-
-    public void ResetMonster()
-    {
-        GetComponent<EnemyHitSystem>().ResetHPCondition();
-        StateTransition(StateDictionary[EnemyStateType.Idle]);
     }
 }
