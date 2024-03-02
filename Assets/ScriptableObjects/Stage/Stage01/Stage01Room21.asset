@@ -22,3 +22,7 @@ MonoBehaviour:
     spawnPositions:
     - {x: 278.5, y: -117.5, z: 0}
     - {x: 283.5, y: -117.5, z: 0}
+  - monsterPrefab: {fileID: 1102426181093380764, guid: a32fb1137b39c56449f12f2ff9bfa60a, type: 3}
+    spawnPositions:
+    - {x: 326, y: -119, z: 0}
+    - {x: 326, y: -126.5, z: 0}
