@@ -16,7 +16,6 @@ public class SignDataManager : Singleton<SignDataManager>
         SignMessages.Add("Sign00", _signTexts.Sign00);
         SignMessages.Add("Sign01", _signTexts.Sign01);
         SignMessages.Add("Sign02", _signTexts.Sign02);
-        SignMessages.Add("Sign03", _signTexts.Sign03);
     }
 
     public string GetMessage(string SignId)

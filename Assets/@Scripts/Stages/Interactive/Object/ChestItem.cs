@@ -74,7 +74,7 @@ public class ChestItem : ChestBase
     private void HelpText()
     {
         _chestText = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
-
+        
         if (_chestItem == ItemType.Skill && _chestItemID == 0)
         {
             _chestText.text = "이제 A키를 눌러서\n\r오러 공격을 할 수 있다";

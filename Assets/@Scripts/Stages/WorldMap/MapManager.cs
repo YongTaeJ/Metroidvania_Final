@@ -14,7 +14,7 @@ public class MapManager : Singleton<MapManager>
     public bool IsWorldMapOpen { get; private set; }
 
     private WorldMapImage _worldMapImage;
-    private PortalMapImage _portalMapImage;
+    private WorldMapDetail _worldMapDetail;
     private PlayerInput _mapInputActions;
 
     protected override void Awake()
@@ -35,7 +35,7 @@ public class MapManager : Singleton<MapManager>
         LoadingImage = Instantiate(loadingImagePrefab, transform);
 
         _worldMapImage = WorldMap.GetComponent<WorldMapImage>();
-        _portalMapImage = WorldMap.GetComponent<PortalMapImage>();
+        _worldMapDetail = WorldMap.GetComponent<WorldMapDetail>();
         _mapInputActions = GetComponentInChildren<PlayerInput>();
 
         if (_mapInputActions != null)
@@ -70,6 +70,7 @@ public class MapManager : Singleton<MapManager>
 
     public void OpenLargeMap()
     {
+        _worldMapDetail.UpdateDetailMapButton();
         WorldMap.gameObject.SetActive(true);
         IsWorldMapOpen = true;
         Time.timeScale = 0;
@@ -115,6 +116,7 @@ public class MapManager : Singleton<MapManager>
 
         WorldMap.gameObject.SetActive(false);
         PortalMap.gameObject.SetActive(false);
+        _worldMapDetail.CloseDetailMapImage();
         IsWorldMapOpen = false;
         Time.timeScale = 1.0f;
 
