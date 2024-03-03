@@ -10,14 +10,23 @@ public class Effect2DPlatform : MonoBehaviour
     private int playerLayer;
     private bool isDropDown = false;
     private Collider2D platformCollider;
+    private bool _isInitialized = false;
     private void Start()
     {
         playerLayer = LayerMask.NameToLayer("Player");
         platformCollider = GetComponent<Collider2D>();
+        OnEnable();
     }
 
     private void OnEnable()
     {
+        if(!_isInitialized)
+        {
+            _isInitialized = true;
+            return;
+        }
+
+        GameManager.Instance.player._controller.OnDropDownJump -= HandleDropDownJump;
         GameManager.Instance.player._controller.OnDropDownJump += HandleDropDownJump;
     }
 

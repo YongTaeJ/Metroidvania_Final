@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-
 public class BackgroundScroll : MonoBehaviour
 {
     [SerializeField] private float _scrollSpeed = 1f;
@@ -12,7 +8,7 @@ public class BackgroundScroll : MonoBehaviour
     private Vector3 _lastPlayerPosition;
     private Transform _playerTransform;
 
-    private void Awake()
+    private void Start()
     {
         _playerTransform = GameManager.Instance.player.transform;
         _lastPlayerPosition = _playerTransform.position;
