@@ -36,6 +36,7 @@ public class VHSpinAttackState : BossAttackState
     public override void OnStateExit()
     {
         base.OnStateExit();
+        _spinCollider.enabled = false;
         _animator.SetInteger(AnimatorHash.PatternNumber, -1);
     }
 
