@@ -43,7 +43,10 @@ public class WorldMapDetail : MonoBehaviour
             img.gameObject.SetActive(false);
         }
 
-        _worldMapImage.SetActive(true);
+        if (_worldMapImage != null)
+        {
+            _worldMapImage.SetActive(true);
+        }
     }
 
     public void UpdateDetailMapButton()

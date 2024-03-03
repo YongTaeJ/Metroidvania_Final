@@ -134,7 +134,7 @@ public class RoomTest : MonoBehaviour
             case "Town":
                 return "마을";
             case "Stage01":
-                return "초원";
+                return "숲";
             case "Stage02":
                 return "대성당";
             default:

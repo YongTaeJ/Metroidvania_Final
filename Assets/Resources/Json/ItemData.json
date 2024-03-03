@@ -466,11 +466,51 @@
     },
     {
       "ItemType": "Chest",
-      "ID": "99",
+      "ID": "90",
       "Name": "Challenge",
       "TypeKor": "상자",
       "NameKor": "상자",
-      "Description": "르탄이 이미지가 들어있는 상자입니다."
+      "Description": "반짝이는 황금 상자입니다"
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "91",
+      "Name": "Challenge",
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "반짝이는 황금 상자입니다"
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "92",
+      "Name": "Challenge",
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "반짝이는 황금 상자입니다"
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "93",
+      "Name": "Challenge",
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "반짝이는 황금 상자입니다"
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "94",
+      "Name": "Challenge",
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "반짝이는 황금 상자입니다"
+    },
+    {
+      "ItemType": "Chest",
+      "ID": "95",
+      "Name": "Challenge",
+      "TypeKor": "상자",
+      "NameKor": "상자",
+      "Description": "반짝이는 황금 상자입니다"
     }
   ]
 }
