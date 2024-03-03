@@ -80,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Damagable 컴포넌트를 찾을 수 없습니다: " + enemy.name);
+                Debug.Log("Damagable 컴포넌트를 찾을 수 없습니다: " + enemy.name);
             }
             StartCoroutine(HitPause(0.07f));
             CameraManager.Instance.CameraShake(_impulseSource, 1f);
