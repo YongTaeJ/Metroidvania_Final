@@ -282,64 +282,61 @@ public class PlayerInputController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (enabled)
+
+        if (context.started && !_isDashing && !Input.GetKey(KeyCode.DownArrow))
         {
-            if (context.started && !_isDashing && !Input.GetKey(KeyCode.DownArrow))
+            if (!_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
             {
-                if ( !_isWallJumping && _doubleJump || _touchingDirection.IsGrounded)
+                _animator.SetTrigger(AnimatorHash.Jump);
+                SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
+                if (ItemManager.Instance.HasItem(ItemType.Equipment, 2))
                 {
-                    _animator.SetTrigger(AnimatorHash.Jump);
-                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
-                    if(ItemManager.Instance.HasItem(ItemType.Equipment, 2))
-                    {
-                        _doubleJump = !_doubleJump;
-                    }
+                    _doubleJump = !_doubleJump;
                 }
             }
-            else if (context.canceled)
-            {
-                if (!_isWallJumping)
-                {
-                    _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-                }
-            }
-
-            if (Input.GetKey(KeyCode.DownArrow) && context.started && _touchingDirection.IsGrounded)
-            {
-                OnDropDownJump?.Invoke();
-            }
-
-            //Wall Jump
-            if (context.started && _wallJumpTimer > 0f)
-            {
-                if (!_isWallJumping && _touchingDirection.IsWall)
-                {
-                    isWallSlideEffect = false;
-                    StopCoroutine("WallSlideEffect");
-                    _isWallSliding = false;
-                    _isWallJumping = true;
-                    _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
-                    _wallJumpTimer = 0f;
-                    _animator.SetTrigger(AnimatorHash.WallJump);
-                    SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
-                    if (transform.localScale.x != _wallJumpDirection)
-                    {
-                        _isFacingRight = !_isFacingRight;
-                        Vector3 Is = transform.localScale;
-                        Is.x *= -1f;
-                        transform.localScale = Is;
-                    }
-
-                    Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
-                }
-            }
-            else if (context.canceled)
+        }
+        else if (context.canceled)
+        {
+            if (!_isWallJumping)
             {
                 _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
             }
         }
 
+        if (Input.GetKey(KeyCode.DownArrow) && context.started && _touchingDirection.IsGrounded)
+        {
+            OnDropDownJump?.Invoke();
+        }
+
+        //Wall Jump
+        if (context.started && _wallJumpTimer > 0f)
+        {
+            if (!_isWallJumping && _touchingDirection.IsWall)
+            {
+                isWallSlideEffect = false;
+                StopCoroutine("WallSlideEffect");
+                _isWallSliding = false;
+                _isWallJumping = true;
+                _rigidbody.velocity = new Vector2(_wallJumpDirection * _wallJumpPower.x, _wallJumpPower.y);
+                _wallJumpTimer = 0f;
+                _animator.SetTrigger(AnimatorHash.WallJump);
+                SFX.Instance.PlayOneShot(ResourceManager.Instance.GetAudioClip("Jump"));
+                if (transform.localScale.x != _wallJumpDirection)
+                {
+                    _isFacingRight = !_isFacingRight;
+                    Vector3 Is = transform.localScale;
+                    Is.x *= -1f;
+                    transform.localScale = Is;
+                }
+
+                Invoke(nameof(CancelWallJump), _wallJumpTime + 0.1f);
+            }
+        }
+        else if (context.canceled)
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
+        }
     }
 
     private void WallJump()

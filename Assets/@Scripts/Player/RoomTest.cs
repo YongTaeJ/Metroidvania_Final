@@ -63,24 +63,20 @@ public class RoomTest : MonoBehaviour
                     // 카메라 전환 코루틴 시작
                     StartCoroutine(CameraTransition(collision));
                 }
-                else
+                else //처음 시작시 Fade out 진행되지 않고 검은 화면에서 바로 Fade In
                 {
                     lastCollisionTag = collision.tag;
                     DetermineCollisionDirection(collision);
 
-                    // 플레이어 입력 비활성화 후 약간의 이동
                     StartCoroutine(PlayerMovePos());
                     GameManager.Instance.player._invincibilityTime = 3f;
                     GameManager.Instance.player.Invincible = true;
 
-                    // 팝업 UI 표시
                     UIManager.Instance.OpenPopupUI(PopupType.StageChange);
                     UIManager.Instance.SetFixedUI(false);
 
-                    // 페이드 아웃 시작
                     _stageChangeUI.SetDarkScreen();
 
-                    // 카메라 전환 코루틴 시작
                     StartCoroutine(CameraTransition(collision));
                 }
             }
