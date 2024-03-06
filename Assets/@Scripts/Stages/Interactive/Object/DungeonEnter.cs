@@ -39,25 +39,15 @@ public class DungeonEnter : MonoBehaviour
 
     private void EnterDungeon()
     {
-        EnterDungeonText();
         if (_press != null) _press.gameObject.SetActive(false);
         GameManager.Instance.player._controller.CanMove = false;
         GameManager.Instance.player.transform.position = new Vector3(290, -100, 0);
-        StartCoroutine(CoChestTextOff());
+        StartCoroutine(CoLoadImageTextOff());
     }
-    private IEnumerator CoChestTextOff()
+    private IEnumerator CoLoadImageTextOff()
     {
         MapManager.Instance.LoadImage(true);
         yield return new WaitForSeconds(1.8f);
         MapManager.Instance.LoadImage(false);
-        UIManager.Instance.OpenPopupUI(PopupType.AToolTip);
-        yield return new WaitForSeconds(1.8f);
-        UIManager.Instance.ClosePopupUI(PopupType.AToolTip);
-    }
-
-    private void EnterDungeonText()
-    {
-        TextMeshProUGUI Text = UIManager.Instance.GetUI(PopupType.AToolTip).GetComponentInChildren<TextMeshProUGUI>();
-        Text.text = "던전에 입장했습니다";
     }
 }
