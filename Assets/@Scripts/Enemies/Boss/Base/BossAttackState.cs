@@ -17,8 +17,11 @@ public abstract class BossAttackState : BossBaseState
     public BossAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
         _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot");
-        _attackCollider = _attackPivot.GetComponent<Collider2D>();
-        _attackCollider.enabled = false;
+
+        if(_attackPivot.TryGetComponent(out _attackCollider))
+        {
+            _attackCollider.enabled = false;
+        }
         
         _eventReceiver = stateMachine.EventReceiver;
         
