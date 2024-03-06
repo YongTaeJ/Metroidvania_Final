@@ -21,7 +21,7 @@ public class EnemyDeadState : EnemyBaseState
         _stateMachine.gameObject.layer = LayerMask.NameToLayer("EnemyDead");
         foreach (var component in attackComponents)
         {
-            component._collider.enabled = false;
+            component.Collider.enabled = false;
         }
         _animator.SetTrigger(AnimatorHash.Dead);
         PlayDeadSound();

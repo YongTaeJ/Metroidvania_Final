@@ -19,9 +19,10 @@ public class VHLeapAttackState : BossAttackState
     {
         BossPatternTypes = new List<BossPatternType>(){BossPatternType.Ranged};
 
-
-        _throwCollider = stateMachine.transform.Find("Sprite/AttackPivot/ThrowAttack").GetComponent<Collider2D>();
-        _bodyTriggerCollider = stateMachine.transform.Find("Sprite/AttackPivot/Body").GetComponent<CapsuleCollider2D>();
+        _throwCollider = stateMachine.transform.Find("Sprite/ThrowAttack").GetComponent<Collider2D>();
+        _throwCollider.enabled = false;
+        
+        _bodyTriggerCollider = stateMachine.transform.Find("Sprite/Body").GetComponent<CapsuleCollider2D>();
         _bodyCollisionCollider = stateMachine.transform.GetComponent<Collider2D>();
         _rigidbody = stateMachine.Rigidbody;
 

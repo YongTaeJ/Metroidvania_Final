@@ -5,11 +5,11 @@ using UnityEngine;
 public class EnemyBodyAttackSystem : MonoBehaviour, IHasDamage
 {
     private int _damage;
-    public Collider2D _collider;
+    public Collider2D Collider {get; private set;}
 
     private void Awake()
     {
-        _collider = GetComponent<Collider2D>();
+        Collider = GetComponent<Collider2D>();
     }
 
     public void Initialize(int damage)
@@ -28,8 +28,8 @@ public class EnemyBodyAttackSystem : MonoBehaviour, IHasDamage
 
     private IEnumerator RefreshCollider()
     {
-        _collider.enabled = false;
+        Collider.enabled = false;
         yield return new WaitForSeconds(0.1f);
-        _collider.enabled = true;
+        Collider.enabled = true;
     }
 }

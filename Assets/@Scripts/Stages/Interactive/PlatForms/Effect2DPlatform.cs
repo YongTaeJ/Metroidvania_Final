@@ -32,7 +32,10 @@ public class Effect2DPlatform : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.player._controller.OnDropDownJump -= HandleDropDownJump;
+        if(!GameManager.IsNull())
+        {
+            GameManager.Instance.player._controller.OnDropDownJump -= HandleDropDownJump;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

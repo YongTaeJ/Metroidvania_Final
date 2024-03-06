@@ -17,6 +17,18 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         }
     }
 
+    public static bool IsNull()
+    {
+        if(_instance == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     protected virtual void Awake()
     {
         if (_instance == null)

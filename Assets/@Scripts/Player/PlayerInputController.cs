@@ -434,7 +434,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (enabled)
         {
-            if (context.performed && !IsAttacking && !_player.IsHit &&!_isDashing)
+            if (context.performed && !IsAttacking && !_player.IsHit &&!_isDashing && !IsWallSliding)
             {
                 IsAttacking = true;
                 if (_isFirstAttack)
@@ -492,7 +492,7 @@ public class PlayerInputController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!IsAttacking && !_player.IsHit)
+        if (!IsAttacking && !_player.IsHit && !IsWallSliding)
         {
             if (context.performed && _canDash == true && ItemManager.Instance.HasItem(ItemType.Equipment, 0))
             {
