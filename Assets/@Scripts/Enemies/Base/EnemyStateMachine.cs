@@ -77,7 +77,7 @@ public abstract class EnemyStateMachine : StateMachine<EnemyBaseState>
         var bodyAttackComponents = transform.Find("Sprite").GetComponentsInChildren<EnemyBodyAttackSystem>();
         foreach (var component in bodyAttackComponents)
         {
-            component._collider.enabled = true;
+            component.Collider.enabled = true;
         }
         PlayerFinder.Initialize();
         gameObject.layer = LayerMask.NameToLayer("Enemy");

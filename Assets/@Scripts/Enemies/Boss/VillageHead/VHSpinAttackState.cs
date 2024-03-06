@@ -16,7 +16,9 @@ public class VHSpinAttackState : BossAttackState
     {
         BossPatternTypes = new List<BossPatternType>(){BossPatternType.Random};
 
-        _spinCollider = stateMachine.transform.Find("Sprite/AttackPivot/SpinAttack").GetComponent<Collider2D>();
+        _spinCollider = stateMachine.transform.Find("Sprite/SpinAttack").GetComponent<Collider2D>();
+        _spinCollider.enabled = false;
+        
         _enemyTransform = stateMachine.transform;
         _rigidbody = stateMachine.Rigidbody;
         _speed = stateMachine.EnemyData.Speed * 6.5f;
@@ -36,7 +38,6 @@ public class VHSpinAttackState : BossAttackState
     public override void OnStateExit()
     {
         base.OnStateExit();
-        _spinCollider.enabled = false;
         _animator.SetInteger(AnimatorHash.PatternNumber, -1);
     }
 

@@ -91,6 +91,8 @@ public class ConstructYNPanel : YNPanel
 
         yield return new WaitForSeconds(delay + 3f);
 
+        SFX.Instance.PlayOneShot("ConstructComplete");
+
         EventChatBoxUI chatBox = UIManager.Instance.GetDisposableUI<EventChatBoxUI>(DisposableType.EventChatBox);
         chatBox.Initialize();
 

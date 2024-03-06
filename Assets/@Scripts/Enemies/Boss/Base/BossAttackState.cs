@@ -18,6 +18,8 @@ public abstract class BossAttackState : BossBaseState
     {
         _attackPivot = stateMachine.transform.Find("Sprite/AttackPivot");
         _attackCollider = _attackPivot.GetComponent<Collider2D>();
+        _attackCollider.enabled = false;
+        
         _eventReceiver = stateMachine.EventReceiver;
         
         _objectFlip = stateMachine.ObjectFlip;
