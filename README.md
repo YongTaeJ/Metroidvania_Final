@@ -1,3 +1,4 @@
+# 에셋을 제거하고 커밋 기록과 작업물만 남긴 버전입니다!
 
 ![CountryHeroBanner](https://github.com/YongTaeJ/Metroidvania_Final/assets/149345676/25468757-4c32-420b-97dd-a76d723cb077)
 
